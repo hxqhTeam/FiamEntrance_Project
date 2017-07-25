@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="home_text">
+        <item>待办任务</item>
+        <item>已办任务</item>
+        <item>出差申请</item>
+        <item>出门管理</item>
+        <item>采购申请</item>
+        <item>任务单</item>
+        <item>合同</item>
+        <item>付款验收</item>
+        <item>需款计划</item>
+        <item>报销</item>
+    </string-array>
+
+
+</resources>
