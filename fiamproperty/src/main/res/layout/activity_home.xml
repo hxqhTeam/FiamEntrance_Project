@@ -21,11 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"
-        android:padding="@dimen/btn_top_10dp">
+        >
 
         <GridView
             android:id="@+id/gridview_id"
-            android:layout_marginTop="@dimen/btn_top_10dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:horizontalSpacing="2dp"
