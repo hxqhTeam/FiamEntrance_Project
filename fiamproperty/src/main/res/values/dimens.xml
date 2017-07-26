@@ -2,4 +2,11 @@
 <resources>
     <dimen name="dimens_20dp">20dp</dimen>
     <dimen name="dimens_18_sp">18sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="dp_22">22dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="sp_14">14dp</dimen>
+    <dimen name="dp_36">36dp</dimen>
+    <dimen name="dimens_20sp">20sp</dimen>
+    <dimen name="dimens_18sp">18sp</dimen>
 </resources>

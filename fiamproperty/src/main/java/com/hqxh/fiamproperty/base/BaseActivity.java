@@ -20,9 +20,9 @@ import com.hqxh.fiamproperty.ui.SystemBarTintManager;
 /**
  * Activity基类
  *
- * Author: nanchen
- * Email: liushilin520@foxmail.com
- * Date: 2017-06-20  14:21
+ * Author: tc
+ * Email: 278233503@qq.com
+ * Date: 2017-07-24  14:21
  */
 
 public abstract class BaseActivity extends AppCompatActivity {

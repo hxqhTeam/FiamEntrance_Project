@@ -1,0 +1,61 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/btn_top_5dp"
+    android:background="@color/white"
+    android:foreground="?android:selectableItemBackground"
+    android:orientation="horizontal"
+    card_view:cardCornerRadius="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/btn_top_5dp"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/task_image_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_db"/>
+
+        <LinearLayout
+            android:layout_toRightOf="@+id/task_image_id"
+            android:layout_marginLeft="@dimen/btn_top_5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/duedate_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dimens_18sp"
+                android:text="2017-7-13"/>
+
+
+            <TextView
+                android:id="@+id/processname_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/btn_top_5dp"
+                android:textSize="@dimen/dimens_20sp"
+                android:text="任务主要标题"/>
+
+            <TextView
+                android:id="@+id/description_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dimens_18sp"
+                android:layout_marginTop="@dimen/btn_top_5dp"
+                android:text="待办任务的具体内容"/>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

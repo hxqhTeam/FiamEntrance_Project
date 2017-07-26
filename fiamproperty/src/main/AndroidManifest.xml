@@ -2,16 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hqxh.fiamproperty">
 
+    <!-- 申明可能需要的网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
-        android:theme="@style/MyThemeBlue"
-        android:supportsRtl="true">
-        <activity android:name=".ui.activity.HomeActivity"
+        android:supportsRtl="true"
+        android:theme="@style/MyThemeBlue">
+        <activity
+            android:name=".ui.activity.HomeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.activity.ActiveTaskActivity"
+            android:label="@string/db_task_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
     </application>
 
 </manifest>

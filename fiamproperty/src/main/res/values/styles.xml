@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="MyThemeBlue"/>
+    <style name="AppTheme" parent="MyThemeBlue" />
 
     <!-- 我们以蓝色为主色调 -->
     <style name="MyThemeBlue" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -34,9 +34,9 @@
     </style>
 
     <!--控制头部据appbar的样式-->
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <!--用于控制toolbar溢出菜单的样式-->
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="TabLayoutTextStyle" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
@@ -51,8 +51,14 @@
         <item name="elevation">0dp</item>
     </style>
 
+    <style name="MyThemeBlue.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
+    <style name="MyThemeBlue.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="MyThemeBlue.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>
