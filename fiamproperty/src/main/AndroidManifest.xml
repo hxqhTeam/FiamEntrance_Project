@@ -3,7 +3,7 @@
     package="com.hqxh.fiamproperty">
 
     <!-- 申明可能需要的网络权限 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +19,30 @@
         <activity
             android:name=".ui.activity.ActiveTaskActivity"
             android:label="@string/db_task_text"
+            android:theme="@style/MyThemeBlue.NoActionBar" />
+        <activity
+            android:name=".ui.activity.WorkorderActivity"
+            android:label="@string/ccsq_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.GrActivity"
+            android:label="@string/cmgl_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.PrMainActivity"
+            android:label="@string/ccsq_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.PrActivity"
+            android:label="@string/jscgsq_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.RwdMainActivity"
+            android:label="@string/rwd_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.RwdActivity"
+            android:label="@string/rwd_text"
             android:theme="@style/MyThemeBlue.NoActionBar"></activity>
     </application>
 

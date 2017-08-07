@@ -13,5 +13,22 @@
         <item>报销</item>
     </string-array>
 
+    <string-array name="po_text">
+        <item>技术采购申请</item>
+        <item>试制采购申请</item>
+        <item>物资采购申请</item>
+        <item>服务采购申请</item>
+        <item>外培采购申请</item>
+    </string-array>
+
+    <string-array name="rwd_text">
+        <item>试验任务单</item>
+        <item>试制任务单</item>
+        <item>物资领料单</item>
+        <item>调件任务单</item>
+        <item>燃油申请单</item>
+        <item>其它任务单</item>
+    </string-array>
+
 
 </resources>

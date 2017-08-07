@@ -1,5 +1,6 @@
 package com.hqxh.fiamproperty.base;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -111,14 +113,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         return R.color.colorPrimary;
     }
 
-    private Toast mToast;
 
-    protected void showToast(String desc){
-        if (mToast == null){
-            mToast = Toast.makeText(this.getApplicationContext(),desc,Toast.LENGTH_SHORT);
-        }else{
-            mToast.setText(desc);
-        }
-        mToast.show();
+    public static void showMiddleToast(Context cxt, String msg) {
+        Toast toast = Toast.makeText(cxt, msg, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }

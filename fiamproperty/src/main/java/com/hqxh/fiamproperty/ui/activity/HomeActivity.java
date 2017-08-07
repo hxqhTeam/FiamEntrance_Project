@@ -23,12 +23,15 @@ import java.util.Map;
 
 public class HomeActivity extends BaseActivity {
 
-
+    public static final int DB_CODE = 1000;
+    public static final int YB_CODE = 1001;
     Toolbar mToolbar;
     /**
      * 标题
      **/
     TextView titleTextView;
+    /**搜索**/
+
 
     /**
      * GridView
@@ -105,7 +108,7 @@ public class HomeActivity extends BaseActivity {
     //判断需要显示的页面
     private void isShowPage() {
 
-        icon = new int[]{R.mipmap.ic_db, R.mipmap.ic_yb,
+        icon = new int[]{R.mipmap.ic_dbrw, R.mipmap.ic_ybrw,
                 R.mipmap.ic_ccsq, R.mipmap.ic_cmgl, R.mipmap.ic_cgsq,
                 R.mipmap.ic_rwd, R.mipmap.ic_ht, R.mipmap.ic_fkys, R.mipmap.ic_xkjh, R.mipmap.ic_bx};
         iconName = getResources().getStringArray(R.array.home_text);
@@ -126,15 +129,36 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-
-
     private AdapterView.OnItemClickListener gridViewOnItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            Intent intent = null;
             switch (i) {
                 case 0:  //待办任务
-                    Intent intent =new Intent(HomeActivity.this,ActiveTaskActivity.class);
-                    startActivityForResult(intent,0);
+                    intent = new Intent(HomeActivity.this, ActiveTaskActivity.class);
+                    intent.putExtra("mark", DB_CODE);
+                    startActivityForResult(intent, 0);
+                    break;
+                case 1:  //已办任务
+                    intent = new Intent(HomeActivity.this, ActiveTaskActivity.class);
+                    intent.putExtra("mark", YB_CODE);
+                    startActivityForResult(intent, 0);
+                    break;
+                case 2:  //出差申请
+                    intent = new Intent(HomeActivity.this, WorkorderActivity.class);
+                    startActivityForResult(intent, 0);
+                    break;
+                case 3:  //出门管理
+                    intent = new Intent(HomeActivity.this, GrActivity.class);
+                    startActivityForResult(intent, 0);
+                    break;
+                case 4:  //采购申请
+                    intent = new Intent(HomeActivity.this, PrMainActivity.class);
+                    startActivityForResult(intent, 0);
+                    break;
+                case 5:  //任务单
+                    intent = new Intent(HomeActivity.this, RwdMainActivity.class);
+                    startActivityForResult(intent, 0);
                     break;
 
             }

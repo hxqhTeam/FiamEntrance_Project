@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@mipmap/ic_db"/>
+            android:src="@mipmap/ic_dbrw"/>
 
         <LinearLayout
             android:layout_toRightOf="@+id/task_image_id"
@@ -33,8 +33,9 @@
                 android:id="@+id/duedate_text_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/have_notdata_hint"
                 android:textSize="@dimen/dimens_18sp"
-                android:text="2017-7-13"/>
+                />
 
 
             <TextView
@@ -42,8 +43,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/btn_top_5dp"
+                android:textColor="@color/black"
+                android:hint="@string/have_notdata_hint"
                 android:textSize="@dimen/dimens_20sp"
-                android:text="任务主要标题"/>
+                />
 
             <TextView
                 android:id="@+id/description_text_id"
@@ -51,7 +54,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/dimens_18sp"
                 android:layout_marginTop="@dimen/btn_top_5dp"
-                android:text="待办任务的具体内容"/>
+                android:hint="@string/have_notdata_hint"
+                />
 
 
         </LinearLayout>

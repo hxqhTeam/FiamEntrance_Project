@@ -1,12 +1,37 @@
 <resources>
     <string name="home_title">FIAM</string>
     <string name="db_task_text">待办任务</string>
+    <string name="yb_task_text">已办任务</string>
+    <string name="ccsq_text">出差申请</string>
+    <string name="gncc_text">国内出差</string>
+    <string name="gwlx_text">国外立项</string>
 
+
+    <!-- 登录界面 key-->
+    <string name="login_personId">login_personId</string>
+    <string name="login_displayName">login_displayName</string>
 
 
     <!--加载提示-->
     <string name="load_more_text">正在加载...</string>
-
+    <string name="have_notdata_hint">暂无数据</string>
+    <string name="all_data_hint">已加载出全部数据...</string>
+    <string name="title_activity_workorder">WorkorderActivity</string>
+    <!--标题-->
+    <string name="cmgl_text">出门管理</string>
+    <string name="cgsq_text">采购申请</string>
+    <string name="jscgsq_text">技术采购申请</string>
+    <string name="szcgsq_text">试制采购申请</string>
+    <string name="wzcgsq_text">物资采购申请</string>
+    <string name="fwcgsq_text">服务采购申请</string>
+    <string name="wpcgsq_text">外培采购申请</string>
+    <string name="rwd_text">任务单</string>
+    <string name="syrwd_text">试验任务单</string>
+    <string name="wzlld_text">物资领料单</string>
+    <string name="djrwd_text">调件任务单</string>
+    <string name="szrwd_text">试制任务单</string>
+    <string name="rysqd_text">燃油申请单</string>
+    <string name="qtrwd_text">其它任务单</string>
 
 
 </resources>

@@ -1,48 +1,66 @@
 package cn.hqxh.fiam.mobile;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.hqxh.fiamproperty.constant.GlobalConfig;
+import com.hqxh.fiamproperty.model.R_Person;
+import com.hqxh.fiamproperty.model.R_Person.PERSION;
 import com.hqxh.fiamproperty.ui.activity.HomeActivity;
+import com.hqxh.fiamproperty.unit.AccountUtils;
+import com.rx2androidnetworking.Rx2AndroidNetworking;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static android.Manifest.permission.READ_PHONE_STATE;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+    private static final int REQUEST_CODE = 0; // 请求码
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -56,16 +74,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+
+    // 所需的全部权限
+    static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.INTERNET,
+    };
+
+    private PermissionsChecker mPermissionsChecker; // 权限检测器
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +121,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+//        mPermissionsChecker = new PermissionsChecker(this);
     }
 
     private void populateAutoComplete() {
@@ -111,20 +136,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
-        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+        if (checkSelfPermission(READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             return true;
         }
-        if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
+        if (shouldShowRequestPermissionRationale(READ_PHONE_STATE)) {
             Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
                         public void onClick(View v) {
-                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
+                            requestPermissions(new String[]{READ_PHONE_STATE}, REQUEST_READ_CONTACTS);
                         }
                     });
         } else {
-            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
+            requestPermissions(new String[]{READ_PHONE_STATE}, REQUEST_READ_CONTACTS);
         }
         return false;
     }
@@ -149,9 +174,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -176,31 +198,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
         }
+//        else if (!isEmailValid(email)) {
+//            mEmailView.setError(getString(R.string.error_invalid_email));
+//            focusView = mEmailView;
+//            cancel = true;
+//        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-//            showProgress(true);
-//            mAuthTask = new UserLoginTask(email, password);
-//            mAuthTask.execute((Void) null);
-            Intent intent=new Intent(LoginActivity.this, HomeActivity.class);
-            startActivityForResult(intent,0);
+
+            Login();
+//
         }
     }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
+//    private boolean isEmailValid(String email) {
+//        //TODO: Replace this with your own logic
+//        return email.contains("@");
+//    }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
@@ -297,61 +316,103 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
+    private void Login() {
 
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
+        String imei = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
+                .getDeviceId();
 
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+        Log.e("TAG", "imei=" + imei + ",usename=" + mEmailView.getText().toString());
+        Log.e("TAG", "HTTP_URL_LOGIN=" + GlobalConfig.HTTP_URL_LOGIN);
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
+        Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_LOGIN)
+                .addQueryParameter("username", mEmailView.getText().toString())
+                .addQueryParameter("imei", imei)
+                .build()
+                .getObjectObservable(R_Person.class) // 发起获取数据列表的请求，并解析到FootList
+                .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
+                .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
+                .doOnNext(new Consumer<R_Person>() {
+                    @Override
+                    public void accept(@io.reactivex.annotations.NonNull R_Person r_person) throws Exception {
+                        showMiddleToast(LoginActivity.this, r_person.getErrmsg());
+                        if (r_person.getErrcode().equals(GlobalConfig.LOGINSUCCESS)) {//登录成功
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
+                        } else if (r_person.getErrcode().equals(GlobalConfig.CHANGEIMEI)) {//登录成功,检测到用户更换手机登录
 
-            // TODO: register the new account here.
-            return true;
-        }
+                        } else if (r_person.getErrcode().equals(GlobalConfig.USERNAMEERROR)) {//用户名密码错误
+                            return;
+                        } else {
+                            return;
+                        }
+                    }
+                })
 
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
+                .map(new Function<R_Person, String>() {
+                    @Override
+                    public String apply(@io.reactivex.annotations.NonNull R_Person r_person) throws Exception {
+                        return r_person.getResult();
+                    }
 
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(@io.reactivex.annotations.NonNull String persion) throws Exception {
+                        if (null != persion) {
+                            JSONObject object = new JSONObject(persion);
+                            PERSION persion1 = new PERSION();
+                            persion1.setDEFSITE(object.getString("DEFSITE"));
+                            persion1.setDISPLAYNAME(object.getString("DISPLAYNAME"));
+                            persion1.setEMAILADDRESS(object.getString("EMAILADDRESS"));
+                            persion1.setMYAPPS(object.getString("MYAPPS"));
+                            persion1.setPERSONID(object.getString("PERSONID"));
+                            AccountUtils.setLoginDetails(LoginActivity.this, persion1);
 
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivityForResult(intent, 0);
+                        }
+
+
+                    }
+
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+                        Log.e("TAG", "throwable=" + throwable.getMessage());
+                        showMiddleToast(LoginActivity.this, "登录失败");
+                    }
+                });
     }
+
+    public static void showMiddleToast(Context cxt, String msg) {
+        Toast toast = Toast.makeText(cxt, msg, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+//        // 缺少权限时, 进入权限配置页面
+//        if (mPermissionsChecker.lacksPermissions(PERMISSIONS)) {
+//            startPermissionsActivity();
+//        } else {
+//            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//            Handler x = new Handler();
+//            x.postDelayed(new splashhandler(), 2000);
+//        }
+    }
+
+
+    private void startPermissionsActivity() {
+//        PermissionsActivity.startActivityForResult(this, REQUEST_CODE, PERMISSIONS);
+    }
+
+
 }
 

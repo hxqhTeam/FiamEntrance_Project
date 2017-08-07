@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public abstract class BaseTitleActivity extends BaseActivity {
     private TextView mTitleName;
 
 
+
     /**
      * 设置标题文本
      */
@@ -43,12 +45,17 @@ public abstract class BaseTitleActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mToolbar=(Toolbar)findViewById(R.id.toolbar);
         mTitleName=(TextView)findViewById(R.id.title_text);
+
+        Log.e(TAG,"22222");
         if (getContentViewLayoutID() != 0) {
             initToolbar();
         }
 
 
     }
+
+
+
 
     private void initToolbar() {
         if (mToolbar != null) {
@@ -79,4 +86,5 @@ public abstract class BaseTitleActivity extends BaseActivity {
     protected boolean isShowBack() {
         return true;
     }
+
 }
