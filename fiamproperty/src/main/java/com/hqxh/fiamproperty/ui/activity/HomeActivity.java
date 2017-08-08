@@ -43,10 +43,13 @@ public class HomeActivity extends BaseActivity {
     // 图片封装为一个数组
     private int[] icon = null;
     private String[] iconName = null;
-
+    private String username;
     @Override
     protected int getContentViewLayoutID() {
-
+        if(getIntent().hasExtra("username")){
+            username=getIntent().getExtras().getString("username");
+            Log.e("TAG","username="+username);
+        }
         return R.layout.activity_home;
 
     }
@@ -158,6 +161,22 @@ public class HomeActivity extends BaseActivity {
                     break;
                 case 5:  //任务单
                     intent = new Intent(HomeActivity.this, RwdMainActivity.class);
+                    startActivityForResult(intent, 0);
+                    break;
+                case 6:  //合同
+                    intent = new Intent(HomeActivity.this, HtActivity.class);
+                    startActivityForResult(intent, 0);
+                    break;
+                case 7:  //付款验收
+                    intent = new Intent(HomeActivity.this, FkActivity.class);
+                    startActivityForResult(intent, 0);
+                    break;
+                case 8:  //需款计划
+                    intent = new Intent(HomeActivity.this, XkjhActivity.class);
+                    startActivityForResult(intent, 0);
+                    break;
+                case 9:  //报销
+                    intent = new Intent(HomeActivity.this, BxActivity.class);
                     startActivityForResult(intent, 0);
                     break;
 

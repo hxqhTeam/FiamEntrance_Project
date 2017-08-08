@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.hqxh.fiamproperty">
 
     <!-- 申明可能需要的网络权限 -->
@@ -9,7 +10,8 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/MyThemeBlue">
+        android:theme="@style/MyThemeBlue"
+        >
         <activity
             android:name=".ui.activity.HomeActivity"
             android:launchMode="singleTask"
@@ -43,6 +45,22 @@
         <activity
             android:name=".ui.activity.RwdActivity"
             android:label="@string/rwd_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.HtActivity"
+            android:label="@string/ht_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.FkActivity"
+            android:label="@string/fkys_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.XkjhActivity"
+            android:label="@string/xkjh_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.BxActivity"
+            android:label="@string/bx_text"
             android:theme="@style/MyThemeBlue.NoActionBar"></activity>
     </application>
 

@@ -54,4 +54,43 @@ public class HttpManager {
         return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.WORKORDER_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
 
     }
+
+    /**
+     * 合同*
+     */
+    public static String getPURCHVIEWUrl(String username,int curpage, int showcount) {
+        return "{'appid':'" + GlobalConfig.CONTPURCH_APPID + "','objectname':'" + GlobalConfig.PURCHVIEW_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+    }
+
+    /**
+     * 付款验收*
+     */
+    public static String getPAYCHECKUrl(String username,int curpage, int showcount) {
+        return "{'appid':'" + GlobalConfig.PAYCHECK_APPID + "','objectname':'" + GlobalConfig.PAYCHECK_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+    }
+
+    /**
+     * 需款计划*
+     */
+    public static String getPAYPLANUrl(String username,int curpage, int showcount) {
+        return "{'appid':'" + GlobalConfig.PP_APPID + "','objectname':'" + GlobalConfig.PAYPLAN_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+    }
+    /**
+     * 差旅报销单／备用金报销*
+     */
+    public static String getEXPENSEUrl(String appid,String username,int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.EXPENSE_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+    }
+
+    /**
+     *借款单*
+     */
+    public static String getBoUrl(String username,int curpage, int showcount) {
+        return "{'appid':'" + GlobalConfig.BO_APPID + "','objectname':'" + GlobalConfig.BO_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+    }
 }
