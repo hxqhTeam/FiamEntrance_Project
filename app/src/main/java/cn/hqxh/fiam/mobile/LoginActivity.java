@@ -53,7 +53,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-import static android.Manifest.permission.READ_CONTACTS;
+
 import static android.Manifest.permission.READ_PHONE_STATE;
 
 /**
@@ -133,13 +133,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean mayRequestContacts() {
+        Log.i("TAG","SDK="+Build.VERSION.SDK_INT);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
         if (checkSelfPermission(READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            Log.i("TAG","22222");
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_PHONE_STATE)) {
+            Log.i("TAG","444444");
             Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override

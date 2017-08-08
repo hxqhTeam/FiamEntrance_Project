@@ -19,4 +19,5 @@
 
     <color name="text_back_color_1">#b1d3ca</color>
     <color name="text_back_color_2">#44f560</color>
+    <color name="text_divid_color">#FFDAD5D5</color>
 </resources>
