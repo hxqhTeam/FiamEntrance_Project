@@ -32,6 +32,13 @@
     <string name="szrwd_text">试制任务单</string>
     <string name="rysqd_text">燃油申请单</string>
     <string name="qtrwd_text">其它任务单</string>
+    <string name="ht_text">合同</string>
+    <string name="fkys_text">付款验收</string>
+    <string name="xkjh_text">需款计划</string>
+    <string name="bx_text">报销</string>
+    <string name="expense_text">差旅报销</string>
+    <string name="byjbx_text">备用金报销</string>
+    <string name="jkd_text">借款单</string>
 
 
 </resources>

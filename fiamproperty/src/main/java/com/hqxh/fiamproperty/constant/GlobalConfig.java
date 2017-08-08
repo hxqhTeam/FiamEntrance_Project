@@ -82,7 +82,35 @@ public final class GlobalConfig {
     //其它任务单
     public static final String TOQT_APPID = "TOQT" ;
 
+    /**任务单结束**/
 
+    //合同的AppID
+    public static final String CONTPURCH_APPID = "CONTPURCH" ;
+    //合同的表名
+    public static final String PURCHVIEW_NAME = "PURCHVIEW" ;
+    //付款验收Appid
+    public static final String PAYCHECK_APPID = "PAYCHECK" ;
+    //付款验收表名
+    public static final String PAYCHECK_NAME = "PAYCHECK" ;
+
+    //需款计划Appid
+    public static final String PP_APPID = "PP" ;
+    //需款计划表名
+    public static final String PAYPLAN_NAME = "PAYPLAN" ;
+
+    /**报销**/
+    //差旅报销单Appid
+    public static final String EXPENSES_APPID = "EXPENSES" ;
+    //差旅报销单表名／备用金报销
+    public static final String EXPENSE_NAME = "EXPENSE" ;
+
+    //备用金报销Appid
+    public static final String EXPENSE_APPID = "EXPENSE" ;
+
+    //借款单Appid
+    public static final String BO_APPID = "BO" ;
+    //借款单表名
+    public static final String BO_NAME = "BO" ;
     /**
      * 用户登录表识--开始*
      */
