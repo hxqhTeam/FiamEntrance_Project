@@ -156,6 +156,11 @@ public class HtActivity extends BaseListActivity {
 
     }
 
+    @Override
+    protected void setOnClick() {
+
+    }
+
 
     /**
      * 获取数据*

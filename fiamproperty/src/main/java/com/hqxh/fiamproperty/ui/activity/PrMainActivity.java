@@ -103,7 +103,7 @@ public class PrMainActivity extends BaseActivity {
     //判断需要显示的页面
     private void isShowPage() {
 
-        icon = new int[]{R.mipmap.ic_jscgsq, R.mipmap.ic_szcgsq,
+        icon = new int[]{R.mipmap.ic_jscgsq, R.drawable.ic_szcgsq,
                 R.mipmap.ic_wzcgsq, R.mipmap.ic_fwcgsq, R.mipmap.ic_wpcgsq};
         iconName = getResources().getStringArray(R.array.po_text);
 

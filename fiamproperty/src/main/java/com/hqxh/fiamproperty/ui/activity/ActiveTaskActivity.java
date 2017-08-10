@@ -1,5 +1,6 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -64,12 +65,10 @@ public class ActiveTaskActivity extends BaseListActivity {
     private void getData() {
         String data=null;
         if(mark==HomeActivity.DB_CODE){
-            data = HttpManager.getWFASSIGNMENTUrl(AccountUtils.getpersonId(this), "ACTIVE", curpage, showcount);
+            data = HttpManager.getWFASSIGNMENTUrl("",AccountUtils.getpersonId(this), "ACTIVE", curpage, showcount);
         }else if(mark==HomeActivity.YB_CODE){
-            data = HttpManager.getWFASSIGNMENTUrl(AccountUtils.getpersonId(this), "COMPLETE", curpage, showcount);
+            data = HttpManager.getWFASSIGNMENTUrl("",AccountUtils.getpersonId(this), "COMPLETE", curpage, showcount);
         }
-        Log.i(TAG, "data=" + data);
-        Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addQueryParameter("data", data)
                 .build()
@@ -174,6 +173,12 @@ public class ActiveTaskActivity extends BaseListActivity {
 
     }
 
+    @Override
+    protected void setOnClick() {
+        searchText.setOnClickListener(searchTextOnClickListener);
+
+    }
+
 
     /**
      * 获取数据*
@@ -197,4 +202,14 @@ public class ActiveTaskActivity extends BaseListActivity {
     }
 
 
+
+    /**跳转事件**/
+    private View.OnClickListener searchTextOnClickListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent=new Intent(ActiveTaskActivity.this,SearchActivity.class);
+            intent.putExtra("appid",GlobalConfig.WFADMIN_APPID);
+            startActivityForResult(intent,0);
+        }
+    };
 }

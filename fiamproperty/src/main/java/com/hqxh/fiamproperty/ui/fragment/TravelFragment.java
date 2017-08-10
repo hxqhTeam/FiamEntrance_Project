@@ -1,6 +1,7 @@
 package com.hqxh.fiamproperty.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_Workorder;
 import com.hqxh.fiamproperty.model.R_Workorder.ResultBean;
 import com.hqxh.fiamproperty.model.R_Workorder.Workorder;
+import com.hqxh.fiamproperty.ui.activity.GnWorkorderActivity;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
 import com.hqxh.fiamproperty.ui.adapter.TravelAdapter;
 import com.hqxh.fiamproperty.ui.widget.PullLoadMoreRecyclerView;
@@ -179,7 +181,8 @@ public class TravelFragment extends Fragment implements PullLoadMoreRecyclerView
         travelAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent=new Intent(getActivity(), GnWorkorderActivity.class);
+                startActivityForResult(intent,0);
             }
         });
     }

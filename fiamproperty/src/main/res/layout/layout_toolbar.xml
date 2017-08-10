@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:id="@+id/toolbar"
     android:background="@color/colorPrimary"
-    app:title=""
-    android:orientation="vertical">
+    app:title="">
 
 
     <TextView
+        android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/title_text"
-        android:textColor="@android:color/white"
         android:layout_gravity="center"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textSize="18sp"/>
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/search_imageView_id"
@@ -26,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:src="@mipmap/ic_search"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
 </android.support.v7.widget.Toolbar>

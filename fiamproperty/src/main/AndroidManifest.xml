@@ -10,8 +10,7 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/MyThemeBlue"
-        >
+        android:theme="@style/MyThemeBlue">
         <activity
             android:name=".ui.activity.HomeActivity"
             android:launchMode="singleTask"
@@ -25,42 +24,50 @@
         <activity
             android:name=".ui.activity.WorkorderActivity"
             android:label="@string/ccsq_text"
-            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+            android:theme="@style/MyThemeBlue.NoActionBar" />
         <activity
             android:name=".ui.activity.GrActivity"
             android:label="@string/cmgl_text"
-            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+            android:theme="@style/MyThemeBlue.NoActionBar" />
         <activity
             android:name=".ui.activity.PrMainActivity"
             android:label="@string/ccsq_text"
-            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+            android:theme="@style/MyThemeBlue.NoActionBar" />
         <activity
             android:name=".ui.activity.PrActivity"
             android:label="@string/jscgsq_text"
-            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+            android:theme="@style/MyThemeBlue.NoActionBar" />
         <activity
             android:name=".ui.activity.RwdMainActivity"
             android:label="@string/rwd_text"
-            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+            android:theme="@style/MyThemeBlue.NoActionBar" />
         <activity
             android:name=".ui.activity.RwdActivity"
             android:label="@string/rwd_text"
-            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+            android:theme="@style/MyThemeBlue.NoActionBar" />
         <activity
             android:name=".ui.activity.HtActivity"
             android:label="@string/ht_text"
-            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+            android:theme="@style/MyThemeBlue.NoActionBar" />
         <activity
             android:name=".ui.activity.FkActivity"
             android:label="@string/fkys_text"
-            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+            android:theme="@style/MyThemeBlue.NoActionBar" />
         <activity
             android:name=".ui.activity.XkjhActivity"
             android:label="@string/xkjh_text"
-            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+            android:theme="@style/MyThemeBlue.NoActionBar" />
         <activity
             android:name=".ui.activity.BxActivity"
             android:label="@string/bx_text"
+            android:theme="@style/MyThemeBlue.NoActionBar" />
+        <activity
+            android:name=".ui.activity.SearchActivity"
+            android:label="@string/search_text"
+            android:theme="@style/MyThemeBlue.NoActionBar" />
+        <activity
+            android:name=".ui.activity.GnWorkorderActivity"
+            android:label="@string/gncc_detail_text"
             android:theme="@style/MyThemeBlue.NoActionBar"></activity>
     </application>
 

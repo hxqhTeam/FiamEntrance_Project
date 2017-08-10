@@ -16,7 +16,8 @@
     <string name="load_more_text">正在加载...</string>
     <string name="have_notdata_hint">暂无数据</string>
     <string name="all_data_hint">已加载出全部数据...</string>
-    <string name="title_activity_workorder">WorkorderActivity</string>
+    <string name="have_not_data_txt">暂无相关数据...</string>
+
     <!--标题-->
     <string name="cmgl_text">出门管理</string>
     <string name="cgsq_text">采购申请</string>
@@ -39,6 +40,31 @@
     <string name="expense_text">差旅报销</string>
     <string name="byjbx_text">备用金报销</string>
     <string name="jkd_text">借款单</string>
+    <string name="search_text">搜索</string>
+    <!--国内出差详情-->
+    <string name="gncc_detail_text">国内出差详情</string>
+    <string name="sqd_text">申请单</string>
+    <string name="have_not_data">暂无数据</string>
+    <string name="projectid_text">费用号</string>
+    <string name="worktype_text">类型</string>
+    <string name="status_text">状态</string>
+    <string name="time_text">时间</string>
+    <string name="udaddress1_text">目的地</string>
+    <string name="udtransport3_text">是否飞机</string>
+    <string name="udremark1_text">出差原因</string>
+    <string name="udtrvcost1_text">差旅费用</string>
+    <string name="udtrvcost2_text">其它费用</string>
+    <string name="udesttotalcost_text">出差费用预算</string>
+    <string name="ccr_text">出差人</string>
+    <string name="jbxx_text">基本信息</string>
+    <string name="udtrv1_text">团队负责人</string>
+    <string name="rdchead_text">中心分管领导</string>
+    <string name="sqr_text">申请人</string>
+    <string name="cudept_text">部门</string>
+    <string name="reportdate_text">申请日期</string>
+    <string name="phonenum_text">电话</string>
+    <string name="spjl_text">审批记录</string>
+    <string name="sp_btn_id">审批</string>
 
 
 </resources>

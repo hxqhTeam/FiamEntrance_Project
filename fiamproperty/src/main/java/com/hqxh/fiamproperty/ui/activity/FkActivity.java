@@ -157,6 +157,11 @@ public class FkActivity extends BaseListActivity {
 
     }
 
+    @Override
+    protected void setOnClick() {
+
+    }
+
 
     /**
      * 获取数据*

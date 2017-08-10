@@ -16,7 +16,7 @@ import com.hqxh.fiamproperty.ui.widget.PullLoadMoreRecyclerView;
 
 public abstract class BaseListActivity extends BaseTitleActivity implements PullLoadMoreRecyclerView.PullLoadMoreListener {
     private static final String TAG = "BaseListActivity";
-    private ImageView searchText;
+    protected ImageView searchText;
 
 
 
@@ -27,6 +27,8 @@ public abstract class BaseListActivity extends BaseTitleActivity implements Pull
 
 
     protected abstract void fillData();
+
+    protected abstract void setOnClick();
 
 
 
@@ -62,13 +64,19 @@ public abstract class BaseListActivity extends BaseTitleActivity implements Pull
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         fillData();
         searchText.setVisibility(View.VISIBLE);
-        Log.i(TAG,"11111");
+        setOnClick();
 
 
     }
 
+
+
     @Override
     protected abstract String getSubTitle();
+
+
+
+
 
 
 

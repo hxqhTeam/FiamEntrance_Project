@@ -46,7 +46,6 @@ public abstract class BaseTitleActivity extends BaseActivity {
         mToolbar=(Toolbar)findViewById(R.id.toolbar);
         mTitleName=(TextView)findViewById(R.id.title_text);
 
-        Log.e(TAG,"22222");
         if (getContentViewLayoutID() != 0) {
             initToolbar();
         }

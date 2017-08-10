@@ -11,8 +11,14 @@ public class HttpManager {
     /**
      * 待办任务*
      */
-    public static String getWFASSIGNMENTUrl(String username, String assignstatus,int curpage, int showcount) {
-            return "{'appid':'" + GlobalConfig.WFADMIN_APPID + "','objectname':'" + GlobalConfig.WFASSIGNMENT_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ASSIGNSTATUS':'="+assignstatus+"','ASSIGNCODE':'="+username+"'}}";
+    public static String getWFASSIGNMENTUrl(String search,String username, String assignstatus,int curpage, int showcount) {
+         if (null==search||search.equals("")){
+             return "{'appid':'" + GlobalConfig.WFADMIN_APPID + "','objectname':'" + GlobalConfig.WFASSIGNMENT_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ASSIGNSTATUS':'="+assignstatus+"','ASSIGNCODE':'="+username+"'}}";
+
+         }else{
+             return "{'appid':'" + GlobalConfig.WFADMIN_APPID + "','objectname':'" + GlobalConfig.WFASSIGNMENT_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ASSIGNSTATUS':'="+assignstatus+"','ASSIGNCODE':'="+username+"'},'reporsearch':{'UDAPPNAME':'"+search+"','DESCRIPTION':'"+search+"'}}";
+
+         }
 
     }
     /**

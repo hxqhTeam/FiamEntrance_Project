@@ -48,7 +48,6 @@ public class HomeActivity extends BaseActivity {
     protected int getContentViewLayoutID() {
         if(getIntent().hasExtra("username")){
             username=getIntent().getExtras().getString("username");
-            Log.e("TAG","username="+username);
         }
         return R.layout.activity_home;
 

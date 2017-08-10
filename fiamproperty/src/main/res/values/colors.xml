@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#4576bb</color> <!-- #3F51B5 2C97DE  28a5e3-->
     <color name="colorPrimaryDark">#4576bb</color> <!--#303F9F   2C97DE-->
-    <color name="colorAccent">#4576bb</color> <!--FF4081 2C97DE -->
+    <color name="colorAccent">#669dec</color> <!--FF4081 2C97DE -->
     <color name="background_gray">#F5F5F5</color>
     <color name="background_dark_gray">#E8E8E8</color>
 
@@ -20,4 +20,8 @@
     <color name="text_back_color_1">#b1d3ca</color>
     <color name="text_back_color_2">#44f560</color>
     <color name="text_divid_color">#FFDAD5D5</color>
+
+    <color name="btn_normal">#669dec</color> <!--FF4081 2C97DE -->
+    <color name="btn_onclick">#4576bb</color> <!--FF4081 2C97DE -->
+
 </resources>

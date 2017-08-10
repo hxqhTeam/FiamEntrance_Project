@@ -120,10 +120,10 @@ public class R_Workorder {
         private String  UDCONTACT;//联系人及电话
         private String  STATUS;//状态
         private String  TEAMLEADER;//团长姓名
-        private String  UDREMARK1;//出国目的／试验目的
+        private String  UDREMARK1;//出国目的／试验目的／出差原因
         private String  UDTARGSTARTDATE;//开始时间／建议完成时间
         private String  UDTARGCOMPDATE;//结束时间／要求完成时间
-        private String  UDADDRESS1;//拟出访路线
+        private String  UDADDRESS1;//拟出访路线／目的地
         private String  UDESTDUR3;//出访国家停留(天)
         private String  UDQTY1;//途径国家容留(天)／样品数量/申请数量
         private String  UDSUMMARY6;//预期成果
@@ -136,6 +136,10 @@ public class R_Workorder {
         private String  WONUM;//申请单／任务单
         private String  PROJECTID;//费用号
         private String  UDESTTOTALCOST;//出差费用预算(人民币)／费用概算合计
+        private String  WORKTYPE;//类型
+        private String  UDTRANSPORT3;//乘坐飞机
+        private String  UDTRVCOST2;//其它费用
+
         //试验任务单
         private String  PROJECTDESC;//项目名称
         private String  PM;//项目经理
@@ -546,6 +550,30 @@ public class R_Workorder {
 
         public void setUDTOTYPE1(String UDTOTYPE1) {
             this.UDTOTYPE1 = UDTOTYPE1;
+        }
+
+        public String getWORKTYPE() {
+            return WORKTYPE;
+        }
+
+        public void setWORKTYPE(String WORKTYPE) {
+            this.WORKTYPE = WORKTYPE;
+        }
+
+        public String getUDTRANSPORT3() {
+            return UDTRANSPORT3;
+        }
+
+        public void setUDTRANSPORT3(String UDTRANSPORT3) {
+            this.UDTRANSPORT3 = UDTRANSPORT3;
+        }
+
+        public String getUDTRVCOST2() {
+            return UDTRVCOST2;
+        }
+
+        public void setUDTRVCOST2(String UDTRVCOST2) {
+            this.UDTRVCOST2 = UDTRVCOST2;
         }
     }
 
