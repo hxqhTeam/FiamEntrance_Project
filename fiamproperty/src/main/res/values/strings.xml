@@ -40,6 +40,19 @@
     <string name="expense_text">差旅报销</string>
     <string name="byjbx_text">备用金报销</string>
     <string name="jkd_text">借款单</string>
+    <string name="location_text">门岗1</string>
+    <string name="location2_text">门岗2</string>
+    <string name="type_text">类型</string>
+    <string name="schedulardate_text">计划出门日期</string>
+    <string name="displayname_text">申请人</string>
+    <string name="description_text">状态</string>
+    <string name="enterdate_text">申请日期</string>
+    <string name="reason_text">理由</string>
+    <string name="grnum_text">申请单号</string>
+    <string name="phonenum_text">电话</string>
+    <string name="cudept_text">部门</string>
+    <string name="cucrew_text">科室</string>
+    <string name="wzcmxq_text">物资出门详情</string>
     <string name="search_text">搜索</string>
     <!--国内出差详情-->
     <string name="gncc_detail_text">国内出差详情</string>

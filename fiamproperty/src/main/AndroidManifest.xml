@@ -69,6 +69,11 @@
             android:name=".ui.activity.GnWorkorderActivity"
             android:label="@string/gncc_detail_text"
             android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.GrDetailsActivity"
+            android:label="@string/wzcmxq_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+
     </application>
 
 </manifest>

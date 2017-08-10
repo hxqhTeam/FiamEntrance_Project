@@ -1,5 +1,6 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -185,6 +186,7 @@ public class PrActivity extends BaseListActivity {
         prAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+
 
             }
         });

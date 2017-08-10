@@ -1,5 +1,6 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -110,10 +111,10 @@ public class GrActivity extends BaseListActivity {
     }
 
 
-    @Override
-    public void onRefresh() {
+   @Override
+  public void onRefresh() {
         curpage = 1;
-        grAdapter.removeAll(grAdapter.getData());
+        grAdapter.removeAll( grAdapter.getData());
         getData();
 
     }
@@ -171,7 +172,8 @@ public class GrActivity extends BaseListActivity {
         grAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent=new Intent(GrActivity.this,GrDetailsActivity.class);
+                startActivityForResult(intent, 0);
             }
         });
     }
