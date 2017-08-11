@@ -76,8 +76,8 @@
     <string name="reportdate_text">申请日期</string>
     <string name="spjl_text">审批记录</string>
     <string name="sp_btn_id">审批</string>
-    <string name="displayname_text">人员</string>
-    <string name="cucrew_text">科室</string>
+    <string name="wzmx_text">物资明细</string>
+    <string name="zcmx_text">整车明细</string>
 
 
 </resources>

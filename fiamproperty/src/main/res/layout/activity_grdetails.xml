@@ -471,7 +471,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/wordcolor2"
@@ -479,14 +479,22 @@
                 android:padding="@dimen/dp_4">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/btn_top_5dp"
-                    android:drawableRight="@drawable/ic_more_horiz_black_24dp"
-                    android:text="物资明细"
+                    android:text="@string/wzmx_text"
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/wzmx_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_more_horiz_black_24dp"
+
+                    />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -495,47 +503,33 @@
 
             </LinearLayout>
 
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/wordcolor2"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:background="@color/wordcolor2"
                 android:padding="@dimen/dp_4">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/btn_top_5dp"
-                    android:drawableRight="@drawable/ic_more_horiz_black_24dp"
-                    android:text="整车明细"
-                    android:textColor="@color/wordcolor"
-                    android:textSize="14dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/text_divid_color">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/wordcolor2"
-                android:orientation="horizontal"
-                android:padding="@dimen/dp_4">
-
-                <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/btn_top_5dp"
                     android:layout_marginTop="@dimen/dp_4"
-                    android:drawableRight="@drawable/ic_more_horiz_black_24dp"
-                    android:text="审批记录"
-                    android:textColor="@color/wordcolor"
+                    android:gravity="center_vertical"
+                    android:text="@string/zcmx_text"
+                    android:textColor="@color/black"
                     android:textSize="14dp" />
-            </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/zcmx_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_more_horiz_black_24dp" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -544,7 +538,44 @@
 
             </LinearLayout>
 
-            <Button
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/wordcolor2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_4">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/btn_top_5dp"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:text="@string/spjl_text"
+                    android:textColor="@color/wordcolor"
+                    android:textSize="14dp" />
+                <ImageView
+                    android:id="@+id/spjl_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_more_horiz_black_24dp"
+
+                    />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/text_divid_color">
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <Button
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="88dp"
@@ -553,8 +584,6 @@
                 android:text="审批"
                 android:textColor="#ffffff"
                 android:textSize="25dp" />
-        </LinearLayout>
-    </ScrollView>
 
 
 
