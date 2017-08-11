@@ -106,7 +106,7 @@ public class R_Workorder {
      * 任务单
      *
      * **/
-    public static class  Workorder{
+    public static class  Workorder extends Entity{
         //国内出差申请
         private String  UDTRV2A; //其它团组名称
         private String  UDREMARK3;//出访国家或地区／试验项目、标准、方法及方案
@@ -139,6 +139,7 @@ public class R_Workorder {
         private String  WORKTYPE;//类型
         private String  UDTRANSPORT3;//乘坐飞机
         private String  UDTRVCOST2;//其它费用
+        private String  UDTRVCOST1;//差旅费用
 
         //试验任务单
         private String  PROJECTDESC;//项目名称
@@ -574,6 +575,14 @@ public class R_Workorder {
 
         public void setUDTRVCOST2(String UDTRVCOST2) {
             this.UDTRVCOST2 = UDTRVCOST2;
+        }
+
+        public String getUDTRVCOST1() {
+            return UDTRVCOST1;
+        }
+
+        public void setUDTRVCOST1(String UDTRVCOST1) {
+            this.UDTRVCOST1 = UDTRVCOST1;
         }
     }
 

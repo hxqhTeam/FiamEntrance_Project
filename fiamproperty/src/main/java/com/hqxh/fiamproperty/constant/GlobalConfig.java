@@ -47,6 +47,8 @@ public final class GlobalConfig {
     public static final String TRAVEL_APPID = "TRAVEL" ;
     //出差表名/任务单
     public static final String WORKORDER_NAME = "WORKORDER" ;
+    //出差人
+    public static final String PERSONRELATION_NAME = "PERSONRELATION" ;
     //国外立项appid
     public static final String TRAVELS_APPID = "TRAVELS" ;
 

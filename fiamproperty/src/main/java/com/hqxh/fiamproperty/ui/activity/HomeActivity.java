@@ -3,17 +3,14 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.base.BaseActivity;
-import com.hqxh.fiamproperty.ui.view.LineGridView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,9 +107,9 @@ public class HomeActivity extends BaseActivity {
     //判断需要显示的页面
     private void isShowPage() {
 
-        icon = new int[]{R.mipmap.ic_dbrw, R.mipmap.ic_ybrw,
-                R.mipmap.ic_ccsq, R.mipmap.ic_cmgl, R.mipmap.ic_cgsq,
-                R.mipmap.ic_rwd, R.mipmap.ic_ht, R.mipmap.ic_fkys, R.mipmap.ic_xkjh, R.mipmap.ic_bx};
+        icon = new int[]{R.drawable.ic_dbrw, R.drawable.ic_ybrw,
+                R.drawable.ic_ccsq, R.drawable.ic_cmgl, R.drawable.ic_cgsq,
+                R.drawable.ic_rwd, R.drawable.ic_ht, R.drawable.ic_fkys, R.drawable.ic_xkjh, R.drawable.ic_bx};
         iconName = getResources().getStringArray(R.array.home_text);
 
     }

@@ -30,6 +30,17 @@ public class HttpManager {
     }
 
     /**
+     * 出差人*
+     */
+    public static String getR_PERSONRELATIONUrl(String username,String wonum,int curpage, int showcount) {
+        return "{'appid':'" + GlobalConfig.TRAVEL_APPID + "','objectname':'" + GlobalConfig.PERSONRELATION_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'="+wonum+"'}}";
+
+    }
+
+
+
+
+    /**
      * 出国立项*
      */
     public static String getGWWORKORDERUrl(String username,int curpage, int showcount) {

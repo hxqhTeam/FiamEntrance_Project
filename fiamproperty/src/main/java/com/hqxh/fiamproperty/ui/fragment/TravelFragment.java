@@ -25,6 +25,7 @@ import com.hqxh.fiamproperty.ui.widget.PullLoadMoreRecyclerView;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -182,7 +183,10 @@ public class TravelFragment extends Fragment implements PullLoadMoreRecyclerView
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent=new Intent(getActivity(), GnWorkorderActivity.class);
-                startActivityForResult(intent,0);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("workorder", (Serializable) travelAdapter.getData().get(position));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 0);
             }
         });
     }
