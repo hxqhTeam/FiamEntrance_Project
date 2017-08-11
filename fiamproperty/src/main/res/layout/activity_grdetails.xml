@@ -28,8 +28,8 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="75dp"
-                    android:layout_height="60dp"
+                    android:layout_width="70dp"
+                    android:layout_height="55dp"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:text="@string/grnum_text"
@@ -41,11 +41,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/grnum_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="17WZ000005"
+                        android:hint="@string/have_not_data"
                         android:padding="4dp"
                         android:textColor="@color/light_black"
                         android:textSize="14dp" />
@@ -55,11 +56,12 @@
                         android:layout_height="1dp"
                         android:background="@color/text_divid_color" />
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/grnum2_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="物资出门"
+                        android:hint="@string/have_not_data"
                         android:padding="4dp"
                         android:textColor="@color/light_black"
                         android:textSize="14dp" />
@@ -79,7 +81,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
@@ -88,11 +90,12 @@
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/location_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="技术中心北门"
+                    android:hint="@string/have_not_data"
                     android:padding="4dp"
                     android:textColor="@color/light_black"
                     android:textSize="14dp" />
@@ -112,7 +115,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
@@ -121,11 +124,12 @@
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/location2_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="工程大楼5号门"
+                    android:hint="@string/have_not_data"
                     android:padding="4dp"
                     android:textColor="@color/light_black"
                     android:textSize="14dp" />
@@ -145,7 +149,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
@@ -154,11 +158,12 @@
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/reason_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:hint="带物资出门"
+                    android:hint="@string/have_not_data"
                     android:padding="4dp"
                     android:textColor="@color/light_black"
                     android:textSize="14dp" />
@@ -178,7 +183,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
@@ -187,11 +192,12 @@
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/type_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="物资"
+                    android:hint="@string/have_not_data"
                     android:padding="4dp"
                     android:textColor="@color/light_black"
                     android:textSize="14dp" />
@@ -212,7 +218,7 @@
 
                 <TextView
                     android:id="@+id/textView"
-                    android:layout_width="75dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
@@ -221,13 +227,14 @@
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/schedulardate_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:padding="4dp"
-                    android:text="2017-07-12"
+                    android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="14dp" />
 
@@ -260,7 +267,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
@@ -269,13 +276,14 @@
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/displayname_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:padding="4dp"
-                    android:text="杨洪伟"
+                    android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="14dp" />
 
@@ -294,22 +302,23 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:text="@string/phonenum_text"
+                    android:text="@string/phone_text"
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/phone_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:padding="4dp"
-                    android:text="1584312433"
+                    android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="14dp" />
 
@@ -328,7 +337,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
@@ -337,13 +346,14 @@
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/cudept_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:padding="4dp"
-                    android:text="一汽品牌项目管理部"
+                    android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="14dp" />
 
@@ -362,7 +372,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
@@ -371,13 +381,14 @@
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/cucrew_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:padding="4dp"
-                    android:text="A平台项目室"
+                    android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="14dp" />
 
@@ -396,7 +407,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
@@ -405,13 +416,14 @@
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/description_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:padding="4dp"
-                    android:text="驳回"
+                    android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="14dp" />
 
@@ -430,7 +442,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
@@ -439,13 +451,14 @@
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/enterdate_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:padding="4dp"
-                    android:text="2017-07-12 15:34:04"
+                    android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="14dp" />
 
@@ -462,13 +475,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/wordcolor2"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_4">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="4dp"
+                    android:layout_marginLeft="@dimen/btn_top_5dp"
+                    android:drawableRight="@drawable/ic_more_horiz_black_24dp"
                     android:text="物资明细"
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
@@ -476,15 +490,23 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/text_divid_color">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/wordcolor2"
                 android:orientation="horizontal"
-                android:background="@color/wordcolor2">
+                android:padding="@dimen/dp_4">
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="4dp"
+                    android:layout_marginLeft="@dimen/btn_top_5dp"
+                    android:drawableRight="@drawable/ic_more_horiz_black_24dp"
                     android:text="整车明细"
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
@@ -492,18 +514,34 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/text_divid_color">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/wordcolor2"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_4">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="4dp"
+                    android:layout_marginLeft="@dimen/btn_top_5dp"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:drawableRight="@drawable/ic_more_horiz_black_24dp"
                     android:text="审批记录"
                     android:textColor="@color/wordcolor"
                     android:textSize="14dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/text_divid_color">
+
             </LinearLayout>
 
             <Button

@@ -49,7 +49,7 @@
     <string name="enterdate_text">申请日期</string>
     <string name="reason_text">理由</string>
     <string name="grnum_text">申请单号</string>
-    <string name="phonenum_text">电话</string>
+    <string name="phone_text">电话</string>
     <string name="cudept_text">部门</string>
     <string name="cucrew_text">科室</string>
     <string name="wzcmxq_text">物资出门详情</string>
@@ -73,9 +73,7 @@
     <string name="udtrv1_text">团队负责人</string>
     <string name="rdchead_text">中心分管领导</string>
     <string name="sqr_text">申请人</string>
-    <string name="cudept_text">部门</string>
     <string name="reportdate_text">申请日期</string>
-    <string name="phonenum_text">电话</string>
     <string name="spjl_text">审批记录</string>
     <string name="sp_btn_id">审批</string>
 

@@ -1,6 +1,7 @@
 package com.hqxh.fiamproperty.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.hqxh.fiamproperty.ui.adapter.GrAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -173,6 +175,9 @@ public class GrActivity extends BaseListActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent=new Intent(GrActivity.this,GrDetailsActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("gr",(Serializable) grAdapter.getData().get(position));
+                intent.putExtras(bundle);
                 startActivityForResult(intent, 0);
             }
         });

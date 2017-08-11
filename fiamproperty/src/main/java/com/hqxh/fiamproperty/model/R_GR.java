@@ -1,5 +1,6 @@
 package com.hqxh.fiamproperty.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -105,7 +106,7 @@ public class R_GR {
     /**出门管理
      *
      * **/
-    public static class  GR{
+    public static class  GR implements Serializable {
 
         private String  ENTERBY; //申请人
         private String  ENTERDATE;//申请时间
@@ -120,6 +121,7 @@ public class R_GR {
         private String  SCHEDULARDATE;//计划出门日期
         private String  LOCATION2DESCRIPTION;//门岗2
         private String  REASON;//理由
+
 
         public String getENTERBY() {
             return ENTERBY;
