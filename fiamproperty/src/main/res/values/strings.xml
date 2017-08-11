@@ -65,6 +65,8 @@
     <string name="phonenum_text">电话</string>
     <string name="spjl_text">审批记录</string>
     <string name="sp_btn_id">审批</string>
+    <string name="displayname_text">人员</string>
+    <string name="cucrew_text">科室</string>
 
 
 </resources>

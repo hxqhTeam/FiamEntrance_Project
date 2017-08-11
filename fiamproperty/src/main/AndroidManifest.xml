@@ -69,6 +69,10 @@
             android:name=".ui.activity.GnWorkorderActivity"
             android:label="@string/gncc_detail_text"
             android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.PersonrelationActivity"
+            android:label="@string/ccr_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
     </application>
 
 </manifest>

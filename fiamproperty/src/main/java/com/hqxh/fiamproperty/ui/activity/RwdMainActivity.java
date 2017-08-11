@@ -103,8 +103,8 @@ public class RwdMainActivity extends BaseActivity {
     //判断需要显示的页面
     private void isShowPage() {
 
-        icon = new int[]{R.mipmap.ic_syred, R.mipmap.ic_szrwd,
-                R.mipmap.ic_wzlld, R.mipmap.ic_djrwd, R.mipmap.ic_rysqd,R.mipmap.ic_qtrwd};
+        icon = new int[]{R.drawable.ic_syrwd, R.drawable.ic_szrwd,
+                R.drawable.ic_wzlld, R.drawable.ic_djrwd, R.drawable.ic_rysq,R.drawable.ic_qtrwd};
         iconName = getResources().getStringArray(R.array.rwd_text);
 
     }
