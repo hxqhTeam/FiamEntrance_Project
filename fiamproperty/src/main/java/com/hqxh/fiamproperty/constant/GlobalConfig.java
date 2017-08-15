@@ -9,6 +9,7 @@ public final class GlobalConfig {
 
     /**服务器地址**/
     public final static String HTTP_URL="http://10.60.12.98:9080";
+//    public final static String HTTP_URL="http://qmportal1.qm.cn:8090";
 
     /**服务器登录接口地址**/
 
@@ -56,6 +57,8 @@ public final class GlobalConfig {
     public static final String GRWZ_APPID = "GRWZ" ;
     //出门管理表名
     public static final String GR_APPID = "GR" ;
+    //物资明细
+    public static final String GRLINE_NAME = "GRLINE" ;
 
     //技术采购申请appid
     public static final String JSPR_APPID = "JSPR" ;
@@ -77,6 +80,7 @@ public final class GlobalConfig {
     public static final String TOSZ_APPID = "TOSZ" ;
     //物资领料单
     public static final String TOLL_APPID = "TOLL" ;
+
     //调件任务单
     public static final String TODJ_APPID = "TODJ" ;
     //燃油申请单
@@ -123,8 +127,6 @@ public final class GlobalConfig {
     public static final String USERNAMEERROR = "USER-E-100";//用户名密码错误
 
     public static final String GETDATASUCCESS = "GLOBAL-S-0";//获取数据成功
-
-
 
 
 

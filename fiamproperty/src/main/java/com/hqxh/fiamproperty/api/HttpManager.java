@@ -37,6 +37,14 @@ public class HttpManager {
 
     }
 
+    /*
+    物资明细
+    */
+   public static String getGRLINEUrl(String username,String grnum,int curpage, int showcount) {
+        return "{'appid':'" + GlobalConfig.GRWZ_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'GRNUM':'="+grnum+"'}}";
+
+    }
+
 
 
 

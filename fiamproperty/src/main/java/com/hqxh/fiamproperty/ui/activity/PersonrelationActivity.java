@@ -65,7 +65,7 @@ public class PersonrelationActivity extends BaseListActivity {
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addQueryParameter("data", data)
                 .build()
-                .getObjectObservable(R_PERSONRELATION.class) // 发起获取数据列表的请求，并解析到FootList
+                .getObjectObservable(R_PERSONRELATION.class) // 发起获取数据列表的请求，并解析到R_PERSONRELATION
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
                 .doOnNext(new Consumer<R_PERSONRELATION>() {

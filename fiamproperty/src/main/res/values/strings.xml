@@ -45,7 +45,7 @@
     <string name="type_text">类型</string>
     <string name="schedulardate_text">计划出门日期</string>
     <string name="displayname_text">申请人</string>
-    <string name="description_text">状态</string>
+    <string name="description1_text">名称</string>
     <string name="enterdate_text">申请日期</string>
     <string name="reason_text">理由</string>
     <string name="grnum_text">申请单号</string>
@@ -78,6 +78,13 @@
     <string name="sp_btn_id">审批</string>
     <string name="wzmx_text">物资明细</string>
     <string name="zcmx_text">整车明细</string>
+    <string name="grlin1_text">规格型号</string>
+    <string name="qty_text">数量</string>
+    <string name="measureunitid_text">计量单位</string>
+    <string name="transdate_text">审批时间</string>
+    <string name="displayname1_text">审批人</string>
+    <string name="description_text">标题</string>
+    <string name="memo_text">审批意见</string>
 
 
 </resources>

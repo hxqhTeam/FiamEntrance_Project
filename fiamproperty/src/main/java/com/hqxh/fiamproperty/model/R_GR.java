@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Created by apple on 17/7/26.
- * 结果集
+ * 出门管理
  */
 
 public class R_GR {
@@ -226,8 +226,10 @@ public class R_GR {
         public void setREASON(String REASON) {
             this.REASON = REASON;
         }
-    }
 
+
+
+    }
 
 
 }

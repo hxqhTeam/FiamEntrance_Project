@@ -78,6 +78,11 @@
             android:name=".ui.activity.PersonrelationActivity"
             android:label="@string/ccr_text"
             android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.WzmxListActivity"
+            android:label="@string/wzmx_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+
     </application>
 
 </manifest>

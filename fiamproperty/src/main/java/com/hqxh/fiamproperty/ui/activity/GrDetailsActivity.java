@@ -1,13 +1,20 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.webkit.JavascriptInterface;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.base.BaseTitleActivity;
 import com.hqxh.fiamproperty.model.R_GR.GR;
+import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
+import com.hqxh.fiamproperty.ui.adapter.GrAdapter;
 import com.hqxh.fiamproperty.unit.JsonUnit;
+
+import java.io.Serializable;
+import java.util.List;
 //物资出门详情
 
 public class GrDetailsActivity extends BaseTitleActivity {
@@ -27,8 +34,12 @@ public class GrDetailsActivity extends BaseTitleActivity {
     TextView cucrew_text;//科室
     TextView description_text;//状态
     TextView enterdate_text;//申请日期
+    ImageView wzmx_text;//物资明细
+    ImageView zcmx_text;//整车明细
+    ImageView spjl_text;//审批记录
 
     private GR gr;
+
 
     @Override
     protected void beforeInit() {
@@ -56,6 +67,10 @@ public class GrDetailsActivity extends BaseTitleActivity {
         cucrew_text=(TextView)findViewById(R.id.cucrew_text);
         description_text=(TextView)findViewById(R.id.description_text);
         enterdate_text=(TextView)findViewById(R.id.enterdate_text);
+        wzmx_text=(ImageView)findViewById(R.id.wzmx_text);
+        zcmx_text=(ImageView)findViewById(R.id.zcmx_text);
+        spjl_text=(ImageView)findViewById(R.id.spjl_text);
+
 
         showData();
 
@@ -78,10 +93,44 @@ public class GrDetailsActivity extends BaseTitleActivity {
         description_text.setText(JsonUnit.convertStrToArray(gr.getSTATUSDESC())[0]);
         enterdate_text.setText(JsonUnit.convertStrToArray(gr.getENTERDATE())[0]);
 
+
+        wzmx_text.setOnClickListener(wzmx_textOnClickListener);
+       //zcmx_text.setOnClickListener(zcmx_textOnClickListener);
+    //    spjl_text.setOnClickListener(spjl_textOnClickListener);
+
     }
 
     @Override
     protected String getSubTitle() {
         return getString(R.string.wzcmxq_text);
     }
+
+
+
+    private View.OnClickListener wzmx_textOnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+            Intent intent=new Intent(GrDetailsActivity.this, WzmxListActivity.class);
+            intent.putExtra("grnum",JsonUnit.convertStrToArray(gr.getGRNUM())[0]);
+            startActivityForResult(intent, 0);
+
+        }
+    };
+    /*private View.OnClickListener zcmx_textOnClickListener = new View.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+
+        }
+    };*/
+  /*  private View.OnClickListener spjl_textOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent=new Intent(GrDetailsActivity.this, spjlListActivity.class);
+            startActivityForResult(intent, 0);
+
+        }
+    };*/
 }
+

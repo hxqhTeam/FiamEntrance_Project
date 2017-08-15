@@ -32,6 +32,8 @@ public class GrAdapter extends BaseQuickAdapter<GR> {
 
     @Override
     protected void convert(BaseViewHolder helper, GR item) {
+
+
         helper.setText(R.id.wonum_text_id, JsonUnit.convertStrToArray(item.getGRNUM())[0]);
         helper.setText(R.id.description_text_id, JsonUnit.convertStrToArray(item.getDESCRIPTION())[0]);
         helper.setText(R.id.reportedby_text_id, "申请人:"+JsonUnit.convertStrToArray(item.getENTERBY())[0]);

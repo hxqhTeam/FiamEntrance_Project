@@ -230,7 +230,7 @@ public abstract class BaseQuickAdapter<T> extends RecyclerView.Adapter<RecyclerV
 
     }
 
-    public void removeAll(List<T> data) {
+    public  void removeAll(List<T> data) {
         mData.removeAll(data);
         notifyDataSetChanged();
 

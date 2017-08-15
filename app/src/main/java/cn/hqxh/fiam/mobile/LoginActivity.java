@@ -332,7 +332,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 .addQueryParameter("username", mEmailView.getText().toString())
                 .addQueryParameter("imei", imei)
                 .build()
-                .getObjectObservable(R_Person.class) // 发起获取数据列表的请求，并解析到FootList
+                .getObjectObservable(R_Person.class) // 发起获取数据列表的请求，并解析到R_Person.class
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
                 .doOnNext(new Consumer<R_Person>() {

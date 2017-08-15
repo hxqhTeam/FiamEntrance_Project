@@ -10,11 +10,12 @@ import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseListActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_Wfassignemt;
-import com.hqxh.fiamproperty.model.R_Wfassignemt.Wfassignment;
-import com.hqxh.fiamproperty.model.R_Wfassignemt.ResultBean;
+import com.hqxh.fiamproperty.model.R_GRLINE;
+import com.hqxh.fiamproperty.model.R_GRLINE.ResultBean;
+import com.hqxh.fiamproperty.model.R_GRLINE.GRLINE;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
 import com.hqxh.fiamproperty.ui.adapter.WfassignmentAdapter;
+import com.hqxh.fiamproperty.ui.adapter.WzmxAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.hqxh.fiamproperty.unit.JsonUnit;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
@@ -32,30 +33,25 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 待办任务的Activity
+ * 物资明细
  **/
-public class ActiveTaskActivity extends BaseListActivity {
-    private static final String TAG = "ActiveTaskActivity";
+public class WzmxListActivity extends BaseListActivity {
+    private static final String TAG = "WzmxListActivity";
 
 
 
-    private WfassignmentAdapter wfassignmentAdapter;
+    private WzmxAdapter wzmxadapter;
 
     private int curpage = 1;
     private int showcount = 20;
     private int totalpage;
 
-    private int mark=0;
+    private String grnum;;
 
     @Override
     protected String getSubTitle() {
 
-        if(mark==HomeActivity.DB_CODE){
-            return getString(R.string.db_task_text);
-        }else if(mark==HomeActivity.YB_CODE){
-            return getString(R.string.yb_task_text);
-        }
-        return null;
+            return getString(R.string.wzmx_text);
     }
 
 
@@ -63,53 +59,47 @@ public class ActiveTaskActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data=null;
-        if(mark==HomeActivity.DB_CODE){
-            data = HttpManager.getWFASSIGNMENTUrl("",AccountUtils.getpersonId(this), "ACTIVE", curpage, showcount);
-        }else if(mark==HomeActivity.YB_CODE){
-            data = HttpManager.getWFASSIGNMENTUrl("",AccountUtils.getpersonId(this), "COMPLETE", curpage, showcount);
-        }
+        String data= HttpManager.getGRLINEUrl(AccountUtils.getpersonId(this),grnum, curpage, showcount);
+        Log.e(TAG,"data="+data);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addQueryParameter("data", data)
                 .build()
-                .getObjectObservable(R_Wfassignemt.class) // 发起获取数据列表的请求，并解析到R_Wfassignemt
+                .getObjectObservable(R_GRLINE.class) // 发起获取数据列表的请求，并解析到R_Wfassignemt
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
-                .doOnNext(new Consumer<R_Wfassignemt>() {
+                .doOnNext(new Consumer<R_GRLINE>() {
                     @Override
-                    public void accept(@NonNull R_Wfassignemt RWfassignemt) throws Exception {
+                    public void accept(@NonNull R_GRLINE r_grline) throws Exception {
                     }
                 })
 
-                .map(new Function<R_Wfassignemt, ResultBean>() {
+                .map(new Function<R_GRLINE, ResultBean>() {
                     @Override
-                    public ResultBean apply(@NonNull R_Wfassignemt RWfassignemt) throws Exception {
+                    public ResultBean apply(@NonNull R_GRLINE r_grline) throws Exception {
 
-                        return RWfassignemt.getResult();
+                        return r_grline.getResult();
                     }
                 })
-                .map(new Function<ResultBean, List<Wfassignment>>() {
+                .map(new Function<ResultBean, List<GRLINE>>() {
                     @Override
-                    public List<Wfassignment> apply(@NonNull ResultBean resultBean) throws Exception {
-                        totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG,"Totalresult="+resultBean.getTotalresult());
+                    public List<GRLINE> apply(@NonNull ResultBean resultBean) throws Exception {
                         return resultBean.getResultlist();
                     }
 
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Wfassignment>>() {
+                .subscribe(new Consumer<List<GRLINE>>() {
                     @Override
-                    public void accept(@NonNull List<Wfassignment> wfassignments) throws Exception {
+                    public void accept(@NonNull List<GRLINE> grline) throws Exception {
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
-                        if (wfassignments == null || wfassignments.isEmpty()) {
+                        if (grline == null || grline.isEmpty()) {
 
                         } else {
 
-                            addData(wfassignments);
+                            addData(grline);
 
 
                         }
@@ -129,7 +119,7 @@ public class ActiveTaskActivity extends BaseListActivity {
     @Override
     public void onRefresh() {
         curpage = 1;
-        wfassignmentAdapter.removeAll(wfassignmentAdapter.getData());
+        wzmxadapter.removeAll(wzmxadapter.getData());
         getData();
 
     }
@@ -138,7 +128,7 @@ public class ActiveTaskActivity extends BaseListActivity {
     public void onLoadMore() {
         if (totalpage == curpage) {
             getLoadMore();
-            showMiddleToast(ActiveTaskActivity.this,getResources().getString(R.string.all_data_hint));
+            showMiddleToast(WzmxListActivity.this,getResources().getString(R.string.all_data_hint));
         } else {
             curpage++;
             getData();
@@ -167,15 +157,14 @@ public class ActiveTaskActivity extends BaseListActivity {
 
     @Override
     protected void fillData() {
-        mark=getIntent().getExtras().getInt("mark");
-        initAdapter(new ArrayList<Wfassignment>());
+        grnum=getIntent().getExtras().getString("grnum");
+        initAdapter(new ArrayList<GRLINE>());
         getData();
 
     }
 
     @Override
     protected void setOnClick() {
-        searchText.setOnClickListener(searchTextOnClickListener);
 
     }
 
@@ -183,10 +172,10 @@ public class ActiveTaskActivity extends BaseListActivity {
     /**
      * 获取数据*
      */
-    private void initAdapter(final List<Wfassignment> list) {
-        wfassignmentAdapter = new WfassignmentAdapter(ActiveTaskActivity.this, R.layout.list_item_task, list);
-        mRecyclerView.setAdapter(wfassignmentAdapter);
-        wfassignmentAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+    private void initAdapter(final List<GRLINE> list) {
+        wzmxadapter = new WzmxAdapter(WzmxListActivity.this, R.layout.list_item_wzmx, list);
+        mRecyclerView.setAdapter(wzmxadapter);
+        wzmxadapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
@@ -197,19 +186,11 @@ public class ActiveTaskActivity extends BaseListActivity {
     /**
      * 添加数据*
      */
-    private void addData(final List<Wfassignment> list) {
-        wfassignmentAdapter.addData(list);
+    private void addData(final List<GRLINE> list) {
+        wzmxadapter.addData(list);
     }
 
 
 
-    /**跳转事件**/
-    private View.OnClickListener searchTextOnClickListener=new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent=new Intent(ActiveTaskActivity.this,SearchActivity.class);
-            intent.putExtra("appid",GlobalConfig.WFADMIN_APPID);
-            startActivityForResult(intent,0);
-        }
-    };
+
 }
