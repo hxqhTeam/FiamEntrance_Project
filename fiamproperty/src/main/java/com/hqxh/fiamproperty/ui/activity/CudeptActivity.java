@@ -1,5 +1,7 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -8,15 +10,16 @@ import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseListActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_PERSONRELATION;
-import com.hqxh.fiamproperty.model.R_PERSONRELATION.PERSONRELATION;
-import com.hqxh.fiamproperty.model.R_PERSONRELATION.ResultBean;
+import com.hqxh.fiamproperty.model.R_CUDEPT;
+import com.hqxh.fiamproperty.model.R_CUDEPT.ResultBean;
+import com.hqxh.fiamproperty.model.R_CUDEPT.CUDEPT;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
-import com.hqxh.fiamproperty.ui.adapter.CcrAdapter;
-import com.hqxh.fiamproperty.ui.adapter.GrAdapter;
+import com.hqxh.fiamproperty.ui.adapter.CudeptAdapter;
+import com.hqxh.fiamproperty.ui.adapter.WfassignmentAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,33 +30,31 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 出差人的Activity
+ * 执行部门选择项
  **/
-public class PersonrelationActivity extends BaseListActivity {
-    private static final String TAG = "PersonrelationActivity";
+public class CudeptActivity extends BaseListActivity {
+    private static final String TAG = "ActiveTaskActivity";
 
 
-    private CcrAdapter ccrAdapter;
+    private CudeptAdapter cudeptAdapter;
 
     private int curpage = 1;
     private int showcount = 20;
     private int totalpage;
 
+    private String title;
 
-    private String wonum; //单号
-    private String title;//标题
+    private String appid;
 
-    @Override
-    protected void beforeInit() {
-        super.beforeInit();
-        wonum=getIntent().getExtras().getString("wonum");
-        title=getIntent().getExtras().getString("title");
-    }
+    private String deptnum;
+
 
     @Override
     protected String getSubTitle() {
 
+
         return title;
+
     }
 
 
@@ -61,50 +62,48 @@ public class PersonrelationActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getR_PERSONRELATIONUrl(AccountUtils.getpersonId(this), wonum, curpage, showcount);
-        Log.i(TAG, "data=" + data);
-        Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
+        String data = HttpManager.getCUDEPTUrl(appid, deptnum, AccountUtils.getpersonId(this), curpage, showcount);
+        Log.e(TAG,"data="+data);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addQueryParameter("data", data)
                 .build()
-                .getObjectObservable(R_PERSONRELATION.class) // 发起获取数据列表的请求，并解析到R_PERSONRELATION
+                .getObjectObservable(R_CUDEPT.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
-                .doOnNext(new Consumer<R_PERSONRELATION>() {
+                .doOnNext(new Consumer<R_CUDEPT>() {
                     @Override
-                    public void accept(@NonNull R_PERSONRELATION r_personrelation) throws Exception {
+                    public void accept(@NonNull R_CUDEPT r_cudept) throws Exception {
                     }
                 })
 
-                .map(new Function<R_PERSONRELATION, ResultBean>() {
+                .map(new Function<R_CUDEPT, ResultBean>() {
                     @Override
-                    public ResultBean apply(@NonNull R_PERSONRELATION r_personrelation) throws Exception {
+                    public ResultBean apply(@NonNull R_CUDEPT r_cudept) throws Exception {
 
-                        return r_personrelation.getResult();
+                        return r_cudept.getResult();
                     }
                 })
-                .map(new Function<ResultBean, List<PERSONRELATION>>() {
+                .map(new Function<ResultBean, List<CUDEPT>>() {
                     @Override
-                    public List<PERSONRELATION> apply(@NonNull ResultBean resultBean) throws Exception {
+                    public List<CUDEPT> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<PERSONRELATION>>() {
+                .subscribe(new Consumer<List<CUDEPT>>() {
                     @Override
-                    public void accept(@NonNull List<PERSONRELATION> personrelation) throws Exception {
+                    public void accept(@NonNull List<CUDEPT> cudept) throws Exception {
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
-                        if (personrelation == null || personrelation.isEmpty()) {
+                        if (cudept == null || cudept.isEmpty()) {
 
                         } else {
 
-                            addData(personrelation);
+                            addData(cudept);
 
 
                         }
@@ -124,7 +123,7 @@ public class PersonrelationActivity extends BaseListActivity {
     @Override
     public void onRefresh() {
         curpage = 1;
-        ccrAdapter.removeAll(ccrAdapter.getData());
+        cudeptAdapter.removeAll(cudeptAdapter.getData());
         getData();
 
     }
@@ -133,7 +132,7 @@ public class PersonrelationActivity extends BaseListActivity {
     public void onLoadMore() {
         if (totalpage == curpage) {
             getLoadMore();
-            showMiddleToast(PersonrelationActivity.this, getResources().getString(R.string.all_data_hint));
+            showMiddleToast(CudeptActivity.this, getResources().getString(R.string.all_data_hint));
         } else {
             curpage++;
             getData();
@@ -162,14 +161,21 @@ public class PersonrelationActivity extends BaseListActivity {
 
     @Override
     protected void fillData() {
-        searchText.setVisibility(View.GONE);
-        initAdapter(new ArrayList<PERSONRELATION>());
+        title = getIntent().getExtras().getString("title");
+        appid = getIntent().getExtras().getString("appid");
+        if(getIntent().hasExtra("deptnum")) {
+            deptnum = getIntent().getExtras().getString("deptnum");
+        }else{
+            deptnum=null;
+        }
+        initAdapter(new ArrayList<CUDEPT>());
         getData();
 
     }
 
     @Override
     protected void setOnClick() {
+        searchText.setOnClickListener(searchTextOnClickListener);
 
     }
 
@@ -177,13 +183,18 @@ public class PersonrelationActivity extends BaseListActivity {
     /**
      * 获取数据*
      */
-    private void initAdapter(final List<PERSONRELATION> list) {
-        ccrAdapter = new CcrAdapter(PersonrelationActivity.this, R.layout.list_item_ccr, list);
-        mRecyclerView.setAdapter(ccrAdapter);
-        ccrAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+    private void initAdapter(final List<CUDEPT> list) {
+        cudeptAdapter = new CudeptAdapter(CudeptActivity.this, R.layout.list_item_cudept, list);
+        mRecyclerView.setAdapter(cudeptAdapter);
+        cudeptAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent = getIntent();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("cudept", (Serializable) cudeptAdapter.getData().get(position));
+                intent.putExtras(bundle);
+                setResult(GlobalConfig.CUDEPT_REQUESTCODE, intent);
+                finish();
             }
         });
     }
@@ -191,9 +202,22 @@ public class PersonrelationActivity extends BaseListActivity {
     /**
      * 添加数据*
      */
-    private void addData(final List<PERSONRELATION> list) {
-        ccrAdapter.addData(list);
+    private void addData(final List<CUDEPT> list) {
+        cudeptAdapter.addData(list);
     }
+
+
+    /**
+     * 跳转事件
+     **/
+    private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(CudeptActivity.this, SearchActivity.class);
+            intent.putExtra("appid", GlobalConfig.WFADMIN_APPID);
+            startActivityForResult(intent, 0);
+        }
+    };
 
 
 }

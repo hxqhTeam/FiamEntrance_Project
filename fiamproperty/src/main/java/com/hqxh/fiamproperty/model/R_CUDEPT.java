@@ -4,10 +4,10 @@ import java.util.List;
 
 /**
  * Created by apple on 17/7/26.
- * 出差人
+ * 执行部门
  */
 
-public class R_PERSONRELATION {
+public class R_CUDEPT {
     private String errcode; //返回状态
     private String errmsg; //消息
     private String userid; //用户名
@@ -57,7 +57,7 @@ public class R_PERSONRELATION {
         private String showcount;//显示条数
         private String totalpage;//总共页数
         private String totalresult;//总共条数
-        private List<PERSONRELATION> resultlist; //记录
+        private List<CUDEPT> resultlist; //记录
 
         public String getCurpage() {
             return curpage;
@@ -92,65 +92,38 @@ public class R_PERSONRELATION {
             this.totalresult = totalresult;
         }
 
-        public List<PERSONRELATION> getResultlist() {
+        public List<CUDEPT> getResultlist() {
             return resultlist;
         }
 
-        public void setResultlist(List<PERSONRELATION> resultlist) {
+        public void setResultlist(List<CUDEPT> resultlist) {
             this.resultlist = resultlist;
         }
     }
 
 
     /**
-     *出差人
+     *执行部门
      * **/
-    public static class  PERSONRELATION extends Entity{
+    public static class  CUDEPT extends Entity{
 
-        private String DISPLAYNAME; //姓名
-        private String TITLE;//职务或职称
-        private String CUDEPT;//部门
-        private String CUCREW;//科室
-        private String SEX;//性别
+        private String DEPTNUM; //部门编号
+        private String DESCRIPTION;//部门名称
 
-        public String getDISPLAYNAME() {
-            return DISPLAYNAME;
+        public String getDEPTNUM() {
+            return DEPTNUM;
         }
 
-        public void setDISPLAYNAME(String DISPLAYNAME) {
-            this.DISPLAYNAME = DISPLAYNAME;
+        public void setDEPTNUM(String DEPTNUM) {
+            this.DEPTNUM = DEPTNUM;
         }
 
-        public String getTITLE() {
-            return TITLE;
+        public String getDESCRIPTION() {
+            return DESCRIPTION;
         }
 
-        public void setTITLE(String TITLE) {
-            this.TITLE = TITLE;
-        }
-
-        public String getCUDEPT() {
-            return CUDEPT;
-        }
-
-        public void setCUDEPT(String CUDEPT) {
-            this.CUDEPT = CUDEPT;
-        }
-
-        public String getCUCREW() {
-            return CUCREW;
-        }
-
-        public void setCUCREW(String CUCREW) {
-            this.CUCREW = CUCREW;
-        }
-
-        public String getSEX() {
-            return SEX;
-        }
-
-        public void setSEX(String SEX) {
-            this.SEX = SEX;
+        public void setDESCRIPTION(String DESCRIPTION) {
+            this.DESCRIPTION = DESCRIPTION;
         }
     }
 

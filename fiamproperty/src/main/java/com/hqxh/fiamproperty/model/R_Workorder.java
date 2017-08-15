@@ -154,6 +154,7 @@ public class R_Workorder {
         private String  REPORTEDBYCUCREW;//提单科室
         private String  OWNER;//执行人代码／子项目负责人代码
         private String  OWNERNAME;//执行人姓名／子项目负责人姓名
+        private String  ACTFINISH;//任务完成时间
         //试制任务单
         private String  UDPAYTHISYEAR;//本年度是否结算
         private String  UDTOTYPE3;//试制类型
@@ -165,8 +166,17 @@ public class R_Workorder {
         private String  CUUNIT;//单位
         //其它任务单
         private String  UDTOTYPE1;//类型
+        private String  WORKORDERID;//唯一ID
+        private String  DEPTNUM;//部门编码
 
 
+        public String getDEPTNUM() {
+            return DEPTNUM;
+        }
+
+        public void setDEPTNUM(String DEPTNUM) {
+            this.DEPTNUM = DEPTNUM;
+        }
 
         public String getUDTRV2A() {
             return UDTRV2A;
@@ -582,6 +592,22 @@ public class R_Workorder {
 
         public void setUDTRVCOST1(String UDTRVCOST1) {
             this.UDTRVCOST1 = UDTRVCOST1;
+        }
+
+        public String getWORKORDERID() {
+            return WORKORDERID;
+        }
+
+        public void setWORKORDERID(String WORKORDERID) {
+            this.WORKORDERID = WORKORDERID;
+        }
+
+        public String getACTFINISH() {
+            return ACTFINISH;
+        }
+
+        public void setACTFINISH(String ACTFINISH) {
+            this.ACTFINISH = ACTFINISH;
         }
     }
 

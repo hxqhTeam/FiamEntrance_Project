@@ -4,10 +4,10 @@ import java.util.List;
 
 /**
  * Created by apple on 17/7/26.
- * 出差人
+ * 审批记录
  */
 
-public class R_PERSONRELATION {
+public class R_WFTRANSACTION {
     private String errcode; //返回状态
     private String errmsg; //消息
     private String userid; //用户名
@@ -57,7 +57,7 @@ public class R_PERSONRELATION {
         private String showcount;//显示条数
         private String totalpage;//总共页数
         private String totalresult;//总共条数
-        private List<PERSONRELATION> resultlist; //记录
+        private List<WFTRANSACTION> resultlist; //记录
 
         public String getCurpage() {
             return curpage;
@@ -92,26 +92,25 @@ public class R_PERSONRELATION {
             this.totalresult = totalresult;
         }
 
-        public List<PERSONRELATION> getResultlist() {
+        public List<WFTRANSACTION> getResultlist() {
             return resultlist;
         }
 
-        public void setResultlist(List<PERSONRELATION> resultlist) {
+        public void setResultlist(List<WFTRANSACTION> resultlist) {
             this.resultlist = resultlist;
         }
     }
 
 
     /**
-     *出差人
+     *审批记录
      * **/
-    public static class  PERSONRELATION extends Entity{
+    public static class  WFTRANSACTION {
 
-        private String DISPLAYNAME; //姓名
-        private String TITLE;//职务或职称
-        private String CUDEPT;//部门
-        private String CUCREW;//科室
-        private String SEX;//性别
+        private String DISPLAYNAME; //审批人
+        private String TRANSDATE;//审批日期
+        private String MEMO;//意见
+        private String NODE;//标题
 
         public String getDISPLAYNAME() {
             return DISPLAYNAME;
@@ -121,36 +120,28 @@ public class R_PERSONRELATION {
             this.DISPLAYNAME = DISPLAYNAME;
         }
 
-        public String getTITLE() {
-            return TITLE;
+        public String getTRANSDATE() {
+            return TRANSDATE;
         }
 
-        public void setTITLE(String TITLE) {
-            this.TITLE = TITLE;
+        public void setTRANSDATE(String TRANSDATE) {
+            this.TRANSDATE = TRANSDATE;
         }
 
-        public String getCUDEPT() {
-            return CUDEPT;
+        public String getMEMO() {
+            return MEMO;
         }
 
-        public void setCUDEPT(String CUDEPT) {
-            this.CUDEPT = CUDEPT;
+        public void setMEMO(String MEMO) {
+            this.MEMO = MEMO;
         }
 
-        public String getCUCREW() {
-            return CUCREW;
+        public String getNODE() {
+            return NODE;
         }
 
-        public void setCUCREW(String CUCREW) {
-            this.CUCREW = CUCREW;
-        }
-
-        public String getSEX() {
-            return SEX;
-        }
-
-        public void setSEX(String SEX) {
-            this.SEX = SEX;
+        public void setNODE(String NODE) {
+            this.NODE = NODE;
         }
     }
 

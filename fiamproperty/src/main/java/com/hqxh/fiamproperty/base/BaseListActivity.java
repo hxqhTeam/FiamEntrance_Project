@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.ui.widget.PullLoadMoreRecyclerView;
@@ -25,6 +26,8 @@ public abstract class BaseListActivity extends BaseTitleActivity implements Pull
 
     protected RecyclerView mRecyclerView;
 
+    protected LinearLayout notLinearLayout;
+
 
     protected abstract void fillData();
 
@@ -41,6 +44,8 @@ public abstract class BaseListActivity extends BaseTitleActivity implements Pull
     protected void initView(Bundle savedInstanceState) {
         searchText=(ImageView)findViewById(R.id.search_imageView_id);
         mPullLoadMoreRecyclerView = (PullLoadMoreRecyclerView) findViewById(R.id.pullLoadMoreRecyclerView);
+
+        notLinearLayout = (LinearLayout) findViewById(R.id.have_not_data_id);
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -62,8 +67,8 @@ public abstract class BaseListActivity extends BaseTitleActivity implements Pull
         mPullLoadMoreRecyclerView.setLinearLayout();
 
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
-        fillData();
         searchText.setVisibility(View.VISIBLE);
+        fillData();
         setOnClick();
 
 

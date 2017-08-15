@@ -8,8 +8,8 @@ package com.hqxh.fiamproperty.constant;
 public final class GlobalConfig {
 
     /**服务器地址**/
-    public final static String HTTP_URL="http://10.60.12.98:9080";
-//    public final static String HTTP_URL="http://qmportal1.qm.cn:8090";
+    public final static String HTTP_URL="http://qmportal1.qm.cn:8090";
+//    public final static String HTTP_URL="http://10.60.12.98:9080";
 
     /**服务器登录接口地址**/
 
@@ -18,6 +18,14 @@ public final class GlobalConfig {
     /**服务器通用查询接口地址**/
 
     public final static String HTTP_URL_SEARCH=HTTP_URL+"/maximo/mobile/common/api";
+
+
+    /**启动工作流接口**/
+
+    public final static String HTTP_URL_START_WORKFLOW=HTTP_URL+"/maximo/mobile/wf/start";
+    /**启动工作流接口**/
+
+    public final static String HTTP_URL_APPROVE_WORKFLOW=HTTP_URL+"/maximo/mobile/wf/approve";
 
 
 
@@ -43,6 +51,9 @@ public final class GlobalConfig {
 
     //待办的表名
     public static final String WFASSIGNMENT_NAME = "WFASSIGNMENT";
+
+    //审批记录表名
+    public static final String WFTRANSACTION_NAME = "WFTRANSACTION" ;
 
     //国内出差appid
     public static final String TRAVEL_APPID = "TRAVEL" ;
@@ -117,6 +128,17 @@ public final class GlobalConfig {
     public static final String BO_APPID = "BO" ;
     //借款单表名
     public static final String BO_NAME = "BO" ;
+
+
+    /**通用-执行部门**/
+    public static final String USER_APPID = "USER" ;
+    /**特殊／通用-执行部门**/
+    public static final String CUDEPT_NAME = "CUDEPT" ;
+
+    /**通用-执行科室**/
+    public static final String ROLE_APPID = "ROLE" ;
+
+
     /**
      * 用户登录表识--开始*
      */
@@ -127,6 +149,19 @@ public final class GlobalConfig {
     public static final String USERNAMEERROR = "USER-E-100";//用户名密码错误
 
     public static final String GETDATASUCCESS = "GLOBAL-S-0";//获取数据成功
+
+
+    /**工作流标示**/
+    public static final String WORKFLOW_106 = "WF-S-106";//返回可执行操作
+
+
+
+
+
+    /**返回码**/
+    public static final int CUDEPT_REQUESTCODE = 1000;//部门请求码
+
+    public static final int CUDEPTKS_REQUESTCODE = 1001;//科室请求码
 
 
 

@@ -1,5 +1,7 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.hqxh.fiamproperty.ui.adapter.WorkOrderAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -182,6 +185,14 @@ public class RwdActivity extends BaseListActivity {
         workOrderAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                Intent intent=null;
+                if(appid.equals(GlobalConfig.TOSY_APPID)){
+                    intent=new Intent(RwdActivity.this,SyrwdWorkorderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, 0);
+                }
 
             }
         });

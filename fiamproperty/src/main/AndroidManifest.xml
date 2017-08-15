@@ -83,6 +83,22 @@
             android:label="@string/wzmx_text"
             android:theme="@style/MyThemeBlue.NoActionBar"></activity>
 
+        <activity
+            android:name=".ui.activity.WftransactionActivity"
+            android:label="@string/spjl_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.CgWorkorderActivity"
+            android:label="@string/cglxxq_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.SyrwdWorkorderActivity"
+            android:label="@string/syrwdxq_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.CudeptActivity"
+            android:label="@string/cudept_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
     </application>
 
 </manifest>

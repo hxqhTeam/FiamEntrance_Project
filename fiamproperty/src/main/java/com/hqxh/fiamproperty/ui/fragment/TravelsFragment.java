@@ -1,6 +1,7 @@
 package com.hqxh.fiamproperty.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -15,12 +16,15 @@ import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_Workorder;
+import com.hqxh.fiamproperty.ui.activity.CgWorkorderActivity;
+import com.hqxh.fiamproperty.ui.activity.GnWorkorderActivity;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
 import com.hqxh.fiamproperty.ui.adapter.TravelAdapter;
 import com.hqxh.fiamproperty.ui.widget.PullLoadMoreRecyclerView;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -177,7 +181,11 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
         travelAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent=new Intent(getActivity(), CgWorkorderActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("workorder", (Serializable) travelAdapter.getData().get(position));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 0);
             }
         });
     }
