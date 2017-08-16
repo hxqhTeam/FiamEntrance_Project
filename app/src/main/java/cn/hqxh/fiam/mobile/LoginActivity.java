@@ -14,7 +14,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -26,7 +25,6 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -35,10 +33,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_Person;
-import com.hqxh.fiamproperty.model.R_Person.PERSION;
+import com.hqxh.fiamproperty.model.R_PERSON;
+import com.hqxh.fiamproperty.model.R_PERSON.PERSION;
 import com.hqxh.fiamproperty.ui.activity.HomeActivity;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
@@ -332,18 +329,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 .addQueryParameter("username", mEmailView.getText().toString())
                 .addQueryParameter("imei", imei)
                 .build()
-                .getObjectObservable(R_Person.class) // 发起获取数据列表的请求，并解析到R_Person.class
+                .getObjectObservable(R_PERSON.class) // 发起获取数据列表的请求，并解析到R_Person.class
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
-                .doOnNext(new Consumer<R_Person>() {
+                .doOnNext(new Consumer<R_PERSON>() {
                     @Override
-                    public void accept(@io.reactivex.annotations.NonNull R_Person r_person) throws Exception {
-                        showMiddleToast(LoginActivity.this, r_person.getErrmsg());
-                        if (r_person.getErrcode().equals(GlobalConfig.LOGINSUCCESS)) {//登录成功
+                    public void accept(@io.reactivex.annotations.NonNull R_PERSON r_PERSON) throws Exception {
+                        showMiddleToast(LoginActivity.this, r_PERSON.getErrmsg());
+                        if (r_PERSON.getErrcode().equals(GlobalConfig.LOGINSUCCESS)) {//登录成功
 
-                        } else if (r_person.getErrcode().equals(GlobalConfig.CHANGEIMEI)) {//登录成功,检测到用户更换手机登录
+                        } else if (r_PERSON.getErrcode().equals(GlobalConfig.CHANGEIMEI)) {//登录成功,检测到用户更换手机登录
 
-                        } else if (r_person.getErrcode().equals(GlobalConfig.USERNAMEERROR)) {//用户名密码错误
+                        } else if (r_PERSON.getErrcode().equals(GlobalConfig.USERNAMEERROR)) {//用户名密码错误
                             return;
                         } else {
                             return;
@@ -351,10 +348,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     }
                 })
 
-                .map(new Function<R_Person, String>() {
+                .map(new Function<R_PERSON, String>() {
                     @Override
-                    public String apply(@io.reactivex.annotations.NonNull R_Person r_person) throws Exception {
-                        return r_person.getResult();
+                    public String apply(@io.reactivex.annotations.NonNull R_PERSON r_PERSON) throws Exception {
+                        return r_PERSON.getResult();
                     }
 
                 })
