@@ -76,12 +76,13 @@
     <string name="reportdate_text">申请日期</string>
     <string name="spjl_text">审批记录</string>
     <string name="sp_btn_id">审批</string>
-    <string name="displayname_text">人员</string>
-    <string name="cucrew_text">科室</string>
+    <string name="displaynamee_text">人员</string>
     <string name="spr_text">审批人</string>
     <string name="node_text">标题</string>
     <string name="trnsdate_text">审批日期</string>
     <string name="memo_text">审批意见</string>
+
+    <!--出国立项-->
     <string name="cg_udremark1_text">出国目的</string>
     <string name="ccsj_text">出差时间</string>
     <string name="udtargstartdate2_text">出国时间</string>
@@ -91,6 +92,7 @@
     <string name="cglxxq_text">出国立项详情</string>
     <string name="memo_hint_text">请输入审批意见</string>
     <string name="spsb_text">审批失败</string>
+    <string name="phonenum_text">电话</string>
 
     <!--试验任务单-->
     <string name="udtodesc_text">任务单描述</string>
@@ -123,7 +125,6 @@
     <string name="transdate_text">审批时间</string>
     <string name="displayname1_text">审批人</string>
     <string name="description_text">标题</string>
-    <string name="memo_text">审批意见</string>
 
 
 </resources>

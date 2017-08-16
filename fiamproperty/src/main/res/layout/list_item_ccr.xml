@@ -23,6 +23,7 @@
             android:padding="@dimen/btn_top_5dp">
 
             <TextView
+                android:id="@+id/displayname_title_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/displayname_text"

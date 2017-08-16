@@ -41,8 +41,8 @@ public class HttpManager {
     /*
     物资明细
     */
-   public static String getGRLINEUrl(String username,String grnum,int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.GRWZ_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'GRNUM':'="+grnum+"'}}";
+    public static String getGRLINEUrl(String username, String grnum, int curpage, int showcount) {
+        return "{'appid':'" + GlobalConfig.GRWZ_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'GRNUM':'=" + grnum + "'}}";
 
     }
 
@@ -140,6 +140,20 @@ public class HttpManager {
 
         }
         return null;
+    }
+
+
+    /**
+     * 执行人
+     * @param cudept 部门
+     * @param cucrew 科室
+     * @param username 用户名
+     * @param curpage 当前页
+     * @param showcount 显示条数
+     *
+     */
+    public static String getPERSONUrl(String cudept, String cucrew, String username, int curpage, int showcount) {
+        return "{'appid':'" + GlobalConfig.USER_APPID + "','objectname':'" + GlobalConfig.PERSON_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'CUDEPT':'=" + cudept + "','CUCREW':'="+cucrew+"'}}";
     }
 
 }

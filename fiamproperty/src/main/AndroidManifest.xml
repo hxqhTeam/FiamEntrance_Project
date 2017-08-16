@@ -99,6 +99,10 @@
             android:name=".ui.activity.CudeptActivity"
             android:label="@string/cudept_text"
             android:theme="@style/MyThemeBlue.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.PersonActivity"
+            android:label="@string/ownername_text"
+            android:theme="@style/MyThemeBlue.NoActionBar"></activity>
     </application>
 
 </manifest>

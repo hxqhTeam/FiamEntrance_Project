@@ -20,7 +20,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:gravity="center"
-            android:background="@drawable/design_0_point"
+            android:background="@drawable/design_one_point"
             android:textColor="@color/white"
             android:text="2017CC00001"
             android:layout_centerVertical="true"

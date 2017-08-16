@@ -2,7 +2,6 @@ package com.hqxh.fiamproperty.ui.adapter;
 
 import android.animation.Animator;
 import android.content.Context;
-import android.util.Log;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.model.R_Workorder.Workorder;
@@ -37,10 +36,10 @@ public class TravelAdapter extends BaseQuickAdapter<Workorder> {
         helper.setText(R.id.fincntrldesc_text_id, "项目名称:"+JsonUnit.convertStrToArray(item.getFINCNTRLDESC())[0]);
         switch (helper.getPosition()%2){
             case 0:
-                helper.setBackgroundRes(R.id.wonum_text_id,R.drawable.design_0_point);
+                helper.setBackgroundRes(R.id.wonum_text_id,R.drawable.design_one_point);
                 break;
             case 1:
-                helper.setBackgroundRes(R.id.wonum_text_id,R.drawable.design_1_point);
+                helper.setBackgroundRes(R.id.wonum_text_id,R.drawable.design_two_point);
                 break;
 
         }

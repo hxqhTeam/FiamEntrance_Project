@@ -36,10 +36,10 @@ public class HtAdapter extends BaseQuickAdapter<PURCHVIEW> {
         helper.setText(R.id.fincntrldesc_text_id, "提出人:"+JsonUnit.convertStrToArray(item.getCUPURAGENT())[0]);
         switch (helper.getPosition()%2){
             case 0:
-                helper.setBackgroundRes(R.id.wonum_text_id,R.drawable.design_0_point);
+                helper.setBackgroundRes(R.id.wonum_text_id,R.drawable.design_one_point);
                 break;
             case 1:
-                helper.setBackgroundRes(R.id.wonum_text_id,R.drawable.design_1_point);
+                helper.setBackgroundRes(R.id.wonum_text_id,R.drawable.design_two_point);
                 break;
 
         }

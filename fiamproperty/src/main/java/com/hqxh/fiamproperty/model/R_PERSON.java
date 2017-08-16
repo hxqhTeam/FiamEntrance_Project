@@ -7,7 +7,7 @@ import java.util.List;
  * 结果集
  */
 
-public class R_Person {
+public class R_PERSON {
     private String errcode; //返回状态
     private String errmsg; //消息
     private String userid; //用户名
@@ -58,6 +58,10 @@ public class R_Person {
         private String EMAILADDRESS;//Email地址
         private String MYAPPS;//用户能够看见的权限
         private String PERSONID;//用户ID
+        private String CUDEPT;//部门
+        private String CUCREW;//科室
+
+
 
         public String getDEFSITE() {
             return DEFSITE;
@@ -97,6 +101,22 @@ public class R_Person {
 
         public void setPERSONID(String PERSONID) {
             this.PERSONID = PERSONID;
+        }
+
+        public String getCUDEPT() {
+            return CUDEPT;
+        }
+
+        public void setCUDEPT(String CUDEPT) {
+            this.CUDEPT = CUDEPT;
+        }
+
+        public String getCUCREW() {
+            return CUCREW;
+        }
+
+        public void setCUCREW(String CUCREW) {
+            this.CUCREW = CUCREW;
         }
     }
 

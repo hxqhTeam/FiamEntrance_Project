@@ -135,6 +135,9 @@ public final class GlobalConfig {
     /**特殊／通用-执行部门**/
     public static final String CUDEPT_NAME = "CUDEPT" ;
 
+    /**通用-执行人**/
+    public static final String PERSON_NAME = "PERSON" ;
+
     /**通用-执行科室**/
     public static final String ROLE_APPID = "ROLE" ;
 
@@ -162,6 +165,8 @@ public final class GlobalConfig {
     public static final int CUDEPT_REQUESTCODE = 1000;//部门请求码
 
     public static final int CUDEPTKS_REQUESTCODE = 1001;//科室请求码
+
+    public static final int PERSON_REQUESTCODE = 1002;//执行人请求码
 
 
 
