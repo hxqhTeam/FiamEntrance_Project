@@ -420,7 +420,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:text="@string/phonenum_text"
+                            android:text="@string/phone_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 

@@ -44,14 +44,14 @@
     <string name="location2_text">门岗2</string>
     <string name="type_text">类型</string>
     <string name="schedulardate_text">计划出门日期</string>
-    <string name="displayname_text">申请人</string>
+
     <string name="description1_text">名称</string>
-    <string name="enterdate_text">申请日期</string>
+    <string name="enterdate_text">申请时间</string>
     <string name="reason_text">理由</string>
     <string name="grnum_text">申请单号</string>
     <string name="phone_text">电话</string>
     <string name="cudept_text">部门</string>
-    <string name="cucrew_text">科室</string>
+
     <string name="wzcmxq_text">物资出门详情</string>
     <string name="search_text">搜索</string>
     <!--国内出差详情-->
@@ -76,13 +76,12 @@
     <string name="reportdate_text">申请日期</string>
     <string name="spjl_text">审批记录</string>
     <string name="sp_btn_id">审批</string>
-    <string name="displaynamee_text">人员</string>
+    <string name="displayname_text">人员</string>
+    <string name="cucrew_text">科室</string>
     <string name="spr_text">审批人</string>
     <string name="node_text">标题</string>
     <string name="trnsdate_text">审批日期</string>
-    <string name="memo_text">审批意见</string>
 
-    <!--出国立项-->
     <string name="cg_udremark1_text">出国目的</string>
     <string name="ccsj_text">出差时间</string>
     <string name="udtargstartdate2_text">出国时间</string>
@@ -92,7 +91,6 @@
     <string name="cglxxq_text">出国立项详情</string>
     <string name="memo_hint_text">请输入审批意见</string>
     <string name="spsb_text">审批失败</string>
-    <string name="phonenum_text">电话</string>
 
     <!--试验任务单-->
     <string name="udtodesc_text">任务单描述</string>
@@ -125,6 +123,14 @@
     <string name="transdate_text">审批时间</string>
     <string name="displayname1_text">审批人</string>
     <string name="description_text">标题</string>
+    <string name="memo_text">审批意见</string>
+    <string name="samplenum_text">样车编号</string>
+    <string name="udmodel_text">型号</string>
+    <string name="udlicensenum_text">品牌</string>
+    <string name="udvehicletype_text">车辆类型</string>
+    <string name="udvehicletype2_text">样车来源</string>
+    <string name="udchassisnum_text">底盘号</string>
+    <string name="udsznum_text">试制编号</string>
 
 
 </resources>

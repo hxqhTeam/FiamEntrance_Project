@@ -95,8 +95,8 @@ public class GrDetailsActivity extends BaseTitleActivity {
 
 
         wzmx_text.setOnClickListener(wzmx_textOnClickListener);
-       //zcmx_text.setOnClickListener(zcmx_textOnClickListener);
-    //    spjl_text.setOnClickListener(spjl_textOnClickListener);
+        zcmx_text.setOnClickListener(zcmx_textOnClickListener);
+      //  spjl_text.setOnClickListener(spjl_textOnClickListener);
 
     }
 
@@ -117,13 +117,16 @@ public class GrDetailsActivity extends BaseTitleActivity {
 
         }
     };
-    /*private View.OnClickListener zcmx_textOnClickListener = new View.OnClickListener(){
+    private View.OnClickListener zcmx_textOnClickListener = new View.OnClickListener(){
 
         @Override
         public void onClick(View v) {
+            Intent intent=new Intent(GrDetailsActivity.this,ZcmxListActivity.class);
+            intent.putExtra("grnum",JsonUnit.convertStrToArray(gr.getGRNUM())[0]);
+            startActivityForResult(intent,0);
 
         }
-    };*/
+    };
   /*  private View.OnClickListener spjl_textOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {

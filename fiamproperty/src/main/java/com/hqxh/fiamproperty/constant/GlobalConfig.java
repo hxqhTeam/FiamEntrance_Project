@@ -8,8 +8,8 @@ package com.hqxh.fiamproperty.constant;
 public final class GlobalConfig {
 
     /**服务器地址**/
-    public final static String HTTP_URL="http://qmportal1.qm.cn:8090";
-//    public final static String HTTP_URL="http://10.60.12.98:9080";
+//    public final static String HTTP_URL="http://qmportal1.qm.cn:8090";
+   public final static String HTTP_URL="http://10.60.12.98:9080";
 
     /**服务器登录接口地址**/
 
@@ -70,6 +70,8 @@ public final class GlobalConfig {
     public static final String GR_APPID = "GR" ;
     //物资明细
     public static final String GRLINE_NAME = "GRLINE" ;
+    //整车明细
+    public static final String GRZC_APPID = "GRZC" ;
 
     //技术采购申请appid
     public static final String JSPR_APPID = "JSPR" ;

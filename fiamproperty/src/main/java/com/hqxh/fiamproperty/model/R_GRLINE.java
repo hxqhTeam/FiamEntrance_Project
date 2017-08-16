@@ -142,6 +142,52 @@ public class R_GRLINE {
            this.MEASUREUNITID = MEASUREUNITID;
        }
 
+     /*
+      整车明细
+      */
+
+       private String SAMPLENUM;//样车编号
+       private String UDMODEL;//型号
+       private String UDLICENSENUM;//品牌
+       private String UDVEHICLETYPE;//车辆类型
+
+
+
+       public String getSAMPLENUM() {
+           return SAMPLENUM;
+       }
+
+       public void setSAMPLENUM(String SAMPLENUM) {
+           this.SAMPLENUM = SAMPLENUM;
+       }
+
+       public String getUDMODEL() {
+           return UDMODEL;
+       }
+
+       public void setUDMODEL(String UDMODEL) {
+           this.UDMODEL = UDMODEL;
+       }
+
+       public String getUDLICENSENUM() {
+           return UDLICENSENUM;
+       }
+
+       public void setUDLICENSENUM(String UDLICENSENUM) {
+           this.UDLICENSENUM = UDLICENSENUM;
+       }
+
+       public String getUDVEHICLETYPE() {
+           return UDVEHICLETYPE;
+       }
+
+       public void setUDVEHICLETYPE(String UDVEHICLETYPE) {
+           this.UDVEHICLETYPE = UDVEHICLETYPE;
+       }
+
+
+
+
 
 
   }
