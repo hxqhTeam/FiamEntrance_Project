@@ -1,13 +1,11 @@
 package com.hqxh.fiamproperty.model;
 
-import java.util.List;
-
 /**
  * Created by apple on 17/7/26.
  * 结果集
  */
 
-public class R_PERSON {
+public class R_PERSONS {
     private String errcode; //返回状态
     private String errmsg; //消息
     private String userid; //用户名

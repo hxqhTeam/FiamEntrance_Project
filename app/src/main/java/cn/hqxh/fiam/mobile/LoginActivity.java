@@ -34,8 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_PERSON;
-import com.hqxh.fiamproperty.model.R_PERSON.PERSION;
+import com.hqxh.fiamproperty.model.R_PERSONS;
 import com.hqxh.fiamproperty.ui.activity.HomeActivity;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
@@ -329,12 +328,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 .addQueryParameter("username", mEmailView.getText().toString())
                 .addQueryParameter("imei", imei)
                 .build()
-                .getObjectObservable(R_PERSON.class) // 发起获取数据列表的请求，并解析到R_Person.class
+                .getObjectObservable(R_PERSONS.class) // 发起获取数据列表的请求，并解析到R_Person.class
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
-                .doOnNext(new Consumer<R_PERSON>() {
+                .doOnNext(new Consumer<R_PERSONS>() {
                     @Override
-                    public void accept(@io.reactivex.annotations.NonNull R_PERSON r_PERSON) throws Exception {
+                    public void accept(@io.reactivex.annotations.NonNull R_PERSONS r_PERSON) throws Exception {
                         showMiddleToast(LoginActivity.this, r_PERSON.getErrmsg());
                         if (r_PERSON.getErrcode().equals(GlobalConfig.LOGINSUCCESS)) {//登录成功
 
@@ -348,9 +347,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     }
                 })
 
-                .map(new Function<R_PERSON, String>() {
+                .map(new Function<R_PERSONS, String>() {
                     @Override
-                    public String apply(@io.reactivex.annotations.NonNull R_PERSON r_PERSON) throws Exception {
+                    public String apply(@io.reactivex.annotations.NonNull R_PERSONS r_PERSON) throws Exception {
                         return r_PERSON.getResult();
                     }
 
@@ -362,7 +361,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     public void accept(@io.reactivex.annotations.NonNull String persion) throws Exception {
                         if (null != persion) {
                             JSONObject object = new JSONObject(persion);
-                            PERSION persion1 = new PERSION();
+                            R_PERSONS.PERSION persion1 = new R_PERSONS.PERSION();
                             persion1.setDEFSITE(object.getString("DEFSITE"));
                             persion1.setDISPLAYNAME(object.getString("DISPLAYNAME"));
                             persion1.setEMAILADDRESS(object.getString("EMAILADDRESS"));

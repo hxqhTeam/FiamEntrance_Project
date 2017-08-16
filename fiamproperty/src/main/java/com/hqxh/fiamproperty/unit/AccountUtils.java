@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.hqxh.fiamproperty.R;
-import com.hqxh.fiamproperty.model.R_PERSON.PERSION;
+import com.hqxh.fiamproperty.model.R_PERSONS.PERSION;
 
 
 /**
