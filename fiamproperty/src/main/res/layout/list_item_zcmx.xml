@@ -35,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
                 android:hint="@string/have_notdata_hint"
+                android:textColor="@color/black"
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
@@ -49,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/udmodel_text"
-                android:textColor="@color/black"
+                android:textColor="@color/wordcolor"
                 android:textSize="@dimen/dimens_16sp" />
 
             <TextView
@@ -58,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
                 android:hint="@string/have_notdata_hint"
+                android:textColor="@color/wordcolor"
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
@@ -72,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/udlicensenum_text"
-                android:textColor="@color/black"
+                android:textColor="@color/wordcolor"
                 android:textSize="@dimen/dimens_16sp" />
 
             <TextView
@@ -81,7 +83,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
                 android:hint="@string/have_notdata_hint"
-                android:textSize="@dimen/dimens_16sp" />
+                android:textSize="@dimen/dimens_16sp"
+                android:textColor="@color/wordcolor" />
 
         </LinearLayout>
         <LinearLayout
@@ -94,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/udvehicletype_text"
-                android:textColor="@color/black"
+                android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16sp" />
 
             <TextView
@@ -103,7 +106,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
                 android:hint="@string/have_notdata_hint"
-                android:textSize="@dimen/dimens_16sp" />
+                android:textSize="@dimen/dimens_16sp"
+                android:textColor="@color/light_black" />
 
         </LinearLayout>
 

@@ -274,7 +274,7 @@
                     android:background="@color/wordcolor2"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:text="@string/displayname_text"
+                    android:text="@string/sqr_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
@@ -413,7 +413,7 @@
                     android:background="@color/wordcolor2"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:text="@string/description_text"
+                    android:text="@string/status_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
@@ -470,8 +470,14 @@
                 android:background="@mipmap/line">
 
             </View>
+            <LinearLayout
+                android:id="@+id/wzmx_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <RelativeLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background_dark_gray"
@@ -502,9 +508,15 @@
                 android:background="@mipmap/line">
 
             </View>
-
+        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/zcmx_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <RelativeLayout
+                android:id="@+id/zcmx_relativelayout_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -533,7 +545,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/line"></View>
-
+            </LinearLayout>
 
 
             <RelativeLayout
@@ -571,12 +583,13 @@
             </View>
 
             <Button
+                android:id="@+id/spbutton"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="88dp"
                 android:background="#FF50BBF9"
                 android:gravity="center"
-                android:text="审批"
+                android:text="@string/sp_btn_id"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/dimens_20sp" />
 

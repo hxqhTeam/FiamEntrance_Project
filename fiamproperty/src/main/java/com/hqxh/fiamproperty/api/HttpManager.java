@@ -67,7 +67,7 @@ public class HttpManager {
      * 出门管理*
      */
     public static String getGRUrl(String username,int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.GRWZ_APPID + "','objectname':'" + GlobalConfig.GR_APPID + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+        return "{'appid':'" + GlobalConfig.GRWZ_APPID + "','objectname':'" + GlobalConfig.GR_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
 
     }
 

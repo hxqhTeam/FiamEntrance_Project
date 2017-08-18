@@ -107,7 +107,7 @@ public class R_GR {
      *
      * **/
     public static class  GR implements Serializable {
-
+        private String  GRID; //GRID
         private String  ENTERBY; //申请人
         private String  ENTERDATE;//申请时间
         private String  GRNUM;//编号
@@ -122,6 +122,13 @@ public class R_GR {
         private String  LOCATION2DESCRIPTION;//门岗2
         private String  REASON;//理由
 
+        public String getGRID() {
+            return GRID;
+        }
+
+        public void setGRID(String GRID) {
+            this.GRID = GRID;
+        }
 
         public String getENTERBY() {
             return ENTERBY;
@@ -155,7 +162,7 @@ public class R_GR {
             this.DESCRIPTION = DESCRIPTION;
         }
 
-        public String getTYPE() {
+        public  String getTYPE() {
             return TYPE;
         }
 

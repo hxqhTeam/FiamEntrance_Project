@@ -30,7 +30,7 @@ public class ZcmxAdapter extends BaseQuickAdapter<GRLINE> {
     @Override
     protected void convert(BaseViewHolder helper, GRLINE item) {
 
-        Log.e("2222",JsonUnit.convertStrToArray(item.getSAMPLENUM())[0]);
+
         helper.setText(R.id.samplenum_text_id, JsonUnit.convertStrToArray(item.getSAMPLENUM())[0]);
         helper.setText(R.id.udmodel_text_id, JsonUnit.convertStrToArray(item.getUDMODEL())[0]);
         helper.setText(R.id.udlicensenum_text_id, JsonUnit.convertStrToArray(item.getUDLICENSENUM())[0]);

@@ -67,7 +67,7 @@ public final class GlobalConfig {
     //出门管理appid
     public static final String GRWZ_APPID = "GRWZ" ;
     //出门管理表名
-    public static final String GR_APPID = "GR" ;
+    public static final String GR_NAME = "GR" ;
     //物资明细
     public static final String GRLINE_NAME = "GRLINE" ;
     //整车明细

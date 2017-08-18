@@ -3,7 +3,7 @@ package com.hqxh.fiamproperty.model;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/8/15.
+ 物资明细，整车明细.
  */
 
 public class R_GRLINE {
