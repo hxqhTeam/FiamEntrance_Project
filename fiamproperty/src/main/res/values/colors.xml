@@ -26,5 +26,6 @@
 
     <color name="btn_normal">#669dec</color> <!--FF4081 2C97DE -->
     <color name="btn_onclick">#4576bb</color> <!--FF4081 2C97DE -->
+    <color name="btn_color">#669dec</color>
 
 </resources>

@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Created by apple on 17/7/26.
- * 结果集
+ * 执行人
  */
 
 public class R_ZXPERSON {
@@ -45,20 +45,19 @@ public class R_ZXPERSON {
         this.result = result;
     }
 
-    /**
-     * 结果集
+    /**结果集
      * curpage
      * resultlist
      * showcount
      * totalpage
      * totalresult
-     **/
+     * **/
     public static class ResultBean {
         private String curpage; //当前页
         private String showcount;//显示条数
         private String totalpage;//总共页数
         private String totalresult;//总共条数
-        private List<PERSION> resultlist; //记录
+        private List<PERSON> resultlist; //记录
 
         public String getCurpage() {
             return curpage;
@@ -93,29 +92,34 @@ public class R_ZXPERSON {
             this.totalresult = totalresult;
         }
 
-        public List<PERSION> getResultlist() {
+        public List<PERSON> getResultlist() {
             return resultlist;
         }
 
-        public void setResultlist(List<PERSION> resultlist) {
+        public void setResultlist(List<PERSON> resultlist) {
             this.resultlist = resultlist;
         }
     }
 
 
     /**
-     * 结果集
-     * DEFSITE
-     * DISPLAYNAME
-     * EMAILADDRESS
-     * MYAPPS
-     * PERSONID
-     **/
-    public static class PERSION extends Entity{
-        private String DISPLAYNAME;//别名
-        private String PERSONID;//用户ID
+     *执行人
+     * **/
+    public static class  PERSON extends Entity{
+
+        private String DISPLAYNAME; //姓名
+        private String PERSONID;//人员
         private String CUDEPT;//部门
         private String CUCREW;//科室
+        private String PERSONUID;//PERSONUID
+
+        public String getPERSONUID() {
+            return PERSONUID;
+        }
+
+        public void setPERSONUID(String PERSONUID) {
+            this.PERSONUID = PERSONUID;
+        }
 
         public String getDISPLAYNAME() {
             return DISPLAYNAME;

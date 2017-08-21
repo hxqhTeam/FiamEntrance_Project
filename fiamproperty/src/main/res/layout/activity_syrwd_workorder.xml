@@ -497,7 +497,6 @@
                             android:background="@color/white"
                             android:gravity="center_vertical"
                             android:hint="@string/have_not_data"
-                            android:drawableRight="@drawable/ic_data"
                             android:paddingRight="@dimen/btn_top_5dp"
                             android:paddingLeft="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
@@ -641,7 +640,6 @@
                             android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
-                            android:drawableRight="@drawable/ic_bm"
                             android:paddingRight="@dimen/btn_top_5dp"
                             android:hint="@string/have_not_data"
                             android:paddingLeft="@dimen/btn_top_5dp"
@@ -672,7 +670,6 @@
 
                         <TextView
                             android:id="@+id/cucrew_text_id"
-                            android:drawableRight="@drawable/ic_ks"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
@@ -710,7 +707,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
-                            android:drawableRight="@drawable/ic_person_black"
                             android:gravity="center_vertical"
                             android:hint="@string/have_not_data"
                             android:paddingRight="@dimen/btn_top_5dp"

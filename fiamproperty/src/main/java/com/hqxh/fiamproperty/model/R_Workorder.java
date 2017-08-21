@@ -159,8 +159,14 @@ public class R_Workorder {
         private String  UDPAYTHISYEAR;//本年度是否结算
         private String  UDTOTYPE3;//试制类型
         private String  CUQUANTITY;//试制数量
+        private String  UDSZDATE1;//任务开始时间
         //物资领料单
         private String  STORELOC;//库房
+        private String  ESTMATCOST;//总费用
+        private String  SCHEDFINISH;//结算完成时间
+        // 调件任务单
+        private String  UDADDITIONAL;//是否补录
+
         //燃油申请单
         private String  UDTOOIL1;//燃油类型及标号
         private String  CUUNIT;//单位
@@ -609,7 +615,39 @@ public class R_Workorder {
         public void setACTFINISH(String ACTFINISH) {
             this.ACTFINISH = ACTFINISH;
         }
-    }
+
+           public String getUDSZDATE1() {
+               return UDSZDATE1;
+           }
+
+           public void setUDSZDATE1(String UDSZDATE1) {
+               this.UDSZDATE1 = UDSZDATE1;
+           }
+
+           public String getESTMATCOST() {
+               return ESTMATCOST;
+           }
+
+           public void setESTMATCOST(String ESTMATCOST) {
+               this.ESTMATCOST = ESTMATCOST;
+           }
+
+           public String getSCHEDFINISH() {
+               return SCHEDFINISH;
+           }
+
+           public void setSCHEDFINISH(String SCHEDFINISH) {
+               this.SCHEDFINISH = SCHEDFINISH;
+           }
+
+           public String getUDADDITIONAL() {
+               return UDADDITIONAL;
+           }
+
+           public void setUDADDITIONAL(String UDADDITIONAL) {
+               this.UDADDITIONAL = UDADDITIONAL;
+           }
+       }
 
 
 

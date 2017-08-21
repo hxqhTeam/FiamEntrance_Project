@@ -66,7 +66,7 @@ public class RwdActivity extends BaseListActivity {
         Log.i(TAG, "data=" + data);
         Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
-                .addQueryParameter("data", data)
+                .addBodyParameter("data", data)
                 .build()
                 .getObjectObservable(R_Workorder.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
@@ -188,6 +188,41 @@ public class RwdActivity extends BaseListActivity {
                 Intent intent=null;
                 if(appid.equals(GlobalConfig.TOSY_APPID)){
                     intent=new Intent(RwdActivity.this,SyrwdWorkorderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, 0);
+                }
+                else if(appid.equals(GlobalConfig.TOSZ_APPID)){
+                    intent=new Intent(RwdActivity.this,SzrwdWorkorderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, 0);
+                }
+                else if(appid.equals(GlobalConfig.TOLL_APPID)){
+                    intent=new Intent(RwdActivity.this,WzlldWorkorderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, 0);
+                }
+                else if(appid.equals(GlobalConfig.TODJ_APPID)){
+                    intent=new Intent(RwdActivity.this,DjrwdWorkorderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, 0);
+                }
+                else if(appid.equals(GlobalConfig.TOOIL_APPID)){
+                    intent=new Intent(RwdActivity.this,RyrwdWorkorderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, 0);
+                }
+                else if(appid.equals(GlobalConfig.TOQT_APPID)){
+                    intent=new Intent(RwdActivity.this,QtrwdWorkorderActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
                     intent.putExtras(bundle);

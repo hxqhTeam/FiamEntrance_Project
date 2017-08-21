@@ -1,5 +1,7 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.hqxh.fiamproperty.ui.adapter.HtAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +53,7 @@ public class HtActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getPURCHVIEWUrl(AccountUtils.getpersonId(this),  curpage, showcount);
+        String data = HttpManager.getPURCHVIEWUrl(AccountUtils.getpersonId(this), curpage, showcount);
         Log.i(TAG, "data=" + data);
         Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
@@ -171,6 +174,12 @@ public class HtActivity extends BaseListActivity {
         htAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+
+                Intent intent = new Intent(HtActivity.this, PurchviewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("purchview", (Serializable) htAdapter.getData().get(position));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 0);
 
             }
         });

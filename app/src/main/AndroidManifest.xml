@@ -15,9 +15,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:theme"
-        >
+        android:theme="@style/SampleTheme"
+        tools:replace="android:theme">
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
@@ -27,6 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="cn.hqxh.fiam.mobile.PermissionsActivity"
+            android:label="PermissionsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

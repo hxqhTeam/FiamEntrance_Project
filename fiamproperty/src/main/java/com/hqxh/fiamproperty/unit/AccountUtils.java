@@ -35,4 +35,11 @@ public class AccountUtils {
     }
 
 
+    //获取传过来的人员信息
+    public static String getPerson(Context cxt){
+        SharedPreferences sharedPreferences = cxt.getSharedPreferences(cxt.getString(R.string.my_person_info),Context.MODE_APPEND);
+        return sharedPreferences.getString(cxt.getString(R.string.my_person_info), null);
+    }
+
+
 }

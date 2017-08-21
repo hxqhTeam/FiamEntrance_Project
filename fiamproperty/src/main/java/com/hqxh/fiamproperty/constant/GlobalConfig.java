@@ -9,7 +9,7 @@ public final class GlobalConfig {
 
     /**服务器地址**/
 //    public final static String HTTP_URL="http://qmportal1.qm.cn:8090";
-   public final static String HTTP_URL="http://10.60.12.98:9080";
+    public final static String HTTP_URL="http://10.60.12.98:9080";
 
     /**服务器登录接口地址**/
 
@@ -36,15 +36,6 @@ public final class GlobalConfig {
     public final static String SZPR="SZPR"; //试制采购申请/采购
     public final static String TOQT="TOQT"; //其它任务单/任务单
 
-
-
-
-
-
-
-
-
-
     /**定义appid,objectname**/
     //待办appid
     public static final String WFADMIN_APPID = "WFADMIN" ;
@@ -59,6 +50,8 @@ public final class GlobalConfig {
     public static final String TRAVEL_APPID = "TRAVEL" ;
     //出差表名/任务单
     public static final String WORKORDER_NAME = "WORKORDER" ;
+    //物料领料单明细
+    public static final String WPITEM_NAME = "WPITEM" ;
     //出差人
     public static final String PERSONRELATION_NAME = "PERSONRELATION" ;
     //国外立项appid
@@ -107,6 +100,10 @@ public final class GlobalConfig {
     public static final String CONTPURCH_APPID = "CONTPURCH" ;
     //合同的表名
     public static final String PURCHVIEW_NAME = "PURCHVIEW" ;
+    //付款计划的表名
+    public static final String CONTRACTLINE_NAME = "CONTRACTLINE" ;
+    //合同行的表名
+    public static final String CONTRACTPAY_NAME = "CONTRACTPAY" ;
     //付款验收Appid
     public static final String PAYCHECK_APPID = "PAYCHECK" ;
     //付款验收表名
@@ -132,7 +129,7 @@ public final class GlobalConfig {
     public static final String BO_NAME = "BO" ;
 
 
-    /**通用-执行部门**/
+    /**通用-执行部门／附件文档**/
     public static final String USER_APPID = "USER" ;
     /**特殊／通用-执行部门**/
     public static final String CUDEPT_NAME = "CUDEPT" ;
@@ -143,6 +140,8 @@ public final class GlobalConfig {
     /**通用-执行科室**/
     public static final String ROLE_APPID = "ROLE" ;
 
+    /**附件文档**/
+    public static final String DOCLINKS_NAME = "DOCLINKS" ;
 
     /**
      * 用户登录表识--开始*
@@ -171,5 +170,11 @@ public final class GlobalConfig {
     public static final int PERSON_REQUESTCODE = 1002;//执行人请求码
 
 
+
+
+    //字段操作标识
+    public static final String READONLY = "readonly";//只读
+
+    public static final String NOTREADONLY = "notreadonly";//可填写
 
 }

@@ -45,8 +45,7 @@ public class WzmxListActivity extends BaseListActivity {
     private int curpage = 1;
     private int showcount = 20;
     private int totalpage;
-
-    private String grnum;;
+    private String grnum;;//
 
     @Override
     protected String getSubTitle() {

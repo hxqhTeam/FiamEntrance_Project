@@ -1,4 +1,6 @@
 <resources>
+
+    <string name="app_name">FAIM</string>
     <string name="home_title">FIAM</string>
     <string name="db_task_text">待办任务</string>
     <string name="yb_task_text">已办任务</string>
@@ -10,13 +12,15 @@
     <!-- 登录界面 key-->
     <string name="login_personId">login_personId</string>
     <string name="login_displayName">login_displayName</string>
+    <string name="my_person_info">MY_PERSON_INFO</string>
 
 
-    <!--加载提示-->
+    <!--提示-->
     <string name="load_more_text">正在加载...</string>
     <string name="have_notdata_hint">暂无数据</string>
     <string name="all_data_hint">已加载出全部数据...</string>
     <string name="have_not_data_txt">暂无相关数据...</string>
+    <string name="unable_to_connect_to_server_login_failed">无法连接服务器,登录失败</string>
 
     <!--标题-->
     <string name="cmgl_text">出门管理</string>
@@ -44,14 +48,14 @@
     <string name="location2_text">门岗2</string>
     <string name="type_text">类型</string>
     <string name="schedulardate_text">计划出门日期</string>
-
+    <string name="displayname_text">申请人</string>
     <string name="description1_text">名称</string>
     <string name="enterdate_text">申请时间</string>
     <string name="reason_text">理由</string>
     <string name="grnum_text">申请单号</string>
     <string name="phone_text">电话</string>
     <string name="cudept_text">部门</string>
-
+    <string name="cucrew_text">科室</string>
     <string name="wzcmxq_text">物资出门详情</string>
     <string name="search_text">搜索</string>
     <!--国内出差详情-->
@@ -76,12 +80,13 @@
     <string name="reportdate_text">申请日期</string>
     <string name="spjl_text">审批记录</string>
     <string name="sp_btn_id">审批</string>
-    <string name="displayname_text">人员</string>
-    <string name="cucrew_text">科室</string>
+    <string name="displaynamee_text">人员</string>
     <string name="spr_text">审批人</string>
     <string name="node_text">标题</string>
     <string name="trnsdate_text">审批日期</string>
+    <string name="memo_text">审批意见</string>
 
+    <!--出国立项-->
     <string name="cg_udremark1_text">出国目的</string>
     <string name="ccsj_text">出差时间</string>
     <string name="udtargstartdate2_text">出国时间</string>
@@ -91,6 +96,7 @@
     <string name="cglxxq_text">出国立项详情</string>
     <string name="memo_hint_text">请输入审批意见</string>
     <string name="spsb_text">审批失败</string>
+    <string name="phonenum_text">电话</string>
 
     <!--试验任务单-->
     <string name="udtodesc_text">任务单描述</string>
@@ -123,7 +129,76 @@
     <string name="transdate_text">审批时间</string>
     <string name="displayname1_text">审批人</string>
     <string name="description_text">标题</string>
-    <string name="memo_text">审批意见</string>
+    <string name="ry_text">人员</string>
+
+    <!--试制任务单-->
+    <string name="udtotype3_text">试制类型</string>
+    <string name="cuquantity_text">试制数量</string>
+    <string name="udszdate1_text">任务到达时间</string>
+    <string name="sz_owner_text">子项目负责人</string>
+    <string name="szrwdxq_text">试制任务单详情</string>
+    <string name="udpaythisyear_text">本年度结算</string>
+
+
+    <!--物资领料单-->
+    <string name="wzlld_title">物资领料单详情</string>
+    <string name="djrwdxq_text">调件任务单详情</string>
+    <string name="lbjmc_text">零部件名称</string>
+    <string name="wpt5_text">图号</string>
+    <string name="orderunit_text">计量单位</string>
+    <string name="storeloc_text">仓库</string>
+    <string name="estmatcost_text">总费用</string>
+    <string name="js_schedfinish_text">结算完成时间</string>
+    <string name="mxxx_text">明细信息</string>
+    <string name="udadditional_text">是否补录</string>
+    <string name="udtooil1_text">燃油类型及标号</string>
+    <string name="sq_udqty1_text">申请数量</string>
+    <string name="cuunit_text">单位</string>
+    <string name="rysqdxq_text">燃油申请单详情</string>
+    <string name="qtrwdxq_text">其它任务单</string>
+
+    <!--合同-->
+    <string name="contractnum_text">合同编号</string>
+    <string name="udcontractnum_text">国外合同号</string>
+    <string name="ht_name_text">合同名称</string>
+    <string name="udclass_text">合同类别</string>
+    <string name="revisionnum_text">版本</string>
+    <string name="udtype2_text">开口/闭口</string>
+    <string name="udcontent_text">主要内容(摘要)</string>
+    <string name="uddirection_text">收付方向</string>
+    <string name="udpayterm1_text">支付方式</string>
+    <string name="udiprowner_text">知识产权归属</string>
+    <string name="totalbasecost_text">合同金额(人民币)</string>
+    <string name="cutotalcost_text">外币合同额</string>
+    <string name="cucurrency_text">外币币种</string>
+    <string name="owner_text">合同责任人</string>
+    <string name="udownerdept_text">责任部门</string>
+    <string name="udownercrew_text">责任科室</string>
+    <string name="tc_displayname_text">提出人</string>
+    <string name="signdate_text">签订日期</string>
+    <string name="startdate_text">开始日期</string>
+    <string name="enddate_text">结束日期</string>
+    <string name="udrecorddate_text">提出日期</string>
+    <string name="udrequestdept_text">提出部门</string>
+    <string name="udrequestcrew_text">提出科室</string>
+    <string name="fkjh_text">付款计划</string>
+    <string name="wd_text">文档</string>
+    <string name="hth_text">合同行</string>
+    <string name="ms_text">描述</string>
+    <string name="create_owner_text">创建人</string>
+    <string name="createdate_text">创建日期</string>
+    <string name="yl_text">预览</string>
+    <string name="htxq_text">合同详情</string>
+    <string name="conpaylinenum_text">第几次</string>
+    <string name="term_text">付款条件</string>
+    <string name="duedate_text">付款日期</string>
+    <string name="linecost_text">付款金额</string>
+    <string name="paymentpercent_text">付款比例</string>
+    <string name="isadvance_text">预付款</string>
+    <string name="contractline_text">行</string>
+    <string name="nr_description_text">内容</string>
+    <string name="unitcost_text">单价</string>
+    <string name="linecost_text1">总价</string>
     <string name="samplenum_text">样车编号</string>
     <string name="udmodel_text">型号</string>
     <string name="udlicensenum_text">品牌</string>

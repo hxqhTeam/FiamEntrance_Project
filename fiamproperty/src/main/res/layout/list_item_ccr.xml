@@ -41,12 +41,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/bm_linearLayout_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="@dimen/btn_top_5dp">
 
             <TextView
+                android:id="@+id/cudept_title_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cudept_text"
@@ -64,12 +66,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ks_linearLayout_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="@dimen/btn_top_5dp">
 
             <TextView
+                android:id="@+id/ks_title_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cucrew_text"

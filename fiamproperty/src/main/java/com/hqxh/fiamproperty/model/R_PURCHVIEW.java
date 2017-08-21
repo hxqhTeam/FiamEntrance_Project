@@ -105,8 +105,9 @@ public class R_PURCHVIEW {
     /**
      *合同
      * **/
-    public static class  PURCHVIEW{
+    public static class  PURCHVIEW extends Entity{
 
+        private String  CONTRACTID; //contractid
         private String  UDCONTRACTNUM; //国外合同号
         private String  DESCRIPTION;//合同名称
         private String  UDCLASS;//合同类别
@@ -132,6 +133,14 @@ public class R_PURCHVIEW {
         private String  UDOWNERDEPT;//责任部门
         private String  UDOWNERCREW;//责任科室
         private String  CONTRACTNUM;//合同号
+
+        public String getCONTRACTID() {
+            return CONTRACTID;
+        }
+
+        public void setCONTRACTID(String CONTRACTID) {
+            this.CONTRACTID = CONTRACTID;
+        }
 
         public String getUDCONTRACTNUM() {
             return UDCONTRACTNUM;

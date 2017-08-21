@@ -3,22 +3,36 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.base.BaseActivity;
+import com.hqxh.fiamproperty.constant.GlobalConfig;
+import com.hqxh.fiamproperty.model.R_PERSONS;
+import com.hqxh.fiamproperty.model.R_PERSONS.PERSION;
+import com.hqxh.fiamproperty.unit.AccountUtils;
+import com.rx2androidnetworking.Rx2AndroidNetworking;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+
 
 public class HomeActivity extends BaseActivity {
+
+    private static final String TAG = "HomeActivity";
 
     public static final int DB_CODE = 1000;
     public static final int YB_CODE = 1001;
@@ -40,13 +54,27 @@ public class HomeActivity extends BaseActivity {
     // 图片封装为一个数组
     private int[] icon = null;
     private String[] iconName = null;
-    private String username;
+    private String identity;
+
+
     @Override
     protected int getContentViewLayoutID() {
-        if(getIntent().hasExtra("username")){
-            username=getIntent().getExtras().getString("username");
-        }
+
         return R.layout.activity_home;
+
+    }
+
+    @Override
+    protected void beforeInit() {
+        super.beforeInit();
+//        identity = JsonUnit.getIdentity(AccountUtils.getPerson(this));
+//        if (null == identity) {
+//            showMiddleToast(this, "无法识别身份");
+//            finish();
+//        }
+//
+//        Login();
+
 
     }
 
@@ -181,6 +209,66 @@ public class HomeActivity extends BaseActivity {
         }
     };
 
+
+    //连接系统测试
+    private void Login() {
+
+        String imei = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
+                .getDeviceId();
+
+        Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_LOGIN)
+                .addQueryParameter("username", identity)
+                .addQueryParameter("imei", imei)
+                .build()
+                .getObjectObservable(R_PERSONS.class) // 发起获取数据列表的请求，并解析到R_Person.class
+                .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
+                .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
+                .doOnNext(new Consumer<R_PERSONS>() {
+                    @Override
+                    public void accept(@io.reactivex.annotations.NonNull R_PERSONS r_PERSON) throws Exception {
+
+
+                    }
+                })
+
+                .map(new Function<R_PERSONS, String>() {
+                    @Override
+                    public String apply(@io.reactivex.annotations.NonNull R_PERSONS r_PERSON) throws Exception {
+                        if (r_PERSON.getErrcode().equals(GlobalConfig.LOGINSUCCESS)) {//登录成功
+                        } else if (r_PERSON.getErrcode().equals(GlobalConfig.CHANGEIMEI)) {//登录成功,检测到用户更换手机登录
+                        } else if (r_PERSON.getErrcode().equals(GlobalConfig.USERNAMEERROR)) {//用户名密码错误
+                        } else {
+                        }
+                        return r_PERSON.getResult();
+                    }
+
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(@io.reactivex.annotations.NonNull String persion) throws Exception {
+                        if (null != persion) {
+                            PERSION persion1 = new Gson().fromJson(persion, PERSION.class);
+                            AccountUtils.setLoginDetails(HomeActivity.this, persion1);
+                        } else {
+                            finish();
+                        }
+
+
+                    }
+
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+                        showMiddleToast(HomeActivity.this, getString(R.string.unable_to_connect_to_server_login_failed));
+                        finish();
+                    }
+                });
+
+
+    }
 
 
 }
