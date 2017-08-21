@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/grlin1_text"
-                android:textColor="@color/black"
+                android:textColor="@color/wordcolor"
                 android:textSize="@dimen/dimens_16sp" />
 
             <TextView
@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
                 android:hint="@string/have_notdata_hint"
+                android:textColor="@color/wordcolor"
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
@@ -71,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/measureunitid_text"
-                android:textColor="@color/black"
+                android:textColor="@color/wordcolor"
                 android:textSize="@dimen/dimens_16sp" />
 
             <TextView
@@ -80,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
                 android:hint="@string/have_notdata_hint"
+                android:textColor="@color/wordcolor"
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>

@@ -33,6 +33,7 @@
                     android:background="@color/wordcolor2"
                     android:gravity="center"
                     android:text="@string/grnum_text"
+                    android:padding="5dp"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
@@ -51,10 +52,13 @@
                         android:textColor="@color/light_black"
                         android:textSize="14dp" />
 
-                    <LinearLayout
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/text_divid_color" />
+                        android:layout_height="0.5dp"
+                        android:background="@mipmap/line">
+
+                    </View>
+
 
                     <TextView
                         android:id="@+id/grnum2_text"
@@ -80,14 +84,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@color/wordcolor2"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="@string/location_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -121,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/wordcolor2"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="@string/location2_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -155,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/wordcolor2"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="@string/reason_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -189,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/wordcolor2"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="@string/type_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -224,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/wordcolor2"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="@string/schedulardate_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -273,7 +278,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/wordcolor2"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="@string/sqr_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -308,7 +313,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/wordcolor2"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="@string/phone_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -343,7 +348,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/wordcolor2"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="@string/cudept_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -377,7 +382,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/wordcolor2"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="@string/cucrew_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -412,7 +417,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/wordcolor2"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="@string/status_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -446,7 +451,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/wordcolor2"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="@string/enterdate_text"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -470,11 +475,6 @@
                 android:background="@mipmap/line">
 
             </View>
-            <LinearLayout
-                android:id="@+id/wzmx_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
             <RelativeLayout
 
@@ -482,7 +482,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/background_dark_gray"
                 android:orientation="horizontal"
-                android:padding="@dimen/dp_4">
+                android:padding="@dimen/btn_top_10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -508,12 +508,8 @@
                 android:background="@mipmap/line">
 
             </View>
-        </LinearLayout>
-            <LinearLayout
-                android:id="@+id/zcmx_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+
+
 
             <RelativeLayout
                 android:id="@+id/zcmx_relativelayout_id"
@@ -522,7 +518,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:background="@color/background_dark_gray"
-                android:padding="@dimen/dp_4">
+                android:padding="@dimen/btn_top_10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -545,7 +541,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/line"></View>
-            </LinearLayout>
+
 
 
             <RelativeLayout
@@ -554,7 +550,7 @@
                 android:background="@color/background_dark_gray"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/dp_4">
+                android:padding="@dimen/btn_top_10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -585,8 +581,8 @@
             <Button
                 android:id="@+id/spbutton"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="88dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="40dp"
                 android:background="#FF50BBF9"
                 android:gravity="center"
                 android:text="@string/sp_btn_id"

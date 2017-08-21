@@ -168,7 +168,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
     private View.OnClickListener spOnClickListener = new View.OnClickListener() {
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
             PostStart(GlobalConfig.GR_NAME, JsonUnit.convertStrToArray(gr.getGRID())[0], GlobalConfig.GRWZ_APPID, AccountUtils.getpersonId(GrDetailsActivity.this));
         }
 
@@ -225,6 +225,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
                 });
     }
 
+/*审批流程*/
 
     //http://10.60.12.98/maximo/mobile/wf/approve?ownertable=GR&ownerid=77128&memo=驳回&selectWhat=0&userid=zhuyinan
     private void PostApprove(String ownertable, String ownerid, String memo, String selectWhat, String userid) {
@@ -252,7 +253,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
                         Log.i(TAG, "审批s=" + s);
-                        R_GR workflow = new Gson().fromJson(s, R_GR.class);
+                        R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         showMiddleToast(GrDetailsActivity.this, workflow.getErrmsg());
                     }
 

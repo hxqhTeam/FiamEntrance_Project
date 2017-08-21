@@ -16,12 +16,13 @@
     <color name="light_black">#a2a7a9</color>
 
     <color name="light_white">#f0f2df</color>
-    <color name="wordcolor">#262828</color>
+    <color name="wordcolor">#373939</color>
     <color name="wordcolor2">#f1f1f1</color>
 
     <color name="text_back_color_1">#b1d3ca</color>
     <color name="text_back_color_2">#44f560</color>
     <color name="text_divid_color">#e4e3e3</color>
+    <color name="wordcolor3">#717171</color>
 
     <color name="btn_normal">#669dec</color> <!--FF4081 2C97DE -->
     <color name="btn_onclick">#4576bb</color> <!--FF4081 2C97DE -->
