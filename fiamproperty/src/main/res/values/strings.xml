@@ -278,6 +278,9 @@
     <string name="udremarks3_text">项目预期目标</string>
     <string name="document_text">文档</string>
     <string name="fwcgxq_text">服务采购详情</string>
+    <string name="payplannum_text">计划单</string>
+    <string name="month_text">日期</string>
+    <string name="type1_text">需款类型</string>
 
     <!--借款单-->
     <string name="bonum_text">借款单</string>

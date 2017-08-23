@@ -86,7 +86,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
         phone_text = (TextView) findViewById(R.id.phone_text);
         cudept_text = (TextView) findViewById(R.id.cudept_text);
         cucrew_text = (TextView) findViewById(R.id.cucrew_text);
-        description_text = (TextView) findViewById(R.id.description_text);
+        description_text = (TextView) findViewById(R.id.status_text);
         enterdate_text = (TextView) findViewById(R.id.enterdate_text);
         wzmx_text = (ImageView) findViewById(R.id.wzmx_text);
         zcmx_text = (ImageView) findViewById(R.id.zcmx_text);
