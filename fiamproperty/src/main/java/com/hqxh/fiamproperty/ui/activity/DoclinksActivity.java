@@ -96,7 +96,6 @@ public class DoclinksActivity extends BaseListActivity {
                     @Override
                     public List<DOCLINKS> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
@@ -110,11 +109,10 @@ public class DoclinksActivity extends BaseListActivity {
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                         if (doclinks == null || doclinks.isEmpty()) {
-
+                            notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
                             addData(doclinks);
-
 
                         }
                     }
@@ -123,7 +121,7 @@ public class DoclinksActivity extends BaseListActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-
+                        notLinearLayout.setVisibility(View.VISIBLE);
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                     }
                 });

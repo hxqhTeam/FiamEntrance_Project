@@ -143,11 +143,46 @@ public class JsonUnit {
     }
 
 
+    /**
+     * 合同
+     **/
+    public static String djpurchviewData(String contractid, String signdate,String startdate, String enddate,String udcontractnum, String userid, String appid) {
+        JSONObject jsdata = new JSONObject();  //第一层
+        JSONObject jsrec = new JSONObject();   //第二层
+        JSONObject jswo = new JSONObject();    //第三层
+
+        try {
+            jswo.put("CONTRACTID", contractid);//唯一列
+            jswo.put("SIGNDATE", signdate);
+            jswo.put("STARTDATE", startdate);
+            jswo.put("UDCONTRACTNUM", udcontractnum);
+            jswo.put("ENDDATE", enddate);
+
+
+            jsrec.put("PURCHVIEW", jswo.toString());
+
+            //最外层
+            jsdata.put("appid", appid);
+            jsdata.put("objectname", GlobalConfig.PURCHVIEW_NAME);
+            jsdata.put("username", userid);
+            jsdata.put("option", "sync");
+            jsdata.put("rec", jsrec.toString());
+
+            return jsdata.toString();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
     //获取身份证号
     public static String getIdentity(String data) {
         Log.e(TAG, "data=" + data);
         String id_number = null;
-        if(!TextUtils.isEmpty(data)) {
+        if (!TextUtils.isEmpty(data)) {
 
             try {
                 JSONObject jsonObject = new JSONObject(data);

@@ -119,9 +119,18 @@ public final class GlobalConfig {
     public static final String EXPENSES_APPID = "EXPENSES" ;
     //差旅报销单表名／备用金报销
     public static final String EXPENSE_NAME = "EXPENSE" ;
+    //补助明细
+    public static final String SUBSIDIES_NAME = "SUBSIDIES" ;
+    //交通明细
+    public static final String EXPENSELINE_NAME = "EXPENSELINE" ;
+    //借款单
+    public static final String BORELATION_NAME = "BORELATION" ;
 
     //备用金报销Appid
     public static final String EXPENSE_APPID = "EXPENSE" ;
+
+    //付款验收
+    public static final String PAYCHECKRELATION_NAME = "PAYCHECKRELATION" ;
 
     //借款单Appid
     public static final String BO_APPID = "BO" ;

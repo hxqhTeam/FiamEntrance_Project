@@ -45,13 +45,14 @@ public class R_BO {
         this.result = result;
     }
 
-    /**结果集
+    /**
+     * 结果集
      * curpage
      * resultlist
      * showcount
      * totalpage
      * totalresult
-     * **/
+     **/
     public static class ResultBean {
         private String curpage; //当前页
         private String showcount;//显示条数
@@ -103,10 +104,11 @@ public class R_BO {
 
 
     /**
-     *需款计划
-     * **/
-    public static class  BO {
+     * 需款计划
+     **/
+    public static class BO extends Entity {
 
+        private String BOID; //BOID
         private String DEPARTMENT; //部门
         private String CONTRACTDESCR;//合同名称
         private String ADDRESS1;//地址
@@ -127,6 +129,14 @@ public class R_BO {
         private String TOTALCOST;//借款金额
         private String STATUSDESC;//状态
         private String BONUM;//借款单
+
+        public String getBOID() {
+            return BOID;
+        }
+
+        public void setBOID(String BOID) {
+            this.BOID = BOID;
+        }
 
         public String getDEPARTMENT() {
             return DEPARTMENT;

@@ -1,6 +1,7 @@
 package com.hqxh.fiamproperty.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,8 @@ import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_EXPENSE;
 import com.hqxh.fiamproperty.model.R_EXPENSE.ResultBean;
 import com.hqxh.fiamproperty.model.R_EXPENSE.EXPENSE;
+import com.hqxh.fiamproperty.ui.activity.ByExpenseActivity;
+import com.hqxh.fiamproperty.ui.activity.ExpenseActivity;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
 import com.hqxh.fiamproperty.ui.adapter.ExpenseAdapter;
 import com.hqxh.fiamproperty.ui.adapter.TravelAdapter;
@@ -24,6 +27,7 @@ import com.hqxh.fiamproperty.ui.widget.PullLoadMoreRecyclerView;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +37,12 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-/**差旅报销**/
+/**
+ * 差旅报销
+ **/
 public class ExpenseFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
 
-    private static final String TAG="ExpenseFragment";
+    private static final String TAG = "ExpenseFragment";
 
     private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private RecyclerView mRecyclerView;
@@ -62,7 +68,7 @@ public class ExpenseFragment extends Fragment implements PullLoadMoreRecyclerVie
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        appid=getArguments().getString("appid");
+        appid = getArguments().getString("appid");
         mPullLoadMoreRecyclerView = (PullLoadMoreRecyclerView) view.findViewById(R.id.pullLoadMoreRecyclerView);
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
@@ -79,7 +85,7 @@ public class ExpenseFragment extends Fragment implements PullLoadMoreRecyclerVie
     }
 
     private void getData() {
-        String data=HttpManager.getEXPENSEUrl(appid,AccountUtils.getpersonId(getActivity()),curpage, showcount);
+        String data = HttpManager.getEXPENSEUrl(appid, AccountUtils.getpersonId(getActivity()), curpage, showcount);
         Log.i(TAG, "data=" + data);
         Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
@@ -105,7 +111,7 @@ public class ExpenseFragment extends Fragment implements PullLoadMoreRecyclerVie
                     @Override
                     public List<EXPENSE> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG,"Totalresult="+resultBean.getTotalresult());
+                        Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
@@ -140,10 +146,6 @@ public class ExpenseFragment extends Fragment implements PullLoadMoreRecyclerVie
     }
 
 
-
-
-
-
     @Override
     public void onRefresh() {
         curpage = 1;
@@ -155,7 +157,7 @@ public class ExpenseFragment extends Fragment implements PullLoadMoreRecyclerVie
     public void onLoadMore() {
         if (totalpage == curpage) {
             getLoadMore();
-            BaseActivity.showMiddleToast(getActivity(),getResources().getString(R.string.all_data_hint));
+            BaseActivity.showMiddleToast(getActivity(), getResources().getString(R.string.all_data_hint));
         } else {
             curpage++;
             getData();
@@ -187,7 +189,21 @@ public class ExpenseFragment extends Fragment implements PullLoadMoreRecyclerVie
         expenseAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent = new Intent();
+                if (appid.equals(GlobalConfig.EXPENSES_APPID)) {//差旅报销
+                    intent.setClass(getActivity(), ExpenseActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("expense", (Serializable) expenseAdapter.getData().get(position));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, 0);
+                }
+                if (appid.equals(GlobalConfig.EXPENSE_APPID)) {//备用金报销
+                    intent.setClass(getActivity(), ByExpenseActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("expense", (Serializable) expenseAdapter.getData().get(position));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, 0);
+                }
             }
         });
     }

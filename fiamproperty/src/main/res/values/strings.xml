@@ -19,7 +19,7 @@
     <string name="load_more_text">正在加载...</string>
     <string name="have_notdata_hint">暂无数据</string>
     <string name="all_data_hint">已加载出全部数据...</string>
-    <string name="have_not_data_txt">暂无相关数据...</string>
+    <string name="have_not_data_txt">暂无相关数据</string>
     <string name="unable_to_connect_to_server_login_failed">无法连接服务器,登录失败</string>
 
     <!--标题-->
@@ -205,7 +205,57 @@
     <string name="udvehicletype_text">车辆类型</string>
     <string name="udvehicletype2_text">样车来源</string>
     <string name="udchassisnum_text">底盘号</string>
+
+    <!--差旅报销-->
     <string name="udsznum_text">试制编号</string>
+    <string name="expensenum_text">报销单</string>
+    <string name="description_bx_text">报销事由</string>
+    <string name="wftype_text">类别</string>
+    <string name="wonum2_text">出差申请</string>
+    <string name="projectid_xm_text">项目预算</string>
+    <string name="totalcost_text">报销金额</string>
+    <string name="bocost_text">借款金额</string>
+    <string name="enterby_text">报销人</string>
+    <string name="zhi_text">至</string>
+    <string name="actdays_text">出差天数</string>
+    <string name="bzmx_text">补助明细</string>
+    <string name="jtmx_text">交通费明细</string>
+    <string name="clbxdxq_text">差旅报销单详情</string>
+    <string name="person_text">人员</string>
+    <string name="trvcost1_text">票据金额</string>
+    <string name="trvcost2_text">补助金额</string>
+    <string name="bx_linecost_text">报销金额</string>
+    <string name="h_text">行</string>
+    <string name="standardcost_text">补助标准</string>
+    <string name="days_text">人天</string>
+    <string name="bz_linecost_text">补助金额</string>
+    <string name="cl_time_text">时间</string>
+    <string name="dd_text">地点</string>
+    <string name="transport_text">交通工具</string>
+    <string name="je_text">金额</string>
+    <string name="bodesc_text">借款事由</string>
+    <string name="boenterdate_text">借款时间</string>
+    <string name="bototalcost_text">借款金额</string>
+    <string name="paycheckcost_text">验收金额</string>
+    <string name="by_enterdate_text">报销日期</string>
+    <string name="contractvendor_text">供应商</string>
+    <string name="payvendor_text">收款单位</string>
+    <string name="address1_text">收款单位地址</string>
+    <string name="bank_text">开户行</string>
+    <string name="bankaccount_text">账号</string>
+    <string name="fkysd_text">付款验收单</string>
+    <string name="bxmx_text">报销明细</string>
+    <string name="paychecknum_text">验收单</string>
+    <string name="by_totalcost_text">含税金额</string>
+    <string name="tax_text">税额</string>
+    <string name="byjbxmx_text">备用金报销明细</string>
+    <string name="invoicedate_text">发票日期</string>
+    <string name="djmc_text">单据名称</string>
+    <string name="remark_text">报销事项说明</string>
+
+
+    <!--备用金报销-->
+
 
     <string name="prnum_text">申请单号</string>
     <string name="udpcowner_text">参加人</string>
@@ -228,5 +278,16 @@
     <string name="udremarks3_text">项目预期目标</string>
     <string name="document_text">文档</string>
     <string name="fwcgxq_text">服务采购详情</string>
+
+    <!--借款单-->
+    <string name="bonum_text">借款单</string>
+    <string name="jk_description_text">借款事由</string>
+    <string name="jk_type_text">借款类型</string>
+    <string name="applycost_text">申请金额</string>
+    <string name="jk_enterby_text">借款人</string>
+    <string name="jk_enterdate_text">借款时间</string>
+    <string name="jy_bank_text">开户银行</string>
+    <string name="jy_bankaccount_text">银行账号</string>
+    <string name="jkdxq_text">借款单详情</string>
 
 </resources>

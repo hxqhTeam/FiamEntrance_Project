@@ -17,6 +17,7 @@ import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_PERSONS;
 import com.hqxh.fiamproperty.model.R_PERSONS.PERSION;
 import com.hqxh.fiamproperty.unit.AccountUtils;
+import com.hqxh.fiamproperty.unit.JsonUnit;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
 import java.util.ArrayList;

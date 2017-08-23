@@ -35,10 +35,12 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/8/23.
+ * <p>
+ * 服务采购
  */
 
-public class FwpaydetailsActivity extends BaseTitleActivity{
-    private static final   String TAG="FwpaydetailsActivity";
+public class FwpaydetailsActivity extends BaseTitleActivity {
+    private static final String TAG = "FwpaydetailsActivity";
 
 
     private TextView prnum_text;//申请单号
@@ -68,10 +70,10 @@ public class FwpaydetailsActivity extends BaseTitleActivity{
     private PR pr;
     private Animation rotate;
 
-    protected void beforeInit(){
+    protected void beforeInit() {
         super.beforeInit();
-        pr=(PR)getIntent().getExtras().getSerializable("pr");
-        Log.e(TAG,"初始化前的准备");
+        pr = (PR) getIntent().getExtras().getSerializable("pr");
+        Log.e(TAG, "初始化前的准备");
     }
 
     @Override
@@ -82,28 +84,28 @@ public class FwpaydetailsActivity extends BaseTitleActivity{
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        prnum_text=(TextView)findViewById(R.id.prnum_text);
-        worktype_text=(TextView)findViewById(R.id.worktype_text);
-        status_text=(TextView)findViewById(R.id.status_text);
-        udremarka_text=(TextView)findViewById(R.id.udremarka_text);
-        projectdes1_text=(TextView)findViewById(R.id.projectdes1_text);
-        udremarks3_text=(TextView)findViewById(R.id.udremarks3_text);
-        pr6_text=(TextView)findViewById(R.id.pr6_text);
-        udremark5_text=(TextView)findViewById(R.id.udremark5_text);
-        rdchead_text=(TextView)findViewById(R.id.rdchead_text);
-        ownername_text=(TextView)findViewById(R.id.ownername_text);
+        prnum_text = (TextView) findViewById(R.id.prnum_text);
+        worktype_text = (TextView) findViewById(R.id.worktype_text);
+        status_text = (TextView) findViewById(R.id.status_text);
+        udremarka_text = (TextView) findViewById(R.id.udremarka_text);
+        projectdes1_text = (TextView) findViewById(R.id.projectdes1_text);
+        udremarks3_text = (TextView) findViewById(R.id.udremarks3_text);
+        pr6_text = (TextView) findViewById(R.id.pr6_text);
+        udremark5_text = (TextView) findViewById(R.id.udremark5_text);
+        rdchead_text = (TextView) findViewById(R.id.rdchead_text);
+        ownername_text = (TextView) findViewById(R.id.ownername_text);
 
-        projectid_text=(TextView)findViewById(R.id.projectid_text);
-        pm_text=(TextView)findViewById(R.id.pm_text);
-        sqr_text=(TextView)findViewById(R.id.sqr_text);
+        projectid_text = (TextView) findViewById(R.id.projectid_text);
+        pm_text = (TextView) findViewById(R.id.pm_text);
+        sqr_text = (TextView) findViewById(R.id.sqr_text);
 
-        jbxx_text=(ImageView)findViewById(R.id.jbxx_text);
-        document_text=(ImageView)findViewById(R.id.document_text);
-        spjl_text=(ImageView)findViewById(R.id.spjl_text);
+        jbxx_text = (ImageView) findViewById(R.id.jbxx_text);
+        document_text = (ImageView) findViewById(R.id.document_text);
+        spjl_text = (ImageView) findViewById(R.id.spjl_text);
 
-        workflowBtn=(Button)findViewById(R.id.workflow_btn_id);
+        workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
 
-        jbxxlinearlayout=(LinearLayout)findViewById(R.id.jbxx_text_id);
+        jbxxlinearlayout = (LinearLayout) findViewById(R.id.jbxx_text_id);
 
         showDate();
 
@@ -140,6 +142,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity{
     protected String getSubTitle() {
         return getString(R.string.fwcgxq_text);
     }
+
     private boolean startAnaim() {
 
         rotate.setInterpolator(new LinearInterpolator());//设置为线性旋转
@@ -150,7 +153,8 @@ public class FwpaydetailsActivity extends BaseTitleActivity{
         jbxx_text.startAnimation(rotate);
         return rotate.getFillAfter();
     }
-    private View.OnClickListener jbxx_textOnClickListener=new View.OnClickListener(){
+
+    private View.OnClickListener jbxx_textOnClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
@@ -161,14 +165,23 @@ public class FwpaydetailsActivity extends BaseTitleActivity{
             }
         }
     };
-    private View.OnClickListener document_textOnClickListener=new View.OnClickListener(){
 
+
+    //问题
+    private View.OnClickListener document_textOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Intent intent = new Intent(FwpaydetailsActivity.this, DoclinksActivity.class);
+            intent.putExtra("ownertable", GlobalConfig.PR_NAME);
+            intent.putExtra("ownerid", JsonUnit.convertStrToArray(pr.getPRID())[0]);
+            intent.putExtra("title", getResources().getString(R.string.wd_text));
+            startActivityForResult(intent, 0);
 
         }
     };
-    private View.OnClickListener spjl_textOnClickListener=new View.OnClickListener(){
+
+    //审批记录
+    private View.OnClickListener spjl_textOnClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View view) {
@@ -179,7 +192,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity{
 
         }
     };
-    private View.OnClickListener workflowBtnOnClickListener=new View.OnClickListener(){
+    private View.OnClickListener workflowBtnOnClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
@@ -242,7 +255,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity{
 
     //http://10.60.12.98/maximo/mobile/wf/approve?ownertable=GR&ownerid=77128&memo=驳回&selectWhat=0&userid=zhuyinan
     private void PostApprove(String ownertable, String ownerid, String memo, String selectWhat, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",memo=" + memo +",selectWhat="+selectWhat+ ",userid=" + userid);
+        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",memo=" + memo + ",selectWhat=" + selectWhat + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_APPROVE_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -291,7 +304,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity{
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
                         Log.e(TAG, "result" + result.getInstruction());
-                        PostApprove(GlobalConfig.PR_NAME, JsonUnit.convertStrToArray(pr.getPRID())[0],memo,result.getIspositive(),AccountUtils.getpersonId(FwpaydetailsActivity.this));
+                        PostApprove(GlobalConfig.PR_NAME, JsonUnit.convertStrToArray(pr.getPRID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(FwpaydetailsActivity.this));
                     }
 
 

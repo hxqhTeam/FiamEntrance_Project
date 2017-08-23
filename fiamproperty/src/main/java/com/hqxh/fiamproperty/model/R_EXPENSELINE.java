@@ -4,10 +4,10 @@ import java.util.List;
 
 /**
  * Created by apple on 17/7/26.
- * 出差人
+ * 差旅报销单-交通费明细
  */
 
-public class R_PERSONRELATION {
+public class R_EXPENSELINE {
     private String errcode; //返回状态
     private String errmsg; //消息
     private String userid; //用户名
@@ -58,7 +58,7 @@ public class R_PERSONRELATION {
         private String showcount;//显示条数
         private String totalpage;//总共页数
         private String totalresult;//总共条数
-        private List<PERSONRELATION> resultlist; //记录
+        private List<EXPENSELINE> resultlist; //记录
 
         public String getCurpage() {
             return curpage;
@@ -93,78 +93,72 @@ public class R_PERSONRELATION {
             this.totalresult = totalresult;
         }
 
-        public List<PERSONRELATION> getResultlist() {
+        public List<EXPENSELINE> getResultlist() {
             return resultlist;
         }
 
-        public void setResultlist(List<PERSONRELATION> resultlist) {
+        public void setResultlist(List<EXPENSELINE> resultlist) {
             this.resultlist = resultlist;
         }
     }
 
 
     /**
-     * 出差人
+     * 交通补助明细 /报销明细
      **/
-    public static class PERSONRELATION extends Entity {
+    public static class EXPENSELINE extends Entity {
 
-        private String DISPLAYNAME; //姓名
-        private String TITLE;//职务或职称
-        private String CUDEPT;//部门
-        private String CUCREW;//科室
-        private String SEX;//性别
-        private String POSITION;//岗级
-        private String LINECOST;//报销金额
-        private String TRVCOST1;//票据金额
-        private String TRVCOST2;//补助金额
-        private String PERSONNAME;//姓名
+        private String ACTSTART; //时间从
+        private String ACTFINISH; //时间到
+        private String ADDRESSBEGIN;//地点从
+        private String ADDRESSEND;//地点到
+        private String TRANSPORT;//交通工具
+        private String LINECOST;//金额／含税金额
 
-        public String getDISPLAYNAME() {
-            return DISPLAYNAME;
+        private String INVOICEDATE;//发票日期
+        private String DESCRIPTION;//单据名称
+        private String REMARK;//报销事项说明
+        private String TAX;//税额
+
+
+        public String getACTSTART() {
+            return ACTSTART;
         }
 
-        public void setDISPLAYNAME(String DISPLAYNAME) {
-            this.DISPLAYNAME = DISPLAYNAME;
+        public void setACTSTART(String ACTSTART) {
+            this.ACTSTART = ACTSTART;
         }
 
-        public String getTITLE() {
-            return TITLE;
+        public String getACTFINISH() {
+            return ACTFINISH;
         }
 
-        public void setTITLE(String TITLE) {
-            this.TITLE = TITLE;
+        public void setACTFINISH(String ACTFINISH) {
+            this.ACTFINISH = ACTFINISH;
         }
 
-        public String getCUDEPT() {
-            return CUDEPT;
+        public String getADDRESSBEGIN() {
+            return ADDRESSBEGIN;
         }
 
-        public void setCUDEPT(String CUDEPT) {
-            this.CUDEPT = CUDEPT;
+        public void setADDRESSBEGIN(String ADDRESSBEGIN) {
+            this.ADDRESSBEGIN = ADDRESSBEGIN;
         }
 
-        public String getCUCREW() {
-            return CUCREW;
+        public String getADDRESSEND() {
+            return ADDRESSEND;
         }
 
-        public void setCUCREW(String CUCREW) {
-            this.CUCREW = CUCREW;
+        public void setADDRESSEND(String ADDRESSEND) {
+            this.ADDRESSEND = ADDRESSEND;
         }
 
-        public String getSEX() {
-            return SEX;
+        public String getTRANSPORT() {
+            return TRANSPORT;
         }
 
-        public void setSEX(String SEX) {
-            this.SEX = SEX;
-        }
-
-        public String getPOSITION() {
-            return POSITION;
-        }
-
-        public void setPOSITION(String POSITION) {
-            this.POSITION = POSITION;
+        public void setTRANSPORT(String TRANSPORT) {
+            this.TRANSPORT = TRANSPORT;
         }
 
         public String getLINECOST() {
@@ -175,28 +169,36 @@ public class R_PERSONRELATION {
             this.LINECOST = LINECOST;
         }
 
-        public String getTRVCOST1() {
-            return TRVCOST1;
+        public String getINVOICEDATE() {
+            return INVOICEDATE;
         }
 
-        public void setTRVCOST1(String TRVCOST1) {
-            this.TRVCOST1 = TRVCOST1;
+        public void setINVOICEDATE(String INVOICEDATE) {
+            this.INVOICEDATE = INVOICEDATE;
         }
 
-        public String getTRVCOST2() {
-            return TRVCOST2;
+        public String getDESCRIPTION() {
+            return DESCRIPTION;
         }
 
-        public void setTRVCOST2(String TRVCOST2) {
-            this.TRVCOST2 = TRVCOST2;
+        public void setDESCRIPTION(String DESCRIPTION) {
+            this.DESCRIPTION = DESCRIPTION;
         }
 
-        public String getPERSONNAME() {
-            return PERSONNAME;
+        public String getREMARK() {
+            return REMARK;
         }
 
-        public void setPERSONNAME(String PERSONNAME) {
-            this.PERSONNAME = PERSONNAME;
+        public void setREMARK(String REMARK) {
+            this.REMARK = REMARK;
+        }
+
+        public String getTAX() {
+            return TAX;
+        }
+
+        public void setTAX(String TAX) {
+            this.TAX = TAX;
         }
     }
 

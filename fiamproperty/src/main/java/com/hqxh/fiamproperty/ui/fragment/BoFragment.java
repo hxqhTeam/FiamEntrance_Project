@@ -1,6 +1,7 @@
 package com.hqxh.fiamproperty.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,8 @@ import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_BO;
 import com.hqxh.fiamproperty.model.R_BO.ResultBean;
 import com.hqxh.fiamproperty.model.R_BO.BO;
+import com.hqxh.fiamproperty.ui.activity.BoActivity;
+import com.hqxh.fiamproperty.ui.activity.GnWorkorderActivity;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
 import com.hqxh.fiamproperty.ui.adapter.BoAdapter;
 import com.hqxh.fiamproperty.ui.adapter.TravelAdapter;
@@ -24,6 +27,7 @@ import com.hqxh.fiamproperty.ui.widget.PullLoadMoreRecyclerView;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +36,14 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-/**借款单**/
+
+/**
+ * 借款单
+ **/
 
 public class BoFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
 
-    private static final String TAG="BoFragment";
+    private static final String TAG = "BoFragment";
 
     private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private RecyclerView mRecyclerView;
@@ -73,7 +80,7 @@ public class BoFragment extends Fragment implements PullLoadMoreRecyclerView.Pul
     }
 
     private void getData() {
-        String data=HttpManager.getBoUrl(AccountUtils.getpersonId(getActivity()),curpage, showcount);
+        String data = HttpManager.getBoUrl(AccountUtils.getpersonId(getActivity()), curpage, showcount);
         Log.i(TAG, "data=" + data);
         Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
@@ -99,7 +106,7 @@ public class BoFragment extends Fragment implements PullLoadMoreRecyclerView.Pul
                     @Override
                     public List<BO> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG,"Totalresult="+resultBean.getTotalresult());
+                        Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
@@ -134,9 +141,6 @@ public class BoFragment extends Fragment implements PullLoadMoreRecyclerView.Pul
     }
 
 
-
-
-
     @Override
     public void onRefresh() {
         curpage = 1;
@@ -148,7 +152,7 @@ public class BoFragment extends Fragment implements PullLoadMoreRecyclerView.Pul
     public void onLoadMore() {
         if (totalpage == curpage) {
             getLoadMore();
-            BaseActivity.showMiddleToast(getActivity(),getResources().getString(R.string.all_data_hint));
+            BaseActivity.showMiddleToast(getActivity(), getResources().getString(R.string.all_data_hint));
         } else {
             curpage++;
             getData();
@@ -180,7 +184,11 @@ public class BoFragment extends Fragment implements PullLoadMoreRecyclerView.Pul
         boAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent = new Intent(getActivity(), BoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("bo", (Serializable) boAdapter.getData().get(position));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 0);
             }
         });
     }

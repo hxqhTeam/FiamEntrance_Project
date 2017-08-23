@@ -8,12 +8,10 @@ import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseListActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_PERSONRELATION;
-import com.hqxh.fiamproperty.model.R_PERSONRELATION.PERSONRELATION;
-import com.hqxh.fiamproperty.model.R_PERSONRELATION.ResultBean;
-import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
-import com.hqxh.fiamproperty.ui.adapter.CcrAdapter;
-import com.hqxh.fiamproperty.ui.adapter.GrAdapter;
+import com.hqxh.fiamproperty.model.R_BORELATION;
+import com.hqxh.fiamproperty.model.R_BORELATION.BORELATION;
+import com.hqxh.fiamproperty.model.R_BORELATION.ResultBean;
+import com.hqxh.fiamproperty.ui.adapter.BorelationAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -27,32 +25,26 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 出差人的Activity
+ *差旅报销单-借款单的Activity
  **/
-public class PersonrelationActivity extends BaseListActivity {
-    private static final String TAG = "PersonrelationActivity";
+public class BorelationActivity extends BaseListActivity {
+    private static final String TAG = "BorelationActivity";
 
 
-    private CcrAdapter ccrAdapter;
-
+    private BorelationAdapter borelationadapter;
 
     private int curpage = 1;
     private int showcount = 20;
     private int totalpage;
 
-
-    private String wonum; //单号
-    private String title;//标题
+    private String expensenum;
     private String appid;
 
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        if (getIntent().hasExtra("wonum")) {
-            wonum = getIntent().getExtras().getString("wonum");
-        }
-        if (getIntent().hasExtra("title")) {
-            title = getIntent().getExtras().getString("title");
+        if (getIntent().hasExtra("expensenum")) {
+            expensenum = getIntent().getExtras().getString("expensenum");
         }
         if (getIntent().hasExtra("appid")) {
             appid = getIntent().getExtras().getString("appid");
@@ -62,7 +54,7 @@ public class PersonrelationActivity extends BaseListActivity {
     @Override
     protected String getSubTitle() {
 
-        return title;
+        return getString(R.string.jkd_text);
     }
 
 
@@ -70,29 +62,31 @@ public class PersonrelationActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getR_PERSONRELATIONUrl(appid, AccountUtils.getpersonId(this), wonum, curpage, showcount);
+        String data = HttpManager.getCLMXUrl(appid, GlobalConfig.BORELATION_NAME,AccountUtils.getpersonId(this), expensenum, curpage, showcount);
+        Log.i(TAG, "data=" + data);
+        Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addQueryParameter("data", data)
                 .build()
-                .getObjectObservable(R_PERSONRELATION.class) // 发起获取数据列表的请求，并解析到R_PERSONRELATION
+                .getObjectObservable(R_BORELATION.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
-                .doOnNext(new Consumer<R_PERSONRELATION>() {
+                .doOnNext(new Consumer<R_BORELATION>() {
                     @Override
-                    public void accept(@NonNull R_PERSONRELATION r_personrelation) throws Exception {
+                    public void accept(@NonNull R_BORELATION r_borelation) throws Exception {
                     }
                 })
 
-                .map(new Function<R_PERSONRELATION, ResultBean>() {
+                .map(new Function<R_BORELATION, ResultBean>() {
                     @Override
-                    public ResultBean apply(@NonNull R_PERSONRELATION r_personrelation) throws Exception {
+                    public ResultBean apply(@NonNull R_BORELATION r_expenseline) throws Exception {
 
-                        return r_personrelation.getResult();
+                        return r_expenseline.getResult();
                     }
                 })
-                .map(new Function<ResultBean, List<PERSONRELATION>>() {
+                .map(new Function<ResultBean, List<BORELATION>>() {
                     @Override
-                    public List<PERSONRELATION> apply(@NonNull ResultBean resultBean) throws Exception {
+                    public List<BORELATION> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
                         Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
@@ -101,17 +95,17 @@ public class PersonrelationActivity extends BaseListActivity {
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<PERSONRELATION>>() {
+                .subscribe(new Consumer<List<BORELATION>>() {
                     @Override
-                    public void accept(@NonNull List<PERSONRELATION> personrelation) throws Exception {
+                    public void accept(@NonNull List<BORELATION> borelation) throws Exception {
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
-                        if (personrelation == null || personrelation.isEmpty()) {
+                        if (borelation == null || borelation.isEmpty()) {
                             notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
-                            addData(personrelation);
+                            addData(borelation);
 
 
                         }
@@ -131,7 +125,7 @@ public class PersonrelationActivity extends BaseListActivity {
     @Override
     public void onRefresh() {
         curpage = 1;
-        ccrAdapter.removeAll(ccrAdapter.getData());
+        borelationadapter.removeAll(borelationadapter.getData());
         getData();
 
     }
@@ -140,7 +134,7 @@ public class PersonrelationActivity extends BaseListActivity {
     public void onLoadMore() {
         if (totalpage == curpage) {
             getLoadMore();
-            showMiddleToast(PersonrelationActivity.this, getResources().getString(R.string.all_data_hint));
+            showMiddleToast(BorelationActivity.this, getResources().getString(R.string.all_data_hint));
         } else {
             curpage++;
             getData();
@@ -170,7 +164,7 @@ public class PersonrelationActivity extends BaseListActivity {
     @Override
     protected void fillData() {
         searchText.setVisibility(View.GONE);
-        initAdapter(new ArrayList<PERSONRELATION>());
+        initAdapter(new ArrayList<BORELATION>());
         getData();
 
     }
@@ -184,30 +178,16 @@ public class PersonrelationActivity extends BaseListActivity {
     /**
      * 获取数据*
      */
-    private void initAdapter(final List<PERSONRELATION> list) {
-        int layoutResId = 0;
-        if (appid.equals(GlobalConfig.TRAVEL_APPID)) {
-            layoutResId = R.layout.list_item_ccr;
-        } else if (appid.equals(GlobalConfig.EXPENSES_APPID)) {
-            layoutResId = R.layout.list_item_cl_ccr;
-        }
-        ccrAdapter = new CcrAdapter(PersonrelationActivity.this, layoutResId, list);
-        ccrAdapter.setAppid(appid);
-
-        mRecyclerView.setAdapter(ccrAdapter);
-        ccrAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-            }
-        });
+    private void initAdapter(final List<BORELATION> list) {
+        borelationadapter = new BorelationAdapter(BorelationActivity.this, R.layout.list_item_cl_jkd, list);
+        mRecyclerView.setAdapter(borelationadapter);
     }
 
     /**
      * 添加数据*
      */
-    private void addData(final List<PERSONRELATION> list) {
-        ccrAdapter.addData(list);
+    private void addData(final List<BORELATION> list) {
+        borelationadapter.addData(list);
     }
 
 

@@ -17,10 +17,9 @@ import com.google.gson.Gson;
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.base.BaseTitleActivity;
 import com.hqxh.fiamproperty.bean.R_APPROVE;
-import com.hqxh.fiamproperty.bean.R_APPROVE.Result;
 import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_Workorder.Workorder;
+import com.hqxh.fiamproperty.model.R_BO.BO;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.hqxh.fiamproperty.unit.JsonUnit;
@@ -34,84 +33,82 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 国内出差详情
+ * 报销单详情
  **/
-public class GnWorkorderActivity extends BaseTitleActivity {
+public class BoActivity extends BaseTitleActivity {
 
-    private static final String TAG = "GnWorkorderActivity";
+    private static final String TAG = "BoActivity";
     /**
      * 信息展示
      **/
-    private TextView wonumText; //申请单
-    private TextView projectidText; //费用号
-    private TextView worktypeText; //类型
+    private TextView bonumText; //借款单
+    private TextView descriptionText; //借款事由
+    private TextView typeText; //借款类型
+    private TextView applycostText; //申请金额
+    private TextView totalcostText; //借款金额
     private TextView statusText; //状态
-    private TextView udtargstartdateText; //开始时间
-    private TextView udtargcompdateText; //结束时间
-    private TextView udaddress1Text; //目的地
-    private TextView udtransport3Text; //是否飞机
-    private TextView udremark1Text; //出差原因
-    private TextView udtrvcost1Text; //差旅费用
-    private TextView udtrvcost2Text; //其它费用
-    private TextView udesttotalcostText; //出差费用预算
+    private TextView enterbyText; //借款人
+    private TextView departmentText; //部门
+    private TextView crewText; //科室
+    private TextView enterdateText; //借款时间
 
-    private ImageView ccrText; //出差人
-    private LinearLayout ccrLinearLayout;
 
-    private ImageView jbxxImageView;  //基本信息
+    private ImageView qtxxImageView;  //其它信息
+    private LinearLayout qtxxLinearLayout;  //其它信息
+    private View qtxxView;  //其它信息
 
-    private TextView udtrv1Text; //团队负责人
-    private TextView rdcheadText; //中心分管领导
-    private TextView reportedbyText; //申请人
-    private TextView cudeptText; //部门
-    private TextView reportdateText; //申请日期
-    private TextView phonenumText; //电话
+    private TextView contractnumText; //合同
+    private TextView prnumText; //采购申请
+    private TextView projectidText; //费用号
+    private TextView payvendorText; //收款单位
+    private TextView address1Text; //收款单位地址
+    private TextView bankText; //开户银行
+    private TextView bankaccountText; //银行账号
+
 
     private ImageView sqjlImageView; //审批记录
 
-    private Button workflowBtn; //审批
+    private Button workflowBtn;
 
-    private Workorder workorder;
+    private BO bo;
 
     private Animation rotate;
 
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        workorder = (Workorder) getIntent().getSerializableExtra("workorder");
-        Log.e(TAG, "初始化界面前的准备");
+        bo = (BO) getIntent().getSerializableExtra("bo");
     }
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_gn_workorder;
+        return R.layout.activity_bo;
     }
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        wonumText = (TextView) findViewById(R.id.requireplannum_text_id);
-        projectidText = (TextView) findViewById(R.id.projectid_text_id);
-        worktypeText = (TextView) findViewById(R.id.worktype_text_id);
+        bonumText = (TextView) findViewById(R.id.bonum_text_id);
+        descriptionText = (TextView) findViewById(R.id.description_text_id);
+        typeText = (TextView) findViewById(R.id.type_text_id);
+        applycostText = (TextView) findViewById(R.id.applycost_text_id);
+        totalcostText = (TextView) findViewById(R.id.bocost_text_id);
         statusText = (TextView) findViewById(R.id.status_text_id);
-        udtargstartdateText = (TextView) findViewById(R.id.udtargstartdate_text_id);
-        udtargcompdateText = (TextView) findViewById(R.id.udtargcompdate_text_id);
-        udaddress1Text = (TextView) findViewById(R.id.udaddress1_text_id);
-        udtransport3Text = (TextView) findViewById(R.id.udtransport3_text_id);
-        udremark1Text = (TextView) findViewById(R.id.udremark1_text_id);
-        udtrvcost1Text = (TextView) findViewById(R.id.udtrvcost1_text_id);
-        udtrvcost2Text = (TextView) findViewById(R.id.udtrvcost2_text_id);
-        udesttotalcostText = (TextView) findViewById(R.id.udesttotalcost_text_id);
+        enterbyText = (TextView) findViewById(R.id.jk_enterby_text_id);
+        departmentText = (TextView) findViewById(R.id.department_text_id);
+        crewText = (TextView) findViewById(R.id.cucrew_text_id);
+        enterdateText = (TextView) findViewById(R.id.enterdate_text_id);
 
-        ccrText = (ImageView) findViewById(R.id.ccr_imageview_id);
-        ccrLinearLayout = (LinearLayout) findViewById(R.id.linearLayout_id);
-        jbxxImageView = (ImageView) findViewById(R.id.jbxx_kz_imageview_id);
+        qtxxImageView = (ImageView) findViewById(R.id.jbxx_kz_imageview_id);
+        qtxxLinearLayout = (LinearLayout) findViewById(R.id.linearLayout_id);
+        qtxxView = (View) findViewById(R.id.jbxx_view_id);
 
-        udtrv1Text = (TextView) findViewById(R.id.udtrv1_text_id);
-        rdcheadText = (TextView) findViewById(R.id.rdchead_text_id);
-        reportedbyText = (TextView) findViewById(R.id.reportedby_text_id);
-        cudeptText = (TextView) findViewById(R.id.cudept_text_id);
-        reportdateText = (TextView) findViewById(R.id.reportdate_text_id);
-        phonenumText = (TextView) findViewById(R.id.phonenum_text_id);
+        contractnumText = (TextView) findViewById(R.id.contractnum_text_id);
+        prnumText = (TextView) findViewById(R.id.prnum_text_id);
+        projectidText = (TextView) findViewById(R.id.projectid_text_id);
+        payvendorText = (TextView) findViewById(R.id.payvendor_text_id);
+        address1Text = (TextView) findViewById(R.id.address1_text_id);
+        bankText = (TextView) findViewById(R.id.bank_text_id);
+        bankaccountText = (TextView) findViewById(R.id.bankaccount_text_id);
 
         sqjlImageView = (ImageView) findViewById(R.id.sqjl_imageview_id);
 
@@ -122,31 +119,37 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
     //展示界面数据
     private void showData() {
-        wonumText.setText(JsonUnit.convertStrToArray(workorder.getWONUM())[0] + "," + JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0]);
-        projectidText.setText(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0]);
-        worktypeText.setText(JsonUnit.convertStrToArray(workorder.getWORKTYPE())[0]);
-        statusText.setText(JsonUnit.convertStrToArray(workorder.getSTATUS())[0]);
-        udtargstartdateText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(workorder.getUDTARGSTARTDATE())[0]));
-        udtargcompdateText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(workorder.getUDTARGCOMPDATE())[0]));
-        udaddress1Text.setText(JsonUnit.convertStrToArray(workorder.getUDADDRESS1())[0]);
-        udtransport3Text.setText(JsonUnit.convertStrToArray(workorder.getUDESTDUR3())[0]);
-        udremark1Text.setText(JsonUnit.convertStrToArray(workorder.getUDREMARK1())[0]);
-        udtrvcost1Text.setText(JsonUnit.convertStrToArray(workorder.getUDTRVCOST1())[0]);
-        udtrvcost2Text.setText(JsonUnit.convertStrToArray(workorder.getUDTRVCOST2())[0]);
-        udesttotalcostText.setText(JsonUnit.convertStrToArray(workorder.getUDESTTOTALCOST())[0]);
+        bonumText.setText(JsonUnit.convertStrToArray(bo.getBONUM())[0]);
+        descriptionText.setText(JsonUnit.convertStrToArray(bo.getDESCRIPTION())[0]);
+        typeText.setText(JsonUnit.convertStrToArray(bo.getTYPE())[0]);
+        applycostText.setText(JsonUnit.convertStrToArray(bo.getAPPLYCOST())[0]);
+        totalcostText.setText(JsonUnit.convertStrToArray(bo.getTOTALCOST())[0]);
+        statusText.setText(JsonUnit.convertStrToArray(bo.getSTATUSDESC())[0]);
+        enterbyText.setText(JsonUnit.convertStrToArray(bo.getENTERBY())[0]);
+        departmentText.setText(JsonUnit.convertStrToArray(bo.getDEPARTMENT())[0]);
+        crewText.setText(JsonUnit.convertStrToArray(bo.getCREW())[0]);
+        enterdateText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(bo.getENTERDATE())[0]));
 
-        udtrv1Text.setText(JsonUnit.convertStrToArray(workorder.getTEAMLEADER())[0]);
-        rdcheadText.setText(JsonUnit.convertStrToArray(workorder.getRDCHEAD())[0]);
-        reportedbyText.setText(JsonUnit.convertStrToArray(workorder.getREPORTEDBY())[0]);
-        cudeptText.setText(JsonUnit.convertStrToArray(workorder.getCUDEPT())[0]);
-        reportdateText.setText(JsonUnit.convertStrToArray(workorder.getREPORTDATE())[0]);
-        phonenumText.setText(JsonUnit.convertStrToArray(workorder.getPHONENUM())[0]);
+        contractnumText.setText(JsonUnit.convertStrToArray(bo.getCONTRACTNUM())[0]);
+        if (!JsonUnit.convertStrToArray(bo.getPRNUM())[0].isEmpty()) {
+            prnumText.setText(JsonUnit.convertStrToArray(bo.getPRNUM())[0] + "," + JsonUnit.convertStrToArray(bo.getPRDESC())[0]);
+
+        }
+        if (!JsonUnit.convertStrToArray(bo.getPROJECTID())[0].isEmpty()) {
+            projectidText.setText(JsonUnit.convertStrToArray(bo.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(bo.getFINCNTRLDESC())[0]);
+        }
+        payvendorText.setText(JsonUnit.convertStrToArray(bo.getPAYVENDOR())[0]);
+        address1Text.setText(JsonUnit.convertStrToArray(bo.getADDRESS1())[0]);
+        bankText.setText(JsonUnit.convertStrToArray(bo.getBANK())[0]);
+        bankaccountText.setText(JsonUnit.convertStrToArray(bo.getBANKACCOUNT())[0]);
 
         rotate = AnimationUtils.loadAnimation(this, R.anim.arrow_rotate);//创建动画
 
-        ccrText.setOnClickListener(ccrTextOnClickListener);
-        jbxxImageView.setOnClickListener(jbxxImageViewOnClickListener);
+        qtxxImageView.setOnClickListener(jbxxImageViewOnClickListener);
+
+
         sqjlImageView.setOnClickListener(sqjlImageViewOnClickListener);
+
 
         workflowBtn.setOnClickListener(workflowBtnOnClickListener);
 
@@ -155,29 +158,20 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
     @Override
     protected String getSubTitle() {
-        return getString(R.string.gncc_detail_text);
+        return getString(R.string.jkdxq_text);
     }
 
-    //出差人
-    private View.OnClickListener ccrTextOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(GnWorkorderActivity.this, PersonrelationActivity.class);
-            intent.putExtra("appid", GlobalConfig.TRAVEL_APPID);
-            intent.putExtra("wonum", JsonUnit.convertStrToArray(workorder.getWONUM())[0]);
-            intent.putExtra("title", getResources().getString(R.string.ccr_text));
-            startActivityForResult(intent, 0);
-        }
-    };
 
     //基本信息
     private View.OnClickListener jbxxImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             if (startAnaim()) {
-                ccrLinearLayout.setVisibility(View.GONE);
+                qtxxLinearLayout.setVisibility(View.GONE);
+                qtxxView.setVisibility(View.GONE);
             } else {
-                ccrLinearLayout.setVisibility(View.VISIBLE);
+                qtxxLinearLayout.setVisibility(View.VISIBLE);
+                qtxxView.setVisibility(View.VISIBLE);
             }
 
         }
@@ -189,34 +183,34 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
         rotate.setInterpolator(new LinearInterpolator());//设置为线性旋转
 
-        Log.e(TAG, "b=" + !rotate.getFillAfter());
         rotate.setFillAfter(!rotate.getFillAfter());//每次都取相反值，使得可以不恢复原位的旋转
 
-        jbxxImageView.startAnimation(rotate);
+        qtxxImageView.startAnimation(rotate);
         return rotate.getFillAfter();
     }
+
 
     //审批记录
     private View.OnClickListener sqjlImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(GnWorkorderActivity.this, WftransactionActivity.class);
-            intent.putExtra("ownertable", GlobalConfig.WORKORDER_NAME);
-            intent.putExtra("ownerid", JsonUnit.convertStrToArray(workorder.getWORKORDERID())[0]);
+            Intent intent = new Intent(BoActivity.this, WftransactionActivity.class);
+            intent.putExtra("ownertable", GlobalConfig.EXPENSE_NAME);
+            intent.putExtra("ownerid", JsonUnit.convertStrToArray(bo.getBOID())[0]);
             startActivityForResult(intent, 0);
         }
     };
+
 
     //审批
     private View.OnClickListener workflowBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            PostStart(GlobalConfig.WORKORDER_NAME, JsonUnit.convertStrToArray(workorder.getWORKORDERID())[0], GlobalConfig.TRAVEL_APPID, AccountUtils.getpersonId(GnWorkorderActivity.this));
+            PostStart(GlobalConfig.BO_NAME, JsonUnit.convertStrToArray(bo.getBOID())[0], GlobalConfig.BO_APPID, AccountUtils.getpersonId(BoActivity.this));
         }
     };
 
     //流程启动
-//http://10.60.12.98/maximo/mobile/wf/start?ownertable=GR&ownerid=77129&processname=GR-WZMAIN&userid=yanghongwei
     private void PostStart(String ownertable, String ownerid, String appid, String userid) {
         Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",appid=" + appid + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_START_WORKFLOW)
@@ -224,6 +218,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
                 .addBodyParameter("ownerid", ownerid)
                 .addBodyParameter("appid", appid)
                 .addBodyParameter("userid", userid)
+
                 .build().getStringObservable()
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
@@ -240,8 +235,6 @@ public class GnWorkorderActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.i(TAG, "s=" + s);
-
 
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_106)) {
@@ -253,7 +246,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
                             showDialog(r_approve.getResult());
                         } else {
-                            showMiddleToast(GnWorkorderActivity.this, workflow.getErrmsg());
+                            showMiddleToast(BoActivity.this, workflow.getErrmsg());
                         }
                     }
 
@@ -261,7 +254,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-                        showMiddleToast(GnWorkorderActivity.this, getString(R.string.spsb_text));
+                        showMiddleToast(BoActivity.this, getString(R.string.spsb_text));
                     }
                 });
     }
@@ -270,13 +263,16 @@ public class GnWorkorderActivity extends BaseTitleActivity {
     //http://10.60.12.98/maximo/mobile/wf/approve?ownertable=GR&ownerid=77128&memo=驳回&selectWhat=0&userid=zhuyinan
     private void PostApprove(String ownertable, String ownerid, String memo, String selectWhat, String userid) {
         Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",memo=" + memo + ",selectWhat=" + selectWhat + ",userid=" + userid);
-        Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_APPROVE_WORKFLOW)
+
+        Rx2AndroidNetworking
+                .post(GlobalConfig.HTTP_URL_APPROVE_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
                 .addBodyParameter("memo", memo)
                 .addBodyParameter("selectWhat", selectWhat)
                 .addBodyParameter("userid", userid)
-                .build().getStringObservable()
+                .build()
+                .getStringObservable()
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
                 .doOnNext(new Consumer<String>() {
@@ -292,33 +288,32 @@ public class GnWorkorderActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.i(TAG, "审批s=" + s);
+                        Log.e(TAG, "s=" + s);
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
-                        showMiddleToast(GnWorkorderActivity.this, workflow.getErrmsg());
+                        showMiddleToast(BoActivity.this, workflow.getErrmsg());
                     }
 
 
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-                        showMiddleToast(GnWorkorderActivity.this, getString(R.string.spsb_text));
+                        showMiddleToast(BoActivity.this, getString(R.string.spsb_text));
                     }
                 });
     }
 
 
     //弹出对话框
-    public void showDialog(List<Result> results) {//
+    public void showDialog(List<R_APPROVE.Result> results) {//
 
         ConfirmDialog.Builder dialog = new ConfirmDialog.Builder(this);
         dialog.setTitle("审批")
                 .setData(results)
                 .setPositiveButton("确定", new ConfirmDialog.Builder.cOnClickListener() {
                     @Override
-                    public void cOnClickListener(DialogInterface dialogInterface, Result result, String memo) {
+                    public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
-                        Log.e(TAG, "result" + result.getInstruction());
-                        PostApprove(GlobalConfig.WORKORDER_NAME, JsonUnit.convertStrToArray(workorder.getWORKORDERID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(GnWorkorderActivity.this));
+                        PostApprove(GlobalConfig.BO_NAME, JsonUnit.convertStrToArray(bo.getBOID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(BoActivity.this));
                     }
 
 

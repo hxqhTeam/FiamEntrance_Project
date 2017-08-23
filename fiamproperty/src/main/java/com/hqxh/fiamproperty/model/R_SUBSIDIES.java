@@ -4,10 +4,10 @@ import java.util.List;
 
 /**
  * Created by apple on 17/7/26.
- * 出差人
+ * 差旅报销单-补助明细
  */
 
-public class R_PERSONRELATION {
+public class R_SUBSIDIES {
     private String errcode; //返回状态
     private String errmsg; //消息
     private String userid; //用户名
@@ -58,7 +58,7 @@ public class R_PERSONRELATION {
         private String showcount;//显示条数
         private String totalpage;//总共页数
         private String totalresult;//总共条数
-        private List<PERSONRELATION> resultlist; //记录
+        private List<SUBSIDIES> resultlist; //记录
 
         public String getCurpage() {
             return curpage;
@@ -93,78 +93,48 @@ public class R_PERSONRELATION {
             this.totalresult = totalresult;
         }
 
-        public List<PERSONRELATION> getResultlist() {
+        public List<SUBSIDIES> getResultlist() {
             return resultlist;
         }
 
-        public void setResultlist(List<PERSONRELATION> resultlist) {
+        public void setResultlist(List<SUBSIDIES> resultlist) {
             this.resultlist = resultlist;
         }
     }
 
 
     /**
-     * 出差人
+     * 差旅报销单
      **/
-    public static class PERSONRELATION extends Entity {
+    public static class SUBSIDIES extends Entity {
 
-        private String DISPLAYNAME; //姓名
-        private String TITLE;//职务或职称
-        private String CUDEPT;//部门
-        private String CUCREW;//科室
-        private String SEX;//性别
-        private String POSITION;//岗级
-        private String LINECOST;//报销金额
-        private String TRVCOST1;//票据金额
-        private String TRVCOST2;//补助金额
-        private String PERSONNAME;//姓名
+        private String LINENUM; //行
+        private String DAYS; //人天
+        private String STANDARDCOST;//补助标准
+        private String LINECOST;//补助金额
 
-        public String getDISPLAYNAME() {
-            return DISPLAYNAME;
+        public String getLINENUM() {
+            return LINENUM;
         }
 
-        public void setDISPLAYNAME(String DISPLAYNAME) {
-            this.DISPLAYNAME = DISPLAYNAME;
+        public void setLINENUM(String LINENUM) {
+            this.LINENUM = LINENUM;
         }
 
-        public String getTITLE() {
-            return TITLE;
+        public String getDAYS() {
+            return DAYS;
         }
 
-        public void setTITLE(String TITLE) {
-            this.TITLE = TITLE;
+        public void setDAYS(String DAYS) {
+            this.DAYS = DAYS;
         }
 
-        public String getCUDEPT() {
-            return CUDEPT;
+        public String getSTANDARDCOST() {
+            return STANDARDCOST;
         }
 
-        public void setCUDEPT(String CUDEPT) {
-            this.CUDEPT = CUDEPT;
-        }
-
-        public String getCUCREW() {
-            return CUCREW;
-        }
-
-        public void setCUCREW(String CUCREW) {
-            this.CUCREW = CUCREW;
-        }
-
-        public String getSEX() {
-            return SEX;
-        }
-
-        public void setSEX(String SEX) {
-            this.SEX = SEX;
-        }
-
-        public String getPOSITION() {
-            return POSITION;
-        }
-
-        public void setPOSITION(String POSITION) {
-            this.POSITION = POSITION;
+        public void setSTANDARDCOST(String STANDARDCOST) {
+            this.STANDARDCOST = STANDARDCOST;
         }
 
         public String getLINECOST() {
@@ -173,30 +143,6 @@ public class R_PERSONRELATION {
 
         public void setLINECOST(String LINECOST) {
             this.LINECOST = LINECOST;
-        }
-
-        public String getTRVCOST1() {
-            return TRVCOST1;
-        }
-
-        public void setTRVCOST1(String TRVCOST1) {
-            this.TRVCOST1 = TRVCOST1;
-        }
-
-        public String getTRVCOST2() {
-            return TRVCOST2;
-        }
-
-        public void setTRVCOST2(String TRVCOST2) {
-            this.TRVCOST2 = TRVCOST2;
-        }
-
-        public String getPERSONNAME() {
-            return PERSONNAME;
-        }
-
-        public void setPERSONNAME(String PERSONNAME) {
-            this.PERSONNAME = PERSONNAME;
         }
     }
 

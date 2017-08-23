@@ -45,13 +45,14 @@ public class R_EXPENSE {
         this.result = result;
     }
 
-    /**结果集
+    /**
+     * 结果集
      * curpage
      * resultlist
      * showcount
      * totalpage
      * totalresult
-     * **/
+     **/
     public static class ResultBean {
         private String curpage; //当前页
         private String showcount;//显示条数
@@ -103,10 +104,11 @@ public class R_EXPENSE {
 
 
     /**
-     *差旅报销单
-     * **/
-    public static class  EXPENSE {
+     * 差旅报销单
+     **/
+    public static class EXPENSE extends Entity {
 
+        private String EXPENSEID; //EXPENSEID
         private String EXPENSENUM; //报销单
         private String DESCRIPTION;//报销事由
         private String WFTYPE;//报销类别／类型
@@ -142,6 +144,14 @@ public class R_EXPENSE {
         private String TAX;//税额
         private String PAYCHECKCOST;//验收金额
 
+
+        public String getEXPENSEID() {
+            return EXPENSEID;
+        }
+
+        public void setEXPENSEID(String EXPENSEID) {
+            this.EXPENSEID = EXPENSEID;
+        }
 
         public String getEXPENSENUM() {
             return EXPENSENUM;
