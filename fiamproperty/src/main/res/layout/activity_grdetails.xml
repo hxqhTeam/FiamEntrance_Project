@@ -29,49 +29,50 @@
 
                 <TextView
                     android:layout_width="70dp"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:text="@string/grnum_text"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
-                    <TextView
+
+                <TextView
                         android:id="@+id/grnum_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@null"
                         android:hint="@string/have_not_data"
-                        android:padding="4dp"
+                        android:padding="10dp"
+                        android:gravity="center"
                         android:textColor="@color/light_black"
                         android:textSize="14dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:text=","
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@mipmap/line">
-
-                    </View>
+                    android:gravity="center"/>
 
 
-                    <TextView
+
+
+                <TextView
                         android:id="@+id/grnum2_text"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@null"
                         android:hint="@string/have_not_data"
-                        android:padding="4dp"
+                        android:padding="10dp"
+                        android:gravity="center_vertical"
                         android:textColor="@color/light_black"
                         android:textSize="14dp" />
 
 
-                </LinearLayout>
+
             </LinearLayout>
 
             <View
