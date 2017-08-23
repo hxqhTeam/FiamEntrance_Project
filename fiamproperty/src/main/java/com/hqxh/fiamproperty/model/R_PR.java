@@ -105,8 +105,8 @@ public class R_PR {
     /**
      *技术采购，试制采购
      * **/
-    public static class  PR{
-
+    public static class  PR extends Entity{
+        private String PRID;
         private String  ASSIGNERNAME; //执行人姓名
         private String  DESCRIPTION;//描述
         private String  PR6;//总预算（外币）
@@ -143,6 +143,28 @@ public class R_PR {
         private String  CONTACT;//联系人
         private String  PHONENUM;//供应商电话
         private String  SERVICETYPE;//类型
+
+        public String getPRID() {
+            return PRID;
+        }
+
+        public void setPRID(String PRID) {
+            this.PRID = PRID;
+        }
+
+        public String getSERVICETYPE() {
+            return SERVICETYPE;
+        }
+
+        public void setSERVICETYPE(String SERVICETYPE) {
+            this.SERVICETYPE = SERVICETYPE;
+        }
+
+
+
+
+
+
 
         public String getASSIGNERNAME() {
             return ASSIGNERNAME;

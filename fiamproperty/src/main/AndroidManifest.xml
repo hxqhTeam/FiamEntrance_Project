@@ -81,7 +81,7 @@
             android:name=".ui.activity.WzmxListActivity"
             android:label="@string/wzmx_text"
             android:screenOrientation="portrait"></activity>
-             <activity
+        <activity
             android:name=".ui.activity.ZcmxListActivity"
             android:label="@string/zcmx_text"
             ></activity>
@@ -145,6 +145,14 @@
         <activity
             android:name=".ui.activity.ContractlineActivity"
             android:label="@string/hth_text"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.activity.WppaydetailsActivity"
+            android:label="@string/wpcgsq_text"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.activity.FwpaydetailsActivity"
+            android:label="@string/fwcgsq_text"
             android:screenOrientation="portrait"></activity>
     </application>
 

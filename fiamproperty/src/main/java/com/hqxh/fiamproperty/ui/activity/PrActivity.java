@@ -1,7 +1,9 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
@@ -17,6 +19,7 @@ import com.hqxh.fiamproperty.ui.adapter.PrAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -186,9 +189,25 @@ public class PrActivity extends BaseListActivity {
         prAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                Intent intent=null;
+                if(appid.equals(GlobalConfig.WPPR_APPID)){
+                      intent=new Intent(PrActivity.this,WppaydetailsActivity.class);
+                      Bundle bundle=new Bundle();
+                      bundle.putSerializable("pr",(Serializable) prAdapter.getData().get(position));
+                      intent.putExtras(bundle);
+                      startActivityForResult(intent, 0);}
+                else if(appid.equals(GlobalConfig.FWPR_APPID)){
+                    intent=new Intent(PrActivity.this,FwpaydetailsActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable("pr",(Serializable) prAdapter.getData().get(position));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, 0);}
 
 
             }
+
+
+
         });
     }
 

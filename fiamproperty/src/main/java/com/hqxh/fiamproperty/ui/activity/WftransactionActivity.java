@@ -46,8 +46,8 @@ public class WftransactionActivity extends BaseListActivity {
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        ownertable=getIntent().getExtras().getString("ownertable");
-        ownerid=getIntent().getExtras().getString("ownerid");
+        ownertable = getIntent().getExtras().getString("ownertable");
+        ownerid = getIntent().getExtras().getString("ownerid");
 
     }
 
@@ -62,7 +62,7 @@ public class WftransactionActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getWFTRANSACTIONUrl(AccountUtils.getpersonId(this), ownertable,ownerid, curpage, showcount);
+        String data = HttpManager.getWFTRANSACTIONUrl(AccountUtils.getpersonId(this), ownertable, ownerid, curpage, showcount);
         Log.i(TAG, "data=" + data);
         Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
@@ -102,7 +102,7 @@ public class WftransactionActivity extends BaseListActivity {
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                         if (wftransaction == null || wftransaction.isEmpty()) {
-
+                            notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
                             addData(wftransaction);

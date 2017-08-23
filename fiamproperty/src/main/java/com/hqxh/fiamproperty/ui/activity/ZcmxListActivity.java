@@ -34,7 +34,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 物资明细
+ * 整车明细
  **/
 public class ZcmxListActivity extends BaseListActivity {
     private static final String TAG = "ZcmxListActivity";

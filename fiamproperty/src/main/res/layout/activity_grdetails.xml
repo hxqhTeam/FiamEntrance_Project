@@ -30,7 +30,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="55dp"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:text="@string/grnum_text"
                     android:padding="5dp"
@@ -90,7 +90,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/location_text"
@@ -124,7 +124,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/location2_text"
@@ -158,7 +158,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/reason_text"
@@ -192,7 +192,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/type_text"
@@ -227,7 +227,7 @@
                     android:id="@+id/textView"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/schedulardate_text"
@@ -276,7 +276,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/sqr_text"
@@ -311,7 +311,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/phone_text"
@@ -346,7 +346,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/cudept_text"
@@ -380,7 +380,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/cucrew_text"
@@ -415,7 +415,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/status_text"
@@ -449,7 +449,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/wordcolor2"
+                    android:background="@color/background_dark_gray"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/enterdate_text"
@@ -577,7 +577,6 @@
                 android:background="@mipmap/line">
 
             </View>
-
             <Button
                 android:id="@+id/spbutton"
                 android:layout_width="match_parent"
@@ -588,6 +587,9 @@
                 android:text="@string/sp_btn_id"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/dimens_20sp" />
+
+
+
 
         </LinearLayout>
 

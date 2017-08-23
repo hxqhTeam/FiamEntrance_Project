@@ -207,5 +207,26 @@
     <string name="udchassisnum_text">底盘号</string>
     <string name="udsznum_text">试制编号</string>
 
+    <string name="prnum_text">申请单号</string>
+    <string name="udpcowner_text">参加人</string>
+    <string name="udremarks_text">培训班编号</string>
+    <string name="udremarks1_text">培训内容</string>
+    <string name="udremarks4_text">地点及单位</string>
+    <string name="linecost1_text">培训预算</string>
+    <string name="udremark_text">从事本专业岗位工作及承担项目工作</string>
+    <string name="udremarks2_text">本专业技术现状,培训理由及目的</string>
+    <string name="date_text">日期</string>
+    <string name="wppaydetails_text">外培采购详情</string>
+    <string name="wpcgsqxq_text">外培采购申请详情</string>
+    <string name="udlxtype_text">立项类型</string>
+    <string name="udremarka_text">立项原因</string>
+    <string name="projectdes1_text">项目内容</string>
+    <string name="pr6_text">总预算（人民币）</string>
+    <string name="udremark6_text">提升内容</string>
+    <string name="udremark5_text">适用范围</string>
+    <string name="wonum_text">任务单号</string>
+    <string name="udremarks3_text">项目预期目标</string>
+    <string name="document_text">文档</string>
+    <string name="fwcgxq_text">服务采购详情</string>
 
 </resources>
