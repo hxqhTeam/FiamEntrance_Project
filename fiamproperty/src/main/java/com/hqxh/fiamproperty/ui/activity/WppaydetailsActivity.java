@@ -136,6 +136,7 @@ public class WppaydetailsActivity extends BaseTitleActivity{
 
 
   }
+
   private View.OnClickListener jbxx_textOnClickListener=new View.OnClickListener() {
     @Override
     public void onClick(View v) {

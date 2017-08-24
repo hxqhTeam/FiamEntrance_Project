@@ -145,6 +145,15 @@ public class HttpManager {
 
     }
 
+
+    /**
+     * 需款项目
+     */
+    public static String gePAYPLANPROJECTUrl(String payplannum,String username, int curpage, int showcount) {
+        return "{'appid':'" + GlobalConfig.PP_APPID + "','objectname':'" + GlobalConfig.PAYPLANPROJECT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYPLANNUM':'=" + payplannum + "'}}";
+
+    }
+
     /**
      * 差旅报销单／备用金报销*
      */

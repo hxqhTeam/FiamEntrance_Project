@@ -113,6 +113,9 @@ public final class GlobalConfig {
     public static final String PP_APPID = "PP" ;
     //需款计划表名
     public static final String PAYPLAN_NAME = "PAYPLAN" ;
+    //需款项目表名
+    public static final String PAYPLANPROJECT_NAME = "PAYPLANPROJECT" ;
+
 
     /**报销**/
     //差旅报销单Appid

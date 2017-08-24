@@ -7,7 +7,7 @@ import java.util.List;
  * 需款计划
  */
 
-public class R_PAYPLAN {
+public class R_PAYPLAN{
     private String errcode; //返回状态
     private String errmsg; //消息
     private String userid; //用户名
@@ -105,8 +105,8 @@ public class R_PAYPLAN {
     /**
      *需款计划
      * **/
-    public static class  PAYPLAN{
-
+    public static class  PAYPLAN extends Entity{
+        private String PAYPLANID;
         private String  TYPE; //类型
         private String  TOTALCOST;//需款金额
         private String  CONTRACTNUM;//合同号
@@ -123,6 +123,14 @@ public class R_PAYPLAN {
         private String  DESCRIPTION;//描述
         private String  MONTH;//年月
         private String  STATUSDESC;//状态
+
+        public String getPAYPLANID() {
+            return PAYPLANID;
+        }
+
+        public void setPAYPLANID(String PAYPLANID) {
+            this.PAYPLANID = PAYPLANID;
+        }
 
         public String getTYPE() {
             return TYPE;

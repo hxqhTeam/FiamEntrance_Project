@@ -224,6 +224,16 @@
             android:label="@string/bxmx_text"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+        android:name=".ui.activity.XkplandetailActivity"
+        android:label="@string/xkjh_text"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.XkxmActivity"
+            android:label="@string/xkxm_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

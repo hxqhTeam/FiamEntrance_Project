@@ -167,7 +167,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     };
 
 
-    //问题
+    //文档
     private View.OnClickListener document_textOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

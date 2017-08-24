@@ -292,5 +292,21 @@
     <string name="jy_bank_text">开户银行</string>
     <string name="jy_bankaccount_text">银行账号</string>
     <string name="jkdxq_text">借款单详情</string>
+    <string name="wftype1_text">报销类别</string>
+    <string name="totalcost1_text">需款金额</string>
+    <string name="contractnum1_text">合同</string>
+    <string name="description2_text">合同描述</string>
+    <string name="contractrev_text">合同版本</string>
+    <string name="phase_text">付款阶段</string>
+    <string name="vendor_text">供应商</string>
+    <string name="description3_text">出差描述</string>
+    <string name="memo1_text">备注</string>
+    <string name="isbopayplan_text">借款需款？</string>
+    <string name="isinternal_text">厂内需款？</string>
+    <string name="xkxm_text">需款项目</string>
+    <string name="projectid1_text">费用号</string>
+    <string name="description12_text">项目名称</string>
+    <string name="description13_text">需款内容</string>
+    <string name="linecost2_text">金额</string>
 
 </resources>
