@@ -440,6 +440,7 @@
                             android:background="@color/white"
                             android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
+                            android:gravity="center_vertical"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -472,6 +473,7 @@
                             android:background="@color/white"
                             android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
+                            android:gravity="center_vertical"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -504,6 +506,7 @@
                             android:background="@color/white"
                             android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
+                            android:gravity="center_vertical"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
 

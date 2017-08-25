@@ -271,7 +271,7 @@
     <string name="udlxtype_text">立项类型</string>
     <string name="udremarka_text">立项原因</string>
     <string name="projectdes1_text">项目内容</string>
-    <string name="pr6_text">总预算（人民币）</string>
+    <string name="pr6_text">总预算  （人民币）</string>
     <string name="udremark6_text">提升内容</string>
     <string name="udremark5_text">适用范围</string>
     <string name="wonum_text">任务单号</string>

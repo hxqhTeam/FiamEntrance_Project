@@ -47,7 +47,6 @@ public class XkplandetailActivity extends BaseTitleActivity{
     TextView payplannum_text;//计划单
     TextView month_text;//日期
     TextView type1_text;//需款类型
-    TextView wftype1_text;//报销类型
     TextView totalcost1_text;//需款金额
     TextView status_text;//状态
     TextView contractnum1_text;//合同
@@ -56,7 +55,6 @@ public class XkplandetailActivity extends BaseTitleActivity{
     TextView phase_text;//付款阶段
     TextView vendor_text;//供应商
     TextView wonum2_text;//出差申请
-    TextView description3_text;//出差描述
 
     TextView isbopayplan_text;//借款需款？
 
@@ -85,7 +83,7 @@ public class XkplandetailActivity extends BaseTitleActivity{
         payplannum_text=(TextView)findViewById(R.id.payplannum_text);
         month_text=(TextView)findViewById(R.id.month_text);
         type1_text=(TextView)findViewById(R.id.type1_text);
-        wftype1_text=(TextView)findViewById(R.id.wftype1_text);
+
         totalcost1_text=(TextView)findViewById(R.id.totalcost1_text);
         status_text=(TextView)findViewById(R.id.status_text);
         contractnum1_text=(TextView)findViewById(R.id.contractnum1_text);
@@ -93,7 +91,7 @@ public class XkplandetailActivity extends BaseTitleActivity{
         phase_text=(TextView)findViewById(R.id.phase_text);
         vendor_text=(TextView)findViewById(R.id.vendor_text);
         wonum2_text=(TextView)findViewById(R.id.wonum2_text);
-        description3_text=(TextView)findViewById(R.id.description3_text);
+
 
         isbopayplan_text=(TextView)findViewById(R.id.isbopayplan_text);
 
@@ -116,7 +114,6 @@ public class XkplandetailActivity extends BaseTitleActivity{
         payplannum_text.setText(JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]+","+JsonUnit.convertStrToArray(payplan.getDESCRIPTION())[0]);
         month_text.setText(JsonUnit.convertStrToArray(payplan.getMONTH())[0]);
         type1_text.setText(JsonUnit.convertStrToArray(payplan.getTYPE())[0]);
-        wftype1_text.setText(JsonUnit.convertStrToArray(payplan.getTYPE())[0]);
         totalcost1_text.setText(JsonUnit.convertStrToArray(payplan.getTOTALCOST())[0]);
         status_text.setText(JsonUnit.convertStrToArray(payplan.getSTATUSDESC())[0]);
         contractnum1_text.setText(JsonUnit.convertStrToArray(payplan.getCONTRACTNUM())[0]);
@@ -124,7 +121,7 @@ public class XkplandetailActivity extends BaseTitleActivity{
         phase_text.setText(JsonUnit.convertStrToArray(payplan.getPHASE())[0]);
         vendor_text.setText(JsonUnit.convertStrToArray(payplan.getVENDORNAME())[0]);
         wonum2_text.setText(JsonUnit.convertStrToArray(payplan.getWONUM2())[0]);
-        description3_text.setText(JsonUnit.convertStrToArray(payplan.getDESCRIPTION())[0]);
+
 
         isbopayplan_text.setText(JsonUnit.convertStrToArray(payplan.getISBOPAYPLAN())[0]);
 
