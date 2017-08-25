@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -56,7 +57,7 @@ public class XkplandetailActivity extends BaseTitleActivity{
     TextView vendor_text;//供应商
     TextView wonum2_text;//出差申请
 
-    TextView isbopayplan_text;//借款需款？
+    CheckBox isbopayplan_text;//借款需款？
 
     TextView sqr_text;//申请人
     TextView enterdate_text;//申请时间
@@ -93,7 +94,7 @@ public class XkplandetailActivity extends BaseTitleActivity{
         wonum2_text=(TextView)findViewById(R.id.wonum2_text);
 
 
-        isbopayplan_text=(TextView)findViewById(R.id.isbopayplan_text);
+        isbopayplan_text=(CheckBox) findViewById(R.id.isbopayplan_text);
 
         sqr_text=(TextView)findViewById(R.id.sqr_text);
         enterdate_text=(TextView)findViewById(R.id.enterdate_text);
@@ -122,8 +123,11 @@ public class XkplandetailActivity extends BaseTitleActivity{
         vendor_text.setText(JsonUnit.convertStrToArray(payplan.getVENDORNAME())[0]);
         wonum2_text.setText(JsonUnit.convertStrToArray(payplan.getWONUM2())[0]);
 
-
-        isbopayplan_text.setText(JsonUnit.convertStrToArray(payplan.getISBOPAYPLAN())[0]);
+        if(JsonUnit.convertStrToArray(payplan.getISBOPAYPLAN())[0].equals("1")){
+            isbopayplan_text.setChecked(true);
+        }else {
+            isbopayplan_text.setChecked(false);
+        }
 
         sqr_text.setText(JsonUnit.convertStrToArray(payplan.getENTERBYNAME())[0]);
         enterdate_text.setText(JsonUnit.convertStrToArray(payplan.getENTERDATE())[0]);
