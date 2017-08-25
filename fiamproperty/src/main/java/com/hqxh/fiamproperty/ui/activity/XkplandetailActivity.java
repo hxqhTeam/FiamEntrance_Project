@@ -128,7 +128,6 @@ public class XkplandetailActivity extends BaseTitleActivity{
         }else {
             isbopayplan_text.setChecked(false);
         }
-
         sqr_text.setText(JsonUnit.convertStrToArray(payplan.getENTERBYNAME())[0]);
         enterdate_text.setText(JsonUnit.convertStrToArray(payplan.getENTERDATE())[0]);
 
