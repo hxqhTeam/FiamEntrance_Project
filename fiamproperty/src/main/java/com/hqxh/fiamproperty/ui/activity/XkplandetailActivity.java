@@ -45,7 +45,6 @@ public class XkplandetailActivity extends BaseTitleActivity{
 
 
     TextView payplannum_text;//计划单
-    TextView description_text;//计划单描述
     TextView month_text;//日期
     TextView type1_text;//需款类型
     TextView wftype1_text;//报销类型
@@ -84,7 +83,6 @@ public class XkplandetailActivity extends BaseTitleActivity{
     @Override
     protected void initView(Bundle savedInstanceState) {
         payplannum_text=(TextView)findViewById(R.id.payplannum_text);
-        description_text=(TextView)findViewById(R.id.description_text);
         month_text=(TextView)findViewById(R.id.month_text);
         type1_text=(TextView)findViewById(R.id.type1_text);
         wftype1_text=(TextView)findViewById(R.id.wftype1_text);
@@ -115,8 +113,7 @@ public class XkplandetailActivity extends BaseTitleActivity{
     }
 
     private void showDate() {
-        payplannum_text.setText(JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]);
-        description_text.setText(JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]);
+        payplannum_text.setText(JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]+","+JsonUnit.convertStrToArray(payplan.getDESCRIPTION())[0]);
         month_text.setText(JsonUnit.convertStrToArray(payplan.getMONTH())[0]);
         type1_text.setText(JsonUnit.convertStrToArray(payplan.getTYPE())[0]);
         wftype1_text.setText(JsonUnit.convertStrToArray(payplan.getTYPE())[0]);

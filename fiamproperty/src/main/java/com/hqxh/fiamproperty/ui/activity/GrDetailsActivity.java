@@ -42,7 +42,6 @@ public class GrDetailsActivity extends BaseTitleActivity {
 
 
     TextView grnum_text; //编号
-    TextView grnum2_text;//物资出门
     TextView location_text;//门岗1
     TextView location2_text;//门岗2
     TextView reason_text;//理由
@@ -76,7 +75,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         grnum_text = (TextView) findViewById(R.id.grnum_text);
-        grnum2_text = (TextView) findViewById(R.id.grnum2_text);
+
         location_text = (TextView) findViewById(R.id.location_text);
         location2_text = (TextView) findViewById(R.id.location2_text);
         reason_text = (TextView) findViewById(R.id.reason_text);
@@ -103,8 +102,8 @@ public class GrDetailsActivity extends BaseTitleActivity {
     }
 
     private void showData() {
-        grnum_text.setText(JsonUnit.convertStrToArray(gr.getGRNUM())[0]);
-        grnum2_text.setText(JsonUnit.convertStrToArray(gr.getDESCRIPTION())[0]);
+        grnum_text.setText(JsonUnit.convertStrToArray(gr.getGRNUM())[0]+','+JsonUnit.convertStrToArray(gr.getDESCRIPTION())[0]);
+
         location_text.setText(JsonUnit.convertStrToArray(gr.getLOCATIONDESCRIPTION())[0]);
         location2_text.setText(JsonUnit.convertStrToArray(gr.getLOCATION2DESCRIPTION())[0]);
         reason_text.setText(JsonUnit.convertStrToArray(gr.getREASON())[0]);

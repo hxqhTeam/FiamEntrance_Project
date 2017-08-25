@@ -20,10 +20,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
-    <ScrollView
+        <ScrollView
             android:id="@+id/scrollView_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,11 +37,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/line"></View>
 
 
                 <LinearLayout
@@ -55,38 +52,23 @@
 
                         <TextView
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:text="@string/payplannum_text"
+                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/payplannum_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
                         <TextView
                             android:id="@+id/payplannum_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:hint="暂无数据"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16sp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=","
-                            android:gravity="center_vertical"/>
-                        <TextView
-                            android:id="@+id/description_text"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
                             android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16sp"/>
+                            android:textSize="@dimen/dimens_16sp" />
+
 
                     </LinearLayout>
 
@@ -103,17 +85,16 @@
 
                         <TextView
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
                             android:text="@string/month_text"
-                            android:textColor="@color/black"
+                            android:layout_margin="@dimen/dimen_10"                              android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
                         <TextView
                             android:id="@+id/month_text"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
                             android:hint="暂无数据"
@@ -130,23 +111,22 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@color/background_dark_gray"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
                             android:text="@string/type1_text"
-                            android:textColor="@color/black"
+                            android:layout_margin="@dimen/dimen_10"                              android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
                         <TextView
                             android:id="@+id/type1_text"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
                             android:hint="暂无数据"
@@ -170,10 +150,9 @@
 
                         <TextView
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:text="@string/wftype1_text"
+                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/wftype1_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -203,17 +182,16 @@
 
                         <TextView
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:text="@string/totalcost1_text"
+                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/totalcost1_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
                         <TextView
                             android:id="@+id/totalcost1_text"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
                             android:hint="暂无数据"
@@ -222,6 +200,7 @@
                             android:textSize="@dimen/dimens_16sp" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -235,10 +214,9 @@
 
                         <TextView
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:text="@string/status_text"
+                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/status_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -269,10 +247,9 @@
                         <TextView
 
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:text="@string/contractnum1_text"
+                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/contractnum1_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -289,10 +266,12 @@
 
                     </LinearLayout>
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/line"></View>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -302,10 +281,9 @@
                     <TextView
 
                         android:layout_width="@dimen/word_80dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:padding="@dimen/btn_top_5dp"
-                        android:text="@string/description2_text"
+                        android:layout_margin="@dimen/dimen_10"                         android:text="@string/description2_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -323,72 +301,75 @@
                 </LinearLayout>
 
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line"></View>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/line"></View>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background_dark_gray"
-            android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:orientation="horizontal">
 
-            <TextView
+                    <TextView
 
-                android:layout_width="@dimen/word_80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/btn_top_5dp"
-                android:text="@string/phase_text"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimens_16sp" />
+                        android:layout_width="@dimen/word_80dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_margin="@dimen/dimen_10"                         android:text="@string/phase_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp" />
 
-            <TextView
-                android:id="@+id/phase_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:hint="暂无数据"
-                android:padding="@dimen/btn_top_5dp"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16sp" />
+                    <TextView
+                        android:id="@+id/phase_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="暂无数据"
+                        android:padding="@dimen/btn_top_5dp"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16sp" />
 
-        </LinearLayout>
-            <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background_dark_gray"
-            android:orientation="horizontal">
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line"></View>
 
-            <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:orientation="horizontal">
 
-                android:layout_width="@dimen/word_80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/btn_top_5dp"
-                android:text="@string/vendor_text"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimens_16sp" />
+                    <TextView
 
-            <TextView
-                android:id="@+id/vendor_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:hint="暂无数据"
-                android:padding="@dimen/btn_top_5dp"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16sp" />
+                        android:layout_width="@dimen/word_80dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_margin="@dimen/dimen_10"                         android:text="@string/vendor_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp" />
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/vendor_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="暂无数据"
+                        android:padding="@dimen/btn_top_5dp"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/line"></View>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line"></View>
 
                 <RelativeLayout
 
@@ -400,18 +381,17 @@
 
                     <TextView
                         android:layout_width="@dimen/word_80dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:padding="@dimen/btn_top_5dp"
-                        android:text="@string/jbxx_text"
+                        android:layout_margin="@dimen/dimen_10"                         android:text="@string/jbxx_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
                     <ImageView
                         android:id="@+id/jbxx_text"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:gravity="center_vertical"
@@ -441,17 +421,16 @@
 
                         <TextView
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:text="@string/wonum2_text"
+                            android:layout_margin="@dimen/dimen_10"                             android:text="@string/wonum2_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
                         <TextView
                             android:id="@+id/wonum2_text"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
                             android:hint="暂无数据"
@@ -475,10 +454,9 @@
 
                         <TextView
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:text="@string/description3_text"
+                            android:layout_margin="@dimen/dimen_10"                             android:text="@string/description3_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -501,7 +479,6 @@
                         android:background="@mipmap/line"></View>
 
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -510,10 +487,9 @@
 
                         <TextView
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:text="@string/isbopayplan_text"
+                            android:layout_margin="@dimen/dimen_10"                             android:text="@string/isbopayplan_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -524,6 +500,7 @@
                             android:background="@color/white"
                             android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
+                            android:gravity="center_vertical"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -543,10 +520,9 @@
 
                         <TextView
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:text="@string/sqr_text"
+                            android:layout_margin="@dimen/dimen_10"                             android:text="@string/sqr_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -557,10 +533,12 @@
                             android:background="@color/white"
                             android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
+                            android:gravity="center_vertical"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -574,10 +552,9 @@
 
                         <TextView
                             android:layout_width="@dimen/word_80dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:text="@string/enterdate_text"
+                            android:layout_margin="@dimen/dimen_10"                             android:text="@string/enterdate_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -588,6 +565,7 @@
                             android:background="@color/white"
                             android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
+                            android:gravity="center_vertical"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -596,10 +574,10 @@
 
                 </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/line"></View>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line"></View>
 
 
                 <RelativeLayout
@@ -613,12 +591,11 @@
 
                     <TextView
                         android:layout_width="@dimen/word_80dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:gravity="center"
-                        android:padding="@dimen/btn_top_5dp"
-                        android:text="@string/xkxm_text"
+                        android:layout_margin="@dimen/dimen_10"                         android:text="@string/xkxm_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -648,12 +625,11 @@
 
                     <TextView
                         android:layout_width="@dimen/word_80dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:gravity="center"
-                        android:padding="@dimen/btn_top_5dp"
-                        android:text="@string/spjl_text"
+                        android:layout_margin="@dimen/dimen_10"                         android:text="@string/spjl_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -676,8 +652,8 @@
         </ScrollView>
 
 
-
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimens_40dp"
