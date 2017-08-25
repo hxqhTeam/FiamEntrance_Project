@@ -1,26 +1,19 @@
 package com.hqxh.fiamproperty.ui.activity;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseListActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_Wfassignemt;
-import com.hqxh.fiamproperty.model.R_Wfassignemt.Wfassignment;
-import com.hqxh.fiamproperty.model.R_Wfassignemt.ResultBean;
-import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
-import com.hqxh.fiamproperty.ui.adapter.WfassignmentAdapter;
+import com.hqxh.fiamproperty.model.R_PRVENDOR;
+import com.hqxh.fiamproperty.model.R_PRVENDOR.PRVENDOR;
+import com.hqxh.fiamproperty.model.R_PRVENDOR.ResultBean;
+import com.hqxh.fiamproperty.ui.adapter.PrvendorAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
-import com.hqxh.fiamproperty.unit.JsonUnit;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,39 +25,41 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 待办任务的Activity
+ * 潜在供应商
  **/
-public class ActiveTaskActivity extends BaseListActivity {
-    private static final String TAG = "ActiveTaskActivity";
+public class PrvendorActivity extends BaseListActivity {
+    private static final String TAG = "PrvendorActivity";
 
 
-    private WfassignmentAdapter wfassignmentAdapter;
+    private PrvendorAdapter prvendoradapter;
 
     private int curpage = 1;
     private int showcount = 20;
     private int totalpage;
 
-    private int mark = 0;
+    private String appid; //appid
+    private String prnum; //prnum
 
-    private String assignstatus;
-    private String title;
 
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        if (getIntent().hasExtra("assignstatus")) {
-            assignstatus = getIntent().getExtras().getString("assignstatus");
+        if (getIntent().hasExtra("appid")) {
+            appid = getIntent().getExtras().getString("appid");
         }
-        if (getIntent().hasExtra("title")) {
-            title = getIntent().getExtras().getString("title");
+        if (getIntent().hasExtra("prnum")) {
+            prnum = getIntent().getExtras().getString("prnum");
         }
+
+
     }
 
     @Override
     protected String getSubTitle() {
 
 
-        return title;
+        return getResources().getString(R.string.qzgys_text);
+
     }
 
 
@@ -72,49 +67,49 @@ public class ActiveTaskActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getWFASSIGNMENTUrl("", AccountUtils.getpersonId(this), assignstatus, curpage, showcount);
+        String data = HttpManager.getPRVENDORUrl(appid, prnum, AccountUtils.getpersonId(this), curpage, showcount);
         Log.e(TAG, "data=" + data);
-        Log.e(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addBodyParameter("data", data)
                 .build()
-                .getObjectObservable(R_Wfassignemt.class) // 发起获取数据列表的请求，并解析到R_Wfassignemt
+                .getObjectObservable(R_PRVENDOR.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
-                .doOnNext(new Consumer<R_Wfassignemt>() {
+                .doOnNext(new Consumer<R_PRVENDOR>() {
                     @Override
-                    public void accept(@NonNull R_Wfassignemt RWfassignemt) throws Exception {
+                    public void accept(@NonNull R_PRVENDOR r_prvendor) throws Exception {
                     }
                 })
 
-                .map(new Function<R_Wfassignemt, ResultBean>() {
+                .map(new Function<R_PRVENDOR, ResultBean>() {
                     @Override
-                    public ResultBean apply(@NonNull R_Wfassignemt RWfassignemt) throws Exception {
+                    public ResultBean apply(@NonNull R_PRVENDOR r_zxperson) throws Exception {
+                        Log.e(TAG, "" + r_zxperson.getErrcode() + "," + r_zxperson.getErrmsg());
 
-                        return RWfassignemt.getResult();
+                        return r_zxperson.getResult();
                     }
                 })
-                .map(new Function<ResultBean, List<Wfassignment>>() {
+                .map(new Function<ResultBean, List<PRVENDOR>>() {
                     @Override
-                    public List<Wfassignment> apply(@NonNull ResultBean resultBean) throws Exception {
+                    public List<PRVENDOR> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
+                        Log.e(TAG, "" + resultBean.getTotalpage() + "," + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Wfassignment>>() {
+                .subscribe(new Consumer<List<PRVENDOR>>() {
                     @Override
-                    public void accept(@NonNull List<Wfassignment> wfassignments) throws Exception {
+                    public void accept(@NonNull List<PRVENDOR> prvendor) throws Exception {
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-
-                        if (wfassignments == null || wfassignments.isEmpty()) {
+                        if (prvendor == null || prvendor.isEmpty()) {
                             notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
-                            addData(wfassignments);
+                            addData(prvendor);
 
 
                         }
@@ -134,7 +129,7 @@ public class ActiveTaskActivity extends BaseListActivity {
     @Override
     public void onRefresh() {
         curpage = 1;
-        wfassignmentAdapter.removeAll(wfassignmentAdapter.getData());
+        prvendoradapter.removeAll(prvendoradapter.getData());
         getData();
 
     }
@@ -143,7 +138,7 @@ public class ActiveTaskActivity extends BaseListActivity {
     public void onLoadMore() {
         if (totalpage == curpage) {
             getLoadMore();
-            showMiddleToast(ActiveTaskActivity.this, getResources().getString(R.string.all_data_hint));
+            showMiddleToast(PrvendorActivity.this, getResources().getString(R.string.all_data_hint));
         } else {
             curpage++;
             getData();
@@ -172,14 +167,15 @@ public class ActiveTaskActivity extends BaseListActivity {
 
     @Override
     protected void fillData() {
-        initAdapter(new ArrayList<Wfassignment>());
+
+        initAdapter(new ArrayList<PRVENDOR>());
         getData();
 
     }
 
     @Override
     protected void setOnClick() {
-        searchText.setOnClickListener(searchTextOnClickListener);
+        searchText.setVisibility(View.GONE);
 
     }
 
@@ -187,34 +183,17 @@ public class ActiveTaskActivity extends BaseListActivity {
     /**
      * 获取数据*
      */
-    private void initAdapter(final List<Wfassignment> list) {
-        wfassignmentAdapter = new WfassignmentAdapter(ActiveTaskActivity.this, R.layout.list_item_task, list);
-        mRecyclerView.setAdapter(wfassignmentAdapter);
-        wfassignmentAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-            }
-        });
+    private void initAdapter(final List<PRVENDOR> list) {
+        prvendoradapter = new PrvendorAdapter(PrvendorActivity.this, R.layout.list_item_qzgys, list);
+        mRecyclerView.setAdapter(prvendoradapter);
     }
 
     /**
      * 添加数据*
      */
-    private void addData(final List<Wfassignment> list) {
-        wfassignmentAdapter.addData(list);
+    private void addData(final List<PRVENDOR> list) {
+        prvendoradapter.addData(list);
     }
 
 
-    /**
-     * 跳转事件
-     **/
-    private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(ActiveTaskActivity.this, SearchActivity.class);
-            intent.putExtra("appid", GlobalConfig.WFADMIN_APPID);
-            startActivityForResult(intent, 0);
-        }
-    };
 }

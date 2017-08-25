@@ -34,10 +34,12 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-
+/**
+ * 国外出差
+ **/
 public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
 
-    private static final String TAG="TravelsFragment";
+    private static final String TAG = "TravelsFragment";
 
     private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private RecyclerView mRecyclerView;
@@ -74,11 +76,11 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
     }
 
     private void getData() {
-        String data= HttpManager.getGWWORKORDERUrl(AccountUtils.getpersonId(getActivity()),curpage, showcount);
+        String data = HttpManager.getGWWORKORDERUrl(AccountUtils.getpersonId(getActivity()), curpage, showcount);
         Log.i(TAG, "data=" + data);
         Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
-                .addQueryParameter("data", data)
+                .addBodyParameter("data", data)
                 .build()
                 .getObjectObservable(R_Workorder.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
@@ -100,7 +102,7 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
                     @Override
                     public List<R_Workorder.Workorder> apply(@NonNull R_Workorder.ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG,"Totalresult="+resultBean.getTotalresult());
+                        Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
@@ -135,9 +137,6 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
     }
 
 
-
-
-
     @Override
     public void onRefresh() {
         curpage = 1;
@@ -149,7 +148,7 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
     public void onLoadMore() {
         if (totalpage == curpage) {
             getLoadMore();
-            BaseActivity.showMiddleToast(getActivity(),getResources().getString(R.string.all_data_hint));
+            BaseActivity.showMiddleToast(getActivity(), getResources().getString(R.string.all_data_hint));
         } else {
             curpage++;
             getData();
@@ -181,7 +180,7 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
         travelAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent=new Intent(getActivity(), CgWorkorderActivity.class);
+                Intent intent = new Intent(getActivity(), CgWorkorderActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("workorder", (Serializable) travelAdapter.getData().get(position));
                 intent.putExtras(bundle);

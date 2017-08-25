@@ -173,7 +173,7 @@ public class SearchActivity extends BaseActivity implements PullLoadMoreRecycler
         Log.e(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
 
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
-                .addQueryParameter("data", data)
+                .addBodyParameter("data", data)
                 .build()
                 .getObjectObservable(R_Wfassignemt.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求

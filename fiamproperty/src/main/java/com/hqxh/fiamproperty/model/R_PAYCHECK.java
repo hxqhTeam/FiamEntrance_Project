@@ -105,8 +105,9 @@ public class R_PAYCHECK {
     /**
      *付款验收
      * **/
-    public static class  PAYCHECK{
+    public static class  PAYCHECK extends Entity{
 
+        private String  PAYCHECKID; //PAYCHECKID
         private String  TOTALCOST; //验收金额
         private String  VENDORNAME;//供应商
         private String  FINCNTRLDESC;//项目名称
@@ -131,6 +132,15 @@ public class R_PAYCHECK {
         private String  ENTERDATE;//提单日期
         private String  CUDEPT;//提单部门
         private String  CUCREW;//提单科室
+        private String  WFPERSON1;//项目经理
+
+        public String getPAYCHECKID() {
+            return PAYCHECKID;
+        }
+
+        public void setPAYCHECKID(String PAYCHECKID) {
+            this.PAYCHECKID = PAYCHECKID;
+        }
 
         public String getTOTALCOST() {
             return TOTALCOST;
@@ -322,6 +332,14 @@ public class R_PAYCHECK {
 
         public void setCUCREW(String CUCREW) {
             this.CUCREW = CUCREW;
+        }
+
+        public String getWFPERSON1() {
+            return WFPERSON1;
+        }
+
+        public void setWFPERSON1(String WFPERSON1) {
+            this.WFPERSON1 = WFPERSON1;
         }
     }
 

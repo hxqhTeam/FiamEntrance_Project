@@ -45,13 +45,14 @@ public class R_PR {
         this.result = result;
     }
 
-    /**结果集
+    /**
+     * 结果集
      * curpage
      * resultlist
      * showcount
      * totalpage
      * totalresult
-     * **/
+     **/
     public static class ResultBean {
         private String curpage; //当前页
         private String showcount;//显示条数
@@ -103,46 +104,55 @@ public class R_PR {
 
 
     /**
-     *技术采购，试制采购
-     * **/
-    public static class  PR extends Entity{
+     * 技术采购，试制采购
+     **/
+    public static class PR extends Entity {
         private String PRID;
-        private String  ASSIGNERNAME; //执行人姓名
-        private String  DESCRIPTION;//描述
-        private String  PR6;//总预算（外币）
-        private String  UDCURRENCYCODE;//货币
-        private String  UDDATE1;//开始日期
-        private String  UDDATE2;//结束日期
-        private String  RDCHEAD;//中心分管领导代码
-        private String  UDLXTYPE;//立项类型
-        private String  REQBYPHONE;//申请人电话
-        private String  CUDEPT;//申请部门
-        private String  CUCREW;//申请科室
-        private String  PRNUM;//采购申请
-        private String  PM;//项目经理
-        private String  UDASSIGNER;//执行人代码
-        private String  REQBYPERSON;//申请人
-        private String  PROJECTID;//费用号
-        private String  PROJECTDESC;//项目名称
-        private String  UDREMARK6;//通过本次采购自身能力提升内容
-        private String  UDREMARK4;//适用范围
-        private String  UDREMARK2;//项目内容
-        private String  UDREMARK3;//项目预期目标
-        private String  CUTYPE;//类型
-        private String  STATUSDESC;//状态
-        private String  TOTALCOST;//总预算（人民币）
-        private String  RDCHEADNAME;//中心分管领导姓名
-        private String  UDREMARK1;//立项必要性和原因
-        private String  ISSUEDATE;//申请日期
-        private String  PCOWNER;//执行人
-        private String  UDREMARK;//备注
-        private String  UDPAYTHISYEAR;//本年度结算
-        private String  OWNERPERSON;//预算员／子项目经理
-        private String  CUSAMPLETYPE;//样品分类
-        private String  NEWVENDOR;//指定的供应商
-        private String  CONTACT;//联系人
-        private String  PHONENUM;//供应商电话
-        private String  SERVICETYPE;//类型
+        private String ASSIGNERNAME; //执行人姓名
+        private String DESCRIPTION;//描述
+        private String PR6;//总预算（外币）
+        private String UDCURRENCYCODE;//货币
+        private String UDDATE1;//开始日期
+        private String UDDATE2;//结束日期
+        private String RDCHEAD;//中心分管领导代码
+        private String UDLXTYPE;//立项类型
+        private String REQBYPHONE;//申请人电话
+        private String CUDEPT;//申请部门
+        private String CUCREW;//申请科室
+        private String PRNUM;//采购申请
+        private String PM;//项目经理
+        private String UDASSIGNER;//执行人代码
+        private String REQBYPERSON;//申请人
+        private String PROJECTID;//费用号
+        private String PROJECTDESC;//项目名称
+        private String UDREMARK6;//通过本次采购自身能力提升内容
+        private String UDREMARK4;//适用范围
+        private String UDREMARK2;//项目内容
+        private String UDREMARK3;//项目预期目标
+        private String CUTYPE;//类型
+        private String STATUSDESC;//状态
+        private String TOTALCOST;//总预算（人民币）
+        private String RDCHEADNAME;//中心分管领导姓名
+        private String UDREMARK1;//立项必要性和原因
+        private String ISSUEDATE;//申请日期
+        private String PCOWNER;//执行人
+        private String UDREMARK;//备注
+        private String UDPAYTHISYEAR;//本年度结算
+        private String OWNERPERSON;//预算员／子项目经理
+        private String CUSAMPLETYPE;//样品分类
+        private String NEWVENDOR;//指定的供应商
+        private String CONTACT;//联系人
+        private String PHONENUM;//供应商电话
+        private String SERVICETYPE;//类型
+        private String WONUM;//任务单
+
+        //试制采购申请单
+        private String VENDOR; //供应商
+        private String VENDORNAME; //供应商名称
+        private String RDCHEADPERSON; //中心分管领导名称
+        //物资采购申请单
+
+        private String UDDATE3; //结算完成日期
 
         public String getPRID() {
             return PRID;
@@ -159,11 +169,6 @@ public class R_PR {
         public void setSERVICETYPE(String SERVICETYPE) {
             this.SERVICETYPE = SERVICETYPE;
         }
-
-
-
-
-
 
 
         public String getASSIGNERNAME() {
@@ -445,8 +450,47 @@ public class R_PR {
         public void setPHONENUM(String PHONENUM) {
             this.PHONENUM = PHONENUM;
         }
-    }
 
+        public String getWONUM() {
+            return WONUM;
+        }
+
+        public void setWONUM(String WONUM) {
+            this.WONUM = WONUM;
+        }
+
+        public String getVENDOR() {
+            return VENDOR;
+        }
+
+        public void setVENDOR(String VENDOR) {
+            this.VENDOR = VENDOR;
+        }
+
+        public String getVENDORNAME() {
+            return VENDORNAME;
+        }
+
+        public void setVENDORNAME(String VENDORNAME) {
+            this.VENDORNAME = VENDORNAME;
+        }
+
+        public String getRDCHEADPERSON() {
+            return RDCHEADPERSON;
+        }
+
+        public void setRDCHEADPERSON(String RDCHEADPERSON) {
+            this.RDCHEADPERSON = RDCHEADPERSON;
+        }
+
+        public String getUDDATE3() {
+            return UDDATE3;
+        }
+
+        public void setUDDATE3(String UDDATE3) {
+            this.UDDATE3 = UDDATE3;
+        }
+    }
 
 
 }

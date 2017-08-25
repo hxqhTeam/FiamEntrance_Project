@@ -189,23 +189,24 @@ public class PrActivity extends BaseListActivity {
         prAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent=null;
-                if(appid.equals(GlobalConfig.WPPR_APPID)){
-                      intent=new Intent(PrActivity.this,WppaydetailsActivity.class);
-                      Bundle bundle=new Bundle();
-                      bundle.putSerializable("pr",(Serializable) prAdapter.getData().get(position));
-                      intent.putExtras(bundle);
-                      startActivityForResult(intent, 0);}
-                else if(appid.equals(GlobalConfig.FWPR_APPID)){
-                    intent=new Intent(PrActivity.this,FwpaydetailsActivity.class);
-                    Bundle bundle=new Bundle();
-                    bundle.putSerializable("pr",(Serializable) prAdapter.getData().get(position));
-                    intent.putExtras(bundle);
-                    startActivityForResult(intent, 0);}
-
+                Intent intent = null;
+                if (appid.equals(GlobalConfig.JSPR_APPID)) {//技术
+                    intent = new Intent(PrActivity.this, JsPrActivity.class);
+                } else if (appid.equals(GlobalConfig.SZPR_APPID)) {//试制
+                    intent = new Intent(PrActivity.this, SzPrActivity.class);
+                } else if (appid.equals(GlobalConfig.PR_APPID)) {//物资
+                    intent = new Intent(PrActivity.this, WzPrActivity.class);
+                } else if (appid.equals(GlobalConfig.WPPR_APPID)) {//外培
+                    intent = new Intent(PrActivity.this, WppaydetailsActivity.class);
+                } else if (appid.equals(GlobalConfig.FWPR_APPID)) {//服务
+                    intent = new Intent(PrActivity.this, FwpaydetailsActivity.class);
+                }
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("pr", (Serializable) prAdapter.getData().get(position));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 0);
 
             }
-
 
 
         });

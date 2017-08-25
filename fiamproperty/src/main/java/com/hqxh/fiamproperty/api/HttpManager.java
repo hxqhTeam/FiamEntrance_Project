@@ -57,8 +57,8 @@ public class HttpManager {
 */
 
     public static String getZCMXUrl(String username, String grnum, int curpage, int showcount) {
-//        return "{'appid':'" + GlobalConfig.GRZC_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'GRNUM':'="+grnum+"'}}";
-        return "{'appid':'" + GlobalConfig.GRZC_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+        return "{'appid':'" + GlobalConfig.GRZC_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'GRNUM':'="+grnum+"'}}";
+//        return "{'appid':'" + GlobalConfig.GRZC_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
 
     }
 
@@ -84,6 +84,22 @@ public class HttpManager {
      */
     public static String getPRUrl(String appid, String username, int curpage, int showcount) {
         return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PR_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+    }
+
+
+    /**
+     * 潜在供应商*
+     */
+    public static String getPRVENDORUrl(String appid, String prnum,String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PRVENDOR_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PRNUM':'="+prnum+"'}}";
+
+    }
+    /**
+     * 申请明细*
+     */
+    public static String getPRLINEUrl(String appid, String prnum,String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PRNUM':'="+prnum+"'}}";
 
     }
 
@@ -117,6 +133,14 @@ public class HttpManager {
      */
     public static String getCONTRACTPAYURL(String username, String contractnum, String contractrev, int curpage, int showcount) {
         return "{'appid':'" + GlobalConfig.CONTPURCH_APPID + "','objectname':'" + GlobalConfig.CONTRACTPAY_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'CONTRACTNUM':'=" + contractnum + "','CONTRACTREV':'=" + contractrev + "'}}";
+
+    }
+
+    /**
+     * 付款验收明细*
+     */
+    public static String getPAYCHECKLINEUrl(String appid, String paychecknum,String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYCHECKLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYCHECKNUM':'="+paychecknum+"'}}";
 
     }
 
@@ -166,14 +190,15 @@ public class HttpManager {
     /**
      * 补助明细*
      */
-    public static String getSUBSIDIESUrl(String appid, String username,String expensenum, int curpage, int showcount) {
+    public static String getSUBSIDIESUrl(String appid, String username, String expensenum, int curpage, int showcount) {
         return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.SUBSIDIES_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'EXPENSENUM':'=" + expensenum + "'}}";
 
     }
+
     /**
      * 补助明细/交通明细*
      */
-    public static String getCLMXUrl(String appid, String objectname,String username,String expensenum, int curpage, int showcount) {
+    public static String getCLMXUrl(String appid, String objectname, String username, String expensenum, int curpage, int showcount) {
         return "{'appid':'" + appid + "','objectname':'" + objectname + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'EXPENSENUM':'=" + expensenum + "'}}";
 
     }
