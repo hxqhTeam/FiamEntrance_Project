@@ -165,6 +165,7 @@ public class HomeActivity extends BaseActivity {
                 case 0:  //待办任务
                     intent = new Intent(HomeActivity.this, ActiveTaskActivity.class);
                     intent.putExtra("assignstatus", "ACTIVE");
+                    intent.putExtra("mark", DB_CODE);
                     intent.putExtra("title", getResources().getString(R.string.db_task_text));
                     startActivityForResult(intent, 0);
                     break;
@@ -172,6 +173,7 @@ public class HomeActivity extends BaseActivity {
                     intent = new Intent(HomeActivity.this, ActiveTaskActivity.class);
                     intent.putExtra("assignstatus", "COMPLETE");
                     intent.putExtra("title", getResources().getString(R.string.yb_task_text));
+                    intent.putExtra("mark", YB_CODE);
                     startActivityForResult(intent, 0);
                     break;
                 case 2:  //出差申请

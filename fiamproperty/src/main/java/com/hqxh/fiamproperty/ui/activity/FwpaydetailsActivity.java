@@ -5,16 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.hqxh.fiamproperty.R;
+import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseTitleActivity;
 import com.hqxh.fiamproperty.bean.R_APPROVE;
 import com.hqxh.fiamproperty.bean.R_WORKFLOW;
@@ -31,6 +35,7 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -42,7 +47,7 @@ import io.reactivex.schedulers.Schedulers;
 public class FwpaydetailsActivity extends BaseTitleActivity {
     private static final String TAG = "FwpaydetailsActivity";
 
-
+    private ScrollView scrollView;
     private TextView prnum_text;//申请单号
     private TextView worktype_text;//类型
     private TextView status_text;//状态
@@ -52,6 +57,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     private TextView pr6_text;//总预算
 
     private ImageView jbxx_text;//其它信息
+    private LinearLayout jbxxlinearlayout;
 
     private TextView udremark5_text;//适用范围
     private TextView rdchead_text;//中心分管领导
@@ -65,15 +71,34 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     private ImageView spjl_text;//审批记录
 
     private Button workflowBtn;//审批按钮
-    private LinearLayout jbxxlinearlayout;
+    private RelativeLayout workflowRelativeLayout;//布局
 
     private PR pr;
     private Animation rotate;
 
+    private int mark = 0;//跳转标识
+    private String appid; //appid
+    private String ownernum;//ownernum
+    private String ownertable;//ownertable
+
     protected void beforeInit() {
         super.beforeInit();
-        pr = (PR) getIntent().getExtras().getSerializable("pr");
-        Log.e(TAG, "初始化前的准备");
+        if(getIntent().hasExtra("pr")){
+            pr = (PR) getIntent().getExtras().getSerializable("pr");
+        }
+        if (getIntent().hasExtra("mark")) {
+            mark = getIntent().getExtras().getInt("mark");
+        }
+        if (getIntent().hasExtra("appid")) {
+            appid = getIntent().getExtras().getString("appid");
+        }
+        if (getIntent().hasExtra("ownernum")) {
+            ownernum = getIntent().getExtras().getString("ownernum");
+        }
+        if (getIntent().hasExtra("ownertable")) {
+            ownertable = getIntent().getExtras().getString("ownertable");
+        }
+
     }
 
     @Override
@@ -84,6 +109,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        scrollView = (ScrollView) findViewById(R.id.scrollView_id);
         prnum_text = (TextView) findViewById(R.id.prnum_text);
         worktype_text = (TextView) findViewById(R.id.worktype_text);
         status_text = (TextView) findViewById(R.id.status_text);
@@ -100,19 +126,31 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
         sqr_text = (TextView) findViewById(R.id.sqr_text);
 
         jbxx_text = (ImageView) findViewById(R.id.jbxx_text);
+        jbxxlinearlayout = (LinearLayout) findViewById(R.id.jbxx_text_id);
+
         document_text = (ImageView) findViewById(R.id.document_text);
         spjl_text = (ImageView) findViewById(R.id.spjl_text);
 
         workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
 
-        jbxxlinearlayout = (LinearLayout) findViewById(R.id.jbxx_text_id);
+        workflowRelativeLayout = (RelativeLayout) findViewById(R.id.relavtivelayout_btn_id);
+        if (null == appid) {
+            showData();
+        } else {
+            if (mark == HomeActivity.DB_CODE) { //待办任务
+                workflowRelativeLayout.setVisibility(View.VISIBLE);
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
+                scrollView.setLayoutParams(layoutParams);
+            }
+            getNetWorkPR();
+        }
 
-        showDate();
 
 
     }
 
-    private void showDate() {
+    private void showData() {
         prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]);
         worktype_text.setText(JsonUnit.convertStrToArray(pr.getCUTYPE())[0]);
         status_text.setText(JsonUnit.convertStrToArray(pr.getSTATUSDESC())[0]);
@@ -147,7 +185,6 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
 
         rotate.setInterpolator(new LinearInterpolator());//设置为线性旋转
 
-        Log.e(TAG, "b=" + !rotate.getFillAfter());
         rotate.setFillAfter(!rotate.getFillAfter());//每次都取相反值，使得可以不恢复原位的旋转
 
         jbxx_text.startAnimation(rotate);
@@ -202,9 +239,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     };
 
     //流程启动
-//http://10.60.12.98/maximo/mobile/wf/start?ownertable=GR&ownerid=77129&processname=GR-WZMAIN&userid=yanghongwei
     private void PostStart(String ownertable, String ownerid, String appid, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",appid=" + appid + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_START_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -253,9 +288,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     }
 
 
-    //http://10.60.12.98/maximo/mobile/wf/approve?ownertable=GR&ownerid=77128&memo=驳回&selectWhat=0&userid=zhuyinan
     private void PostApprove(String ownertable, String ownerid, String memo, String selectWhat, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",memo=" + memo + ",selectWhat=" + selectWhat + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_APPROVE_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -278,7 +311,6 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.i(TAG, "审批s=" + s);
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         showMiddleToast(FwpaydetailsActivity.this, workflow.getErrmsg());
                     }
@@ -316,5 +348,54 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
         }).create().show();
     }
 
+    //根据appid,grnum,objctname获取国内出差信息
+    private void getNetWorkPR() {
+        String data = HttpManager.getPRUrl(appid, ownernum, AccountUtils.getpersonId(this), 1, 10);
+        Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
+                .addBodyParameter("data", data)
+                .build()
+                .getObjectObservable(R_PR.class) // 发起获取数据列表的请求，并解析到FootList
+                .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
+                .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
+                .doOnNext(new Consumer<R_PR>() {
+                    @Override
+                    public void accept(@NonNull R_PR r_pr) throws Exception {
+                    }
+                })
+
+                .map(new Function<R_PR, R_PR.ResultBean>() {
+                    @Override
+                    public R_PR.ResultBean apply(@NonNull R_PR r_pr) throws Exception {
+
+                        return r_pr.getResult();
+                    }
+                })
+                .map(new Function<R_PR.ResultBean, List<R_PR.PR>>() {
+                    @Override
+                    public List<R_PR.PR> apply(@NonNull R_PR.ResultBean resultBean) throws Exception {
+                        return resultBean.getResultlist();
+                    }
+
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<PR>>() {
+                    @Override
+                    public void accept(@NonNull List<PR> prs) throws Exception {
+
+                        if (prs == null || prs.isEmpty()) {
+                        } else {
+                            pr = prs.get(0);
+                            showData();
+                        }
+                    }
+
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                    }
+                });
+    }
 
 }

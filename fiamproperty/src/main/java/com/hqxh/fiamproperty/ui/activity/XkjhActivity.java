@@ -54,7 +54,7 @@ public class XkjhActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getPAYPLANUrl(AccountUtils.getpersonId(this),  curpage, showcount);
+        String data = HttpManager.getPAYPLANUrl(AccountUtils.getpersonId(this), curpage, showcount);
         Log.i(TAG, "data=" + data);
         Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
@@ -94,7 +94,7 @@ public class XkjhActivity extends BaseListActivity {
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                         if (payplan == null || payplan.isEmpty()) {
-
+                            notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
                             addData(payplan);
@@ -107,7 +107,7 @@ public class XkjhActivity extends BaseListActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-
+                        notLinearLayout.setVisibility(View.VISIBLE);
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                     }
                 });
@@ -175,11 +175,11 @@ public class XkjhActivity extends BaseListActivity {
         xkjhAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent=new Intent(XkjhActivity.this,XkplandetailActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("payplan",(Serializable)xkjhAdapter.getData().get(position));
+                Intent intent = new Intent(XkjhActivity.this, XkplandetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("payplan", (Serializable) xkjhAdapter.getData().get(position));
                 intent.putExtras(bundle);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
 
             }
         });

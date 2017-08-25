@@ -345,5 +345,6 @@
     <string name="unitcost2_text">不含税单价</string>
     <string name="linecost3_text">不含税总价</string>
     <string name="ysxq_text">验收详情</string>
+    <string name="have_not_appove_hint">暂无审批功能</string>
 
 </resources>

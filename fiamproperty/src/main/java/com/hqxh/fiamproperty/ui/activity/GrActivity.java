@@ -53,11 +53,9 @@ public class GrActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getGRUrl(AccountUtils.getpersonId(this),  curpage, showcount);
-        Log.i(TAG, "data=" + data);
-        Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
+        String data = HttpManager.getGRUrl(GlobalConfig.GRWZ_APPID, GlobalConfig.GR_NAME, "", AccountUtils.getpersonId(this), curpage, showcount);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
-                .addQueryParameter("data", data)
+                .addBodyParameter("data", data)
                 .build()
                 .getObjectObservable(R_GR.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
@@ -79,7 +77,6 @@ public class GrActivity extends BaseListActivity {
                     @Override
                     public List<GR> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
@@ -93,7 +90,7 @@ public class GrActivity extends BaseListActivity {
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                         if (gr == null || gr.isEmpty()) {
-
+                            notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
                             addData(gr);
@@ -106,17 +103,17 @@ public class GrActivity extends BaseListActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-
+                        notLinearLayout.setVisibility(View.VISIBLE);
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                     }
                 });
     }
 
 
-   @Override
-  public void onRefresh() {
+    @Override
+    public void onRefresh() {
         curpage = 1;
-        grAdapter.removeAll( grAdapter.getData());
+        grAdapter.removeAll(grAdapter.getData());
         getData();
 
     }
@@ -174,9 +171,9 @@ public class GrActivity extends BaseListActivity {
         grAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent=new Intent(GrActivity.this,GrDetailsActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("gr",(Serializable) grAdapter.getData().get(position));
+                Intent intent = new Intent(GrActivity.this, GrDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("gr", (Serializable) grAdapter.getData().get(position));
                 intent.putExtras(bundle);
                 startActivityForResult(intent, 0);
             }

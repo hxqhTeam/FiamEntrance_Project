@@ -27,7 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="@dimen/dimens_40dp"
             android:scrollbars="none">
 
             <LinearLayout
@@ -49,8 +48,9 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/prnum_text"
+                            android:text="@string/prnum_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -81,8 +81,9 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/projectid_text"
+                            android:text="@string/projectid_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -113,8 +114,8 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
                             android:text="@string/status_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -146,8 +147,9 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/udpcowner_text"
+                            android:text="@string/udpcowner_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -178,8 +180,9 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/udremarks_text"
+                            android:text="@string/udremarks_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -210,8 +213,9 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/udremarks1_text"
+                            android:text="@string/udremarks1_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -241,17 +245,17 @@
                     android:layout_height="match_parent"
                     android:background="@color/background_dark_gray"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="80dp"
                         android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:layout_margin="@dimen/dimen_10"                        android:text="@string/jbxx_text"
-                        android:textColor="@color/black"
+                        android:layout_margin="@dimen/dimen_10"
                         android:gravity="center"
+                        android:text="@string/jbxx_text"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
                     <ImageView
@@ -286,8 +290,8 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
                             android:text="@string/sqr_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -319,8 +323,8 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
                             android:text="@string/reportdate_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -352,8 +356,8 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
                             android:text="@string/phone_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -385,8 +389,8 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
                             android:text="@string/date_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -439,8 +443,8 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
                             android:text="@string/udremarks4_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -473,8 +477,8 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
                             android:text="@string/udremark_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -506,8 +510,8 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
                             android:text="@string/udremarks2_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -517,9 +521,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
+                            android:gravity="center_vertical"
                             android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
-                            android:gravity="center_vertical"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -572,26 +576,7 @@
 
         </ScrollView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_40dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/workflow_btn_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/btn_default"
-                android:text="@string/sp_btn_id"
-                android:textColor="@color/white"
-                android:textSize="@dimen/dimens_16sp" />
-
-
-        </RelativeLayout>
+        <include layout="@layout/appove_button"></include>
 
     </RelativeLayout>
 

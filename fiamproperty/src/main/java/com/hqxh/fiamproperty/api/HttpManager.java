@@ -25,8 +25,14 @@ public class HttpManager {
     /**
      * 国内出差*
      */
-    public static String getWORKORDERUrl(String username, int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.TRAVEL_APPID + "','objectname':'" + GlobalConfig.WORKORDER_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getWORKORDERUrl(String appid, String objectname, String wonum, String username, int curpage, int showcount) {
+        if (wonum.isEmpty()) {
+            return "{'appid':'" + appid + "','objectname':'" + objectname + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+        } else {
+            return "{'appid':'" + appid + "','objectname':'" + objectname + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'=" + wonum + "'}}";
+
+        }
 
     }
 
@@ -57,49 +63,50 @@ public class HttpManager {
 */
 
     public static String getZCMXUrl(String username, String grnum, int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.GRZC_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'"+username+"','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'GRNUM':'="+grnum+"'}}";
+        return "{'appid':'" + GlobalConfig.GRZC_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'GRNUM':'=" + grnum + "'}}";
 //        return "{'appid':'" + GlobalConfig.GRZC_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
 
     }
 
 
     /**
-     * 出国立项*
-     */
-    public static String getGWWORKORDERUrl(String username, int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.TRAVELS_APPID + "','objectname':'" + GlobalConfig.WORKORDER_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
-
-    }
-
-    /**
      * 出门管理*
      */
-    public static String getGRUrl(String username, int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.GRWZ_APPID + "','objectname':'" + GlobalConfig.GR_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getGRUrl(String appid, String objctname, String grnum, String username, int curpage, int showcount) {
+        if (grnum.isEmpty()) {
+            return "{'appid':'" + appid + "','objectname':'" + objctname + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+        } else {
+            return "{'appid':'" + appid + "','objectname':'" + objctname + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'GRNUM':'=" + grnum + "'}}";
 
+        }
     }
 
     /**
      * 采购申请*
      */
-    public static String getPRUrl(String appid, String username, int curpage, int showcount) {
-        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PR_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getPRUrl(String appid, String prnum, String username, int curpage, int showcount) {
+        if (prnum.isEmpty()) {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PR_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
 
+        } else {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PR_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PRNUM':'=" + prnum + "'}}";
+        }
     }
 
 
     /**
      * 潜在供应商*
      */
-    public static String getPRVENDORUrl(String appid, String prnum,String username, int curpage, int showcount) {
-        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PRVENDOR_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PRNUM':'="+prnum+"'}}";
+    public static String getPRVENDORUrl(String appid, String prnum, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PRVENDOR_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PRNUM':'=" + prnum + "'}}";
 
     }
+
     /**
      * 申请明细*
      */
-    public static String getPRLINEUrl(String appid, String prnum,String username, int curpage, int showcount) {
-        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PRNUM':'="+prnum+"'}}";
+    public static String getPRLINEUrl(String appid, String prnum, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PRNUM':'=" + prnum + "'}}";
 
     }
 
@@ -123,8 +130,14 @@ public class HttpManager {
     /**
      * 合同*
      */
-    public static String getPURCHVIEWUrl(String username, int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.CONTPURCH_APPID + "','objectname':'" + GlobalConfig.PURCHVIEW_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getPURCHVIEWUrl(String appid,String contractnum,String username, int curpage, int showcount) {
+        if(contractnum.isEmpty()){
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PURCHVIEW_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+        }else{
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PURCHVIEW_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'CONTRACTNUM':'=" + contractnum + "'}}";
+
+        }
 
     }
 
@@ -139,8 +152,8 @@ public class HttpManager {
     /**
      * 付款验收明细*
      */
-    public static String getPAYCHECKLINEUrl(String appid, String paychecknum,String username, int curpage, int showcount) {
-        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYCHECKLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYCHECKNUM':'="+paychecknum+"'}}";
+    public static String getPAYCHECKLINEUrl(String appid, String paychecknum, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYCHECKLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYCHECKNUM':'=" + paychecknum + "'}}";
 
     }
 
@@ -173,7 +186,7 @@ public class HttpManager {
     /**
      * 需款项目
      */
-    public static String gePAYPLANPROJECTUrl(String payplannum,String username, int curpage, int showcount) {
+    public static String gePAYPLANPROJECTUrl(String payplannum, String username, int curpage, int showcount) {
         return "{'appid':'" + GlobalConfig.PP_APPID + "','objectname':'" + GlobalConfig.PAYPLANPROJECT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYPLANNUM':'=" + payplannum + "'}}";
 
     }

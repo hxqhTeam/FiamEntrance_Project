@@ -21,5 +21,5 @@
     <dimen name="dimens_line">0.5dp</dimen>
     <dimen name="dimens_40dp">40dp</dimen>
     <dimen name="dimen_2dp">2dp</dimen>
-    <dimen name="dimens_14sp">14sp</dimen>
+    <dimen name="dimens_14sp">16sp</dimen>
 </resources>

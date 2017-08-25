@@ -37,14 +37,12 @@ import io.reactivex.schedulers.Schedulers;
 public class ActiveTaskActivity extends BaseListActivity {
     private static final String TAG = "ActiveTaskActivity";
 
-
     private WfassignmentAdapter wfassignmentAdapter;
 
     private int curpage = 1;
     private int showcount = 20;
     private int totalpage;
 
-    private int mark = 0;
 
     private String assignstatus;
     private String title;
@@ -193,7 +191,134 @@ public class ActiveTaskActivity extends BaseListActivity {
         wfassignmentAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Wfassignment wfassignment = (Wfassignment) wfassignmentAdapter.getData().get(position);
+                String app = JsonUnit.convertStrToArray(wfassignment.getAPP())[0];
+                Intent intent = getIntent();
+                if (app.equals(GlobalConfig.GRWZ_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, GrDetailsActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.TRAVEL_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, GnWorkorderActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.TRAVELS_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, CgWorkorderActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.JSPR_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, JsPrActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.SZPR_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, SzPrActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.PR_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, WzPrActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.FWPR_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, FwpaydetailsActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.WPPR_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, WppaydetailsActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.TOSY_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, SyrwdWorkorderActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.TOSZ_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, SzrwdWorkorderActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.TOLL_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, WzlldWorkorderActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.TODJ_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, DjrwdWorkorderActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.TOOIL_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, RyrwdWorkorderActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.TOQT_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, QtrwdWorkorderActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.CONTPURCH_APPID)) {
+                    intent.setClass(ActiveTaskActivity.this, PurchviewActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                }
+//                else if (app.equals(GlobalConfig.PAYCHECK_APPID)) {
+//                    intent.setClass(ActiveTaskActivity.this, PaycheckActivity.class);
+//                    intent.putExtra("appid", app);
+//                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+//                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+//                    startActivityForResult(intent, 0);
+//                } else if (app.equals(GlobalConfig.PP_APPID)) {
+//                    intent.setClass(ActiveTaskActivity.this, XkplandetailActivity.class);
+//                    intent.putExtra("appid", app);
+//                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+//                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+//                    startActivityForResult(intent, 0);
+//                } else if (app.equals(GlobalConfig.EXPENSES_APPID)) {
+//                    intent.setClass(ActiveTaskActivity.this, ExpenseActivity.class);
+//                    intent.putExtra("appid", app);
+//                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+//                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+//                    startActivityForResult(intent, 0);
+//                } else if (app.equals(GlobalConfig.EXPENSE_APPID)) {
+//                    intent.setClass(ActiveTaskActivity.this, ByExpenseActivity.class);
+//                    intent.putExtra("appid", app);
+//                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+//                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+//                    startActivityForResult(intent, 0);
+//                } else if (app.equals(GlobalConfig.BO_APPID)) {
+//                    intent.setClass(ActiveTaskActivity.this, BoActivity.class);
+//                    intent.putExtra("appid", app);
+//                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+//                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+//                    startActivityForResult(intent, 0);
+//                }
+                else {
+                    showMiddleToast(ActiveTaskActivity.this, getString(R.string.have_not_appove_hint));
+                }
             }
         });
     }

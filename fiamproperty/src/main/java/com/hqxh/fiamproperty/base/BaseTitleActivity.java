@@ -86,4 +86,17 @@ public abstract class BaseTitleActivity extends BaseActivity {
         return true;
     }
 
+
+    /**获取View的高度**/
+    public static int getHeight(View view){
+        int w = View.MeasureSpec.makeMeasureSpec(0,
+                View.MeasureSpec.UNSPECIFIED);
+        int h = View.MeasureSpec.makeMeasureSpec(0,
+                View.MeasureSpec.UNSPECIFIED);
+        view.measure(w, h);
+        int height = view.getMeasuredHeight();
+
+        return height;
+    }
+
 }

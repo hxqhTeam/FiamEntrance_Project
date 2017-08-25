@@ -27,13 +27,108 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="@dimen/dimens_40dp"
             android:scrollbars="none">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_10"
+                        android:gravity="center"
+                        android:text="@string/grnum_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                    <TextView
+                        android:id="@+id/grnum_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="暂无数据"
+                        android:padding="@dimen/top_7dp"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_10"
+                        android:gravity="center"
+                        android:text="@string/location_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                    <TextView
+                        android:id="@+id/location_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="暂无数据"
+                        android:padding="@dimen/top_7dp"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_10"
+                        android:gravity="center"
+                        android:text="@string/location2_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                    <TextView
+                        android:id="@+id/location2_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="暂无数据"
+                        android:padding="@dimen/top_7dp"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -44,8 +139,144 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_10"
+                        android:gravity="center"
+                        android:text="@string/reason_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                    <TextView
+                        android:id="@+id/reason_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="暂无数据"
+                        android:padding="@dimen/top_7dp"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_10"
+                        android:gravity="center"
+                        android:text="@string/type_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                    <TextView
+                        android:id="@+id/type_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="暂无数据"
+                        android:padding="@dimen/top_7dp"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_10"
+                        android:gravity="center"
+                        android:text="@string/schedulardate_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                    <TextView
+                        android:id="@+id/schedulardate_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="暂无数据"
+                        android:padding="@dimen/top_7dp"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line"></View>
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/dimen_10"
+                        android:gravity="center"
+                        android:text="@string/jbxx_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp"
+
+                        />
+
+                    <ImageView
+                        android:id="@+id/jbxx_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/btn_top_5dp"
+                        android:src="@drawable/ic_keyboard_arrow_down_black" />
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/jbxx_linearlayout_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -53,218 +284,12 @@
                         android:orientation="horizontal">
 
                         <TextView
+
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:text="@string/grnum_text"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                        <TextView
-                            android:id="@+id/grnum_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:hint="暂无数据"
-                            android:padding="@dimen/top_7dp"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background_dark_gray"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"
-                            android:text="@string/location_text"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                        <TextView
-                            android:id="@+id/location_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:hint="暂无数据"
-                            android:padding="@dimen/top_7dp"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background_dark_gray"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"
-                            android:text="@string/location2_text"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                        <TextView
-                            android:id="@+id/location2_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:hint="暂无数据"
-                            android:padding="@dimen/top_7dp"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background_dark_gray"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"
-                            android:text="@string/reason_text"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                        <TextView
-                            android:id="@+id/reason_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:hint="暂无数据"
-                            android:padding="@dimen/top_7dp"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background_dark_gray"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"
-                            android:text="@string/type_text"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                        <TextView
-                            android:id="@+id/type_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:hint="暂无数据"
-                            android:padding="@dimen/top_7dp"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background_dark_gray"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/schedulardate_text"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                        <TextView
-                            android:id="@+id/schedulardate_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:hint="暂无数据"
-                            android:padding="@dimen/top_7dp"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/btn_top_10dp"
-                        android:background="@color/background_dark_gray"></View>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background_dark_gray"
-                        android:orientation="horizontal">
-
-                        <TextView
-
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/sqr_text"
+                            android:text="@string/sqr_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -280,147 +305,143 @@
                             android:textSize="@dimen/dimens_16sp" />
 
                     </LinearLayout>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/line"></View>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/background_dark_gray"
-                    android:orientation="horizontal">
 
-                    <TextView
 
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                        android:text="@string/phone_text"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dimens_16sp" />
-
-                    <TextView
-                        android:id="@+id/phone_text"
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center_vertical"
-                        android:hint="暂无数据"
-                        android:padding="@dimen/top_7dp"
-                        android:textColor="@color/light_black"
-                        android:textSize="@dimen/dimens_16sp" />
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/line"></View>
 
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/line"></View>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/background_dark_gray"
-                    android:orientation="horizontal">
-
-                    <TextView
-
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                        android:text="@string/cudept_text"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dimens_16sp" />
-
-                    <TextView
-                        android:id="@+id/cudept_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center_vertical"
-                        android:hint="暂无数据"
-                        android:padding="@dimen/top_7dp"
-                        android:textColor="@color/light_black"
-                        android:textSize="@dimen/dimens_16sp" />
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_dark_gray"
+                        android:orientation="horizontal">
 
-                </LinearLayout>
+                        <TextView
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/line"></View>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/background_dark_gray"
-                    android:orientation="horizontal">
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
+                            android:text="@string/phone_text"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimens_16sp" />
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                        android:text="@string/cucrew_text"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dimens_16sp" />
+                        <TextView
+                            android:id="@+id/phone_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center_vertical"
+                            android:hint="暂无数据"
+                            android:padding="@dimen/top_7dp"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16sp" />
 
-                    <TextView
-                        android:id="@+id/cucrew_text"
+                    </LinearLayout>
+
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center_vertical"
-                        android:hint="暂无数据"
-                        android:padding="@dimen/top_7dp"
-                        android:textColor="@color/light_black"
-                        android:textSize="@dimen/dimens_16sp" />
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/line"></View>
 
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/line"></View>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/background_dark_gray"
-                    android:orientation="horizontal">
-
-                    <TextView
-
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                        android:text="@string/status_text"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dimens_16sp" />
-
-                    <TextView
-                        android:id="@+id/status_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center_vertical"
-                        android:hint="暂无数据"
-                        android:padding="@dimen/top_7dp"
-                        android:textColor="@color/light_black"
-                        android:textSize="@dimen/dimens_16sp" />
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_dark_gray"
+                        android:orientation="horizontal">
 
-                </LinearLayout>
+                        <TextView
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/line"></View>
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
+                            android:text="@string/cudept_text"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimens_16sp" />
 
+                        <TextView
+                            android:id="@+id/cudept_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center_vertical"
+                            android:hint="暂无数据"
+                            android:padding="@dimen/top_7dp"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16sp" />
 
+                    </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/jbxx_text_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/line"></View>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_dark_gray"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
+                            android:text="@string/cucrew_text"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+                        <TextView
+                            android:id="@+id/cucrew_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center_vertical"
+                            android:hint="暂无数据"
+                            android:padding="@dimen/top_7dp"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/line"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_dark_gray"
+                        android:orientation="horizontal">
+
+                        <TextView
+
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
+                            android:text="@string/status_text"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+                        <TextView
+                            android:id="@+id/status_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center_vertical"
+                            android:hint="暂无数据"
+                            android:padding="@dimen/top_7dp"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
@@ -436,8 +457,9 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/enterdate_text"
+                            android:text="@string/enterdate_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -453,18 +475,10 @@
                             android:textSize="@dimen/dimens_16sp" />
 
                     </LinearLayout>
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-
-
-
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/jxbb_view_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/line"></View>
@@ -474,7 +488,6 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:background="@color/background_dark_gray"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -484,8 +497,9 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/dimen_10"
                         android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                        android:text="@string/wzmx_text"
+                        android:text="@string/wzmx_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -499,6 +513,7 @@
                         android:src="@drawable/ic_more_horiz_black" />
 
                 </RelativeLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -519,8 +534,9 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/dimen_10"
                         android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                        android:text="@string/zcmx_text"
+                        android:text="@string/zcmx_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -536,6 +552,7 @@
                 </RelativeLayout>
 
                 <View
+                    android:id="@+id/zcmx_view_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/line"></View>
@@ -553,8 +570,9 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/dimen_10"
                         android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                        android:text="@string/spjl_text"
+                        android:text="@string/spjl_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -577,28 +595,8 @@
         </ScrollView>
 
 
-
-
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimens_40dp"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/spbutton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/btn_default"
-            android:text="@string/sp_btn_id"
-            android:textColor="@color/white"
-            android:textSize="@dimen/dimens_16sp" />
-
-
-    </RelativeLayout>
+    <include layout="@layout/appove_button"></include>
 
 </RelativeLayout>

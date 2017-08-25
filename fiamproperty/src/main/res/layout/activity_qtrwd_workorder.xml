@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,7 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="@dimen/dimens_40dp"
             android:scrollbars="none">
 
             <LinearLayout
@@ -99,6 +97,7 @@
                             android:background="@color/white"
                             android:gravity="center_vertical"
                             android:hint="@string/have_not_data"
+                            android:paddingLeft="@dimen/btn_top_5dp"
                             android:text="说明（收货或者发货）：
                                                                              货物尺寸及重量：
                                                                              邮寄单位：
@@ -114,7 +113,6 @@
                                                                              传真：
                                                                              手机：
                                                                              建议完成时间："
-                            android:paddingLeft="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
                     </LinearLayout>
@@ -785,27 +783,7 @@
 
         </ScrollView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_40dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/workflow_btn_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/btn_default"
-                android:text="@string/sp_btn_id"
-                android:textColor="@color/white"
-                android:textSize="@dimen/dimens_16sp" />
-
-
-        </RelativeLayout>
-
+        <include layout="@layout/appove_button"></include>
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

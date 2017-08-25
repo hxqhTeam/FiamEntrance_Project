@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.api.HttpManager;
@@ -43,6 +44,7 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
 
     private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private RecyclerView mRecyclerView;
+    private LinearLayout notLinearLayout;
 
     private int curpage = 1;
     private int showcount = 20;
@@ -61,6 +63,7 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mPullLoadMoreRecyclerView = (PullLoadMoreRecyclerView) view.findViewById(R.id.pullLoadMoreRecyclerView);
+        notLinearLayout = (LinearLayout) view.findViewById(R.id.have_not_data_id);
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -76,9 +79,7 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
     }
 
     private void getData() {
-        String data = HttpManager.getGWWORKORDERUrl(AccountUtils.getpersonId(getActivity()), curpage, showcount);
-        Log.i(TAG, "data=" + data);
-        Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
+        String data = HttpManager.getWORKORDERUrl(GlobalConfig.TRAVELS_APPID, GlobalConfig.WORKORDER_NAME, "", AccountUtils.getpersonId(getActivity()), curpage, showcount);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addBodyParameter("data", data)
                 .build()
@@ -102,7 +103,6 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
                     @Override
                     public List<R_Workorder.Workorder> apply(@NonNull R_Workorder.ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
@@ -116,7 +116,7 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                         if (workorder == null || workorder.isEmpty()) {
-
+                            notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
                             addData(workorder);
@@ -129,7 +129,7 @@ public class TravelsFragment extends Fragment implements PullLoadMoreRecyclerVie
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-
+                        notLinearLayout.setVisibility(View.VISIBLE);
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                     }
                 });

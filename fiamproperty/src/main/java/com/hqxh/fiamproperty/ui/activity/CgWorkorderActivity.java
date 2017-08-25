@@ -5,21 +5,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.hqxh.fiamproperty.R;
+import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseTitleActivity;
 import com.hqxh.fiamproperty.bean.R_APPROVE;
 import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_PR;
+import com.hqxh.fiamproperty.model.R_Workorder;
 import com.hqxh.fiamproperty.model.R_Workorder.Workorder;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
 import com.hqxh.fiamproperty.unit.AccountUtils;
@@ -43,6 +48,7 @@ import retrofit2.http.HTTP;
 public class CgWorkorderActivity extends BaseTitleActivity {
 
     private static final String TAG = "CgWorkorderActivity";
+    private ScrollView scrollView;
     /**
      * 信息展示
      **/
@@ -60,9 +66,11 @@ public class CgWorkorderActivity extends BaseTitleActivity {
     private TextView udestdur3Text; //停留天数
 
     private ImageView lcgrymdText; //拟出国人员名单
-    private LinearLayout ccrLinearLayout;
+
 
     private ImageView qtxxImageView;  //其它信息
+    private LinearLayout ccrLinearLayout; //其它信息
+    private View qtxxView; //其它信息
 
     private TextView udtrv1Text; //团队负责人
     private TextView rdcheadText; //中心分管领导
@@ -72,6 +80,7 @@ public class CgWorkorderActivity extends BaseTitleActivity {
     private TextView phonenumText; //电话
 
     private ImageView sqjlImageView; //审批记录
+    private RelativeLayout workflowRelativeLayout;//布局
 
     private Button workflowBtn;
 
@@ -79,11 +88,29 @@ public class CgWorkorderActivity extends BaseTitleActivity {
 
     private Animation rotate;
 
+    private int mark = 0;//跳转标识
+    private String appid; //appid
+    private String ownernum;//ownernum
+    private String ownertable;//ownertable
+
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        workorder = (Workorder) getIntent().getSerializableExtra("workorder");
-        Log.e(TAG, "初始化界面前的准备");
+        if (getIntent().hasExtra("workorder")) {
+            workorder = (Workorder) getIntent().getSerializableExtra("workorder");
+        }
+        if (getIntent().hasExtra("mark")) {
+            mark = getIntent().getExtras().getInt("mark");
+        }
+        if (getIntent().hasExtra("appid")) {
+            appid = getIntent().getExtras().getString("appid");
+        }
+        if (getIntent().hasExtra("ownernum")) {
+            ownernum = getIntent().getExtras().getString("ownernum");
+        }
+        if (getIntent().hasExtra("ownertable")) {
+            ownertable = getIntent().getExtras().getString("ownertable");
+        }
     }
 
     @Override
@@ -93,6 +120,7 @@ public class CgWorkorderActivity extends BaseTitleActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        scrollView = (ScrollView) findViewById(R.id.scrollView_id);
         wonumText = (TextView) findViewById(R.id.requireplannum_text_id);
         projectidText = (TextView) findViewById(R.id.projectid_text_id);
         udesttotalcostText = (TextView) findViewById(R.id.udesttotalcost_text_id);
@@ -105,8 +133,9 @@ public class CgWorkorderActivity extends BaseTitleActivity {
         udestdur3Text = (TextView) findViewById(R.id.udestdur3_text_id);
 
         lcgrymdText = (ImageView) findViewById(R.id.lcgrymd_imageview_id);
-        ccrLinearLayout = (LinearLayout) findViewById(R.id.linearLayout_id);
         qtxxImageView = (ImageView) findViewById(R.id.jbxx_kz_imageview_id);
+        ccrLinearLayout = (LinearLayout) findViewById(R.id.linearLayout_id);
+        qtxxView = (View) findViewById(R.id.qtxx_view_id);
 
         udtrv1Text = (TextView) findViewById(R.id.udtrv1_text_id);
         rdcheadText = (TextView) findViewById(R.id.rdchead_text_id);
@@ -118,9 +147,20 @@ public class CgWorkorderActivity extends BaseTitleActivity {
         sqjlImageView = (ImageView) findViewById(R.id.sqjl_imageview_id);
 
         workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
-
-        showData();
+        workflowRelativeLayout = (RelativeLayout) findViewById(R.id.relavtivelayout_btn_id);
+        if (null == appid) {
+            showData();
+        } else {
+            if (mark == HomeActivity.DB_CODE) { //待办任务
+                workflowRelativeLayout.setVisibility(View.VISIBLE);
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
+                scrollView.setLayoutParams(layoutParams);
+            }
+            getNetWorkWorkOrder();
+        }
     }
+
 
     //展示界面数据
     private void showData() {
@@ -174,8 +214,10 @@ public class CgWorkorderActivity extends BaseTitleActivity {
         public void onClick(View view) {
             if (startAnaim()) {
                 ccrLinearLayout.setVisibility(View.GONE);
+                qtxxView.setVisibility(View.GONE);
             } else {
                 ccrLinearLayout.setVisibility(View.VISIBLE);
+                qtxxView.setVisibility(View.VISIBLE);
             }
 
         }
@@ -263,9 +305,7 @@ public class CgWorkorderActivity extends BaseTitleActivity {
     }
 
 
-    //http://10.60.12.98/maximo/mobile/wf/approve?ownertable=GR&ownerid=77128&memo=驳回&selectWhat=0&userid=zhuyinan
     private void PostApprove(String ownertable, String ownerid, String memo, String selectWhat, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",memo=" + memo + ",selectWhat=" + selectWhat + ",userid=" + userid);
 
         Rx2AndroidNetworking
                 .post(GlobalConfig.HTTP_URL_APPROVE_WORKFLOW)
@@ -325,6 +365,58 @@ public class CgWorkorderActivity extends BaseTitleActivity {
                 dialogInterface.dismiss();
             }
         }).create().show();
+    }
+
+    //根据appid,grnum,objctname获取国内出差信息
+    private void getNetWorkWorkOrder() {
+        String data = HttpManager.getWORKORDERUrl(appid, ownertable, ownernum, AccountUtils.getpersonId(CgWorkorderActivity.this), 1, 10);
+        Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
+                .addBodyParameter("data", data)
+                .build()
+                .getObjectObservable(R_Workorder.class) // 发起获取数据列表的请求，并解析到FootList
+                .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
+                .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
+                .doOnNext(new Consumer<R_Workorder>() {
+                    @Override
+                    public void accept(@NonNull R_Workorder r_workorder) throws Exception {
+                    }
+                })
+
+                .map(new Function<R_Workorder, R_Workorder.ResultBean>() {
+                    @Override
+                    public R_Workorder.ResultBean apply(@NonNull R_Workorder r_workorder) throws Exception {
+
+                        return r_workorder.getResult();
+                    }
+                })
+                .map(new Function<R_Workorder.ResultBean, List<R_Workorder.Workorder>>() {
+                    @Override
+                    public List<R_Workorder.Workorder> apply(@NonNull R_Workorder.ResultBean resultBean) throws Exception {
+                        return resultBean.getResultlist();
+                    }
+
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<R_Workorder.Workorder>>() {
+                    @Override
+                    public void accept(@NonNull List<R_Workorder.Workorder> workorders) throws Exception {
+
+                        if (workorders == null || workorders.isEmpty()) {
+                        } else {
+                            workorder = workorders.get(0);
+                            showData();
+
+                        }
+                    }
+
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                    }
+                });
+
     }
 
 }

@@ -24,7 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="@dimen/dimens_40dp"
             android:scrollbars="none">
 
             <LinearLayout
@@ -497,7 +496,6 @@
                             android:gravity="center_vertical"
                             android:hint="@string/have_not_data"
                             android:paddingLeft="@dimen/btn_top_5dp"
-                            android:paddingRight="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
                     </LinearLayout>
@@ -904,26 +902,7 @@
 
         </ScrollView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_40dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/workflow_btn_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/btn_default"
-                android:text="@string/sp_btn_id"
-                android:textColor="@color/white"
-                android:textSize="@dimen/dimens_16sp" />
-
-
-        </RelativeLayout>
+        <include layout="@layout/appove_button"></include>
 
     </RelativeLayout>
 

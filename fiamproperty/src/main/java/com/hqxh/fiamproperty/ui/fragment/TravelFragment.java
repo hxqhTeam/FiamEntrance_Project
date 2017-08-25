@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.api.HttpManager;
@@ -35,13 +36,17 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-/**国内出差**/
+/**
+ * 国内出差
+ **/
 public class TravelFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
 
-    private static final String TAG="TravelFragment";
+    private static final String TAG = "TravelFragment";
 
     private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private RecyclerView mRecyclerView;
+
+    private LinearLayout notLinearLayout;
 
     private int curpage = 1;
     private int showcount = 20;
@@ -60,6 +65,7 @@ public class TravelFragment extends Fragment implements PullLoadMoreRecyclerView
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mPullLoadMoreRecyclerView = (PullLoadMoreRecyclerView) view.findViewById(R.id.pullLoadMoreRecyclerView);
+        notLinearLayout = (LinearLayout) view.findViewById(R.id.have_not_data_id);
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -75,9 +81,7 @@ public class TravelFragment extends Fragment implements PullLoadMoreRecyclerView
     }
 
     private void getData() {
-        String data=HttpManager.getWORKORDERUrl(AccountUtils.getpersonId(getActivity()),curpage, showcount);
-        Log.i(TAG, "data=" + data);
-        Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
+        String data = HttpManager.getWORKORDERUrl(GlobalConfig.TRAVEL_APPID, GlobalConfig.WORKORDER_NAME, "", AccountUtils.getpersonId(getActivity()), curpage, showcount);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addBodyParameter("data", data)
                 .build()
@@ -101,7 +105,6 @@ public class TravelFragment extends Fragment implements PullLoadMoreRecyclerView
                     @Override
                     public List<Workorder> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG,"Totalresult="+resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
@@ -115,7 +118,7 @@ public class TravelFragment extends Fragment implements PullLoadMoreRecyclerView
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                         if (workorder == null || workorder.isEmpty()) {
-
+                            notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
                             addData(workorder);
@@ -128,15 +131,12 @@ public class TravelFragment extends Fragment implements PullLoadMoreRecyclerView
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-
+                        notLinearLayout.setVisibility(View.VISIBLE);
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                     }
                 });
 
     }
-
-
-
 
 
     @Override
@@ -150,7 +150,7 @@ public class TravelFragment extends Fragment implements PullLoadMoreRecyclerView
     public void onLoadMore() {
         if (totalpage == curpage) {
             getLoadMore();
-            BaseActivity.showMiddleToast(getActivity(),getResources().getString(R.string.all_data_hint));
+            BaseActivity.showMiddleToast(getActivity(), getResources().getString(R.string.all_data_hint));
         } else {
             curpage++;
             getData();
@@ -182,7 +182,7 @@ public class TravelFragment extends Fragment implements PullLoadMoreRecyclerView
         travelAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent=new Intent(getActivity(), GnWorkorderActivity.class);
+                Intent intent = new Intent(getActivity(), GnWorkorderActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("workorder", (Serializable) travelAdapter.getData().get(position));
                 intent.putExtras(bundle);

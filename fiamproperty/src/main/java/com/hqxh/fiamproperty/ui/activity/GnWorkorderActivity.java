@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -12,15 +13,19 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.hqxh.fiamproperty.R;
+import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseTitleActivity;
 import com.hqxh.fiamproperty.bean.R_APPROVE;
 import com.hqxh.fiamproperty.bean.R_APPROVE.Result;
 import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
+import com.hqxh.fiamproperty.model.R_Workorder;
 import com.hqxh.fiamproperty.model.R_Workorder.Workorder;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
 import com.hqxh.fiamproperty.unit.AccountUtils;
@@ -32,6 +37,7 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -40,6 +46,8 @@ import io.reactivex.schedulers.Schedulers;
 public class GnWorkorderActivity extends BaseTitleActivity {
 
     private static final String TAG = "GnWorkorderActivity";
+
+    private ScrollView scrollView;
     /**
      * 信息展示
      **/
@@ -71,16 +79,34 @@ public class GnWorkorderActivity extends BaseTitleActivity {
     private ImageView sqjlImageView; //审批记录
 
     private Button workflowBtn; //审批
+    private RelativeLayout workflowRelativeLayout;//布局
 
     private Workorder workorder;
 
     private Animation rotate;
+
+    private int mark = 0;//跳转标识
+    private String appid; //appid
+    private String ownernum;//ownernum
+    private String ownertable;//ownertable
 
     @Override
     protected void beforeInit() {
         super.beforeInit();
         if (getIntent().hasExtra("workorder")) {
             workorder = (Workorder) getIntent().getSerializableExtra("workorder");
+        }
+        if (getIntent().hasExtra("mark")) {
+            mark = getIntent().getExtras().getInt("mark");
+        }
+        if (getIntent().hasExtra("appid")) {
+            appid = getIntent().getExtras().getString("appid");
+        }
+        if (getIntent().hasExtra("ownernum")) {
+            ownernum = getIntent().getExtras().getString("ownernum");
+        }
+        if (getIntent().hasExtra("ownertable")) {
+            ownertable = getIntent().getExtras().getString("ownertable");
         }
 
     }
@@ -92,6 +118,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        scrollView = (ScrollView) findViewById(R.id.scrollView_id);
         wonumText = (TextView) findViewById(R.id.requireplannum_text_id);
         projectidText = (TextView) findViewById(R.id.projectid_text_id);
         worktypeText = (TextView) findViewById(R.id.worktype_text_id);
@@ -119,9 +146,21 @@ public class GnWorkorderActivity extends BaseTitleActivity {
         sqjlImageView = (ImageView) findViewById(R.id.sqjl_imageview_id);
 
         workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
+        workflowRelativeLayout = (RelativeLayout) findViewById(R.id.relavtivelayout_btn_id);
+        if (null == appid) {
+            showData();
+        } else {
+            if (mark == HomeActivity.DB_CODE) { //待办任务
+                workflowRelativeLayout.setVisibility(View.VISIBLE);
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
+                scrollView.setLayoutParams(layoutParams);
+            }
+            getNetWorkWorkOrder();
+        }
 
-        showData();
     }
+
 
     //展示界面数据
     private void showData() {
@@ -149,6 +188,13 @@ public class GnWorkorderActivity extends BaseTitleActivity {
         reportdateText.setText(JsonUnit.convertStrToArray(workorder.getREPORTDATE())[0]);
         phonenumText.setText(JsonUnit.convertStrToArray(workorder.getPHONENUM())[0]);
 
+
+        setOnClickListener();
+
+
+    }
+
+    private void setOnClickListener() {
         rotate = AnimationUtils.loadAnimation(this, R.anim.arrow_rotate);//创建动画
 
         ccrText.setOnClickListener(ccrTextOnClickListener);
@@ -156,8 +202,6 @@ public class GnWorkorderActivity extends BaseTitleActivity {
         sqjlImageView.setOnClickListener(sqjlImageViewOnClickListener);
 
         workflowBtn.setOnClickListener(workflowBtnOnClickListener);
-
-
     }
 
     @Override
@@ -337,4 +381,56 @@ public class GnWorkorderActivity extends BaseTitleActivity {
         }).create().show();
     }
 
+    //根据appid,grnum,objctname获取国内出差信息
+    private void getNetWorkWorkOrder() {
+        String data = HttpManager.getWORKORDERUrl(appid,ownertable,ownernum,AccountUtils.getpersonId(GnWorkorderActivity.this), 1, 10);
+        Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
+                .addBodyParameter("data", data)
+                .build()
+                .getObjectObservable(R_Workorder.class) // 发起获取数据列表的请求，并解析到FootList
+                .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
+                .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
+                .doOnNext(new Consumer<R_Workorder>() {
+                    @Override
+                    public void accept(@NonNull R_Workorder r_workorder) throws Exception {
+                    }
+                })
+
+                .map(new Function<R_Workorder, R_Workorder.ResultBean>() {
+                    @Override
+                    public R_Workorder.ResultBean apply(@NonNull R_Workorder r_workorder) throws Exception {
+
+                        return r_workorder.getResult();
+                    }
+                })
+                .map(new Function<R_Workorder.ResultBean, List<Workorder>>() {
+                    @Override
+                    public List<Workorder> apply(@NonNull R_Workorder.ResultBean resultBean) throws Exception {
+                        return resultBean.getResultlist();
+                    }
+
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Workorder>>() {
+                    @Override
+                    public void accept(@NonNull List<Workorder> workorders) throws Exception {
+
+                        if (workorders == null || workorders.isEmpty()) {
+
+                        } else {
+                            workorder = workorders.get(0);
+                            showData();
+
+                        }
+                    }
+
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+
+                    }
+                });
+    }
 }
