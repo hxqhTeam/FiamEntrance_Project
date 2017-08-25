@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.hqxh.fiamproperty.constant.GlobalConfig;
+import com.hqxh.fiamproperty.model.R_PRLINE.PRLINE;
 import com.hqxh.fiamproperty.model.R_WPITEM.WPITEM;
 
 import org.json.JSONArray;
@@ -146,7 +147,7 @@ public class JsonUnit {
     /**
      * 合同
      **/
-    public static String djpurchviewData(String contractid, String signdate,String startdate, String enddate,String udcontractnum, String userid, String appid) {
+    public static String djpurchviewData(String contractid, String signdate, String startdate, String enddate, String udcontractnum, String userid, String appid) {
         JSONObject jsdata = new JSONObject();  //第一层
         JSONObject jsrec = new JSONObject();   //第二层
         JSONObject jswo = new JSONObject();    //第三层
@@ -177,6 +178,89 @@ public class JsonUnit {
         return null;
 
     }
+
+
+    /**
+     * 技术采购申请/试制采购申请
+     **/
+    public static String JsPrData(String prid, String rdchead, String udassigner, String userid, String appid) {
+        JSONObject jsdata = new JSONObject();  //第一层
+        JSONObject jsrec = new JSONObject();   //第二层
+        JSONObject jswo = new JSONObject();    //第三层
+
+        try {
+            jswo.put("PRID", prid);//唯一列
+            jswo.put("RDCHEAD", rdchead); //中心分管领导
+            if (!udassigner.isEmpty()) {
+                jswo.put("UDASSIGNER", udassigner); //执行人代码
+            }
+
+
+            jsrec.put("PR", jswo.toString());
+
+            //最外层
+            jsdata.put("appid", appid);
+            jsdata.put("objectname", GlobalConfig.PR_NAME);
+            jsdata.put("username", userid);
+            jsdata.put("option", "sync");
+            jsdata.put("rec", jsrec.toString());
+
+            return jsdata.toString();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+
+    /**
+     * 物资采购申请
+     **/
+    public static String WzPrData(String prid, String rdchead, String uddate2, List<PRLINE> prlines, String userid, String appid) {
+        JSONObject jsdata = new JSONObject();  //第一层
+        JSONObject jsrec = new JSONObject();   //第二层
+        JSONObject jswo = new JSONObject();    //第三层
+
+        try {
+            jswo.put("PRID", prid);//唯一列
+            jswo.put("RDCHEAD", rdchead); //中心分管领导
+            jswo.put("UDDATE2", uddate2); //执行人代码
+
+
+            jsrec.put("PR", jswo.toString());
+            //采购申请明细
+            JSONArray jaline = new JSONArray();
+            for (int i = 0; i < prlines.size(); i++) {
+                JSONObject jsline = new JSONObject();
+                PRLINE prline = prlines.get(i);
+                jsline.put("PRLINEID", prline.getPRLINEID());
+                jsline.put("UDASSIGNER", prline.getUDASSIGNER());//执行人
+                jaline.put(jsline);
+
+            }
+            jsrec.put("PRLINE", jaline.toString());
+
+
+            //最外层
+            jsdata.put("appid", appid);
+            jsdata.put("objectname", GlobalConfig.PR_NAME);
+            jsdata.put("username", userid);
+            jsdata.put("option", "sync");
+            jsdata.put("rec", jsrec.toString());
+
+            return jsdata.toString();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
 
     //获取身份证号
     public static String getIdentity(String data) {

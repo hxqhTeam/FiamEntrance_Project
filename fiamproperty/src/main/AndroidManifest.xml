@@ -225,6 +225,46 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".ui.activity.JsPrActivity"
+            android:label="@string/jscgxq_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.PrvendorActivity"
+            android:label="@string/qzgys_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.SzPrActivity"
+            android:label="@string/szcgsqxq_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.PrlineActivity"
+            android:label="@string/sqmx_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.WzPrActivity"
+            android:label="@string/wzcgsqxq_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.PaycheckActivity"
+            android:label="@string/fkysmx1_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.PaychecklineActivity"
+            android:label="@string/ysmx_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.PaychecklineDetailActivity"
+            android:label="@string/ysxq_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
         android:name=".ui.activity.XkplandetailActivity"
         android:label="@string/xkjh_text"
         android:screenOrientation="portrait"

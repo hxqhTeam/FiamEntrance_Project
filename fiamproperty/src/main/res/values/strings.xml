@@ -67,7 +67,7 @@
     <string name="status_text">状态</string>
     <string name="time_text">时间</string>
     <string name="udaddress1_text">目的地</string>
-    <string name="udtransport3_text">是否飞机</string>
+    <string name="udtransport3_text">乘坐飞机</string>
     <string name="udremark1_text">出差原因</string>
     <string name="udtrvcost1_text">差旅费用</string>
     <string name="udtrvcost2_text">其它费用</string>
@@ -271,7 +271,7 @@
     <string name="udlxtype_text">立项类型</string>
     <string name="udremarka_text">立项原因</string>
     <string name="projectdes1_text">项目内容</string>
-    <string name="pr6_text">总预算  （人民币）</string>
+    <string name="pr6_text">总预算(人民币)</string>
     <string name="udremark6_text">提升内容</string>
     <string name="udremark5_text">适用范围</string>
     <string name="wonum_text">任务单号</string>
@@ -308,5 +308,42 @@
     <string name="description12_text">项目名称</string>
     <string name="description13_text">需款内容</string>
     <string name="linecost2_text">金额</string>
+
+    <!--技术采购申请-->
+    <string name="lx_udremark1_text">立项原因</string>
+    <string name="js_udremark3_text">项目预期目标</string>
+    <string name="js_udremark6_text">通过本次采购自身能力提升内容</string>
+    <string name="reqbyphone_text">申请人电话</string>
+    <string name="qzgys_text">潜在供应商</string>
+    <string name="jscgxq_text">技术采购详情</string>
+    <string name="bz_text">备注</string>
+    <string name="sz_pr6_text">总预算(外币)</string>
+    <string name="udcurrencycode_text">货币</string>
+    <string name="sqmx_text">申请明细</string>
+    <string name="szcgsqxq_text">试制采购申请详情</string>
+    <string name="sz_udmodel_text">图号</string>
+    <string name="uddate1_text">合同履约开始日期</string>
+    <string name="wz_udremark1_text">申请原因</string>
+    <string name="wz_uddate1_text">建议完成时间</string>
+    <string name="uddate3_text">结算完成时间</string>
+    <string name="newvendor_text">指定的供应商</string>
+    <string name="contact_text">联系人</string>
+    <string name="wzcgsqxq_text">物资采购申请详情</string>
+    <string name="ys_totalcost_text">验收金额</string>
+    <string name="isfinalcheck_text">最后一次验收</string>
+    <string name="phase1_text">验收阶段</string>
+    <string name="checke_text">验收人</string>
+    <string name="checkdate_text">验收时间</string>
+    <string name="ys_cudept_text">提单部门</string>
+    <string name="ys_cucrew_text">提单科室</string>
+    <string name="pc1_text">交付物和验收内容</string>
+    <string name="pc2_text">验收结论/意见</string>
+    <string name="ysmx_text">验收明细</string>
+
+    <string name="fkysmx1_text">付款验收明细</string>
+    <string name="modelnum2_text">型号规格</string>
+    <string name="unitcost2_text">不含税单价</string>
+    <string name="linecost3_text">不含税总价</string>
+    <string name="ysxq_text">验收详情</string>
 
 </resources>

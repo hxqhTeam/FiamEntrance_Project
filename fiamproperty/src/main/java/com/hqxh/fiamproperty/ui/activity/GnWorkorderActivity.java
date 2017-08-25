@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,7 +50,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
     private TextView udtargstartdateText; //开始时间
     private TextView udtargcompdateText; //结束时间
     private TextView udaddress1Text; //目的地
-    private TextView udtransport3Text; //是否飞机
+    private CheckBox udtransport3Text; //是否飞机
     private TextView udremark1Text; //出差原因
     private TextView udtrvcost1Text; //差旅费用
     private TextView udtrvcost2Text; //其它费用
@@ -78,8 +79,10 @@ public class GnWorkorderActivity extends BaseTitleActivity {
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        workorder = (Workorder) getIntent().getSerializableExtra("workorder");
-        Log.e(TAG, "初始化界面前的准备");
+        if (getIntent().hasExtra("workorder")) {
+            workorder = (Workorder) getIntent().getSerializableExtra("workorder");
+        }
+
     }
 
     @Override
@@ -96,7 +99,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
         udtargstartdateText = (TextView) findViewById(R.id.udtargstartdate_text_id);
         udtargcompdateText = (TextView) findViewById(R.id.udtargcompdate_text_id);
         udaddress1Text = (TextView) findViewById(R.id.udaddress1_text_id);
-        udtransport3Text = (TextView) findViewById(R.id.udtransport3_text_id);
+        udtransport3Text = (CheckBox) findViewById(R.id.udtransport3_text_id);
         udremark1Text = (TextView) findViewById(R.id.udremark1_text_id);
         udtrvcost1Text = (TextView) findViewById(R.id.udtrvcost1_text_id);
         udtrvcost2Text = (TextView) findViewById(R.id.udtrvcost2_text_id);
@@ -129,7 +132,11 @@ public class GnWorkorderActivity extends BaseTitleActivity {
         udtargstartdateText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(workorder.getUDTARGSTARTDATE())[0]));
         udtargcompdateText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(workorder.getUDTARGCOMPDATE())[0]));
         udaddress1Text.setText(JsonUnit.convertStrToArray(workorder.getUDADDRESS1())[0]);
-        udtransport3Text.setText(JsonUnit.convertStrToArray(workorder.getUDESTDUR3())[0]);
+        if (JsonUnit.convertStrToArray(workorder.getUDTRANSPORT3())[0].equals("1")) {
+            udtransport3Text.setChecked(true);
+        } else {
+            udtransport3Text.setChecked(false);
+        }
         udremark1Text.setText(JsonUnit.convertStrToArray(workorder.getUDREMARK1())[0]);
         udtrvcost1Text.setText(JsonUnit.convertStrToArray(workorder.getUDTRVCOST1())[0]);
         udtrvcost2Text.setText(JsonUnit.convertStrToArray(workorder.getUDTRVCOST2())[0]);

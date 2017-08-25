@@ -78,6 +78,10 @@ public final class GlobalConfig {
     public static final String WPPR_APPID = "WPPR" ;
     //采购申请表名
     public static final String PR_NAME = "PR" ;
+    //潜在供应商表名
+    public static final String PRVENDOR_NAME = "PRVENDOR" ;
+    //申请明细行表名
+    public static final String PRLINE_NAME = "PRLINE" ;
 
     /**任务单**/
     //试验任务单
@@ -134,6 +138,8 @@ public final class GlobalConfig {
 
     //付款验收
     public static final String PAYCHECKRELATION_NAME = "PAYCHECKRELATION" ;
+    //付款验收
+    public static final String PAYCHECKLINE_NAME = "PAYCHECKLINE" ;
 
     //借款单Appid
     public static final String BO_APPID = "BO" ;
@@ -180,6 +186,8 @@ public final class GlobalConfig {
     public static final int CUDEPTKS_REQUESTCODE = 1001;//科室请求码
 
     public static final int PERSON_REQUESTCODE = 1002;//执行人请求码
+
+    public static final int RDCHEAD_REQUESTCODE = 1003;//中心分管领导请求码
 
 
 

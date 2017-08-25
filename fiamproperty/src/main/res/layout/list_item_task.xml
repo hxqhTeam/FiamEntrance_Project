@@ -12,21 +12,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/btn_top_5dp"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/btn_top_5dp">
 
         <ImageView
             android:id="@+id/task_image_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/ic_dbrw"/>
+            android:layout_centerVertical="true" />
 
         <LinearLayout
-            android:layout_toRightOf="@+id/task_image_id"
-            android:layout_marginLeft="@dimen/btn_top_5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/btn_top_5dp"
+            android:layout_toRightOf="@+id/task_image_id"
             android:orientation="vertical">
 
             <TextView
@@ -34,8 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/have_notdata_hint"
-                android:textSize="@dimen/dimens_18sp"
-                />
+                android:textSize="@dimen/dimens_18sp" />
 
 
             <TextView
@@ -43,19 +41,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/btn_top_5dp"
-                android:textColor="@color/black"
                 android:hint="@string/have_notdata_hint"
-                android:textSize="@dimen/dimens_20sp"
-                />
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimens_20sp" />
 
             <TextView
                 android:id="@+id/description_text_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/dimens_18sp"
                 android:layout_marginTop="@dimen/btn_top_5dp"
                 android:hint="@string/have_notdata_hint"
-                />
+                android:textSize="@dimen/dimens_18sp" />
 
 
         </LinearLayout>

@@ -1,5 +1,7 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.hqxh.fiamproperty.ui.adapter.HtAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +94,7 @@ public class FkActivity extends BaseListActivity {
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                         if (paycheck == null || paycheck.isEmpty()) {
-
+                            notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
                             addData(paycheck);
@@ -104,7 +107,7 @@ public class FkActivity extends BaseListActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-
+                        notLinearLayout.setVisibility(View.VISIBLE);
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                     }
                 });
@@ -172,7 +175,11 @@ public class FkActivity extends BaseListActivity {
         fkAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent =  new Intent(FkActivity.this, PaycheckActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("paycheck", (Serializable) fkAdapter.getData().get(position));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 0);
             }
         });
     }

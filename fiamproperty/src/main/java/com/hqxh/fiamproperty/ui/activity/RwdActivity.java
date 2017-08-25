@@ -101,7 +101,7 @@ public class RwdActivity extends BaseListActivity {
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                         if (workorders == null || workorders.isEmpty()) {
-
+                             notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
                             addData(workorders);
@@ -114,7 +114,7 @@ public class RwdActivity extends BaseListActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-
+                        notLinearLayout.setVisibility(View.VISIBLE);
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                     }
                 });
