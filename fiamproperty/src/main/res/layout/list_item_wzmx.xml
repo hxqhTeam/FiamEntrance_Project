@@ -23,6 +23,7 @@
             android:padding="@dimen/btn_top_5dp">
 
             <TextView
+                android:id="@+id/title1_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/description1_text"
@@ -47,6 +48,7 @@
             android:padding="@dimen/btn_top_5dp">
 
             <TextView
+                android:id="@+id/title2_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/grlin1_text"
@@ -72,6 +74,7 @@
             android:padding="@dimen/btn_top_5dp">
 
             <TextView
+                android:id="@+id/title3_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/measureunitid_text"
@@ -97,10 +100,11 @@
             android:padding="@dimen/btn_top_5dp">
 
             <TextView
+                android:id="@+id/title4_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/qty_text"
-                android:textColor="@color/light_black"
+                android:textColor="@color/black"
                 android:textSize="@dimen/dimens_16sp" />
 
             <TextView

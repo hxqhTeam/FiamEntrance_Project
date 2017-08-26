@@ -33,11 +33,10 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 物资明细
+ * 物资明细/整车明细
  **/
 public class WzmxListActivity extends BaseListActivity {
     private static final String TAG = "WzmxListActivity";
-
 
 
     private WzmxAdapter wzmxadapter;
@@ -45,12 +44,31 @@ public class WzmxListActivity extends BaseListActivity {
     private int curpage = 1;
     private int showcount = 20;
     private int totalpage;
-    private String grnum;;//
+
+    private String appid;//appid
+    private String grnum;//grnum
+    private String title;//title
+
+
+    @Override
+    protected void beforeInit() {
+        super.beforeInit();
+        if (getIntent().hasExtra("appid")) {
+            appid = getIntent().getExtras().getString("appid");
+        }
+        if (getIntent().hasExtra("grnum")) {
+            grnum = getIntent().getExtras().getString("grnum");
+        }
+        if (getIntent().hasExtra("title")) {
+            title = getIntent().getExtras().getString("title");
+        }
+
+    }
 
     @Override
     protected String getSubTitle() {
 
-            return getString(R.string.wzmx_text);
+        return title;
     }
 
 
@@ -58,8 +76,7 @@ public class WzmxListActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data= HttpManager.getGRLINEUrl(AccountUtils.getpersonId(this),grnum, curpage, showcount);
-        Log.e(TAG,"data="+data);
+        String data = HttpManager.getGRLINEUrl(appid, AccountUtils.getpersonId(this), grnum, curpage, showcount);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addQueryParameter("data", data)
                 .build()
@@ -127,7 +144,7 @@ public class WzmxListActivity extends BaseListActivity {
     public void onLoadMore() {
         if (totalpage == curpage) {
             getLoadMore();
-            showMiddleToast(WzmxListActivity.this,getResources().getString(R.string.all_data_hint));
+            showMiddleToast(WzmxListActivity.this, getResources().getString(R.string.all_data_hint));
         } else {
             curpage++;
             getData();
@@ -156,7 +173,6 @@ public class WzmxListActivity extends BaseListActivity {
 
     @Override
     protected void fillData() {
-        grnum=getIntent().getExtras().getString("grnum");
         initAdapter(new ArrayList<GRLINE>());
         getData();
 
@@ -164,6 +180,7 @@ public class WzmxListActivity extends BaseListActivity {
 
     @Override
     protected void setOnClick() {
+        searchText.setVisibility(View.GONE);
 
     }
 
@@ -173,13 +190,8 @@ public class WzmxListActivity extends BaseListActivity {
      */
     private void initAdapter(final List<GRLINE> list) {
         wzmxadapter = new WzmxAdapter(WzmxListActivity.this, R.layout.list_item_wzmx, list);
+        wzmxadapter.setAppid(appid);
         mRecyclerView.setAdapter(wzmxadapter);
-        wzmxadapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-            }
-        });
     }
 
     /**
@@ -188,8 +200,6 @@ public class WzmxListActivity extends BaseListActivity {
     private void addData(final List<GRLINE> list) {
         wzmxadapter.addData(list);
     }
-
-
 
 
 }

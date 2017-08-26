@@ -3,7 +3,7 @@ package com.hqxh.fiamproperty.model;
 import java.util.List;
 
 /**
- 物资明细，整车明细.
+ * 物资明细，整车明细.
  */
 
 public class R_GRLINE {
@@ -44,13 +44,14 @@ public class R_GRLINE {
         this.result = result;
     }
 
-    /**结果集
+    /**
+     * 结果集
      * curpage
      * resultlist
      * showcount
      * totalpage
      * totalresult
-     * **/
+     **/
     public static class ResultBean {
         private String curpage; //当前页
         private String showcount;//显示条数
@@ -99,96 +100,88 @@ public class R_GRLINE {
             this.resultlist = resultlist;
         }
     }
-   /*
-   物资明细
-   */
-  public static class GRLINE{
 
-       private  String  DESCRIPTION;//名称
-       private String GRLIN1;//规格类型
-       private String QTY;//数量
-       private String MEASUREUNITID;//计量单位
+    /*
+    物资明细／整车明细
+    */
+    public static class GRLINE {
 
+        //物资明细
+        private String DESCRIPTION;//名称/样车编号
+        private String GRLIN1;//规格类型/型号
+        private String QTY;//数量
+        private String MEASUREUNITID;//计量单位
 
-       public String getDESCRIPTION() {
-           return DESCRIPTION;
-       }
-
-       public void setDESCRIPTION(String DESCRIPTION) {
-           this.DESCRIPTION = DESCRIPTION;
-       }
-
-       public String getGRLIN1() {
-           return GRLIN1;
-       }
-
-       public void setGRLIN1(String GRLIN1) {
-           this.GRLIN1 = GRLIN1;
-       }
-
-       public String getQTY() {
-           return QTY;
-       }
-
-       public void setQTY(String QTY) {
-           this.QTY = QTY;
-       }
-
-       public String getMEASUREUNITID() {
-           return MEASUREUNITID;
-       }
-
-       public void setMEASUREUNITID(String MEASUREUNITID) {
-           this.MEASUREUNITID = MEASUREUNITID;
-       }
-
-     /*
-      整车明细
-      */
-
-       private String SAMPLENUM;//样车编号
-       private String UDMODEL;//型号
-       private String UDLICENSENUM;//品牌
-       private String UDVEHICLETYPE;//车辆类型
+        //整车明细
+        private String GRLIN3;//品牌
+        private String GRLIN6;//底盘号
+        private String GRLIN4;//样车类别
+        private String GRLIN5;//样车来源
 
 
+        public String getDESCRIPTION() {
+            return DESCRIPTION;
+        }
 
-       public String getSAMPLENUM() {
-           return SAMPLENUM;
-       }
+        public void setDESCRIPTION(String DESCRIPTION) {
+            this.DESCRIPTION = DESCRIPTION;
+        }
 
-       public void setSAMPLENUM(String SAMPLENUM) {
-           this.SAMPLENUM = SAMPLENUM;
-       }
+        public String getGRLIN1() {
+            return GRLIN1;
+        }
 
-       public String getUDMODEL() {
-           return UDMODEL;
-       }
+        public void setGRLIN1(String GRLIN1) {
+            this.GRLIN1 = GRLIN1;
+        }
 
-       public void setUDMODEL(String UDMODEL) {
-           this.UDMODEL = UDMODEL;
-       }
+        public String getQTY() {
+            return QTY;
+        }
 
-       public String getUDLICENSENUM() {
-           return UDLICENSENUM;
-       }
+        public void setQTY(String QTY) {
+            this.QTY = QTY;
+        }
 
-       public void setUDLICENSENUM(String UDLICENSENUM) {
-           this.UDLICENSENUM = UDLICENSENUM;
-       }
+        public String getMEASUREUNITID() {
+            return MEASUREUNITID;
+        }
 
-       public String getUDVEHICLETYPE() {
-           return UDVEHICLETYPE;
-       }
-
-       public void setUDVEHICLETYPE(String UDVEHICLETYPE) {
-           this.UDVEHICLETYPE = UDVEHICLETYPE;
-       }
-
+        public void setMEASUREUNITID(String MEASUREUNITID) {
+            this.MEASUREUNITID = MEASUREUNITID;
+        }
 
 
+        public String getGRLIN3() {
+            return GRLIN3;
+        }
 
+        public void setGRLIN3(String GRLIN3) {
+            this.GRLIN3 = GRLIN3;
+        }
 
+        public String getGRLIN6() {
+            return GRLIN6;
+        }
 
-  }
+        public void setGRLIN6(String GRLIN6) {
+            this.GRLIN6 = GRLIN6;
+        }
+
+        public String getGRLIN4() {
+            return GRLIN4;
+        }
+
+        public void setGRLIN4(String GRLIN4) {
+            this.GRLIN4 = GRLIN4;
+        }
+
+        public String getGRLIN5() {
+            return GRLIN5;
+        }
+
+        public void setGRLIN5(String GRLIN5) {
+            this.GRLIN5 = GRLIN5;
+        }
+    }
 }

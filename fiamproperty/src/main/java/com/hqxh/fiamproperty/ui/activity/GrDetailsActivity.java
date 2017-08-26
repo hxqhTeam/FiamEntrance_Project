@@ -25,14 +25,10 @@ import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_GR;
 import com.hqxh.fiamproperty.model.R_GR.GR;
-
-
-import com.hqxh.fiamproperty.model.R_WFTRANSACTION;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.hqxh.fiamproperty.unit.JsonUnit;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
-
 
 import java.util.List;
 
@@ -78,7 +74,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
 
     private GR gr; //对象
 
-    private int mark=0;//跳转标识
+    private int mark = 0;//跳转标识
     private String appid; //appid
     private String ownernum;//ownernum
     private String ownertable;//ownertable
@@ -219,13 +215,17 @@ public class GrDetailsActivity extends BaseTitleActivity {
         }
     };
 
-
+    /**
+     * 物资明细
+     **/
     private View.OnClickListener wzmx_textOnClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(GrDetailsActivity.this, WzmxListActivity.class);
             intent.putExtra("grnum", JsonUnit.convertStrToArray(gr.getGRNUM())[0]);
+            intent.putExtra("appid", GlobalConfig.GRWZ);
+            intent.putExtra("title", getResources().getString(R.string.wzmx_text));
             startActivityForResult(intent, 0);
 
         }
@@ -234,8 +234,10 @@ public class GrDetailsActivity extends BaseTitleActivity {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(GrDetailsActivity.this, ZcmxListActivity.class);
+            Intent intent = new Intent(GrDetailsActivity.this, WzmxListActivity.class);
             intent.putExtra("grnum", JsonUnit.convertStrToArray(gr.getGRNUM())[0]);
+            intent.putExtra("appid", GlobalConfig.GRZC_APPID);
+            intent.putExtra("title", getResources().getString(R.string.zcmx_text));
             startActivityForResult(intent, 0);
 
         }
@@ -285,15 +287,11 @@ public class GrDetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.i(TAG, "s=" + s);
-
-
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_106)) {
                             R_APPROVE r_approve = new Gson().fromJson(s, R_APPROVE.class);
                             for (int i = 0; i < r_approve.getResult().size(); i++) {
                                 R_APPROVE.Result result = r_approve.getResult().get(i);
-                                Log.e(TAG, "instruction=" + result.getInstruction() + ",ispositive=" + result.getIspositive());
                             }
 
                             showDialog(r_approve.getResult());
@@ -314,7 +312,6 @@ public class GrDetailsActivity extends BaseTitleActivity {
 /*审批流程*/
 
     private void PostApprove(String ownertable, String ownerid, String memo, String selectWhat, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",memo=" + memo + ",selectWhat=" + selectWhat + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_APPROVE_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)

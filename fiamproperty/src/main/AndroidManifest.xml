@@ -98,11 +98,6 @@
             android:label="@string/wzmx_text"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".ui.activity.ZcmxListActivity"
-            android:label="@string/zcmx_text"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
             android:name=".ui.activity.WftransactionActivity"

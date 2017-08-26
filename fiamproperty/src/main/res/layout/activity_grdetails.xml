@@ -438,7 +438,7 @@
                             android:gravity="center_vertical"
                             android:hint="暂无数据"
                             android:padding="@dimen/top_7dp"
-                            android:textColor="@color/light_black"
+                            android:textColor="@color/text_back_color_2"
                             android:textSize="@dimen/dimens_16sp" />
 
                     </LinearLayout>

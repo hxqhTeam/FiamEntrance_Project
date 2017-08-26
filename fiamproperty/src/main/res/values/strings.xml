@@ -346,5 +346,9 @@
     <string name="linecost3_text">不含税总价</string>
     <string name="ysxq_text">验收详情</string>
     <string name="have_not_appove_hint">暂无审批功能</string>
+    <string name="ycdescription_text">样车编号</string>
+    <string name="xh_grlin1_text">型号</string>
+    <string name="grlin3_text">品牌</string>
+    <string name="grlin4_text">车辆类别</string>
 
 </resources>

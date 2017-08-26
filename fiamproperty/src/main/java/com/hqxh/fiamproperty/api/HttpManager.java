@@ -52,10 +52,10 @@ public class HttpManager {
     }
 
     /*
-    物资明细
+    物资明细/整车明细
     */
-    public static String getGRLINEUrl(String username, String grnum, int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.GRWZ_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'GRNUM':'=" + grnum + "'}}";
+    public static String getGRLINEUrl(String appid, String username, String grnum, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'GRNUM':'=" + grnum + "'}}";
 
     }
 /*
@@ -130,11 +130,11 @@ public class HttpManager {
     /**
      * 合同*
      */
-    public static String getPURCHVIEWUrl(String appid,String contractnum,String username, int curpage, int showcount) {
-        if(contractnum.isEmpty()){
+    public static String getPURCHVIEWUrl(String appid, String contractnum, String username, int curpage, int showcount) {
+        if (contractnum.isEmpty()) {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PURCHVIEW_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
 
-        }else{
+        } else {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PURCHVIEW_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'CONTRACTNUM':'=" + contractnum + "'}}";
 
         }

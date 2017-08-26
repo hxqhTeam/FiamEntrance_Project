@@ -33,6 +33,7 @@ public final class GlobalConfig {
     /**项目类型**/
     public final static String TRAVEL="TRAVEL"; //国内出差/出差申请
     public final static String GRWZ="GRWZ"; //物资出门/出门管理
+    public final static String GRZC="GRZC"; //整车明细/出门管理
     public final static String SZPR="SZPR"; //试制采购申请/采购
     public final static String TOQT="TOQT"; //其它任务单/任务单
 
