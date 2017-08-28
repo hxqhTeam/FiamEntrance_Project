@@ -28,4 +28,18 @@
     <color name="btn_onclick">#4576bb</color> <!--FF4081 2C97DE -->
     <color name="btn_color">#669dec</color>
 
+    <color name="maskPressed">#33888888</color>
+    <color name="maskPressed2">#22808080</color>
+    <color name="red">#FF0000</color>
+
+
+    <color name="ios_btntext_blue">#007aff</color>
+    <color name="text_msg_33">#333333</color>
+    <color name="text_item_33">#333333</color>
+    <color name="btn_alert">#222222</color>
+    <color name="text_title_11">#111111</color>
+    <color name="text_input_44">#444444</color>
+
+    <color name="datepick_surance_blue">#3598da</color>
+
 </resources>

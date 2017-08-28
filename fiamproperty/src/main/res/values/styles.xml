@@ -16,7 +16,6 @@
     </style>
 
 
-
     <style name="MyMarginStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
@@ -75,5 +74,48 @@
         <item name="android:button">@drawable/radiobutton_seletor</item>
     </style>
 
+
+    <style name="BadgeButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#cc333333</item>
+        <item name="btnBadgeHeight">14dp</item>
+        <item name="btnBadgeColor">@color/colorAccent</item>
+    </style>
+
+    <style name="BadgeButton.Normal">
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/badge</item>
+        <item name="btnBadgeVisible">true</item>
+    </style>
+
+    <style name="BadgeButton.GridItem">
+        <item name="android:layout_marginRight">1px</item>
+        <item name="android:layout_marginBottom">1px</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/badge_grid</item>
+        <item name="layout_columnWeight">1</item>
+        <item name="btnBadgeVisible">false</item>
+    </style>
+
+    <style name="BadgeButton.TabItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">70dp</item>
+        <!--<item name="android:background">@drawable/badge_grid</item>-->
+        <!--<item name="android:textColor">@color/tab</item>-->
+        <item name="btnBadgeVisible">false</item>
+    </style>
+
+    <style name="loading_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 
 </resources>

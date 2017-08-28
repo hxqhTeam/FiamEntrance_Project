@@ -2,12 +2,8 @@ package cn.hqxh.fiam.mobile;
 
 import android.Manifest;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -18,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.hqxh.fiamproperty.base.BaseActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_PERSONS;
 import com.hqxh.fiamproperty.ui.activity.HomeActivity;
@@ -44,8 +39,9 @@ public class LoginActivity extends AppCompatActivity {
     // 所需的全部权限
     static final String[] PERMISSIONS = new String[]{
             Manifest.permission.READ_PHONE_STATE,
-//            Manifest.permission.CAMERA,
             Manifest.permission.INTERNET,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
     private PermissionsChecker mPermissionsChecker; // 权限检测器

@@ -54,9 +54,7 @@ public class FkActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getPAYCHECKUrl(AccountUtils.getpersonId(this),  curpage, showcount);
-        Log.i(TAG, "data=" + data);
-        Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
+        String data = HttpManager.getPAYCHECKUrl(GlobalConfig.PAYCHECK_APPID, "", AccountUtils.getpersonId(this), curpage, showcount);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addQueryParameter("data", data)
                 .build()
@@ -175,7 +173,7 @@ public class FkActivity extends BaseListActivity {
         fkAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent =  new Intent(FkActivity.this, PaycheckActivity.class);
+                Intent intent = new Intent(FkActivity.this, PaycheckActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("paycheck", (Serializable) fkAdapter.getData().get(position));
                 intent.putExtras(bundle);

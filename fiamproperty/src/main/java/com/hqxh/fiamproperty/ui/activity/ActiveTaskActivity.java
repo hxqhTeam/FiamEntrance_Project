@@ -4,23 +4,19 @@ import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseListActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_Wfassignemt;
-import com.hqxh.fiamproperty.model.R_Wfassignemt.Wfassignment;
 import com.hqxh.fiamproperty.model.R_Wfassignemt.ResultBean;
+import com.hqxh.fiamproperty.model.R_Wfassignemt.Wfassignment;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
 import com.hqxh.fiamproperty.ui.adapter.WfassignmentAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.hqxh.fiamproperty.unit.JsonUnit;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -193,129 +189,129 @@ public class ActiveTaskActivity extends BaseListActivity {
             public void onItemClick(View view, int position) {
                 Wfassignment wfassignment = (Wfassignment) wfassignmentAdapter.getData().get(position);
                 String app = JsonUnit.convertStrToArray(wfassignment.getAPP())[0];
+                Log.e(TAG,"app="+app);
                 Intent intent = getIntent();
-                if (app.equals(GlobalConfig.GRWZ_APPID)) {
+                if (app.equals(GlobalConfig.GRWZ_APPID)) { //出门管理
                     intent.setClass(ActiveTaskActivity.this, GrDetailsActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.TRAVEL_APPID)) {
+                } else if (app.equals(GlobalConfig.TRAVEL_APPID)) {//国内出差
                     intent.setClass(ActiveTaskActivity.this, GnWorkorderActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.TRAVELS_APPID)) {
+                } else if (app.equals(GlobalConfig.TRAVELS_APPID)) {//国外出差
                     intent.setClass(ActiveTaskActivity.this, CgWorkorderActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.JSPR_APPID)) {
+                } else if (app.equals(GlobalConfig.JSPR_APPID)) {//技术采购申请
                     intent.setClass(ActiveTaskActivity.this, JsPrActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.SZPR_APPID)) {
+                } else if (app.equals(GlobalConfig.SZPR_APPID)) {//试制采购申请
                     intent.setClass(ActiveTaskActivity.this, SzPrActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.PR_APPID)) {
+                } else if (app.equals(GlobalConfig.PR_APPID)) {//物资采购申请
                     intent.setClass(ActiveTaskActivity.this, WzPrActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.FWPR_APPID)) {
+                } else if (app.equals(GlobalConfig.FWPR_APPID)) {//服务采购申请
                     intent.setClass(ActiveTaskActivity.this, FwpaydetailsActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.WPPR_APPID)) {
+                } else if (app.equals(GlobalConfig.WPPR_APPID)) {//外培采购申请
                     intent.setClass(ActiveTaskActivity.this, WppaydetailsActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.TOSY_APPID)) {
+                } else if (app.equals(GlobalConfig.TOSY_APPID)) {//试用任务单
                     intent.setClass(ActiveTaskActivity.this, SyrwdWorkorderActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.TOSZ_APPID)) {
+                } else if (app.equals(GlobalConfig.TOSZ_APPID)) {//试制任务单
                     intent.setClass(ActiveTaskActivity.this, SzrwdWorkorderActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.TOLL_APPID)) {
+                } else if (app.equals(GlobalConfig.TOLL_APPID)) {//物资领料单
                     intent.setClass(ActiveTaskActivity.this, WzlldWorkorderActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.TODJ_APPID)) {
+                } else if (app.equals(GlobalConfig.TODJ_APPID)) {//调件任务单
                     intent.setClass(ActiveTaskActivity.this, DjrwdWorkorderActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.TOOIL_APPID)) {
+                } else if (app.equals(GlobalConfig.TOOIL_APPID)) {//燃油申请单
                     intent.setClass(ActiveTaskActivity.this, RyrwdWorkorderActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.TOQT_APPID)) {
+                } else if (app.equals(GlobalConfig.TOQT_APPID)) {//其它任务单
                     intent.setClass(ActiveTaskActivity.this, QtrwdWorkorderActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                } else if (app.equals(GlobalConfig.CONTPURCH_APPID)) {
+                } else if (app.equals(GlobalConfig.CONTPURCH_APPID)) {//合同
                     intent.setClass(ActiveTaskActivity.this, PurchviewActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.PAYCHECK_APPID)) {//付款验收
+                    intent.setClass(ActiveTaskActivity.this, PaycheckActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.PP_APPID)) {//需款计划
+                    intent.setClass(ActiveTaskActivity.this, XkplandetailActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.EXPENSES_APPID)) {//差旅报销单
+                    intent.setClass(ActiveTaskActivity.this, ExpenseActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.EXPENSE_APPID)) { //备用金报销单
+                    intent.setClass(ActiveTaskActivity.this, ByExpenseActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
+                } else if (app.equals(GlobalConfig.BO_APPID)) { //报销
+                    intent.setClass(ActiveTaskActivity.this, BoActivity.class);
+                    intent.putExtra("appid", app);
+                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
+                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
+                    startActivityForResult(intent, 0);
                 }
-//                else if (app.equals(GlobalConfig.PAYCHECK_APPID)) {
-//                    intent.setClass(ActiveTaskActivity.this, PaycheckActivity.class);
-//                    intent.putExtra("appid", app);
-//                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
-//                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
-//                    startActivityForResult(intent, 0);
-//                } else if (app.equals(GlobalConfig.PP_APPID)) {
-//                    intent.setClass(ActiveTaskActivity.this, XkplandetailActivity.class);
-//                    intent.putExtra("appid", app);
-//                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
-//                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
-//                    startActivityForResult(intent, 0);
-//                } else if (app.equals(GlobalConfig.EXPENSES_APPID)) {
-//                    intent.setClass(ActiveTaskActivity.this, ExpenseActivity.class);
-//                    intent.putExtra("appid", app);
-//                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
-//                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
-//                    startActivityForResult(intent, 0);
-//                } else if (app.equals(GlobalConfig.EXPENSE_APPID)) {
-//                    intent.setClass(ActiveTaskActivity.this, ByExpenseActivity.class);
-//                    intent.putExtra("appid", app);
-//                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
-//                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
-//                    startActivityForResult(intent, 0);
-//                } else if (app.equals(GlobalConfig.BO_APPID)) {
-//                    intent.setClass(ActiveTaskActivity.this, BoActivity.class);
-//                    intent.putExtra("appid", app);
-//                    intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
-//                    intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
-//                    startActivityForResult(intent, 0);
-//                }
                 else {
                     showMiddleToast(ActiveTaskActivity.this, getString(R.string.have_not_appove_hint));
                 }

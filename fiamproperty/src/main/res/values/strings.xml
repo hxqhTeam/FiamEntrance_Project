@@ -187,7 +187,7 @@
     <string name="ms_text">描述</string>
     <string name="create_owner_text">创建人</string>
     <string name="createdate_text">创建日期</string>
-    <string name="yl_text">预览</string>
+    <string name="yl_text">查看</string>
     <string name="htxq_text">合同详情</string>
     <string name="conpaylinenum_text">第几次</string>
     <string name="term_text">付款条件</string>

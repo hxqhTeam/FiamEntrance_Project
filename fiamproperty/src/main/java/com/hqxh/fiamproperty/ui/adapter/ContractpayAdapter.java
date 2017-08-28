@@ -32,10 +32,10 @@ public class ContractpayAdapter extends BaseQuickAdapter<CONTRACTPAY> {
     protected void convert(BaseViewHolder helper, CONTRACTPAY item) {
         helper.setText(R.id.conpaylinenum_text_id, JsonUnit.convertStrToArray(item.getCONPAYLINENUM())[0]);
         helper.setText(R.id.term_text_id, JsonUnit.convertStrToArray(item.getTERM())[0]);
-        helper.setText(R.id.duedate_text_id,JsonUnit.convertStrToArray(item.getDUEDATE())[0]);
-        helper.setText(R.id.linecost_text_id,JsonUnit.convertStrToArray(item.getLINECOST())[0]);
-        helper.setText(R.id.paymentpercent_text_id,JsonUnit.convertStrToArray(item.getPAYMENTPERCENT())[0]);
-        helper.setText(R.id.isadvance_text_id,JsonUnit.convertStrToArray(item.getISADVANCE())[0]);
+        helper.setText(R.id.duedate_text_id, JsonUnit.strToDateString(JsonUnit.convertStrToArray(item.getDUEDATE())[0]));
+        helper.setText(R.id.linecost_text_id, JsonUnit.convertStrToArray(item.getLINECOST())[0]);
+        helper.setText(R.id.paymentpercent_text_id, JsonUnit.convertStrToArray(item.getPAYMENTPERCENT())[0]);
+        helper.setText(R.id.isadvance_text_id, JsonUnit.convertStrToArray(item.getISADVANCE())[0]);
     }
 
 

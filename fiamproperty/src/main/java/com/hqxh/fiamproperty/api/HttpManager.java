@@ -169,16 +169,28 @@ public class HttpManager {
     /**
      * 付款验收*
      */
-    public static String getPAYCHECKUrl(String username, int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.PAYCHECK_APPID + "','objectname':'" + GlobalConfig.PAYCHECK_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getPAYCHECKUrl(String appid, String paychecknum, String username, int curpage, int showcount) {
+        if (paychecknum.isEmpty()) {
+            return "{'appid':'" + GlobalConfig.PAYCHECK_APPID + "','objectname':'" + GlobalConfig.PAYCHECK_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+        } else {
+            return "{'appid':'" + GlobalConfig.PAYCHECK_APPID + "','objectname':'" + GlobalConfig.PAYCHECK_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYPLANNUM':'=" + paychecknum + "'}}";
+
+        }
 
     }
 
     /**
      * 需款计划*
      */
-    public static String getPAYPLANUrl(String username, int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.PP_APPID + "','objectname':'" + GlobalConfig.PAYPLAN_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getPAYPLANUrl(String appid, String payplannum, String username, int curpage, int showcount) {
+        if (payplannum.isEmpty()) {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYPLAN_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+        } else {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYPLAN_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYPLANNUM':'=" + payplannum + "'}}";
+
+        }
 
     }
 
@@ -194,8 +206,14 @@ public class HttpManager {
     /**
      * 差旅报销单／备用金报销*
      */
-    public static String getEXPENSEUrl(String appid, String username, int curpage, int showcount) {
-        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.EXPENSE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getEXPENSEUrl(String appid, String expensenum, String username, int curpage, int showcount) {
+        if (expensenum.isEmpty()) {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.EXPENSE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+        } else {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.EXPENSE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'EXPENSENUM':'=" + expensenum + "'}}";
+
+        }
 
     }
 
@@ -219,8 +237,14 @@ public class HttpManager {
     /**
      * 借款单*
      */
-    public static String getBoUrl(String username, int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.BO_APPID + "','objectname':'" + GlobalConfig.BO_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getBoUrl(String appid, String bonum, String username, int curpage, int showcount) {
+        if (bonum.isEmpty()) {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.BO_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+
+        } else {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.BO_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'BONUM':'=" + bonum + "'}}";
+
+        }
 
     }
 

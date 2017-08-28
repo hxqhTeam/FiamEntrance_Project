@@ -54,11 +54,9 @@ public class XkjhActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getPAYPLANUrl(AccountUtils.getpersonId(this), curpage, showcount);
-        Log.i(TAG, "data=" + data);
-        Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
+        String data = HttpManager.getPAYPLANUrl(GlobalConfig.PP_APPID, "", AccountUtils.getpersonId(this), curpage, showcount);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
-                .addQueryParameter("data", data)
+                .addBodyParameter("data", data)
                 .build()
                 .getObjectObservable(R_PAYPLAN.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求

@@ -7,16 +7,15 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.ui.SystemBarTintManager;
+import com.hqxh.fiamproperty.ui.widget.LoadingDialog;
 
 
 /**
@@ -29,6 +28,8 @@ import com.hqxh.fiamproperty.ui.SystemBarTintManager;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private static final String TAG = "BaseActivity";
+
+    public static LoadingDialog loadingDialog;
 
     /**
      * 获取布局ID
@@ -120,6 +121,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(cxt, msg, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+    }
+
+    public void showLoadingDialog(String msg) {
+        loadingDialog = new LoadingDialog(this, msg, R.style.loading_dialog);
+        loadingDialog.show();
+    }
+
+    public void dismissLoadingDialog() {
+        if (null != loadingDialog) {
+            loadingDialog.dismiss();
+        }
     }
 
 

@@ -127,7 +127,7 @@
                             android:gravity="center_vertical"
                             android:hint="@string/have_not_data"
                             android:paddingLeft="@dimen/btn_top_5dp"
-                            android:textColor="@color/light_black"
+                            android:textColor="@color/text_back_color_2"
                             android:textSize="@dimen/dimens_16sp" />
                     </LinearLayout>
 

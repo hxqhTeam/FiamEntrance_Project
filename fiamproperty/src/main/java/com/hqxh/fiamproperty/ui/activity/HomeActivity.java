@@ -4,28 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.hqxh.fiamproperty.R;
+import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_PERSONS;
 import com.hqxh.fiamproperty.model.R_PERSONS.PERSION;
+import com.hqxh.fiamproperty.model.R_Wfassignemt;
+import com.hqxh.fiamproperty.ui.widget.MaterialBadgeTextView;
 import com.hqxh.fiamproperty.unit.AccountUtils;
-import com.hqxh.fiamproperty.unit.JsonUnit;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -44,30 +40,63 @@ public class HomeActivity extends BaseActivity {
     TextView titleTextView;
     /**搜索**/
 
-
     /**
-     * GridView
+     * 待办任务
      **/
-    GridView gridView;
+    private TextView dbBadgeButton;
+    private MaterialBadgeTextView badgeText;
+    /**
+     * 已办任务
+     **/
+    private TextView ybBadgeButton;
+    /**
+     * 出差申请
+     **/
+    private TextView ccsqBadgeButton;
+    /**
+     * 出门管理
+     **/
+    private TextView cmglBadgeButton;
+    /**
+     * 采购申请
+     **/
+    private TextView cgsqBadgeButton;
+    /**
+     * 任务单
+     **/
+    private TextView rwdBadgeButton;
+    /**
+     * 合同
+     **/
+    private TextView htBadgeButton;
+    /**
+     * 付款验收
+     **/
+    private TextView fkysBadgeButton;
+    /**
+     * 需款计划
+     **/
+    private TextView xkjhBadgeButton;
+    /**
+     * 报销
+     **/
+    private TextView bxBadgeButton;
 
-    private List<Map<String, Object>> data_list;
-    private SimpleAdapter sim_adapter;
-    // 图片封装为一个数组
-    private int[] icon = null;
-    private String[] iconName = null;
+
     private String identity;
+
 
 
     @Override
     protected int getContentViewLayoutID() {
-
-        return R.layout.activity_home;
+        return R.layout.activity_home1;
 
     }
 
     @Override
     protected void beforeInit() {
         super.beforeInit();
+        showLoadingDialog("加载中...");
 //        identity = JsonUnit.getIdentity(AccountUtils.getPerson(this));
 //        if (null == identity) {
 //            showMiddleToast(this, "无法识别身份");
@@ -76,29 +105,39 @@ public class HomeActivity extends BaseActivity {
 //
 //        Login();
 
-
+        getData();
     }
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         titleTextView = (TextView) findViewById(R.id.title_text);
-        gridView = (GridView) findViewById(R.id.gridview_id);
 
+        dbBadgeButton = (TextView) findViewById(R.id.db_task_id);
+        badgeText = (MaterialBadgeTextView) findViewById(R.id.badge_text_id);
+        ybBadgeButton = (TextView) findViewById(R.id.yb_task_id);
+        ccsqBadgeButton = (TextView) findViewById(R.id.ccsq_text_id);
+        cmglBadgeButton = (TextView) findViewById(R.id.cmgl_text_id);
+        cgsqBadgeButton = (TextView) findViewById(R.id.cgsq_text_id);
+        rwdBadgeButton = (TextView) findViewById(R.id.rwd_text_id);
+        htBadgeButton = (TextView) findViewById(R.id.ht_text_id);
+        fkysBadgeButton = (TextView) findViewById(R.id.fkys_text_id);
+        xkjhBadgeButton = (TextView) findViewById(R.id.xkjh_text_id);
+        bxBadgeButton = (TextView) findViewById(R.id.bx_text_id);
         initToolbar();
 
-        isShowPage();
+        dbBadgeButton.setOnClickListener(onClickListener);
+        ybBadgeButton.setOnClickListener(onClickListener);
+        ccsqBadgeButton.setOnClickListener(onClickListener);
+        cmglBadgeButton.setOnClickListener(onClickListener);
+        cgsqBadgeButton.setOnClickListener(onClickListener);
+        rwdBadgeButton.setOnClickListener(onClickListener);
+        htBadgeButton.setOnClickListener(onClickListener);
+        fkysBadgeButton.setOnClickListener(onClickListener);
+        xkjhBadgeButton.setOnClickListener(onClickListener);
+        bxBadgeButton.setOnClickListener(onClickListener);
 
-        //新建List
-        data_list = new ArrayList<Map<String, Object>>();
-        getData();
-        //新建适配器
-        String[] from = {"image", "text"};
-        int[] to = {R.id.image, R.id.text};
-        sim_adapter = new SimpleAdapter(this, data_list, R.layout.item_grid_view, from, to);
-        //配置适配器
-        gridView.setAdapter(sim_adapter);
-        gridView.setOnItemClickListener(gridViewOnItemClickListener);
+
     }
 
 
@@ -133,84 +172,58 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-    //判断需要显示的页面
-    private void isShowPage() {
-
-        icon = new int[]{R.drawable.ic_dbrw, R.drawable.ic_ybrw,
-                R.drawable.ic_ccsq, R.drawable.ic_cmgl, R.drawable.ic_cgsq,
-                R.drawable.ic_rwd, R.drawable.ic_ht, R.drawable.ic_fkys, R.drawable.ic_xkjh, R.drawable.ic_bx};
-        iconName = getResources().getStringArray(R.array.home_text);
-
-    }
-
-    //设置数据
-    public List<Map<String, Object>> getData() {
-        //cion和iconName的长度是相同的，这里任选其一都可以
-        for (int i = 0; i < icon.length; i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("image", icon[i]);
-            map.put("text", iconName[i]);
-            data_list.add(map);
-        }
-
-        return data_list;
-    }
-
-
-    private AdapterView.OnItemClickListener gridViewOnItemClickListener = new AdapterView.OnItemClickListener() {
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        public void onClick(View view) {
             Intent intent = null;
-            switch (i) {
-                case 0:  //待办任务
-                    intent = new Intent(HomeActivity.this, ActiveTaskActivity.class);
-                    intent.putExtra("assignstatus", "ACTIVE");
-                    intent.putExtra("mark", DB_CODE);
-                    intent.putExtra("title", getResources().getString(R.string.db_task_text));
-                    startActivityForResult(intent, 0);
-                    break;
-                case 1:  //已办任务
-                    intent = new Intent(HomeActivity.this, ActiveTaskActivity.class);
-                    intent.putExtra("assignstatus", "COMPLETE");
-                    intent.putExtra("title", getResources().getString(R.string.yb_task_text));
-                    intent.putExtra("mark", YB_CODE);
-                    startActivityForResult(intent, 0);
-                    break;
-                case 2:  //出差申请
-                    intent = new Intent(HomeActivity.this, WorkorderActivity.class);
-                    startActivityForResult(intent, 0);
-                    break;
-                case 3:  //出门管理
-                    intent = new Intent(HomeActivity.this, GrActivity.class);
-                    startActivityForResult(intent, 0);
-                    break;
-                case 4:  //采购申请
-                    intent = new Intent(HomeActivity.this, PrMainActivity.class);
-                    startActivityForResult(intent, 0);
-                    break;
-                case 5:  //任务单
-                    intent = new Intent(HomeActivity.this, RwdMainActivity.class);
-                    startActivityForResult(intent, 0);
-                    break;
-                case 6:  //合同
-                    intent = new Intent(HomeActivity.this, HtActivity.class);
-                    startActivityForResult(intent, 0);
-                    break;
-                case 7:  //付款验收
-                    intent = new Intent(HomeActivity.this, FkActivity.class);
-                    startActivityForResult(intent, 0);
-                    break;
-                case 8:  //需款计划
-                    intent = new Intent(HomeActivity.this, XkjhActivity.class);
-                    startActivityForResult(intent, 0);
-                    break;
-                case 9:  //报销
-                    intent = new Intent(HomeActivity.this, BxActivity.class);
-                    startActivityForResult(intent, 0);
-                    break;
+            int i = view.getId();
+            if (i == R.id.db_task_id) {
+                intent = new Intent(HomeActivity.this, ActiveTaskActivity.class);
+                intent.putExtra("assignstatus", "ACTIVE");
+                intent.putExtra("mark", DB_CODE);
+                intent.putExtra("title", getResources().getString(R.string.db_task_text));
+                startActivityForResult(intent, 0);
+
+            } else if (i == R.id.yb_task_id) {
+                intent = new Intent(HomeActivity.this, ActiveTaskActivity.class);
+                intent.putExtra("assignstatus", "COMPLETE");
+                intent.putExtra("title", getResources().getString(R.string.yb_task_text));
+                intent.putExtra("mark", YB_CODE);
+                startActivityForResult(intent, 0);
+
+            } else if (i == R.id.ccsq_text_id) {
+                intent = new Intent(HomeActivity.this, WorkorderActivity.class);
+                startActivityForResult(intent, 0);
+
+            } else if (i == R.id.cmgl_text_id) {
+                intent = new Intent(HomeActivity.this, GrActivity.class);
+                startActivityForResult(intent, 0);
+
+            } else if (i == R.id.cgsq_text_id) {
+                intent = new Intent(HomeActivity.this, PrMainActivity.class);
+                startActivityForResult(intent, 0);
+
+            } else if (i == R.id.rwd_text_id) {
+                intent = new Intent(HomeActivity.this, RwdMainActivity.class);
+                startActivityForResult(intent, 0);
+
+            } else if (i == R.id.ht_text_id) {
+                intent = new Intent(HomeActivity.this, HtActivity.class);
+                startActivityForResult(intent, 0);
+
+            } else if (i == R.id.fkys_text_id) {
+                intent = new Intent(HomeActivity.this, FkActivity.class);
+                startActivityForResult(intent, 0);
+
+            } else if (i == R.id.xkjh_text_id) {
+                intent = new Intent(HomeActivity.this, XkjhActivity.class);
+                startActivityForResult(intent, 0);
+
+            } else if (i == R.id.bx_text_id) {
+                intent = new Intent(HomeActivity.this, BxActivity.class);
+                startActivityForResult(intent, 0);
 
             }
-
         }
     };
 
@@ -273,6 +286,66 @@ public class HomeActivity extends BaseActivity {
                 });
 
 
+    }
+
+
+    /*＊获取待办任务的数量**/
+
+    /**
+     * 获取数据
+     **/
+    private void getData() {
+        String data = HttpManager.getWFASSIGNMENTUrl("", AccountUtils.getpersonId(this), "ACTIVE", 1, 10);
+        Log.e(TAG, "data=" + data);
+        Log.e(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
+        Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
+                .addBodyParameter("data", data)
+                .build()
+                .getObjectObservable(R_Wfassignemt.class) // 发起获取数据列表的请求，并解析到R_Wfassignemt
+                .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
+                .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
+                .doOnNext(new Consumer<R_Wfassignemt>() {
+                    @Override
+                    public void accept(@NonNull R_Wfassignemt RWfassignemt) throws Exception {
+                    }
+                })
+
+                .map(new Function<R_Wfassignemt, R_Wfassignemt.ResultBean>() {
+                    @Override
+                    public R_Wfassignemt.ResultBean apply(@NonNull R_Wfassignemt RWfassignemt) throws Exception {
+
+                        return RWfassignemt.getResult();
+                    }
+                })
+                .map(new Function<R_Wfassignemt.ResultBean, String>() {
+                    @Override
+                    public String apply(@NonNull R_Wfassignemt.ResultBean resultBean) throws Exception {
+                        return resultBean.getTotalresult();
+                    }
+
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(@NonNull String s) throws Exception {
+                        dismissLoadingDialog();
+                        badgeText.setVisibility(View.VISIBLE);
+                        Log.e(TAG, "s=" + s);
+                        if (s.equals("0")) {
+                            badgeText.setBadgeCount(0, true);
+                        } else {
+                            badgeText.setBadgeCount(Integer.valueOf(s));
+                        }
+
+
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        dismissLoadingDialog();
+                    }
+                });
     }
 
 

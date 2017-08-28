@@ -1,9 +1,14 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.DownloadListener;
+import com.androidnetworking.interfaces.DownloadProgressListener;
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseListActivity;
@@ -11,11 +16,14 @@ import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_DOCLINKS;
 import com.hqxh.fiamproperty.model.R_DOCLINKS.DOCLINKS;
 import com.hqxh.fiamproperty.model.R_DOCLINKS.ResultBean;
-import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
 import com.hqxh.fiamproperty.ui.adapter.DoclinksAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
+import com.hqxh.fiamproperty.unit.JsonUnit;
+import com.hqxh.fiamproperty.unit.OpenFiles;
+import com.hqxh.fiamproperty.unit.Utils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -187,10 +195,14 @@ public class DoclinksActivity extends BaseListActivity {
     private void initAdapter(final List<DOCLINKS> list) {
         doclinksadapter = new DoclinksAdapter(DoclinksActivity.this, R.layout.list_item_doclinks, list);
         mRecyclerView.setAdapter(doclinksadapter);
-        doclinksadapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
 
+        doclinksadapter.setOnclicklistener(new DoclinksAdapter.cOnClickListener() {
+            @Override
+            public void cOnClickListener(int postion, String urlname) {
+                Log.e(TAG, "postion=" + postion + ",urlname=" + urlname);
+                Log.e(TAG, "urlname=" + JsonUnit.getSlash(urlname));
+                Log.e(TAG, "filename=" + JsonUnit.getFile(urlname));
+                uploadFile(GlobalConfig.HTTP_DOCLINKS_URL + JsonUnit.getSlash(urlname), Utils.getFilePath(DoclinksActivity.this), JsonUnit.getFile(urlname));
             }
         });
     }
@@ -203,4 +215,98 @@ public class DoclinksActivity extends BaseListActivity {
     }
 
 
+    /**
+     * 文件下载
+     **/
+    private void uploadFile(String url, final String dirPath, final String fileName) {
+        AndroidNetworking.download(url, Utils.getFilePath(dirPath), fileName)
+                .build()
+                .setDownloadProgressListener(new DownloadProgressListener() {
+                    @Override
+                    public void onProgress(long bytesDownloaded, long totalBytes) {
+                        // do anything with progress
+                    }
+                })
+                .startDownload(new DownloadListener() {
+                    @Override
+                    public void onDownloadComplete() {
+                        // do anything after completion
+                        Log.e(TAG, "下载完成");
+                        File dir = new File(dirPath + "/" + fileName);
+                        openFile(dir);
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Log.e(TAG, "下载失败" + error.getMessage());
+                    }
+                });
+
+    }
+
+
+    private boolean checkEndsWithInStringArray(String checkItsEnd,
+                                               String[] fileEndings) {
+        for (String aEnd : fileEndings) {
+            if (checkItsEnd.endsWith(aEnd))
+                return true;
+        }
+        return false;
+    }
+
+
+    private void openFile(File currentPath) {
+        Log.e(TAG, "currentPath=" + currentPath.toString());
+        if (currentPath != null && currentPath.isFile()) {
+            String fileName = currentPath.toString();
+            Intent intent;
+            if (checkEndsWithInStringArray(fileName, getResources().
+                    getStringArray(R.array.fileEndingImage))) {
+                intent = OpenFiles.getImageFileIntent(DoclinksActivity.this,currentPath);
+                startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, getResources().
+                    getStringArray(R.array.fileEndingWebText))) {
+                intent = OpenFiles.getHtmlFileIntent(DoclinksActivity.this, currentPath);
+                startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, getResources().
+                    getStringArray(R.array.fileEndingPackage))) {
+                intent = OpenFiles.getApkFileIntent(DoclinksActivity.this,currentPath);
+                startActivity(intent);
+
+            } else if (checkEndsWithInStringArray(fileName, getResources().
+                    getStringArray(R.array.fileEndingAudio))) {
+                intent = OpenFiles.getAudioFileIntent(DoclinksActivity.this,currentPath);
+                startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, getResources().
+                    getStringArray(R.array.fileEndingVideo))) {
+                intent = OpenFiles.getVideoFileIntent(DoclinksActivity.this,currentPath);
+                startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, getResources().
+                    getStringArray(R.array.fileEndingText))) {
+                intent = OpenFiles.getTextFileIntent(DoclinksActivity.this,currentPath);
+                startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, getResources().
+                    getStringArray(R.array.fileEndingPdf))) {
+                intent = OpenFiles.getPdfFileIntent(DoclinksActivity.this,currentPath);
+                startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, getResources().
+                    getStringArray(R.array.fileEndingWord))) {
+                intent = OpenFiles.getWordFileIntent(DoclinksActivity.this,currentPath);
+                startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, getResources().
+                    getStringArray(R.array.fileEndingExcel))) {
+                intent = OpenFiles.getExcelFileIntent(DoclinksActivity.this, currentPath);
+                startActivity(intent);
+            } else if (checkEndsWithInStringArray(fileName, getResources().
+                    getStringArray(R.array.fileEndingPPT))) {
+                intent = OpenFiles.getPPTFileIntent(DoclinksActivity.this,currentPath);
+                startActivity(intent);
+            } else {
+                showMiddleToast(this, "无法打开，请安装相应的软件！");
+            }
+        } else {
+            showMiddleToast(this, "对不起，这不是文件！");
+        }
+    }
 }

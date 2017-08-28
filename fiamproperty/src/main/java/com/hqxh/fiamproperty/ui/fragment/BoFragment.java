@@ -67,7 +67,7 @@ public class BoFragment extends Fragment implements PullLoadMoreRecyclerView.Pul
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mPullLoadMoreRecyclerView = (PullLoadMoreRecyclerView) view.findViewById(R.id.pullLoadMoreRecyclerView);
-        notLinearLayout=(LinearLayout)view.findViewById(R.id.have_not_data_id);
+        notLinearLayout = (LinearLayout) view.findViewById(R.id.have_not_data_id);
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -83,9 +83,9 @@ public class BoFragment extends Fragment implements PullLoadMoreRecyclerView.Pul
     }
 
     private void getData() {
-        String data = HttpManager.getBoUrl(AccountUtils.getpersonId(getActivity()), curpage, showcount);
+        String data = HttpManager.getBoUrl(GlobalConfig.BO_APPID, "", AccountUtils.getpersonId(getActivity()), curpage, showcount);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
-                .addQueryParameter("data", data)
+                .addBodyParameter("data", data)
                 .build()
                 .getObjectObservable(R_BO.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求

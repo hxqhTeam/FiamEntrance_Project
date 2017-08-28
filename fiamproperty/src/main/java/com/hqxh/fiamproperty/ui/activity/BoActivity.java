@@ -5,20 +5,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.hqxh.fiamproperty.R;
+import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseTitleActivity;
 import com.hqxh.fiamproperty.bean.R_APPROVE;
 import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
+import com.hqxh.fiamproperty.model.R_BO;
 import com.hqxh.fiamproperty.model.R_BO.BO;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
 import com.hqxh.fiamproperty.unit.AccountUtils;
@@ -30,6 +35,7 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -38,6 +44,8 @@ import io.reactivex.schedulers.Schedulers;
 public class BoActivity extends BaseTitleActivity {
 
     private static final String TAG = "BoActivity";
+
+    private ScrollView scrollView;
     /**
      * 信息展示
      **/
@@ -69,15 +77,36 @@ public class BoActivity extends BaseTitleActivity {
     private ImageView sqjlImageView; //审批记录
 
     private Button workflowBtn;
+    private RelativeLayout workflowRelativeLayout;//布局
 
     private BO bo;
 
     private Animation rotate;
 
+    private int mark = 0;//跳转标识
+    private String appid; //appid
+    private String ownernum;//ownernum
+    private String ownertable;//ownertable
+
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        bo = (BO) getIntent().getSerializableExtra("bo");
+        if (getIntent().hasExtra("bo")) {
+            bo = (BO) getIntent().getSerializableExtra("bo");
+        }
+        if (getIntent().hasExtra("mark")) {
+            mark = getIntent().getExtras().getInt("mark");
+        }
+        if (getIntent().hasExtra("appid")) {
+            appid = getIntent().getExtras().getString("appid");
+        }
+        if (getIntent().hasExtra("ownernum")) {
+            ownernum = getIntent().getExtras().getString("ownernum");
+        }
+        if (getIntent().hasExtra("ownertable")) {
+            ownertable = getIntent().getExtras().getString("ownertable");
+        }
+
     }
 
     @Override
@@ -87,6 +116,7 @@ public class BoActivity extends BaseTitleActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        scrollView = (ScrollView) findViewById(R.id.scrollView_id);
         bonumText = (TextView) findViewById(R.id.bonum_text_id);
         descriptionText = (TextView) findViewById(R.id.description_text_id);
         typeText = (TextView) findViewById(R.id.type_text_id);
@@ -114,8 +144,20 @@ public class BoActivity extends BaseTitleActivity {
 
         workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
 
-        showData();
+        workflowRelativeLayout = (RelativeLayout) findViewById(R.id.relavtivelayout_btn_id);
+        if (null == appid) {
+            showData();
+        } else {
+            if (mark == HomeActivity.DB_CODE) { //待办任务
+                workflowRelativeLayout.setVisibility(View.VISIBLE);
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
+                scrollView.setLayoutParams(layoutParams);
+            }
+            getNetWorkBo();
+        }
     }
+
 
     //展示界面数据
     private void showData() {
@@ -323,6 +365,60 @@ public class BoActivity extends BaseTitleActivity {
                 dialogInterface.dismiss();
             }
         }).create().show();
+    }
+
+    //根据appid,grnum,objctname获取国内出差信息
+    private void getNetWorkBo() {
+
+        String data = HttpManager.getBoUrl(appid, ownernum, AccountUtils.getpersonId(BoActivity.this), 1, 10);
+        Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
+                .addBodyParameter("data", data)
+                .build()
+                .getObjectObservable(R_BO.class) // 发起获取数据列表的请求，并解析到FootList
+                .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
+                .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
+                .doOnNext(new Consumer<R_BO>() {
+                    @Override
+                    public void accept(@NonNull R_BO r_bo) throws Exception {
+                    }
+                })
+
+                .map(new Function<R_BO, R_BO.ResultBean>() {
+                    @Override
+                    public R_BO.ResultBean apply(@NonNull R_BO r_bo) throws Exception {
+
+                        return r_bo.getResult();
+                    }
+                })
+                .map(new Function<R_BO.ResultBean, List<BO>>() {
+                    @Override
+                    public List<BO> apply(@NonNull R_BO.ResultBean resultBean) throws Exception {
+                        return resultBean.getResultlist();
+                    }
+
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<BO>>() {
+                    @Override
+                    public void accept(@NonNull List<BO> bos) throws Exception {
+
+                        if (bos == null || bos.isEmpty()) {
+                        } else {
+                            bo = bos.get(0);
+                            showData();
+
+
+                        }
+                    }
+
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                    }
+                });
+
     }
 
 }

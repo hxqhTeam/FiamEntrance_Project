@@ -28,14 +28,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="@dimen/dimens_40dp"
             android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="vertical">
 
 
                 <LinearLayout
@@ -52,8 +51,8 @@
                         <TextView
                             android:layout_width="@dimen/word_80dp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
                             android:text="@string/payplannum_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -86,9 +85,10 @@
                         <TextView
                             android:layout_width="@dimen/word_80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/month_text"
-                            android:layout_margin="@dimen/dimen_10"                              android:textColor="@color/black"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
                         <TextView
@@ -118,9 +118,10 @@
                         <TextView
                             android:layout_width="@dimen/word_80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/type1_text"
-                            android:layout_margin="@dimen/dimen_10"                              android:textColor="@color/black"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
                         <TextView
@@ -137,7 +138,6 @@
                     </LinearLayout>
 
 
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -152,8 +152,9 @@
                         <TextView
                             android:layout_width="@dimen/word_80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/totalcost1_text"
+                            android:text="@string/totalcost1_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -184,8 +185,9 @@
                         <TextView
                             android:layout_width="@dimen/word_80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/status_text"
+                            android:text="@string/status_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -217,8 +219,9 @@
 
                             android:layout_width="@dimen/word_80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                            android:text="@string/contractnum1_text"
+                            android:text="@string/contractnum1_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -251,8 +254,9 @@
 
                         android:layout_width="@dimen/word_80dp"
                         android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_10"
                         android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                         android:text="@string/description2_text"
+                        android:text="@string/description2_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -285,8 +289,9 @@
 
                         android:layout_width="@dimen/word_80dp"
                         android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_10"
                         android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                         android:text="@string/phase_text"
+                        android:text="@string/phase_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -302,6 +307,7 @@
                         android:textSize="@dimen/dimens_16sp" />
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -317,8 +323,9 @@
 
                         android:layout_width="@dimen/word_80dp"
                         android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_10"
                         android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                         android:text="@string/vendor_text"
+                        android:text="@string/vendor_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -393,8 +400,9 @@
                         <TextView
                             android:layout_width="@dimen/word_80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                             android:text="@string/wonum2_text"
+                            android:text="@string/wonum2_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -412,7 +420,6 @@
                     </LinearLayout>
 
 
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -428,8 +435,9 @@
                         <TextView
                             android:layout_width="@dimen/word_80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                             android:text="@string/isbopayplan_text"
+                            android:text="@string/isbopayplan_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -464,8 +472,9 @@
                         <TextView
                             android:layout_width="@dimen/word_80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                             android:text="@string/sqr_text"
+                            android:text="@string/sqr_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -474,9 +483,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
+                            android:gravity="center_vertical"
                             android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
-                            android:gravity="center_vertical"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -496,8 +505,9 @@
                         <TextView
                             android:layout_width="@dimen/word_80dp"
                             android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:layout_margin="@dimen/dimen_10"                             android:text="@string/enterdate_text"
+                            android:text="@string/enterdate_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -506,9 +516,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
+                            android:gravity="center_vertical"
                             android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
-                            android:gravity="center_vertical"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -537,8 +547,9 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/dimen_10"
                         android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                         android:text="@string/xkxm_text"
+                        android:text="@string/xkxm_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -571,8 +582,9 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/dimen_10"
                         android:gravity="center"
-                        android:layout_margin="@dimen/dimen_10"                         android:text="@string/spjl_text"
+                        android:text="@string/spjl_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -597,25 +609,6 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimens_40dp"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/workflow_btn_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/btn_default"
-            android:text="@string/sp_btn_id"
-            android:textColor="@color/white"
-            android:textSize="@dimen/dimens_16sp" />
-
-
-    </RelativeLayout>
+    <include layout="@layout/appove_button"></include>
 
 </RelativeLayout>

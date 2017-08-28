@@ -1,12 +1,10 @@
 package com.hqxh.fiamproperty.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import com.hqxh.fiamproperty.R;
@@ -81,13 +79,6 @@ public class ApprovalAdapter extends BaseAdapter {
                 notifyDataSetChanged();
             }
         });
-//        boolean res = false;
-//        if (states.get(String.valueOf(position)) == null || states.get(String.valueOf(position)) == false) {
-//            res = false;
-//        } else {
-//            res = true;
-//        }
-//        Log.e("KEY1", "执行");
 
         holder.rdBtn.setChecked(states.get(String.valueOf(position)));
 

@@ -281,5 +281,32 @@ public class JsonUnit {
         return null;
     }
 
+    /**
+     * 转换斜杠
+     **/
+    public static String getSlash(String str) {
+        String qzurl = "C:\\doclinks";
+        if (!str.isEmpty()) {
+            str = str.replace(qzurl, "");
+            str = str.replace("\\", "/");
+        }
 
+
+        return str;
+    }
+
+    /**
+     * 获取文件名
+     **/
+    //http://10.60.12.98/attach2017/1503304774234.xlsx
+    public static String getFile(String str) {
+        String qzurl = "C:\\doclinks";
+        if (!str.isEmpty()) {
+            int index = str.lastIndexOf("\\");
+            str = str.substring(index + 1, str.length());
+        }
+
+
+        return str;
+    }
 }
