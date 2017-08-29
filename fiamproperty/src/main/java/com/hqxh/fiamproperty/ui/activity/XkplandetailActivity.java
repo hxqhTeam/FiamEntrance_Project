@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -13,18 +12,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.hqxh.fiamproperty.R;
-import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseTitleActivity;
 import com.hqxh.fiamproperty.bean.R_APPROVE;
 import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_PAYPLAN;
 import com.hqxh.fiamproperty.model.R_PAYPLAN.PAYPLAN;
 import com.hqxh.fiamproperty.model.R_PR;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
@@ -37,20 +32,18 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 需款计划详情
+需款计划详情
  */
 
-public class XkplandetailActivity extends BaseTitleActivity {
-    private static final String TAG = "XkplandetailActivity";
+public class XkplandetailActivity extends BaseTitleActivity{
+    private static final String TAG="XkplandetailActivity";
 
     private PAYPLAN payplan;
     private Animation rotate;
 
-    private ScrollView scrollView;
 
     TextView payplannum_text;//计划单
     TextView month_text;//日期
@@ -68,83 +61,62 @@ public class XkplandetailActivity extends BaseTitleActivity {
 
     TextView sqr_text;//申请人
     TextView enterdate_text;//申请时间
+    TextView cudept_text;//部门
+    TextView cucrew_text;//科室
     LinearLayout jbxxLinearlayout;
 
     ImageView jbxx_text;//其它信息
     ImageView xkxm_text;//文档
     ImageView spjl_text;//审批记录
 
-    private Button workflowBtn;
-    private RelativeLayout workflowRelativeLayout;//布局
-
-    private int mark = 0;//跳转标识
-    private String appid; //appid
-    private String ownernum;//ownernum
-    private String ownertable;//ownertable
-
-    @Override
-    protected void beforeInit() {
-        super.beforeInit();
-        if (getIntent().hasExtra("payplan")) {
-            payplan = (PAYPLAN) getIntent().getExtras().getSerializable("payplan");
-        }
-
-    }
+    Button sp_btn_id;//审批按钮
 
 
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.xkplandetails;
     }
-
+    protected void beforeInit(){
+        super.beforeInit();
+        payplan = (PAYPLAN) getIntent().getExtras().getSerializable("payplan");
+    }
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        scrollView = (ScrollView) findViewById(R.id.scrollView_id);
-        payplannum_text = (TextView) findViewById(R.id.payplannum_text);
-        month_text = (TextView) findViewById(R.id.month_text);
-        type1_text = (TextView) findViewById(R.id.type1_text);
+        payplannum_text=(TextView)findViewById(R.id.payplannum_text);
+        month_text=(TextView)findViewById(R.id.month_text);
+        type1_text=(TextView)findViewById(R.id.type1_text);
 
-        totalcost1_text = (TextView) findViewById(R.id.totalcost1_text);
-        status_text = (TextView) findViewById(R.id.status_text);
-        contractnum1_text = (TextView) findViewById(R.id.contractnum1_text);
-        description2_text = (TextView) findViewById(R.id.description2_text);
-        phase_text = (TextView) findViewById(R.id.phase_text);
-        vendor_text = (TextView) findViewById(R.id.vendor_text);
-        wonum2_text = (TextView) findViewById(R.id.wonum2_text);
+        totalcost1_text=(TextView)findViewById(R.id.totalcost1_text);
+        status_text=(TextView)findViewById(R.id.status_text);
+        contractnum1_text=(TextView)findViewById(R.id.contractnum1_text);
+        description2_text=(TextView)findViewById(R.id.description2_text);
+        phase_text=(TextView)findViewById(R.id.phase_text);
+        vendor_text=(TextView)findViewById(R.id.vendor_text);
+        wonum2_text=(TextView)findViewById(R.id.wonum2_text);
+        cudept_text=(TextView)findViewById(R.id.cudept_text);
+        cucrew_text=(TextView)findViewById(R.id.cucrew_text);
 
 
-        isbopayplan_text = (CheckBox) findViewById(R.id.isbopayplan_text);
+        isbopayplan_text=(CheckBox) findViewById(R.id.isbopayplan_text);
 
-        sqr_text = (TextView) findViewById(R.id.sqr_text);
-        enterdate_text = (TextView) findViewById(R.id.enterdate_text);
+        sqr_text=(TextView)findViewById(R.id.sqr_text);
+        enterdate_text=(TextView)findViewById(R.id.enterdate_text);
 
-        jbxxLinearlayout = (LinearLayout) findViewById(R.id.jbxx_text_id);
+        jbxxLinearlayout=(LinearLayout) findViewById(R.id.jbxx_text_id);
 
-        jbxx_text = (ImageView) findViewById(R.id.jbxx_text);
-        xkxm_text = (ImageView) findViewById(R.id.xkxm_text);
-        spjl_text = (ImageView) findViewById(R.id.spjl_text);
+        jbxx_text=(ImageView)findViewById(R.id.jbxx_text);
+        xkxm_text=(ImageView)findViewById(R.id.xkxm_text);
+        spjl_text=(ImageView)findViewById(R.id.spjl_text);
 
-        workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
+        sp_btn_id=(Button)findViewById(R.id.workflow_btn_id);
 
-        workflowRelativeLayout = (RelativeLayout) findViewById(R.id.relavtivelayout_btn_id);
-        if (null == appid) {
-            showData();
-        } else {
-            if (mark == HomeActivity.DB_CODE) { //待办任务
-                workflowRelativeLayout.setVisibility(View.VISIBLE);
-                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
-                scrollView.setLayoutParams(layoutParams);
-            }
-            getNetWorkPAYPLAN();
-        }
+         showDate();
 
     }
 
-
-    private void showData() {
-        payplannum_text.setText(JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0] + "," + JsonUnit.convertStrToArray(payplan.getDESCRIPTION())[0]);
+    private void showDate() {
+        payplannum_text.setText(JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]+","+JsonUnit.convertStrToArray(payplan.getDESCRIPTION())[0]);
         month_text.setText(JsonUnit.convertStrToArray(payplan.getMONTH())[0]);
         type1_text.setText(JsonUnit.convertStrToArray(payplan.getTYPE())[0]);
         totalcost1_text.setText(JsonUnit.convertStrToArray(payplan.getTOTALCOST())[0]);
@@ -154,10 +126,13 @@ public class XkplandetailActivity extends BaseTitleActivity {
         phase_text.setText(JsonUnit.convertStrToArray(payplan.getPHASE())[0]);
         vendor_text.setText(JsonUnit.convertStrToArray(payplan.getVENDORNAME())[0]);
         wonum2_text.setText(JsonUnit.convertStrToArray(payplan.getWONUM2())[0]);
+        cudept_text.setText(JsonUnit.convertStrToArray(payplan.getDEPARTMENT())[0]);
+        cucrew_text.setText(JsonUnit.convertStrToArray(payplan.getCREW())[0]);
 
-        if (JsonUnit.convertStrToArray(payplan.getISBOPAYPLAN())[0].equals("1")) {
+
+        if(JsonUnit.convertStrToArray(payplan.getISBOPAYPLAN())[0].equals("1")){
             isbopayplan_text.setChecked(true);
-        } else {
+        }else {
             isbopayplan_text.setChecked(false);
         }
         sqr_text.setText(JsonUnit.convertStrToArray(payplan.getENTERBYNAME())[0]);
@@ -168,7 +143,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
         jbxx_text.setOnClickListener(jbxx_textOnClickListener);
         spjl_text.setOnClickListener(sqjlImageViewOnClickListener);
         xkxm_text.setOnClickListener(xkxm_textOnClickListener);
-        workflowBtn.setOnClickListener(sp_btn_idOnClickListener);
+        sp_btn_id.setOnClickListener(sp_btn_idOnClickListener);
     }
 
     @Override
@@ -182,13 +157,15 @@ public class XkplandetailActivity extends BaseTitleActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(XkplandetailActivity.this, XkxmActivity.class);
-            intent.putExtra("payplannum", JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]);
+            intent.putExtra("payplannum",JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]);
             startActivityForResult(intent, 0);
 
         }
     };
 
-    //审批记录
+    /*
+审批记录
+*/
     private View.OnClickListener sqjlImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -201,7 +178,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
     /*
     其它信息
     */
-    private View.OnClickListener jbxx_textOnClickListener = new View.OnClickListener() {
+    private View.OnClickListener jbxx_textOnClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (startAnaim()) {
@@ -212,7 +189,6 @@ public class XkplandetailActivity extends BaseTitleActivity {
 
         }
     };
-
     //启动动画
     private boolean startAnaim() {
 
@@ -224,7 +200,6 @@ public class XkplandetailActivity extends BaseTitleActivity {
         jbxx_text.startAnimation(rotate);
         return rotate.getFillAfter();
     }
-
     //审批
     private View.OnClickListener sp_btn_idOnClickListener = new View.OnClickListener() {
         @Override
@@ -234,8 +209,11 @@ public class XkplandetailActivity extends BaseTitleActivity {
     };
 
 
+
     //流程启动
+//http://10.60.12.98/maximo/mobile/wf/start?ownertable=GR&ownerid=77129&processname=GR-WZMAIN&userid=yanghongwei
     private void PostStart(String ownertable, String ownerid, String appid, String userid) {
+        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",appid=" + appid + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_START_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -286,7 +264,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
 
     //http://10.60.12.98/maximo/mobile/wf/approve?ownertable=GR&ownerid=77128&memo=驳回&selectWhat=0&userid=zhuyinan
     private void PostApprove(String ownertable, String ownerid, String memo, String selectWhat, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",memo=" + memo + ",selectWhat=" + selectWhat + ",userid=" + userid);
+        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",memo=" + memo +",selectWhat="+selectWhat+ ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_APPROVE_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -335,7 +313,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
                         Log.e(TAG, "result" + result.getInstruction());
-                        PostApprove(GlobalConfig.PAYPLAN_NAME, JsonUnit.convertStrToArray(payplan.getPAYPLANID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(XkplandetailActivity.this));
+                        PostApprove(GlobalConfig.PAYPLAN_NAME, JsonUnit.convertStrToArray(payplan.getPAYPLANID())[0],memo,result.getIspositive(),AccountUtils.getpersonId(XkplandetailActivity.this));
                     }
 
 
@@ -345,56 +323,5 @@ public class XkplandetailActivity extends BaseTitleActivity {
                 dialogInterface.dismiss();
             }
         }).create().show();
-    }
-
-    //根据appid,grnum,objctname获取国内出差信息
-    private void getNetWorkPAYPLAN() {
-        String data = HttpManager.getPAYPLANUrl(appid, ownernum, AccountUtils.getpersonId(this), 1, 10);
-        Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
-                .addBodyParameter("data", data)
-                .build()
-                .getObjectObservable(R_PAYPLAN.class) // 发起获取数据列表的请求，并解析到FootList
-                .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
-                .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
-                .doOnNext(new Consumer<R_PAYPLAN>() {
-                    @Override
-                    public void accept(@NonNull R_PAYPLAN r_payplan) throws Exception {
-                    }
-                })
-
-                .map(new Function<R_PAYPLAN, R_PAYPLAN.ResultBean>() {
-                    @Override
-                    public R_PAYPLAN.ResultBean apply(@NonNull R_PAYPLAN r_payplan) throws Exception {
-
-                        return r_payplan.getResult();
-                    }
-                })
-                .map(new Function<R_PAYPLAN.ResultBean, List<PAYPLAN>>() {
-                    @Override
-                    public List<PAYPLAN> apply(@NonNull R_PAYPLAN.ResultBean resultBean) throws Exception {
-                        return resultBean.getResultlist();
-                    }
-
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<PAYPLAN>>() {
-                    @Override
-                    public void accept(@NonNull List<PAYPLAN> payplans) throws Exception {
-
-                        if (payplans == null || payplans.isEmpty()) {
-                        } else {
-                            payplan = payplans.get(0);
-                            showData();
-
-                        }
-                    }
-
-
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(@NonNull Throwable throwable) throws Exception {
-                    }
-                });
     }
 }

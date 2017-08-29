@@ -523,6 +523,72 @@
                             android:textSize="@dimen/dimens_16sp" />
 
                     </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/line"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_dark_gray"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/word_80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:layout_margin="@dimen/dimen_10"
+                            android:text="@string/cudept_text"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+                        <TextView
+                            android:id="@+id/cudept_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:hint="暂无数据"
+                            android:padding="@dimen/btn_top_5dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/line"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_dark_gray"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/word_80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:layout_margin="@dimen/dimen_10"
+                            android:text="@string/cucrew_text"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+                        <TextView
+                            android:id="@+id/cucrew_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:hint="暂无数据"
+                            android:padding="@dimen/btn_top_5dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+                    </LinearLayout>
+
 
 
                 </LinearLayout>
