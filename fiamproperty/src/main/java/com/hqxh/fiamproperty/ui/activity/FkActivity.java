@@ -15,7 +15,6 @@ import com.hqxh.fiamproperty.model.R_PAYCHECK.PAYCHECK;
 import com.hqxh.fiamproperty.model.R_PAYCHECK.ResultBean;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
 import com.hqxh.fiamproperty.ui.adapter.FkAdapter;
-import com.hqxh.fiamproperty.ui.adapter.HtAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -160,7 +159,7 @@ public class FkActivity extends BaseListActivity {
 
     @Override
     protected void setOnClick() {
-
+        searchText.setOnClickListener(searchTextOnClickListener);
     }
 
 
@@ -189,5 +188,18 @@ public class FkActivity extends BaseListActivity {
         fkAdapter.addData(list);
     }
 
+
+    /**
+     * 跳转事件
+     **/
+    private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = getIntent();
+            intent.setClass(FkActivity.this, Fkys_SearchActivity.class);
+            intent.putExtra("appid", GlobalConfig.PAYCHECK_APPID);
+            startActivityForResult(intent, 0);
+        }
+    };
 
 }

@@ -3,8 +3,6 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 
 import com.hqxh.fiamproperty.R;
@@ -14,7 +12,6 @@ import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_PR;
 import com.hqxh.fiamproperty.model.R_PR.PR;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
-import com.hqxh.fiamproperty.ui.adapter.GrAdapter;
 import com.hqxh.fiamproperty.ui.adapter.PrAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
@@ -52,6 +49,18 @@ public class PrActivity extends BaseListActivity {
     private int titleRec; //标题
     private String appid; //Appid
 
+    @Override
+    protected void beforeInit() {
+        super.beforeInit();
+        if (getIntent().hasExtra("titleRec")) {
+            titleRec = getIntent().getExtras().getInt("titleRec");
+        }
+        if (getIntent().hasExtra("appid")) {
+            appid = getIntent().getExtras().getString("appid");
+        }
+
+
+    }
 
     @Override
     protected String getSubTitle() {
@@ -65,9 +74,9 @@ public class PrActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getPRUrl(appid, "",AccountUtils.getpersonId(this), curpage, showcount);
+        String data = HttpManager.getPRUrl(appid, "", AccountUtils.getpersonId(this), curpage, showcount);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
-                .addQueryParameter("data", data)
+                .addBodyParameter("data", data)
                 .build()
                 .getObjectObservable(R_PR.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
@@ -85,9 +94,9 @@ public class PrActivity extends BaseListActivity {
                         return r_pr.getResult();
                     }
                 })
-                .map(new Function<R_PR.ResultBean, List<R_PR.PR>>() {
+                .map(new Function<R_PR.ResultBean, List<PR>>() {
                     @Override
-                    public List<R_PR.PR> apply(@NonNull R_PR.ResultBean resultBean) throws Exception {
+                    public List<PR> apply(@NonNull R_PR.ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
                         return resultBean.getResultlist();
                     }
@@ -162,8 +171,7 @@ public class PrActivity extends BaseListActivity {
 
     @Override
     protected void fillData() {
-        titleRec = getIntent().getExtras().getInt("titleRec");
-        appid = getIntent().getExtras().getString("appid");
+
 
         initAdapter(new ArrayList<PR>());
         getData();
@@ -172,7 +180,7 @@ public class PrActivity extends BaseListActivity {
 
     @Override
     protected void setOnClick() {
-
+        searchText.setOnClickListener(searchTextOnClickListener);
     }
 
 
@@ -215,5 +223,15 @@ public class PrActivity extends BaseListActivity {
         prAdapter.addData(list);
     }
 
-
+    /**
+     * 跳转事件
+     **/
+    private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = getIntent();
+            intent.setClass(PrActivity.this, Pr_SearchActivity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
 }

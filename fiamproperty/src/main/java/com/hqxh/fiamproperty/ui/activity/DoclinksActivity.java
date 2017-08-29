@@ -219,6 +219,7 @@ public class DoclinksActivity extends BaseListActivity {
      * 文件下载
      **/
     private void uploadFile(String url, final String dirPath, final String fileName) {
+        Log.e(TAG,"文件下载地址"+url);
         AndroidNetworking.download(url, Utils.getFilePath(dirPath), fileName)
                 .build()
                 .setDownloadProgressListener(new DownloadProgressListener() {

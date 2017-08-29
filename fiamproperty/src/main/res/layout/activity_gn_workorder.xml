@@ -288,7 +288,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:button="@drawable/checkbox_bj" />
+                                android:button="@drawable/checkbox_bj"
+                                android:clickable="false" />
                         </RelativeLayout>
                     </LinearLayout>
 
@@ -590,6 +591,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
+                            android:gravity="center_vertical"
                             android:hint="@string/have_not_data"
                             android:paddingLeft="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
@@ -688,7 +690,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
+                            android:gravity="center_vertical"
                             android:hint="@string/have_not_data"
+                            android:paddingLeft="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
                     </LinearLayout>

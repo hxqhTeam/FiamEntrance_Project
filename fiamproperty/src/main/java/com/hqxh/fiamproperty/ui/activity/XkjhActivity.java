@@ -14,7 +14,6 @@ import com.hqxh.fiamproperty.model.R_PAYPLAN;
 import com.hqxh.fiamproperty.model.R_PAYPLAN.PAYPLAN;
 import com.hqxh.fiamproperty.model.R_PAYPLAN.ResultBean;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
-import com.hqxh.fiamproperty.ui.adapter.FkAdapter;
 import com.hqxh.fiamproperty.ui.adapter.XkjhAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
@@ -160,7 +159,7 @@ public class XkjhActivity extends BaseListActivity {
 
     @Override
     protected void setOnClick() {
-
+        searchText.setOnClickListener(searchTextOnClickListener);
     }
 
 
@@ -189,6 +188,20 @@ public class XkjhActivity extends BaseListActivity {
     private void addData(final List<PAYPLAN> list) {
         xkjhAdapter.addData(list);
     }
+
+
+    /**
+     * 跳转事件
+     **/
+    private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = getIntent();
+            intent.setClass(XkjhActivity.this, Xkjh_SearchActivity.class);
+            intent.putExtra("appid", GlobalConfig.PP_APPID);
+            startActivityForResult(intent, 0);
+        }
+    };
 
 
 }

@@ -1,20 +1,21 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.base.BaseActivity;
+import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.ui.fragment.TravelFragment;
 import com.hqxh.fiamproperty.ui.fragment.TravelsFragment;
 
@@ -25,17 +26,23 @@ import java.util.List;
  * 出差申请
  **/
 public class WorkorderActivity extends BaseActivity {
+    private static final String TAG = "WorkorderActivity";
     Toolbar mToolbar;
     /**
      * 标题
      **/
     TextView titleTextView;
 
+    ImageView searchText;
+
     TabLayout tabLayout;
     ViewPager viewPager;
 
+
     private TravelFragment travelFragment;
     private TravelsFragment travelsFragment;
+
+    private int current;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -46,6 +53,8 @@ public class WorkorderActivity extends BaseActivity {
     protected void initView(Bundle savedInstanceState) {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         titleTextView = (TextView) findViewById(R.id.title_text);
+        searchText = (ImageView) findViewById(R.id.search_imageView_id);
+        searchText.setVisibility(View.VISIBLE);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         initToolbar();
 
@@ -56,6 +65,7 @@ public class WorkorderActivity extends BaseActivity {
 //        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);//适合很多tab
         tabLayout.setTabMode(TabLayout.MODE_FIXED);//tab均分,适合少的tab
 
+        searchText.setOnClickListener(searchTextOnClickListener);
     }
 
 
@@ -100,6 +110,7 @@ public class WorkorderActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
+
             return mFragmentList.get(position);
         }
 
@@ -136,9 +147,45 @@ public class WorkorderActivity extends BaseActivity {
         adapter.addFrag(travelsFragment, getString(R.string.gwlx_text));
 
 
-
         viewPager.setAdapter(adapter);
 
         viewPager.setOffscreenPageLimit(2);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                current = position;
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
+
+
+    /**
+     * 跳转事件
+     **/
+    private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = getIntent();
+            intent.setClass(WorkorderActivity.this, Ccsq_SearchActivity.class);
+            Log.e(TAG, "current" + current);
+            if (current == 0) {
+                intent.putExtra("appid", GlobalConfig.TRAVEL_APPID);
+            } else {
+                intent.putExtra("appid", GlobalConfig.TRAVELS_APPID);
+            }
+
+            startActivityForResult(intent, 0);
+        }
+    };
 }

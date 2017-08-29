@@ -23,7 +23,6 @@ import com.hqxh.fiamproperty.base.BaseTitleActivity;
 import com.hqxh.fiamproperty.bean.R_APPROVE;
 import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_PR;
 import com.hqxh.fiamproperty.model.R_Workorder;
 import com.hqxh.fiamproperty.model.R_Workorder.Workorder;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
@@ -31,8 +30,6 @@ import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.hqxh.fiamproperty.unit.JsonUnit;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -40,7 +37,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.http.HTTP;
 
 /**
  * 出国立项详情
@@ -201,9 +197,11 @@ public class CgWorkorderActivity extends BaseTitleActivity {
     private View.OnClickListener ccrTextOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(CgWorkorderActivity.this, PersonrelationActivity.class);
+            Intent intent = getIntent();
+            intent.setClass(CgWorkorderActivity.this, PersonrelationActivity.class);
             intent.putExtra("wonum", JsonUnit.convertStrToArray(workorder.getWONUM())[0]);
             intent.putExtra("title", getResources().getString(R.string.lcgrymd_text));
+            intent.putExtra("appid", GlobalConfig.TRAVELS_APPID);
             startActivityForResult(intent, 0);
         }
     };

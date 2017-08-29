@@ -16,6 +16,9 @@ public final class GlobalConfig {
      * 附件下载路劲
      **/
     public final static String HTTP_DOCLINKS_URL = "http://10.60.12.98";
+
+//    public final static String HTTP_DOCLINKS_URL = HTTP_URL+"/maximo/file";
+
     /**
      * 服务器登录接口地址
      **/

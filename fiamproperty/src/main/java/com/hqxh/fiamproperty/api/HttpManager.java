@@ -37,6 +37,16 @@ public class HttpManager {
     }
 
     /**
+     * 根据
+     * 条件进行搜索
+     */
+    public static String getSearchWORKORDERUrl(String appid, String objectname, String search, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + objectname + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'WONUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+
+
+    }
+
+    /**
      * 出差人*
      */
     public static String getR_PERSONRELATIONUrl(String appid, String username, String wonum, int curpage, int showcount) {
@@ -64,7 +74,6 @@ public class HttpManager {
 
     public static String getZCMXUrl(String username, String grnum, int curpage, int showcount) {
         return "{'appid':'" + GlobalConfig.GRZC_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'GRNUM':'=" + grnum + "'}}";
-//        return "{'appid':'" + GlobalConfig.GRZC_APPID + "','objectname':'" + GlobalConfig.GRLINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
 
     }
 
@@ -82,6 +91,13 @@ public class HttpManager {
     }
 
     /**
+     * 出门管理-搜索*
+     */
+    public static String getSearchGRUrl(String appid, String objctname, String search, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + objctname + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'GRNUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+    }
+
+    /**
      * 采购申请*
      */
     public static String getPRUrl(String appid, String prnum, String username, int curpage, int showcount) {
@@ -91,6 +107,14 @@ public class HttpManager {
         } else {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PR_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PRNUM':'=" + prnum + "'}}";
         }
+    }
+
+    /**
+     * 采购申请-搜索*
+     */
+    public static String getSearchPRUrl(String appid, String search, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PR_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'PRNUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+
     }
 
 
@@ -120,6 +144,15 @@ public class HttpManager {
 
 
     /**
+     * 任务单-搜索*
+     */
+    public static String getSearchRWDUrl(String appid, String search, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.WORKORDER_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'WONUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+
+    }
+
+
+    /**
      * 明细信息*
      */
     public static String getWPITEMUrl(String appid, String wonum, String username, int curpage, int showcount) {
@@ -138,6 +171,15 @@ public class HttpManager {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PURCHVIEW_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'CONTRACTNUM':'=" + contractnum + "'}}";
 
         }
+
+    }
+
+    /**
+     * 合同-搜索*
+     */
+    public static String getSearchPURCHVIEWUrl(String appid, String search, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PURCHVIEW_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'CONTRACTNUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+
 
     }
 
@@ -180,6 +222,17 @@ public class HttpManager {
 
     }
 
+
+    /**
+     * 付款验收*
+     */
+    public static String getSearchPAYCHECKUrl(String appid, String search, String username, int curpage, int showcount) {
+
+        return "{'appid':'" + GlobalConfig.PAYCHECK_APPID + "','objectname':'" + GlobalConfig.PAYCHECK_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'PAYCHECKNUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+
+
+    }
+
     /**
      * 需款计划*
      */
@@ -191,6 +244,16 @@ public class HttpManager {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYPLAN_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYPLANNUM':'=" + payplannum + "'}}";
 
         }
+
+    }
+
+
+    /**
+     * 需款计划-搜索*
+     */
+    public static String getSearchPAYPLANUrl(String appid, String search, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYPLAN_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'PAYPLANNUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+
 
     }
 
@@ -214,6 +277,15 @@ public class HttpManager {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.EXPENSE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'EXPENSENUM':'=" + expensenum + "'}}";
 
         }
+
+    }
+
+    /**
+     * 差旅报销单／备用金报销 -搜索*
+     */
+    public static String getSearchEXPENSEUrl(String appid, String search, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.EXPENSE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'EXPENSENUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+
 
     }
 
@@ -245,6 +317,15 @@ public class HttpManager {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.BO_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'BONUM':'=" + bonum + "'}}";
 
         }
+
+    }
+
+    /**
+     * 借款单-搜索*
+     */
+    public static String getSearchBoUrl(String appid, String search, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.BO_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'BONUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+
 
     }
 

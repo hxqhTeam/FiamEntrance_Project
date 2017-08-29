@@ -233,15 +233,19 @@ public class JsonUnit {
             jsrec.put("PR", jswo.toString());
             //采购申请明细
             JSONArray jaline = new JSONArray();
-            for (int i = 0; i < prlines.size(); i++) {
-                JSONObject jsline = new JSONObject();
-                PRLINE prline = prlines.get(i);
-                jsline.put("PRLINEID", prline.getPRLINEID());
-                jsline.put("UDASSIGNER", prline.getUDASSIGNER());//执行人
-                jaline.put(jsline);
+            if (null != prlines) {
+                for (int i = 0; i < prlines.size(); i++) {
+                    JSONObject jsline = new JSONObject();
+                    PRLINE prline = prlines.get(i);
+                    jsline.put("PRLINEID", prline.getPRLINEID());
+                    jsline.put("UDASSIGNER", prline.getUDASSIGNER());//执行人
+                    jaline.put(jsline);
 
+                }
+                jsrec.put("PRLINE", jaline.toString());
+            } else {
+                jsrec.put("PRLINE", "");
             }
-            jsrec.put("PRLINE", jaline.toString());
 
 
             //最外层

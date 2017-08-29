@@ -138,44 +138,7 @@
 
                     </LinearLayout>
 
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background_dark_gray"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_10"
-                            android:gravity="center"
-                            android:text="@string/udadditional_text"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white">
-
-                            <CheckBox
-                                android:id="@+id/udadditional_checkbox_id"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="@dimen/btn_top_5dp" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-
+                    
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

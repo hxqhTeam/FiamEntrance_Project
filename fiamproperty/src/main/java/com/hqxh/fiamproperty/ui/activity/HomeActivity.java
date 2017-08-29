@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -296,8 +295,6 @@ public class HomeActivity extends BaseActivity {
      **/
     private void getData() {
         String data = HttpManager.getWFASSIGNMENTUrl("", AccountUtils.getpersonId(this), "ACTIVE", 1, 10);
-        Log.e(TAG, "data=" + data);
-        Log.e(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addBodyParameter("data", data)
                 .build()
@@ -331,7 +328,6 @@ public class HomeActivity extends BaseActivity {
                     public void accept(@NonNull String s) throws Exception {
                         dismissLoadingDialog();
                         badgeText.setVisibility(View.VISIBLE);
-                        Log.e(TAG, "s=" + s);
                         if (s.equals("0")) {
                             badgeText.setBadgeCount(0, true);
                         } else {

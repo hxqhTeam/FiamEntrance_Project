@@ -189,7 +189,7 @@ public class ActiveTaskActivity extends BaseListActivity {
             public void onItemClick(View view, int position) {
                 Wfassignment wfassignment = (Wfassignment) wfassignmentAdapter.getData().get(position);
                 String app = JsonUnit.convertStrToArray(wfassignment.getAPP())[0];
-                Log.e(TAG,"app="+app);
+                Log.e(TAG, "app=" + app);
                 Intent intent = getIntent();
                 if (app.equals(GlobalConfig.GRWZ_APPID)) { //出门管理
                     intent.setClass(ActiveTaskActivity.this, GrDetailsActivity.class);
@@ -311,8 +311,7 @@ public class ActiveTaskActivity extends BaseListActivity {
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, 0);
-                }
-                else {
+                } else {
                     showMiddleToast(ActiveTaskActivity.this, getString(R.string.have_not_appove_hint));
                 }
             }
@@ -333,8 +332,8 @@ public class ActiveTaskActivity extends BaseListActivity {
     private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(ActiveTaskActivity.this, SearchActivity.class);
-            intent.putExtra("appid", GlobalConfig.WFADMIN_APPID);
+            Intent intent = getIntent();
+            intent.setClass(ActiveTaskActivity.this, SearchActivity.class);
             startActivityForResult(intent, 0);
         }
     };

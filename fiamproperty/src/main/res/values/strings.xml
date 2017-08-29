@@ -6,7 +6,7 @@
     <string name="yb_task_text">已办任务</string>
     <string name="ccsq_text">出差申请</string>
     <string name="gncc_text">国内出差</string>
-    <string name="gwlx_text">国外立项</string>
+    <string name="gwlx_text">出国立项</string>
 
 
     <!-- 登录界面 key-->
@@ -61,7 +61,7 @@
     <!--国内出差详情-->
     <string name="gncc_detail_text">国内出差详情</string>
     <string name="sqd_text">申请单</string>
-    <string name="have_not_data">暂无数据</string>
+    <string name="have_not_data">""</string>
     <string name="projectid_text">费用号</string>
     <string name="worktype_text">类型</string>
     <string name="status_text">状态</string>

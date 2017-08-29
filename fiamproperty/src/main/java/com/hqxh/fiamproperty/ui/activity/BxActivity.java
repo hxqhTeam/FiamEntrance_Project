@@ -1,5 +1,6 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hqxh.fiamproperty.R;
@@ -15,8 +17,6 @@ import com.hqxh.fiamproperty.base.BaseActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.ui.fragment.BoFragment;
 import com.hqxh.fiamproperty.ui.fragment.ExpenseFragment;
-import com.hqxh.fiamproperty.ui.fragment.TravelFragment;
-import com.hqxh.fiamproperty.ui.fragment.TravelsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,7 @@ public class BxActivity extends BaseActivity {
      * 标题
      **/
     TextView titleTextView;
+    ImageView searchText;
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -37,6 +38,9 @@ public class BxActivity extends BaseActivity {
     private ExpenseFragment expenseFragment;
     private ExpenseFragment expenseFragment1;
     private BoFragment boFragment;
+
+
+    private int current;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -48,6 +52,8 @@ public class BxActivity extends BaseActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         titleTextView = (TextView) findViewById(R.id.title_text);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
+        searchText = (ImageView) findViewById(R.id.search_imageView_id);
+        searchText.setVisibility(View.VISIBLE);
         initToolbar();
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -56,7 +62,7 @@ public class BxActivity extends BaseActivity {
         tabLayout.setupWithViewPager(viewPager);
 //        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);//适合很多tab
         tabLayout.setTabMode(TabLayout.MODE_FIXED);//tab均分,适合少的tab
-
+        searchText.setOnClickListener(searchTextOnClickListener);
     }
 
 
@@ -145,9 +151,50 @@ public class BxActivity extends BaseActivity {
         adapter.addFrag(boFragment, getString(R.string.jkd_text));
 
 
-
         viewPager.setAdapter(adapter);
 
         viewPager.setOffscreenPageLimit(2);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                current = position;
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
+
+
+    /**
+     * 跳转事件
+     **/
+    private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = getIntent();
+            if (current == 0) { //差旅报销单
+                intent.setClass(BxActivity.this, Expense_SearchActivity.class);
+                intent.putExtra("appid", GlobalConfig.EXPENSES_APPID);
+            } else if (current == 1) { //备用金报销
+                intent.setClass(BxActivity.this, Expense_SearchActivity.class);
+                intent.putExtra("appid", GlobalConfig.EXPENSE_APPID);
+            } else if (current == 2) { //借款单
+                intent.setClass(BxActivity.this, Bo_SearchActivity.class);
+                intent.putExtra("appid", GlobalConfig.BO_APPID);
+            }
+
+
+            startActivityForResult(intent, 0);
+        }
+    };
 }

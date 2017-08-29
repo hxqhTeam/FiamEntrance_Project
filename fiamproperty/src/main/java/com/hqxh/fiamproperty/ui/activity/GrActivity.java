@@ -3,7 +3,6 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import com.hqxh.fiamproperty.R;
@@ -11,8 +10,8 @@ import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseListActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_GR;
-import com.hqxh.fiamproperty.model.R_GR.ResultBean;
 import com.hqxh.fiamproperty.model.R_GR.GR;
+import com.hqxh.fiamproperty.model.R_GR.ResultBean;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
 import com.hqxh.fiamproperty.ui.adapter.GrAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
@@ -158,6 +157,7 @@ public class GrActivity extends BaseListActivity {
 
     @Override
     protected void setOnClick() {
+        searchText.setOnClickListener(searchTextOnClickListener);
 
     }
 
@@ -186,6 +186,20 @@ public class GrActivity extends BaseListActivity {
     private void addData(final List<GR> list) {
         grAdapter.addData(list);
     }
+
+
+    /**
+     * 跳转事件
+     **/
+    private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = getIntent();
+            intent.setClass(GrActivity.this, Cmgl_SearchActivity.class);
+            intent.putExtra("appid", GlobalConfig.GRWZ_APPID);
+            startActivityForResult(intent, 0);
+        }
+    };
 
 
 }

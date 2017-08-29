@@ -54,10 +54,8 @@ public class HtActivity extends BaseListActivity {
      **/
     private void getData() {
         String data = HttpManager.getPURCHVIEWUrl(GlobalConfig.CONTPURCH_APPID, "", AccountUtils.getpersonId(this), curpage, showcount);
-        Log.i(TAG, "data=" + data);
-        Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
-                .addQueryParameter("data", data)
+                .addBodyParameter("data", data)
                 .build()
                 .getObjectObservable(R_PURCHVIEW.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
@@ -161,7 +159,7 @@ public class HtActivity extends BaseListActivity {
 
     @Override
     protected void setOnClick() {
-
+        searchText.setOnClickListener(searchTextOnClickListener);
     }
 
 
@@ -192,5 +190,16 @@ public class HtActivity extends BaseListActivity {
         htAdapter.addData(list);
     }
 
-
+    /**
+     * 跳转事件
+     **/
+    private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = getIntent();
+            intent.setClass(HtActivity.this, Ht_SearchActivity.class);
+            intent.putExtra("appid", GlobalConfig.CONTPURCH_APPID);
+            startActivityForResult(intent, 0);
+        }
+    };
 }

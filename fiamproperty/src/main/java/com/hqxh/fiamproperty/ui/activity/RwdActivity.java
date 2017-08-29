@@ -14,7 +14,6 @@ import com.hqxh.fiamproperty.model.R_Workorder;
 import com.hqxh.fiamproperty.model.R_Workorder.ResultBean;
 import com.hqxh.fiamproperty.model.R_Workorder.Workorder;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
-import com.hqxh.fiamproperty.ui.adapter.GrAdapter;
 import com.hqxh.fiamproperty.ui.adapter.WorkOrderAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
@@ -35,12 +34,12 @@ import io.reactivex.schedulers.Schedulers;
 public class RwdActivity extends BaseListActivity {
     private static final String TAG = "RwdActivity";
 
-    public static final int RWD_SY=1000;//试验任务单
-    public static final int RWD_SZ=1001;//试制任务单
-    public static final int RWD_WZ=1003;//物资领料单
-    public static final int RWD_DJ=1004;//调件任务单
-    public static final int RWD_RY=1005;//燃油申请单
-    public static final int RWD_QT=1006;//其它任务单
+    public static final int RWD_SY = 1000;//试验任务单
+    public static final int RWD_SZ = 1001;//试制任务单
+    public static final int RWD_WZ = 1003;//物资领料单
+    public static final int RWD_DJ = 1004;//调件任务单
+    public static final int RWD_RY = 1005;//燃油申请单
+    public static final int RWD_QT = 1006;//其它任务单
 
     private WorkOrderAdapter workOrderAdapter;
 
@@ -50,6 +49,19 @@ public class RwdActivity extends BaseListActivity {
 
     private int titleRec; //标题
     private String appid; //Appid
+
+    @Override
+    protected void beforeInit() {
+        super.beforeInit();
+        if (getIntent().hasExtra("titleRec")) {
+            titleRec = getIntent().getExtras().getInt("titleRec");
+        }
+        if (getIntent().hasExtra("appid")) {
+            appid = getIntent().getExtras().getString("appid");
+        }
+
+
+    }
 
     @Override
     protected String getSubTitle() {
@@ -62,9 +74,7 @@ public class RwdActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getRWDUrl(appid,AccountUtils.getpersonId(this),  curpage, showcount);
-        Log.i(TAG, "data=" + data);
-        Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
+        String data = HttpManager.getRWDUrl(appid, AccountUtils.getpersonId(this), curpage, showcount);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addBodyParameter("data", data)
                 .build()
@@ -101,7 +111,7 @@ public class RwdActivity extends BaseListActivity {
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                         if (workorders == null || workorders.isEmpty()) {
-                             notLinearLayout.setVisibility(View.VISIBLE);
+                            notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
                             addData(workorders);
@@ -163,8 +173,7 @@ public class RwdActivity extends BaseListActivity {
     @Override
     protected void fillData() {
 
-        titleRec = getIntent().getExtras().getInt("titleRec");
-        appid = getIntent().getExtras().getString("appid");
+
         initAdapter(new ArrayList<Workorder>());
         getData();
 
@@ -172,7 +181,7 @@ public class RwdActivity extends BaseListActivity {
 
     @Override
     protected void setOnClick() {
-
+        searchText.setOnClickListener(searchTextOnClickListener);
     }
 
 
@@ -185,49 +194,31 @@ public class RwdActivity extends BaseListActivity {
         workOrderAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent=null;
-                if(appid.equals(GlobalConfig.TOSY_APPID)){
-                    intent=new Intent(RwdActivity.this,SyrwdWorkorderActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
-                    intent.putExtras(bundle);
-                    startActivityForResult(intent, 0);
+                Intent intent = null;
+                Log.e(TAG, "appid=" + appid);
+                if (appid.equals(GlobalConfig.TOSY_APPID)) {
+                    intent = new Intent(RwdActivity.this, SyrwdWorkorderActivity.class);
+
+                } else if (appid.equals(GlobalConfig.TOSZ_APPID)) {
+                    intent = new Intent(RwdActivity.this, SzrwdWorkorderActivity.class);
+
+                } else if (appid.equals(GlobalConfig.TOLL_APPID)) {
+                    intent = new Intent(RwdActivity.this, WzlldWorkorderActivity.class);
+
+                } else if (appid.equals(GlobalConfig.TODJ_APPID)) {
+                    intent = new Intent(RwdActivity.this, DjrwdWorkorderActivity.class);
+
+                } else if (appid.equals(GlobalConfig.TOOIL_APPID)) {
+                    intent = new Intent(RwdActivity.this, RyrwdWorkorderActivity.class);
+
+                } else if (appid.equals(GlobalConfig.TOQT_APPID)) {
+                    intent = new Intent(RwdActivity.this, QtrwdWorkorderActivity.class);
+
                 }
-                else if(appid.equals(GlobalConfig.TOSZ_APPID)){
-                    intent=new Intent(RwdActivity.this,SzrwdWorkorderActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
-                    intent.putExtras(bundle);
-                    startActivityForResult(intent, 0);
-                }
-                else if(appid.equals(GlobalConfig.TOLL_APPID)){
-                    intent=new Intent(RwdActivity.this,WzlldWorkorderActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
-                    intent.putExtras(bundle);
-                    startActivityForResult(intent, 0);
-                }
-                else if(appid.equals(GlobalConfig.TODJ_APPID)){
-                    intent=new Intent(RwdActivity.this,DjrwdWorkorderActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
-                    intent.putExtras(bundle);
-                    startActivityForResult(intent, 0);
-                }
-                else if(appid.equals(GlobalConfig.TOOIL_APPID)){
-                    intent=new Intent(RwdActivity.this,RyrwdWorkorderActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
-                    intent.putExtras(bundle);
-                    startActivityForResult(intent, 0);
-                }
-                else if(appid.equals(GlobalConfig.TOQT_APPID)){
-                    intent=new Intent(RwdActivity.this,QtrwdWorkorderActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
-                    intent.putExtras(bundle);
-                    startActivityForResult(intent, 0);
-                }
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("workorder", (Serializable) workOrderAdapter.getData().get(position));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 0);
 
             }
         });
@@ -240,5 +231,15 @@ public class RwdActivity extends BaseListActivity {
         workOrderAdapter.addData(list);
     }
 
-
+    /**
+     * 跳转事件
+     **/
+    private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = getIntent();
+            intent.setClass(RwdActivity.this, Rwd_SearchActivity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
 }
