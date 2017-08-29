@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private PermissionsChecker mPermissionsChecker; // 权限检测器
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +127,6 @@ public class LoginActivity extends AppCompatActivity {
                             persion1.setMYAPPS(object.getString("MYAPPS"));
                             persion1.setPERSONID(object.getString("PERSONID"));
                             AccountUtils.setLoginDetails(LoginActivity.this, persion1);
-                            Log.e("TAG", "咋不跳呢");
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivityForResult(intent, 0);
                         }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.hqxh.fiamproperty.ui.widget.MaterialBadgeTextView;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -85,7 +87,6 @@ public class HomeActivity extends BaseActivity {
     private String identity;
 
 
-
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_home1;
@@ -96,15 +97,17 @@ public class HomeActivity extends BaseActivity {
     protected void beforeInit() {
         super.beforeInit();
         showLoadingDialog("加载中...");
+        identity = "_220724199011260619";
 //        identity = JsonUnit.getIdentity(AccountUtils.getPerson(this));
-//        if (null == identity) {
-//            showMiddleToast(this, "无法识别身份");
-//            finish();
-//        }
-//
-//        Login();
+        if (null == identity) {
+            showMiddleToast(this, "无法识别身份");
+            finish();
+        }
 
-        getData();
+//        Login();
+//        getData();
+
+        LoginAndCount();
     }
 
     @Override
@@ -234,8 +237,8 @@ public class HomeActivity extends BaseActivity {
                 .getDeviceId();
 
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_LOGIN)
-                .addQueryParameter("username", identity)
-                .addQueryParameter("imei", imei)
+                .addBodyParameter("username", identity)
+                .addBodyParameter("imei", imei)
                 .build()
                 .getObjectObservable(R_PERSONS.class) // 发起获取数据列表的请求，并解析到R_Person.class
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
@@ -342,6 +345,72 @@ public class HomeActivity extends BaseActivity {
                         dismissLoadingDialog();
                     }
                 });
+    }
+
+
+    /**
+     * 测试登录与获取任务数
+     **/
+    private void LoginAndCount() {
+        String imei = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
+                .getDeviceId();
+        Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_LOGIN)
+                .addBodyParameter("username", identity)
+                .addBodyParameter("imei", imei)
+                .build()
+                .getObjectObservable(R_PERSONS.class) // 发起网络请求，并解析到R_PERSONS
+                .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
+                .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取R_PERSONS列表的请求结果
+                .doOnNext(new Consumer<R_PERSONS>() {
+                    @Override
+                    public void accept(@NonNull R_PERSONS r_persons) throws Exception {
+                    }
+                })
+                .observeOn(Schedulers.io()) // 回到 io 线程去处理获取R_Wfassignemt的请求
+                .flatMap(new Function<R_PERSONS, Observable<R_Wfassignemt>>() {
+                    @Override
+                    public Observable<R_Wfassignemt> apply(@NonNull R_PERSONS r_persons) throws Exception {
+
+                        if (r_persons.getErrcode().equals(GlobalConfig.LOGINSUCCESS) || r_persons.getErrcode().equals(GlobalConfig.CHANGEIMEI)) {//登录成功
+                            String persion = r_persons.getResult();
+                            if (null != persion) {
+                                PERSION persion1 = new Gson().fromJson(persion, PERSION.class);
+                                AccountUtils.setLoginDetails(HomeActivity.this, persion1);
+                                String data = HttpManager.getWFASSIGNMENTUrl("", persion1.getPERSONID(), "ACTIVE", 1, 10);
+                                return Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
+                                        .addBodyParameter("data", data)
+                                        .build()
+                                        .getObjectObservable(R_Wfassignemt.class);
+                            } else {
+                                finish();
+                            }
+                        }
+                        return null;
+                    }
+
+
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<R_Wfassignemt>() {
+                               @Override
+                               public void accept(@NonNull R_Wfassignemt r_Wfassignemt) throws Exception {
+                                   R_Wfassignemt.ResultBean resultbean = r_Wfassignemt.getResult();
+                                   Log.e(TAG, "s=" + resultbean.getTotalresult());
+                                   dismissLoadingDialog();
+                                   badgeText.setVisibility(View.VISIBLE);
+                                   if (resultbean.getTotalresult().equals("0")) {
+                                       badgeText.setBadgeCount(0, true);
+                                   } else {
+                                       badgeText.setBadgeCount(Integer.valueOf(resultbean.getTotalresult()));
+                                   }
+                               }
+                           }, new Consumer<Throwable>() {
+                               @Override
+                               public void accept(@NonNull Throwable throwable) throws Exception {
+                                   dismissLoadingDialog();
+                               }
+                           }
+                );
     }
 
 
