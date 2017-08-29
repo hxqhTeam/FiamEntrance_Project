@@ -56,7 +56,7 @@ public class GrActivity extends BaseListActivity {
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addBodyParameter("data", data)
                 .build()
-                .getObjectObservable(R_GR.class) // 发起获取数据列表的请求，并解析到FootList
+                .getObjectObservable(R_GR.class) // 发起获取数据列表的请求，并解析到R_GR.class
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
                 .doOnNext(new Consumer<R_GR>() {

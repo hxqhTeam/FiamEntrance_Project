@@ -190,7 +190,7 @@ public class WzmxListActivity extends BaseListActivity {
      */
     private void initAdapter(final List<GRLINE> list) {
         wzmxadapter = new WzmxAdapter(WzmxListActivity.this, R.layout.list_item_wzmx, list);
-        wzmxadapter.setAppid(appid);
+
         mRecyclerView.setAdapter(wzmxadapter);
     }
 

@@ -51,6 +51,9 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     private TextView prnum_text;//申请单号
     private TextView worktype_text;//类型
     private TextView status_text;//状态
+    private TextView enterdate_text;//申请时间
+    private TextView cudept_text;//部门
+    private TextView cucrew_text;//科室
     private TextView udremarka_text;//立项原因
     private TextView projectdes1_text;//项目内容
     private TextView udremarks3_text;//项目预期目标
@@ -113,6 +116,9 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
         prnum_text = (TextView) findViewById(R.id.prnum_text);
         worktype_text = (TextView) findViewById(R.id.worktype_text);
         status_text = (TextView) findViewById(R.id.status_text);
+        enterdate_text=(TextView)findViewById(R.id.enterdate_text);
+        cudept_text=(TextView)findViewById(R.id.cudept_text);
+        cucrew_text=(TextView)findViewById(R.id.cucrew_text);
         udremarka_text = (TextView) findViewById(R.id.udremarka_text);
         projectdes1_text = (TextView) findViewById(R.id.projectdes1_text);
         udremarks3_text = (TextView) findViewById(R.id.udremarks3_text);
@@ -151,17 +157,23 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     }
 
     private void showData() {
-        prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]);
+        prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]+","+JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
         worktype_text.setText(JsonUnit.convertStrToArray(pr.getCUTYPE())[0]);
         status_text.setText(JsonUnit.convertStrToArray(pr.getSTATUSDESC())[0]);
         udremarka_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK1())[0]);
         projectdes1_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK2())[0]);
         udremarks3_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK3())[0]);
         pr6_text.setText(JsonUnit.convertStrToArray(pr.getTOTALCOST())[0]);
+        cudept_text.setText(JsonUnit.convertStrToArray(pr.getCUDEPT())[0]);
+        cucrew_text.setText(JsonUnit.convertStrToArray(pr.getCUCREW())[0]);
+        enterdate_text.setText(JsonUnit.convertStrToArray(pr.getISSUEDATE())[0]);
         udremark5_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK4())[0]);
         rdchead_text.setText(JsonUnit.convertStrToArray(pr.getRDCHEADNAME())[0]);
         ownername_text.setText(JsonUnit.convertStrToArray(pr.getASSIGNERNAME())[0]);
-        projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]);
+        if(!JsonUnit.convertStrToArray(pr.getPROJECTID())[0].isEmpty()){
+
+        projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]+","+JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
+        }
         pm_text.setText(JsonUnit.convertStrToArray(pr.getPM())[0]);
         sqr_text.setText(JsonUnit.convertStrToArray(pr.getREQBYPERSON())[0]);
 

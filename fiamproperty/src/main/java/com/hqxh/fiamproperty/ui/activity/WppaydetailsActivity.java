@@ -50,11 +50,14 @@ public class WppaydetailsActivity extends BaseTitleActivity {
     private ScrollView scrollView;
     /*  展示*/
     private TextView prnum_text;//申请单
+
     private TextView projectid_text;//费用号
     private TextView status_text;//状态
     private TextView udpcowner_text;//参加人
+
     private TextView udremarks_text;//培训班编号
     private TextView udremarks1_text;//培训内容
+
 
     private ImageView jbxx_text;//其它信息
     private LinearLayout jbxxlinearlayout;
@@ -63,6 +66,8 @@ public class WppaydetailsActivity extends BaseTitleActivity {
     private TextView reportdate_text;//申请日期
     private TextView phone_text;//电话
     private TextView uddate1_text;//开始日期
+    private TextView cudept_text;//部门
+    private TextView cucrew_text;//科室
     private TextView uddate2_text;//结束日期
 
     private TextView udremarks4_text;//地点及单位
@@ -118,6 +123,7 @@ public class WppaydetailsActivity extends BaseTitleActivity {
         prnum_text = (TextView) findViewById(R.id.prnum_text);
         projectid_text = (TextView) findViewById(R.id.projectid_text);
         status_text = (TextView) findViewById(R.id.status_text);
+
         udpcowner_text = (TextView) findViewById(R.id.udpcowner_text);
         udremarks_text = (TextView) findViewById(R.id.udremarks_text);
         udremarks1_text = (TextView) findViewById(R.id.udremarks1_text);
@@ -127,6 +133,8 @@ public class WppaydetailsActivity extends BaseTitleActivity {
         phone_text = (TextView) findViewById(R.id.phone_text);
         uddate1_text = (TextView) findViewById(R.id.uddate1_text);
         uddate2_text = (TextView) findViewById(R.id.uddate2_text);
+        cudept_text=(TextView)findViewById(R.id.cudept_text);
+        cucrew_text=(TextView)findViewById(R.id.cucrew_text);
         udremarks4_text = (TextView) findViewById(R.id.udremarks4_text);
         // linecost_text=(TextView)findViewById(R.id.linecost_text);
         udremark_text = (TextView) findViewById(R.id.udremark_text);
@@ -151,17 +159,23 @@ public class WppaydetailsActivity extends BaseTitleActivity {
     }
 
     private void showData() {
-        prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]);
-        projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]);
+        prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]+","+JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
+        if(!JsonUnit.convertStrToArray(pr.getPROJECTID())[0].isEmpty()){
+            projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]+","+JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
+        }
+
         status_text.setText(JsonUnit.convertStrToArray(pr.getSTATUSDESC())[0]);
         udpcowner_text.setText(JsonUnit.convertStrToArray(pr.getPCOWNER())[0]);
         udremarks_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK2())[0]);
         udremarks1_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK3())[0]);
         sqr_text.setText(JsonUnit.convertStrToArray(pr.getREQBYPERSON())[0]);
-        reportdate_text.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(pr.getISSUEDATE())[0]));
+
+        reportdate_text.setText(JsonUnit.convertStrToArray(pr.getISSUEDATE())[0]);
         phone_text.setText(JsonUnit.convertStrToArray(pr.getREQBYPHONE())[0]);
         uddate1_text.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(pr.getUDDATE1())[0]));
         uddate2_text.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(pr.getUDDATE2())[0]));
+        cudept_text.setText(JsonUnit.convertStrToArray(pr.getCUDEPT())[0]);
+        cucrew_text.setText(JsonUnit.convertStrToArray(pr.getCUCREW())[0]);
         udremarks4_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK4())[0]);
 
         udremark_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK())[0]);

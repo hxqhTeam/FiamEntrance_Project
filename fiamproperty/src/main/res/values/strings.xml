@@ -271,7 +271,7 @@
     <string name="udlxtype_text">立项类型</string>
     <string name="udremarka_text">立项原因</string>
     <string name="projectdes1_text">项目内容</string>
-    <string name="pr6_text">总预算(人民币)</string>
+    <string name="pr6_text">总预算   (人民币)</string>
     <string name="udremark6_text">提升内容</string>
     <string name="udremark5_text">适用范围</string>
     <string name="wonum_text">任务单号</string>
@@ -279,7 +279,7 @@
     <string name="document_text">文档</string>
     <string name="fwcgxq_text">服务采购详情</string>
     <string name="payplannum_text">计划单</string>
-    <string name="month_text">日期</string>
+    <string name="month_text">年月</string>
     <string name="type1_text">需款类型</string>
 
     <!--借款单-->
@@ -350,5 +350,6 @@
     <string name="xh_grlin1_text">型号</string>
     <string name="grlin3_text">品牌</string>
     <string name="grlin4_text">车辆类别</string>
+    <string name="udtrain1_text">岗级</string>
 
 </resources>
