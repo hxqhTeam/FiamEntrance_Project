@@ -35,11 +35,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
-                android:hint="@string/have_notdata_hint"
+                android:hint="@string/have_not_data"
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_line"
+            android:background="@mipmap/line"></View>
         <LinearLayout
             android:id="@+id/bm_linearLayout_id"
             android:layout_width="match_parent"
@@ -60,11 +63,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
-                android:hint="@string/have_notdata_hint"
+                android:hint="@string/have_not_data"
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_line"
+            android:background="@mipmap/line"></View>
         <LinearLayout
             android:id="@+id/ks_linearLayout_id"
             android:layout_width="match_parent"
@@ -84,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
-                android:hint="@string/have_notdata_hint"
+                android:hint="@string/have_not_data"
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
