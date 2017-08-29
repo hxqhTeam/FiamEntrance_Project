@@ -39,7 +39,10 @@
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_line"
+            android:background="@mipmap/line"></View>
         <LinearLayout
             android:id="@+id/bm_linearLayout_id"
             android:layout_width="match_parent"
@@ -64,7 +67,10 @@
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_line"
+            android:background="@mipmap/line"></View>
         <LinearLayout
             android:id="@+id/ks_linearLayout_id"
             android:layout_width="match_parent"
@@ -110,7 +116,10 @@
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_line"
+            android:background="@mipmap/line"></View>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

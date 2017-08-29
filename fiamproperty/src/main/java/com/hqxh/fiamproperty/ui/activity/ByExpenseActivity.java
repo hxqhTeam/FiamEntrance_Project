@@ -178,7 +178,9 @@ public class ByExpenseActivity extends BaseTitleActivity {
         wftypeText.setText(JsonUnit.convertStrToArray(expense.getWFTYPE())[0]);
         totalcostText.setText(JsonUnit.convertStrToArray(expense.getTOTALCOST())[0]);
         statusText.setText(JsonUnit.convertStrToArray(expense.getSTATUSDESC())[0]);
-        contractnumText.setText(JsonUnit.convertStrToArray(expense.getCONTRACTNUM())[0] + "," + JsonUnit.convertStrToArray(expense.getCONTRACTDESC())[0]);
+         if(!JsonUnit.convertStrToArray(expense.getCONTRACTNUM())[0].isEmpty()){
+             contractnumText.setText(JsonUnit.convertStrToArray(expense.getCONTRACTNUM())[0] + "," + JsonUnit.convertStrToArray(expense.getCONTRACTDESC())[0]);
+         }
         if (!JsonUnit.convertStrToArray(expense.getPRNUM())[0].isEmpty()) {
             prnumText.setText(JsonUnit.convertStrToArray(expense.getPRNUM())[0] + "," + JsonUnit.convertStrToArray(expense.getPRDESC())[0]);
         }

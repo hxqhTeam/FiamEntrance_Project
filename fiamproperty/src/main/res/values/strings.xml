@@ -17,7 +17,7 @@
 
     <!--提示-->
     <string name="load_more_text">正在加载...</string>
-    <string name="have_notdata_hint">暂无数据</string>
+    <string name="have_notdata_hint"></string>
     <string name="all_data_hint">已加载出全部数据...</string>
     <string name="have_not_data_txt">暂无相关数据</string>
     <string name="unable_to_connect_to_server_login_failed">无法连接服务器,登录失败</string>
