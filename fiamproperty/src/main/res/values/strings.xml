@@ -351,5 +351,6 @@
     <string name="grlin3_text">品牌</string>
     <string name="grlin4_text">车辆类别</string>
     <string name="udtrain1_text">岗级</string>
+    <string name="loading_hint">加载中...</string>
 
 </resources>

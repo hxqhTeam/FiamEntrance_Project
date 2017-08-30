@@ -96,18 +96,18 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        showLoadingDialog("加载中...");
-        identity = "_220724199011260619";
+        showLoadingDialog(getString(R.string.loading_hint));
+//        identity = "_220724199011260619";
 //        identity = JsonUnit.getIdentity(AccountUtils.getPerson(this));
-        if (null == identity) {
-            showMiddleToast(this, "无法识别身份");
-            finish();
-        }
+//        if (null == identity) {
+//            showMiddleToast(this, "无法识别身份");
+//            finish();
+//        }
 
 //        Login();
-//        getData();
+        getData();
 
-        LoginAndCount();
+//        LoginAndCount();
     }
 
     @Override
@@ -414,4 +414,12 @@ public class HomeActivity extends BaseActivity {
     }
 
 
+
+    //重新启动
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e(TAG, "onRestart");
+        getData();
+    }
 }

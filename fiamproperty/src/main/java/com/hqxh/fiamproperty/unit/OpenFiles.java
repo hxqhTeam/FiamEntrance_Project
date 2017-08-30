@@ -1,23 +1,23 @@
 package com.hqxh.fiamproperty.unit;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v4.BuildConfig;
 import android.support.v4.content.FileProvider;
 
 import java.io.File;
 
 public class OpenFiles {
     //android获取一个用于打开HTML文件的intent
-    public static Intent getHtmlFileIntent(Context context, File file) {
+    public static Intent getHtmlFileIntent(Context context, File file) throws ActivityNotFoundException {
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         //判断是否是AndroidN以及更高的版本
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".fileProvider", file);
+            Uri contentUri = FileProvider.getUriForFile(context, "com.hqxh.fiamproperty.fileProvider", file);
             intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
         } else {
 
@@ -28,7 +28,7 @@ public class OpenFiles {
     }
 
     //android获取一个用于打开图片文件的intent
-    public static Intent getImageFileIntent(Context context, File file) {
+    public static Intent getImageFileIntent(Context context, File file) throws ActivityNotFoundException {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -45,7 +45,7 @@ public class OpenFiles {
 
     //android获取一个用于打开PDF文件的intent
 
-    public static Intent getPdfFileIntent(Context context, File file) {
+    public static Intent getPdfFileIntent(Context context, File file) throws ActivityNotFoundException {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -61,7 +61,7 @@ public class OpenFiles {
     }
 
     //android获取一个用于打开文本文件的intent
-    public static Intent getTextFileIntent(Context context, File file) {
+    public static Intent getTextFileIntent(Context context, File file) throws ActivityNotFoundException {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -78,7 +78,7 @@ public class OpenFiles {
     }
 
     //android获取一个用于打开音频文件的intent
-    public static Intent getAudioFileIntent(Context context, File file) {
+    public static Intent getAudioFileIntent(Context context, File file) throws ActivityNotFoundException {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -96,7 +96,7 @@ public class OpenFiles {
 
     //android获取一个用于打开视频文件的intent
 
-    public static Intent getVideoFileIntent(Context context, File file) {
+    public static Intent getVideoFileIntent(Context context, File file) throws ActivityNotFoundException {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -114,7 +114,7 @@ public class OpenFiles {
 
 
     //android获取一个用于打开CHM文件的intent
-    public static Intent getChmFileIntent(Context context, File file) {
+    public static Intent getChmFileIntent(Context context, File file) throws ActivityNotFoundException {
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -133,7 +133,7 @@ public class OpenFiles {
 
     //android获取一个用于打开Word文件的intent
 
-    public static Intent getWordFileIntent(Context context, File file) {
+    public static Intent getWordFileIntent(Context context, File file) throws ActivityNotFoundException {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -149,7 +149,7 @@ public class OpenFiles {
     }
 
     //android获取一个用于打开Excel文件的intent
-    public static Intent getExcelFileIntent(Context context, File file) {
+    public static Intent getExcelFileIntent(Context context, File file) throws ActivityNotFoundException {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -166,7 +166,7 @@ public class OpenFiles {
     }
 
     //android获取一个用于打开PPT文件的intent
-    public static Intent getPPTFileIntent(Context context, File file) {
+    public static Intent getPPTFileIntent(Context context, File file) throws ActivityNotFoundException {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -182,7 +182,7 @@ public class OpenFiles {
     }
 
     //android获取一个用于打开apk文件的intent
-    public static Intent getApkFileIntent(Context context, File file) {
+    public static Intent getApkFileIntent(Context context, File file) throws ActivityNotFoundException {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

@@ -1,5 +1,6 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
@@ -199,9 +200,6 @@ public class DoclinksActivity extends BaseListActivity {
         doclinksadapter.setOnclicklistener(new DoclinksAdapter.cOnClickListener() {
             @Override
             public void cOnClickListener(int postion, String urlname) {
-                Log.e(TAG, "postion=" + postion + ",urlname=" + urlname);
-                Log.e(TAG, "urlname=" + JsonUnit.getSlash(urlname));
-                Log.e(TAG, "filename=" + JsonUnit.getFile(urlname));
                 uploadFile(GlobalConfig.HTTP_DOCLINKS_URL + JsonUnit.getSlash(urlname), Utils.getFilePath(DoclinksActivity.this), JsonUnit.getFile(urlname));
             }
         });
@@ -219,7 +217,7 @@ public class DoclinksActivity extends BaseListActivity {
      * 文件下载
      **/
     private void uploadFile(String url, final String dirPath, final String fileName) {
-        Log.e(TAG,"文件下载地址"+url);
+        Log.e(TAG, "文件下载地址" + url);
         AndroidNetworking.download(url, Utils.getFilePath(dirPath), fileName)
                 .build()
                 .setDownloadProgressListener(new DownloadProgressListener() {
@@ -264,45 +262,94 @@ public class DoclinksActivity extends BaseListActivity {
             Intent intent;
             if (checkEndsWithInStringArray(fileName, getResources().
                     getStringArray(R.array.fileEndingImage))) {
-                intent = OpenFiles.getImageFileIntent(DoclinksActivity.this,currentPath);
-                startActivity(intent);
+                try {
+                    intent = OpenFiles.getImageFileIntent(DoclinksActivity.this, currentPath);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    showMiddleToast(this, "无法打开，请安装相应的软件！");
+                }
             } else if (checkEndsWithInStringArray(fileName, getResources().
                     getStringArray(R.array.fileEndingWebText))) {
-                intent = OpenFiles.getHtmlFileIntent(DoclinksActivity.this, currentPath);
-                startActivity(intent);
+
+                try {
+                    intent = OpenFiles.getHtmlFileIntent(DoclinksActivity.this, currentPath);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    showMiddleToast(this, "无法打开，请安装相应的软件！");
+                }
+
             } else if (checkEndsWithInStringArray(fileName, getResources().
                     getStringArray(R.array.fileEndingPackage))) {
-                intent = OpenFiles.getApkFileIntent(DoclinksActivity.this,currentPath);
-                startActivity(intent);
+
+                try {
+                    intent = OpenFiles.getApkFileIntent(DoclinksActivity.this, currentPath);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    showMiddleToast(this, "无法打开，请安装相应的软件！");
+                }
 
             } else if (checkEndsWithInStringArray(fileName, getResources().
                     getStringArray(R.array.fileEndingAudio))) {
-                intent = OpenFiles.getAudioFileIntent(DoclinksActivity.this,currentPath);
-                startActivity(intent);
+
+                try {
+                    intent = OpenFiles.getAudioFileIntent(DoclinksActivity.this, currentPath);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    showMiddleToast(this, "无法打开，请安装相应的软件！");
+                }
             } else if (checkEndsWithInStringArray(fileName, getResources().
                     getStringArray(R.array.fileEndingVideo))) {
-                intent = OpenFiles.getVideoFileIntent(DoclinksActivity.this,currentPath);
-                startActivity(intent);
+
+                try {
+                    intent = OpenFiles.getVideoFileIntent(DoclinksActivity.this, currentPath);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    showMiddleToast(this, "无法打开，请安装相应的软件！");
+                }
             } else if (checkEndsWithInStringArray(fileName, getResources().
                     getStringArray(R.array.fileEndingText))) {
-                intent = OpenFiles.getTextFileIntent(DoclinksActivity.this,currentPath);
-                startActivity(intent);
+
+                try {
+                    intent = OpenFiles.getTextFileIntent(DoclinksActivity.this, currentPath);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    showMiddleToast(this, "无法打开，请安装相应的软件！");
+                }
             } else if (checkEndsWithInStringArray(fileName, getResources().
                     getStringArray(R.array.fileEndingPdf))) {
-                intent = OpenFiles.getPdfFileIntent(DoclinksActivity.this,currentPath);
-                startActivity(intent);
+
+                try {
+                    intent = OpenFiles.getPdfFileIntent(DoclinksActivity.this, currentPath);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    showMiddleToast(this, "无法打开，请安装相应的软件！");
+                }
             } else if (checkEndsWithInStringArray(fileName, getResources().
                     getStringArray(R.array.fileEndingWord))) {
-                intent = OpenFiles.getWordFileIntent(DoclinksActivity.this,currentPath);
-                startActivity(intent);
+
+                try {
+                    intent = OpenFiles.getWordFileIntent(DoclinksActivity.this, currentPath);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    showMiddleToast(this, "无法打开，请安装相应的软件！");
+                }
             } else if (checkEndsWithInStringArray(fileName, getResources().
                     getStringArray(R.array.fileEndingExcel))) {
-                intent = OpenFiles.getExcelFileIntent(DoclinksActivity.this, currentPath);
-                startActivity(intent);
+
+                try {
+                    intent = OpenFiles.getExcelFileIntent(DoclinksActivity.this, currentPath);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    showMiddleToast(this, "无法打开，请安装相应的软件！");
+                }
             } else if (checkEndsWithInStringArray(fileName, getResources().
                     getStringArray(R.array.fileEndingPPT))) {
-                intent = OpenFiles.getPPTFileIntent(DoclinksActivity.this,currentPath);
-                startActivity(intent);
+                try {
+                    intent = OpenFiles.getPPTFileIntent(DoclinksActivity.this, currentPath);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    showMiddleToast(this, "无法打开，请安装相应的软件！");
+                }
             } else {
                 showMiddleToast(this, "无法打开，请安装相应的软件！");
             }

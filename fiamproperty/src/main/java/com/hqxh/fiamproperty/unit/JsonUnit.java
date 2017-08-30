@@ -179,6 +179,38 @@ public class JsonUnit {
 
     }
 
+    /**
+     * 付款验收
+     **/
+    public static String PaycheckData(String paycheckid, String checkdate, String userid, String appid) {
+        JSONObject jsdata = new JSONObject();  //第一层
+        JSONObject jsrec = new JSONObject();   //第二层
+        JSONObject jswo = new JSONObject();    //第三层
+
+        try {
+            jswo.put("PAYCHECKID", paycheckid);//唯一列
+            jswo.put("CHECKDATE", checkdate);
+
+
+            jsrec.put("PAYCHECK", jswo.toString());
+
+            //最外层
+            jsdata.put("appid", appid);
+            jsdata.put("objectname", GlobalConfig.PAYCHECK_NAME);
+            jsdata.put("username", userid);
+            jsdata.put("option", "sync");
+            jsdata.put("rec", jsrec.toString());
+
+            return jsdata.toString();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
 
     /**
      * 技术采购申请/试制采购申请
