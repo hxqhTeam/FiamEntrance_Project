@@ -52,7 +52,13 @@ public class CgWorkorderActivity extends BaseTitleActivity {
     private TextView projectidText; //费用号
     private TextView udesttotalcostText; //出差费用预算
     private TextView statusText; //状态
+    private TextView udtrv2Text; //出国团组名称
+    private TextView udremark2Text; //邀请接待单位
     private TextView udremark1Text; //出国目的
+    private TextView udremark4Text; //出国工作任务
+    private TextView udsummary6Text; //预期成果
+    private TextView udksremarkText; //途径国家或地区
+    private TextView udaddress1Text; //出访路线
     //出差时间
     private TextView udtargstartdateText; //开始时间
     private TextView udtargcompdateText; //结束时间
@@ -121,6 +127,14 @@ public class CgWorkorderActivity extends BaseTitleActivity {
         projectidText = (TextView) findViewById(R.id.projectid_text_id);
         udesttotalcostText = (TextView) findViewById(R.id.udesttotalcost_text_id);
         statusText = (TextView) findViewById(R.id.status_text_id);
+
+        udtrv2Text = (TextView) findViewById(R.id.udtrv2_text_id);
+        udremark2Text = (TextView) findViewById(R.id.udremark2_text_id);
+        udremark4Text = (TextView) findViewById(R.id.cg_udremark4_text_id);
+        udsummary6Text = (TextView) findViewById(R.id.udsummary6_text_id);
+        udksremarkText = (TextView) findViewById(R.id.udksremark_text_id);
+        udaddress1Text = (TextView) findViewById(R.id.udaddress1_text_id);
+
         udremark1Text = (TextView) findViewById(R.id.udremark1_text_id);
         udtargstartdateText = (TextView) findViewById(R.id.udtargstartdate_text_id);
         udtargcompdateText = (TextView) findViewById(R.id.udtargcompdate_text_id);
@@ -160,10 +174,30 @@ public class CgWorkorderActivity extends BaseTitleActivity {
 
     //展示界面数据
     private void showData() {
-        wonumText.setText(JsonUnit.convertStrToArray(workorder.getWONUM())[0] + "," + JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0]);
-        projectidText.setText(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0]);
+        if (JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0].isEmpty()) {
+            wonumText.setText(JsonUnit.convertStrToArray(workorder.getWONUM())[0]);
+
+        } else {
+            wonumText.setText(JsonUnit.convertStrToArray(workorder.getWONUM())[0] + "," + JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0]);
+
+        }
+        if (JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0].isEmpty()) {
+            projectidText.setText(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0]);
+
+        } else {
+            projectidText.setText(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0]);
+
+        }
         udesttotalcostText.setText(JsonUnit.convertStrToArray(workorder.getUDESTTOTALCOST())[0]);
         statusText.setText(JsonUnit.convertStrToArray(workorder.getSTATUS())[0]);
+
+        udtrv2Text.setText(JsonUnit.convertStrToArray(workorder.getUDTRV2())[0]);
+        udremark2Text.setText(JsonUnit.convertStrToArray(workorder.getUDREMARK2())[0]);
+        udremark4Text.setText(JsonUnit.convertStrToArray(workorder.getUDREMARK4())[0]);
+        udsummary6Text.setText(JsonUnit.convertStrToArray(workorder.getUDSUMMARY6())[0]);
+        udksremarkText.setText(JsonUnit.convertStrToArray(workorder.getUDKSREMARK())[0]);
+        udaddress1Text.setText(JsonUnit.convertStrToArray(workorder.getUDADDRESS1())[0]);
+
         udremark1Text.setText(JsonUnit.convertStrToArray(workorder.getUDREMARK1())[0]);
         udtargstartdateText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(workorder.getUDTARGSTARTDATE())[0]));
         udtargcompdateText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(workorder.getUDTARGCOMPDATE())[0]));

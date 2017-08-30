@@ -73,6 +73,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
     private TextView rdcheadText; //中心分管领导
     private TextView reportedbyText; //申请人
     private TextView cudeptText; //部门
+    private TextView cucrewText; //科室
     private TextView reportdateText; //申请日期
     private TextView phonenumText; //电话
 
@@ -140,6 +141,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
         rdcheadText = (TextView) findViewById(R.id.rdchead_text_id);
         reportedbyText = (TextView) findViewById(R.id.reportedby_text_id);
         cudeptText = (TextView) findViewById(R.id.cudept_text_id);
+        cucrewText = (TextView) findViewById(R.id.cucrew_text_id);
         reportdateText = (TextView) findViewById(R.id.reportdate_text_id);
         phonenumText = (TextView) findViewById(R.id.phonenum_text_id);
 
@@ -185,6 +187,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
         rdcheadText.setText(JsonUnit.convertStrToArray(workorder.getRDCHEAD())[0]);
         reportedbyText.setText(JsonUnit.convertStrToArray(workorder.getREPORTEDBY())[0]);
         cudeptText.setText(JsonUnit.convertStrToArray(workorder.getCUDEPT())[0]);
+        cucrewText.setText(JsonUnit.convertStrToArray(workorder.getCUCREW())[0]);
         reportdateText.setText(JsonUnit.convertStrToArray(workorder.getREPORTDATE())[0]);
         phonenumText.setText(JsonUnit.convertStrToArray(workorder.getPHONENUM())[0]);
 
@@ -383,7 +386,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
     //根据appid,grnum,objctname获取国内出差信息
     private void getNetWorkWorkOrder() {
-        String data = HttpManager.getWORKORDERUrl(appid,ownertable,ownernum,AccountUtils.getpersonId(GnWorkorderActivity.this), 1, 10);
+        String data = HttpManager.getWORKORDERUrl(appid, ownertable, ownernum, AccountUtils.getpersonId(GnWorkorderActivity.this), 1, 10);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addBodyParameter("data", data)
                 .build()

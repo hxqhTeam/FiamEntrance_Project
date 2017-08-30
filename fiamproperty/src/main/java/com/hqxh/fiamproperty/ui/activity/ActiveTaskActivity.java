@@ -355,6 +355,7 @@ public class ActiveTaskActivity extends BaseListActivity {
                     if (notLinearLayout.isShown()) {
                         notLinearLayout.setVisibility(View.GONE);
                     }
+                    getData();
                 }
 
         }

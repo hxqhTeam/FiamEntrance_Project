@@ -79,7 +79,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/type_text"
@@ -112,7 +112,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/status_text"
@@ -145,7 +145,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udlxtype_text"
@@ -178,7 +178,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/lx_udremark1_text"
@@ -211,7 +211,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/projectdes1_text"
@@ -245,7 +245,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/js_udremark3_text"
@@ -278,7 +278,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/pr6_text"
@@ -356,7 +356,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/js_udremark6_text"
@@ -389,7 +389,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udremark5_text"
@@ -423,7 +423,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/cl_time_text"
@@ -481,7 +481,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/rdchead_text"
@@ -514,7 +514,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/ownername_text"
@@ -547,7 +547,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/rwd_text"
@@ -580,7 +580,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/projectid_text"
@@ -613,7 +613,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/pm_text"
@@ -646,7 +646,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/sqr_text"
@@ -679,7 +679,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/cudept_text"
@@ -712,7 +712,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/cucrew_text"
@@ -745,7 +745,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/reportdate_text"
@@ -778,7 +778,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/reqbyphone_text"

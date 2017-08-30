@@ -352,5 +352,11 @@
     <string name="grlin4_text">车辆类别</string>
     <string name="udtrain1_text">岗级</string>
     <string name="loading_hint">加载中...</string>
+    <string name="udtrv2_text">出国团组名称</string>
+    <string name="cg_udremark2_text">邀请接待单位</string>
+    <string name="cg_udremark4_text">出国工作任务</string>
+    <string name="udsummary6_text">预期成果</string>
+    <string name="udksremark_text">途经国家或地区</string>
+    <string name="cg_udaddress1_text">拟出访路线</string>
 
 </resources>
