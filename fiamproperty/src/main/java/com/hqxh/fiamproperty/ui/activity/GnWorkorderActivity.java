@@ -272,7 +272,6 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
     //流程启动
     private void PostStart(String ownertable, String ownerid, String appid, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",appid=" + appid + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_START_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -367,7 +366,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
                     @Override
                     public void cOnClickListener(DialogInterface dialogInterface, Result result, String memo) {
                         dialogInterface.dismiss();
-                        PostApprove(GlobalConfig.WORKORDER_NAME, JsonUnit.convertStrToArray(workorder.getWORKORDERID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(GnWorkorderActivity.this));
+                        PostApprove(ownertable, JsonUnit.convertStrToArray(workorder.getWORKORDERID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(GnWorkorderActivity.this));
                     }
 
 

@@ -150,6 +150,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
                 layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
                 scrollView.setLayoutParams(layoutParams);
             }
+            showLoadingDialog(getResources().getString(R.string.loading_hint));
             getNetWorkPAYPLAN();
         }
 
@@ -230,8 +231,6 @@ public class XkplandetailActivity extends BaseTitleActivity {
     private boolean startAnaim() {
 
         rotate.setInterpolator(new LinearInterpolator());//设置为线性旋转
-
-        Log.e(TAG, "b=" + !rotate.getFillAfter());
         rotate.setFillAfter(!rotate.getFillAfter());//每次都取相反值，使得可以不恢复原位的旋转
 
         jbxx_text.startAnimation(rotate);
@@ -242,7 +241,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
     private View.OnClickListener sp_btn_idOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            PostStart(GlobalConfig.PAYPLAN_NAME, JsonUnit.convertStrToArray(payplan.getPAYPLANID())[0], GlobalConfig.PP_APPID, AccountUtils.getpersonId(XkplandetailActivity.this));
+            PostStart(ownertable, JsonUnit.convertStrToArray(payplan.getPAYPLANID())[0], appid, AccountUtils.getpersonId(XkplandetailActivity.this));
         }
     };
 
@@ -270,17 +269,11 @@ public class XkplandetailActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.i(TAG, "s=" + s);
 
 
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_106)) {
                             R_APPROVE r_approve = new Gson().fromJson(s, R_APPROVE.class);
-                            for (int i = 0; i < r_approve.getResult().size(); i++) {
-                                R_APPROVE.Result result = r_approve.getResult().get(i);
-                                Log.e(TAG, "instruction=" + result.getInstruction() + ",ispositive=" + result.getIspositive());
-                            }
-
                             showDialog(r_approve.getResult());
                         } else {
                             showMiddleToast(XkplandetailActivity.this, workflow.getErrmsg());
@@ -322,9 +315,12 @@ public class XkplandetailActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.i(TAG, "审批s=" + s);
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         showMiddleToast(XkplandetailActivity.this, workflow.getErrmsg());
+                        if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_103)) {
+                            setResult(ActiveTaskActivity.TASK_RESULTCODE);
+                            finish();
+                        }
                     }
 
 
@@ -347,8 +343,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
                     @Override
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
-                        Log.e(TAG, "result" + result.getInstruction());
-                        PostApprove(GlobalConfig.PAYPLAN_NAME, JsonUnit.convertStrToArray(payplan.getPAYPLANID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(XkplandetailActivity.this));
+                        PostApprove(ownertable, JsonUnit.convertStrToArray(payplan.getPAYPLANID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(XkplandetailActivity.this));
                     }
 
 
@@ -394,7 +389,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<List<PAYPLAN>>() {
                     @Override
                     public void accept(@NonNull List<PAYPLAN> payplans) throws Exception {
-
+                        dismissLoadingDialog();
                         if (payplans == null || payplans.isEmpty()) {
                         } else {
                             payplan = payplans.get(0);
@@ -407,6 +402,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
+                        dismissLoadingDialog();
                     }
                 });
     }

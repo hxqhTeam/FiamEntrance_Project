@@ -105,7 +105,7 @@ public class R_ZXPERSON {
     /**
      *执行人
      * **/
-    public static class  PERSON extends Entity{
+    public static class PERSON extends Entity{
 
         private String DISPLAYNAME; //姓名
         private String PERSONID;//人员

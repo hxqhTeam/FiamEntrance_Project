@@ -213,7 +213,7 @@ public class JsonUnit {
 
 
     /**
-     * 技术采购申请/试制采购申请
+     * 技术采购申请/试制采购申请/服务采购申请
      **/
     public static String JsPrData(String prid, String rdchead, String udassigner, String userid, String appid) {
         JSONObject jsdata = new JSONObject();  //第一层

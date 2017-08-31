@@ -401,7 +401,7 @@ public class CgWorkorderActivity extends BaseTitleActivity {
                     @Override
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
-                        PostApprove(GlobalConfig.WORKORDER_NAME, JsonUnit.convertStrToArray(workorder.getWORKORDERID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(CgWorkorderActivity.this));
+                        PostApprove(ownertable, JsonUnit.convertStrToArray(workorder.getWORKORDERID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(CgWorkorderActivity.this));
                     }
 
 

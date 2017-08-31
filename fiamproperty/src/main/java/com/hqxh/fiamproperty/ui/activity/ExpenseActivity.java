@@ -3,7 +3,6 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -25,7 +24,6 @@ import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_EXPENSE;
 import com.hqxh.fiamproperty.model.R_EXPENSE.EXPENSE;
-import com.hqxh.fiamproperty.model.R_Workorder.Workorder;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.hqxh.fiamproperty.unit.JsonUnit;
@@ -157,6 +155,7 @@ public class ExpenseActivity extends BaseTitleActivity {
                 layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
                 scrollView.setLayoutParams(layoutParams);
             }
+            showLoadingDialog(getResources().getString(R.string.loading_hint));
             getNetWorkEXPENSE();
         }
     }
@@ -287,13 +286,12 @@ public class ExpenseActivity extends BaseTitleActivity {
     private View.OnClickListener workflowBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            PostStart(GlobalConfig.EXPENSE_NAME, JsonUnit.convertStrToArray(expense.getEXPENSEID())[0], GlobalConfig.EXPENSES_APPID, AccountUtils.getpersonId(ExpenseActivity.this));
+            PostStart(ownertable, JsonUnit.convertStrToArray(expense.getEXPENSEID())[0], appid, AccountUtils.getpersonId(ExpenseActivity.this));
         }
     };
 
     //流程启动
     private void PostStart(String ownertable, String ownerid, String appid, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",appid=" + appid + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_START_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -320,10 +318,6 @@ public class ExpenseActivity extends BaseTitleActivity {
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_106)) {
                             R_APPROVE r_approve = new Gson().fromJson(s, R_APPROVE.class);
-                            for (int i = 0; i < r_approve.getResult().size(); i++) {
-                                R_APPROVE.Result result = r_approve.getResult().get(i);
-                                Log.e(TAG, "instruction=" + result.getInstruction() + ",ispositive=" + result.getIspositive());
-                            }
 
                             showDialog(r_approve.getResult());
                         } else {
@@ -367,9 +361,12 @@ public class ExpenseActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.e(TAG, "s=" + s);
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         showMiddleToast(ExpenseActivity.this, workflow.getErrmsg());
+                        if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_103)) {
+                            setResult(ActiveTaskActivity.TASK_RESULTCODE);
+                            finish();
+                        }
                     }
 
 
@@ -392,7 +389,7 @@ public class ExpenseActivity extends BaseTitleActivity {
                     @Override
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
-                        PostApprove(GlobalConfig.EXPENSE_NAME, JsonUnit.convertStrToArray(expense.getEXPENSEID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(ExpenseActivity.this));
+                        PostApprove(ownertable, JsonUnit.convertStrToArray(expense.getEXPENSEID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(ExpenseActivity.this));
                     }
 
 
@@ -439,7 +436,7 @@ public class ExpenseActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<List<EXPENSE>>() {
                     @Override
                     public void accept(@NonNull List<EXPENSE> expenses) throws Exception {
-
+                        dismissLoadingDialog();
                         if (expenses == null || expenses.isEmpty()) {
                         } else {
 
@@ -453,6 +450,7 @@ public class ExpenseActivity extends BaseTitleActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
+                        dismissLoadingDialog();
                     }
                 });
 

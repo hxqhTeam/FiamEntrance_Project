@@ -3,7 +3,6 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -23,7 +22,6 @@ import com.hqxh.fiamproperty.base.BaseTitleActivity;
 import com.hqxh.fiamproperty.bean.R_APPROVE;
 import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_GR;
 import com.hqxh.fiamproperty.model.R_PR;
 import com.hqxh.fiamproperty.model.R_PR.PR;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
@@ -154,6 +152,7 @@ public class WppaydetailsActivity extends BaseTitleActivity {
                 layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
                 scrollView.setLayoutParams(layoutParams);
             }
+            showLoadingDialog(getResources().getString(R.string.loading_hint));
             getNetWorkPR();
         }
     }
@@ -219,7 +218,6 @@ public class WppaydetailsActivity extends BaseTitleActivity {
 
         rotate.setInterpolator(new LinearInterpolator());//设置为线性旋转
 
-        Log.e(TAG, "b=" + !rotate.getFillAfter());
         rotate.setFillAfter(!rotate.getFillAfter());//每次都取相反值，使得可以不恢复原位的旋转
 
         jbxx_text.startAnimation(rotate);
@@ -235,14 +233,12 @@ public class WppaydetailsActivity extends BaseTitleActivity {
     private View.OnClickListener workflowBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            PostStart(GlobalConfig.PR_NAME, JsonUnit.convertStrToArray(pr.getPRID())[0], GlobalConfig.WPPR_APPID, AccountUtils.getpersonId(WppaydetailsActivity.this));
+            PostStart(ownertable, JsonUnit.convertStrToArray(pr.getPRID())[0], appid, AccountUtils.getpersonId(WppaydetailsActivity.this));
         }
     };
 
     //流程启动
-//http://10.60.12.98/maximo/mobile/wf/start?ownertable=GR&ownerid=77129&processname=GR-WZMAIN&userid=yanghongwei
     private void PostStart(String ownertable, String ownerid, String appid, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",appid=" + appid + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_START_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -264,16 +260,9 @@ public class WppaydetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.i(TAG, "s=" + s);
-
-
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_106)) {
                             R_APPROVE r_approve = new Gson().fromJson(s, R_APPROVE.class);
-                            for (int i = 0; i < r_approve.getResult().size(); i++) {
-                                R_APPROVE.Result result = r_approve.getResult().get(i);
-                                Log.e(TAG, "instruction=" + result.getInstruction() + ",ispositive=" + result.getIspositive());
-                            }
 
                             showDialog(r_approve.getResult());
                         } else {
@@ -291,9 +280,7 @@ public class WppaydetailsActivity extends BaseTitleActivity {
     }
 
 
-    //http://10.60.12.98/maximo/mobile/wf/approve?ownertable=GR&ownerid=77128&memo=驳回&selectWhat=0&userid=zhuyinan
     private void PostApprove(String ownertable, String ownerid, String memo, String selectWhat, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",memo=" + memo + ",selectWhat=" + selectWhat + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_APPROVE_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -316,9 +303,12 @@ public class WppaydetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.i(TAG, "审批s=" + s);
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         showMiddleToast(WppaydetailsActivity.this, workflow.getErrmsg());
+                        if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_103)) {
+                            setResult(ActiveTaskActivity.TASK_RESULTCODE);
+                            finish();
+                        }
                     }
 
 
@@ -341,8 +331,7 @@ public class WppaydetailsActivity extends BaseTitleActivity {
                     @Override
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
-                        Log.e(TAG, "result" + result.getInstruction());
-                        PostApprove(GlobalConfig.PR_NAME, JsonUnit.convertStrToArray(pr.getPRID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(WppaydetailsActivity.this));
+                        PostApprove(ownertable, JsonUnit.convertStrToArray(pr.getPRID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(WppaydetailsActivity.this));
                     }
 
 
@@ -389,7 +378,7 @@ public class WppaydetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<List<PR>>() {
                     @Override
                     public void accept(@NonNull List<PR> prs) throws Exception {
-
+                        dismissLoadingDialog();
                         if (prs == null || prs.isEmpty()) {
                         } else {
                             pr = prs.get(0);
@@ -401,6 +390,7 @@ public class WppaydetailsActivity extends BaseTitleActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
+                        dismissLoadingDialog();
                     }
                 });
     }

@@ -167,6 +167,7 @@ public class ByExpenseActivity extends BaseTitleActivity {
                 layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
                 scrollView.setLayoutParams(layoutParams);
             }
+            showLoadingDialog(getResources().getString(R.string.loading_hint));
             getNetWorkEXPENSE();
         }
     }
@@ -178,9 +179,9 @@ public class ByExpenseActivity extends BaseTitleActivity {
         wftypeText.setText(JsonUnit.convertStrToArray(expense.getWFTYPE())[0]);
         totalcostText.setText(JsonUnit.convertStrToArray(expense.getTOTALCOST())[0]);
         statusText.setText(JsonUnit.convertStrToArray(expense.getSTATUSDESC())[0]);
-         if(!JsonUnit.convertStrToArray(expense.getCONTRACTNUM())[0].isEmpty()){
-             contractnumText.setText(JsonUnit.convertStrToArray(expense.getCONTRACTNUM())[0] + "," + JsonUnit.convertStrToArray(expense.getCONTRACTDESC())[0]);
-         }
+        if (!JsonUnit.convertStrToArray(expense.getCONTRACTNUM())[0].isEmpty()) {
+            contractnumText.setText(JsonUnit.convertStrToArray(expense.getCONTRACTNUM())[0] + "," + JsonUnit.convertStrToArray(expense.getCONTRACTDESC())[0]);
+        }
         if (!JsonUnit.convertStrToArray(expense.getPRNUM())[0].isEmpty()) {
             prnumText.setText(JsonUnit.convertStrToArray(expense.getPRNUM())[0] + "," + JsonUnit.convertStrToArray(expense.getPRDESC())[0]);
         }
@@ -312,13 +313,12 @@ public class ByExpenseActivity extends BaseTitleActivity {
     private View.OnClickListener workflowBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            PostStart(GlobalConfig.EXPENSE_NAME, JsonUnit.convertStrToArray(expense.getEXPENSEID())[0], GlobalConfig.EXPENSE_APPID, AccountUtils.getpersonId(ByExpenseActivity.this));
+            PostStart(ownertable, JsonUnit.convertStrToArray(expense.getEXPENSEID())[0], appid, AccountUtils.getpersonId(ByExpenseActivity.this));
         }
     };
 
     //流程启动
     private void PostStart(String ownertable, String ownerid, String appid, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",appid=" + appid + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_START_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -345,11 +345,6 @@ public class ByExpenseActivity extends BaseTitleActivity {
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_106)) {
                             R_APPROVE r_approve = new Gson().fromJson(s, R_APPROVE.class);
-                            for (int i = 0; i < r_approve.getResult().size(); i++) {
-                                R_APPROVE.Result result = r_approve.getResult().get(i);
-                                Log.e(TAG, "instruction=" + result.getInstruction() + ",ispositive=" + result.getIspositive());
-                            }
-
                             showDialog(r_approve.getResult());
                         } else {
                             showMiddleToast(ByExpenseActivity.this, workflow.getErrmsg());
@@ -417,7 +412,7 @@ public class ByExpenseActivity extends BaseTitleActivity {
                     @Override
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
-                        PostApprove(GlobalConfig.EXPENSE_NAME, JsonUnit.convertStrToArray(expense.getEXPENSEID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(ByExpenseActivity.this));
+                        PostApprove(ownertable, JsonUnit.convertStrToArray(expense.getEXPENSEID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(ByExpenseActivity.this));
                     }
 
 
@@ -464,7 +459,7 @@ public class ByExpenseActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<List<EXPENSE>>() {
                     @Override
                     public void accept(@NonNull List<EXPENSE> expenses) throws Exception {
-
+                        dismissLoadingDialog();
                         if (expenses == null || expenses.isEmpty()) {
                         } else {
 
@@ -478,6 +473,7 @@ public class ByExpenseActivity extends BaseTitleActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
+                        dismissLoadingDialog();
                     }
                 });
 

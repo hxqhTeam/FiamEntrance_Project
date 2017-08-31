@@ -3,7 +3,6 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -338,7 +337,6 @@ public class GrDetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.e(TAG, "s=" + s);
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         showMiddleToast(GrDetailsActivity.this, workflow.getErrmsg());
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_103)) {
@@ -368,7 +366,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
                     @Override
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
-                        PostApprove(GlobalConfig.GR_NAME, JsonUnit.convertStrToArray(gr.getGRID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(GrDetailsActivity.this));
+                        PostApprove(ownertable, JsonUnit.convertStrToArray(gr.getGRID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(GrDetailsActivity.this));
                     }
 
 

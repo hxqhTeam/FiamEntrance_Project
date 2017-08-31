@@ -244,7 +244,7 @@ public class ActiveTaskActivity extends BaseListActivity {
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, TASK_REQUESTCODE);
-                } else if (app.equals(GlobalConfig.TOSY_APPID)) {//试用任务单
+                } else if (app.equals(GlobalConfig.TOSY_APPID)) {//试验任务单
                     intent.setClass(ActiveTaskActivity.this, SyrwdWorkorderActivity.class);
                     intent.putExtra("appid", app);
                     intent.putExtra("ownernum", JsonUnit.convertStrToArray(wfassignment.getOWNERNUM())[0]);

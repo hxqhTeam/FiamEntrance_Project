@@ -2,7 +2,9 @@ package com.hqxh.fiamproperty.ui.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -24,6 +26,7 @@ import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_PR;
 import com.hqxh.fiamproperty.model.R_PR.PR;
+import com.hqxh.fiamproperty.model.R_ZXPERSON;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.hqxh.fiamproperty.unit.JsonUnit;
@@ -57,13 +60,14 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     private TextView projectdes1_text;//项目内容
     private TextView udremarks3_text;//项目预期目标
     private TextView pr6_text;//总预算
+    private TextView rdchead_text;//中心分管领导
+    private TextView ownername_text;//执行人
+
 
     private ImageView jbxx_text;//其它信息
     private LinearLayout jbxxlinearlayout;
 
     private TextView udremark5_text;//适用范围
-    private TextView rdchead_text;//中心分管领导
-    private TextView ownername_text;//执行人
 
     private TextView projectid_text;//费用号
     private TextView pm_text;//项目经理
@@ -82,6 +86,10 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     private String appid; //appid
     private String ownernum;//ownernum
     private String ownertable;//ownertable
+
+
+    private String rdchead; //中心分管领导
+    private String udassigner = "";//执行人代码
 
     protected void beforeInit() {
         super.beforeInit();
@@ -184,8 +192,54 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
 
         rotate = AnimationUtils.loadAnimation(this, R.anim.arrow_rotate);//创建动画
 
+        onClickListener();
+    }
+
+    //设置事件监听
+    private void onClickListener() {
+
+        Log.e(TAG, "RDCHEAD=" + JsonUnit.convertStrToArray(pr.getRDCHEAD())[1]);
+        if (JsonUnit.convertStrToArray(pr.getRDCHEAD())[1].equals(GlobalConfig.NOTREADONLY)) { //中心分管领导
+            Drawable nav_up = getResources().getDrawable(R.drawable.ic_person_black);
+            nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+            rdchead_text.setCompoundDrawablesWithIntrinsicBounds(null, null, nav_up, null);
+            rdchead_text.setOnClickListener(rdcheadTextOnClickListener);
+        }
+        Log.e(TAG, "OWNERPERSON=" + JsonUnit.convertStrToArray(pr.getASSIGNERNAME())[1]);
+        if (JsonUnit.convertStrToArray(pr.getASSIGNERNAME())[1].equals(GlobalConfig.NOTREADONLY)) {
+            Drawable nav_up = getResources().getDrawable(R.drawable.ic_person_black);
+            nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+            ownername_text.setCompoundDrawablesWithIntrinsicBounds(null, null, nav_up, null);
+            ownername_text.setOnClickListener(ownernameTextOnClickListener);
+        }
+
 
     }
+
+
+    //中心分管领导
+    private View.OnClickListener rdcheadTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(FwpaydetailsActivity.this, PersonActivity.class);
+            intent.putExtra("appid", GlobalConfig.ROLE_APPID);
+            startActivityForResult(intent, GlobalConfig.RDCHEAD_REQUESTCODE);
+
+
+        }
+    };
+    //执行人
+    private View.OnClickListener ownernameTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(FwpaydetailsActivity.this, PersonActivity.class);
+            intent.putExtra("appid", GlobalConfig.FWPR_APPID);
+            startActivityForResult(intent, GlobalConfig.PERSON_REQUESTCODE);
+
+
+        }
+    };
+
 
     @Override
     protected String getSubTitle() {
@@ -244,10 +298,50 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
 
         @Override
         public void onClick(View v) {
-            PostStart(GlobalConfig.PR_NAME, JsonUnit.convertStrToArray(pr.getPRID())[0], GlobalConfig.FWPR_APPID, AccountUtils.getpersonId(FwpaydetailsActivity.this));
+            update(JsonUnit.JsPrData(JsonUnit.convertStrToArray(pr.getPRID())[0], rdchead, udassigner, AccountUtils.getpersonId(FwpaydetailsActivity.this), appid));
 
         }
     };
+
+
+    //更新操作
+    private void update(String data) {
+        Rx2AndroidNetworking
+                .post(GlobalConfig.HTTP_URL_SEARCH)
+                .addBodyParameter("data", data) //数据
+                .build()
+                .getStringObservable()
+                .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
+                .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
+                .doOnNext(new Consumer<String>() {
+                    @Override
+                    public void accept(@NonNull String string) throws Exception {
+
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(@NonNull String s) throws Exception {
+                        R_WORKFLOW r = new Gson().fromJson(s, R_WORKFLOW.class);
+                        if (r.getErrcode().equals(GlobalConfig.GETDATASUCCESS)) {
+                            PostStart(GlobalConfig.PR_NAME, JsonUnit.convertStrToArray(pr.getPRID())[0], GlobalConfig.FWPR_APPID, AccountUtils.getpersonId(FwpaydetailsActivity.this));
+
+                        } else {
+                            showMiddleToast(FwpaydetailsActivity.this, r.getErrmsg());
+                        }
+                    }
+
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        showMiddleToast(FwpaydetailsActivity.this, getString(R.string.spsb_text));
+                    }
+                });
+    }
+
 
     //流程启动
     private void PostStart(String ownertable, String ownerid, String appid, String userid) {
@@ -314,6 +408,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
+                        Log.e(TAG, "s=" + s);
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         showMiddleToast(FwpaydetailsActivity.this, workflow.getErrmsg());
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_103)) {
@@ -342,7 +437,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
                     @Override
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
-                        PostApprove(GlobalConfig.PR_NAME, JsonUnit.convertStrToArray(pr.getPRID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(FwpaydetailsActivity.this));
+                        PostApprove(ownertable, JsonUnit.convertStrToArray(pr.getPRID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(FwpaydetailsActivity.this));
                     }
 
 
@@ -404,5 +499,28 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
                     }
                 });
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case GlobalConfig.RDCHEAD_REQUESTCODE: //中心分管领导
+                if (resultCode == GlobalConfig.CUDEPT_REQUESTCODE) {
+                    R_ZXPERSON.PERSON persion = (R_ZXPERSON.PERSON) data.getSerializableExtra("person");
+                    rdchead = JsonUnit.convertStrToArray(persion.getPERSONID())[0];
+                    rdchead_text.setText(JsonUnit.convertStrToArray(persion.getDISPLAYNAME())[0]);
+                }
+                break;
+            case GlobalConfig.PERSON_REQUESTCODE: //执行人
+                if (resultCode == GlobalConfig.CUDEPT_REQUESTCODE) {
+                    R_ZXPERSON.PERSON persion = (R_ZXPERSON.PERSON) data.getSerializableExtra("person");
+                    udassigner = JsonUnit.convertStrToArray(persion.getPERSONID())[0];
+                    ownername_text.setText(JsonUnit.convertStrToArray(persion.getDISPLAYNAME())[0]);
+                }
+                break;
+        }
+    }
+
 
 }

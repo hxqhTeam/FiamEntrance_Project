@@ -154,6 +154,7 @@ public class BoActivity extends BaseTitleActivity {
                 layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
                 scrollView.setLayoutParams(layoutParams);
             }
+            showLoadingDialog(getResources().getString(R.string.loading_hint));
             getNetWorkBo();
         }
     }
@@ -248,13 +249,12 @@ public class BoActivity extends BaseTitleActivity {
     private View.OnClickListener workflowBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            PostStart(GlobalConfig.BO_NAME, JsonUnit.convertStrToArray(bo.getBOID())[0], GlobalConfig.BO_APPID, AccountUtils.getpersonId(BoActivity.this));
+            PostStart(ownertable, JsonUnit.convertStrToArray(bo.getBOID())[0], appid, AccountUtils.getpersonId(BoActivity.this));
         }
     };
 
     //流程启动
     private void PostStart(String ownertable, String ownerid, String appid, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",appid=" + appid + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_START_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -281,11 +281,6 @@ public class BoActivity extends BaseTitleActivity {
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_106)) {
                             R_APPROVE r_approve = new Gson().fromJson(s, R_APPROVE.class);
-                            for (int i = 0; i < r_approve.getResult().size(); i++) {
-                                R_APPROVE.Result result = r_approve.getResult().get(i);
-                                Log.e(TAG, "instruction=" + result.getInstruction() + ",ispositive=" + result.getIspositive());
-                            }
-
                             showDialog(r_approve.getResult());
                         } else {
                             showMiddleToast(BoActivity.this, workflow.getErrmsg());
@@ -355,7 +350,7 @@ public class BoActivity extends BaseTitleActivity {
                     @Override
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
-                        PostApprove(GlobalConfig.BO_NAME, JsonUnit.convertStrToArray(bo.getBOID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(BoActivity.this));
+                        PostApprove(ownertable, JsonUnit.convertStrToArray(bo.getBOID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(BoActivity.this));
                     }
 
 
@@ -402,7 +397,7 @@ public class BoActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<List<BO>>() {
                     @Override
                     public void accept(@NonNull List<BO> bos) throws Exception {
-
+                        dismissLoadingDialog();
                         if (bos == null || bos.isEmpty()) {
                         } else {
                             bo = bos.get(0);
@@ -416,6 +411,7 @@ public class BoActivity extends BaseTitleActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
+                        dismissLoadingDialog();
                     }
                 });
 

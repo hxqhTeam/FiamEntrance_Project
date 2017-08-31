@@ -52,7 +52,6 @@
                             android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-
                             android:text="@string/rwd_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -85,7 +84,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udtodesc_text"
@@ -118,7 +117,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udtotype2_text"
@@ -151,7 +150,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/status_text"
@@ -184,7 +183,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/projectid_text"
@@ -218,7 +217,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/projectdesc_text"
@@ -251,7 +250,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/pm_text"
@@ -284,7 +283,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/reportedbyname_text"
@@ -317,7 +316,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/cudept_text"
@@ -350,7 +349,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/cucrew_text"
@@ -383,7 +382,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/reportdate1_text"
@@ -416,7 +415,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/phone_text"
@@ -449,7 +448,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udtargstartdate_text"
@@ -482,7 +481,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udtargcompdate_text"
@@ -516,7 +515,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/actfinish_text"
@@ -531,6 +530,107 @@
                             android:gravity="center_vertical"
                             android:hint="@string/have_not_data"
                             android:paddingLeft="@dimen/btn_top_5dp"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16sp" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/line"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_dark_gray"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/dimens_text"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
+                            android:text="@string/cudept1_text"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+                        <TextView
+                            android:id="@+id/cudept_text_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center_vertical"
+                            android:hint="@string/have_not_data"
+                            android:paddingLeft="@dimen/btn_top_5dp"
+                            android:paddingRight="@dimen/btn_top_5dp"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/line"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_dark_gray"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/dimens_text"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
+                            android:text="@string/cucrew1_text"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+                        <TextView
+                            android:id="@+id/cucrew_text_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center_vertical"
+                            android:hint="@string/have_not_data"
+                            android:padding="@dimen/btn_top_5dp"
+                            android:paddingLeft="@dimen/btn_top_5dp"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/line"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_dark_gray"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/dimens_text"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
+                            android:text="@string/ownername_text"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+                        <TextView
+                            android:id="@+id/ownername_text_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center_vertical"
+                            android:hint="@string/have_not_data"
+                            android:paddingLeft="@dimen/btn_top_5dp"
+                            android:paddingRight="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
                     </LinearLayout>
@@ -593,7 +693,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/supervisor_text"
@@ -612,6 +712,8 @@
                             android:textSize="@dimen/dimens_16sp" />
                     </LinearLayout>
 
+
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -626,109 +728,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_10"
-                            android:gravity="center"
-                            android:text="@string/cudept1_text"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                        <TextView
-                            android:id="@+id/cudept_text_id"
-                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:hint="@string/have_not_data"
-                            android:paddingLeft="@dimen/btn_top_5dp"
-                            android:paddingRight="@dimen/btn_top_5dp"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16sp" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background_dark_gray"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_10"
-                            android:gravity="center"
-                            android:text="@string/cucrew1_text"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                        <TextView
-                            android:id="@+id/cucrew_text_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:hint="@string/have_not_data"
-                            android:padding="@dimen/btn_top_5dp"
-                            android:paddingLeft="@dimen/btn_top_5dp"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16sp" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background_dark_gray"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_10"
-                            android:gravity="center"
-                            android:text="@string/ownername_text"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimens_16sp" />
-
-                        <TextView
-                            android:id="@+id/ownername_text_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:hint="@string/have_not_data"
-                            android:paddingLeft="@dimen/btn_top_5dp"
-                            android:paddingRight="@dimen/btn_top_5dp"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16sp" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line"></View>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background_dark_gray"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udtoquestion_text"
@@ -761,7 +761,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udremark2_text"
@@ -794,7 +794,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udremark21_text"
@@ -827,7 +827,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udqty1_text"
@@ -860,7 +860,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udremark31_text"
@@ -893,7 +893,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udremark4_text"
