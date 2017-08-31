@@ -34,6 +34,8 @@ public class XkmxAdapter extends BaseQuickAdapter<PAYPLANPROJECT> {
         helper.setText(R.id.description12_text, JsonUnit.convertStrToArray(item.getFINCNTRLDESC())[0]);
         helper.setText(R.id.description13_text, JsonUnit.convertStrToArray(item.getDESCRIPTION())[0]);
         helper.setText(R.id.linecost2_text, JsonUnit.convertStrToArray(item.getLINECOST())[0]);
+
+
     }
 
 

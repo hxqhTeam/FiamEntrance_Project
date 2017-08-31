@@ -26,6 +26,7 @@ import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_PAYPLAN;
 import com.hqxh.fiamproperty.model.R_PAYPLAN.PAYPLAN;
+import com.hqxh.fiamproperty.ui.adapter.ZxkjhAdapter;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.hqxh.fiamproperty.unit.JsonUnit;
@@ -70,7 +71,8 @@ public class XkplandetailActivity extends BaseTitleActivity {
     LinearLayout jbxxLinearlayout;
 
     ImageView jbxx_text;//其它信息
-    ImageView xkxm_text;//文档
+    ImageView xkxmImageView;//需款项目
+    TextView xkxmText; //需款标题
     ImageView spjl_text;//审批记录
 
     private Button workflowBtn;
@@ -135,7 +137,8 @@ public class XkplandetailActivity extends BaseTitleActivity {
         jbxxLinearlayout = (LinearLayout) findViewById(R.id.jbxx_text_id);
 
         jbxx_text = (ImageView) findViewById(R.id.jbxx_text);
-        xkxm_text = (ImageView) findViewById(R.id.xkxm_text);
+        xkxmText = (TextView) findViewById(R.id.xumx_name_id);
+        xkxmImageView = (ImageView) findViewById(R.id.xkxm_text);
         spjl_text = (ImageView) findViewById(R.id.spjl_text);
 
         workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
@@ -178,10 +181,12 @@ public class XkplandetailActivity extends BaseTitleActivity {
         enterdate_text.setText(JsonUnit.convertStrToArray(payplan.getENTERDATE())[0]);
 
         rotate = AnimationUtils.loadAnimation(this, R.anim.arrow_rotate);//创建动画
-
+        if(JsonUnit.convertStrToArray(payplan.getTYPE())[0].equals("3.部门需款汇总")){
+            xkxmText.setText(R.string.zxkjh_text);
+        }
         jbxx_text.setOnClickListener(jbxx_textOnClickListener);
         spjl_text.setOnClickListener(sqjlImageViewOnClickListener);
-        xkxm_text.setOnClickListener(xkxm_textOnClickListener);
+        xkxmImageView.setOnClickListener(xkxm_textOnClickListener);
         workflowBtn.setOnClickListener(sp_btn_idOnClickListener);
     }
 
@@ -195,9 +200,20 @@ public class XkplandetailActivity extends BaseTitleActivity {
     private View.OnClickListener xkxm_textOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(XkplandetailActivity.this, XkxmActivity.class);
-            intent.putExtra("payplannum", JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]);
-            startActivityForResult(intent, 0);
+            Intent intent=null;
+            if(JsonUnit.convertStrToArray(payplan.getTYPE())[0].equals("3.部门需款汇总")) {
+                 intent = new Intent(XkplandetailActivity.this, ZxkjhActivity.class);
+                intent.putExtra("payplannum", JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]);
+                intent.putExtra("title", getResources().getString(R.string.zxkjh_text));
+                intent.putExtra("appid", GlobalConfig.PPCHANGE_APPID);
+                startActivityForResult(intent, 0);
+            }else{
+                 intent = new Intent(XkplandetailActivity.this, XkxmActivity.class);
+                intent.putExtra("payplannum", JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]);
+                intent.putExtra("title", getResources().getString(R.string.xkxm_text));
+                intent.putExtra("appid", GlobalConfig.PP_APPID);
+                startActivityForResult(intent, 0);
+            }
 
         }
     };
@@ -290,9 +306,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
     }
 
 
-    //http://10.60.12.98/maximo/mobile/wf/approve?ownertable=GR&ownerid=77128&memo=驳回&selectWhat=0&userid=zhuyinan
     private void PostApprove(String ownertable, String ownerid, String memo, String selectWhat, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",memo=" + memo + ",selectWhat=" + selectWhat + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_APPROVE_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)

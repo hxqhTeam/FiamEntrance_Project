@@ -251,6 +251,10 @@ public class HttpManager {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYPLAN_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
 
         } else {
+            if(appid.equals(GlobalConfig.PPCHANGE_APPID)){  //子需款计划
+                return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYPLAN_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PARENT':'=" + payplannum + "'}}";
+
+            }
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYPLAN_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYPLANNUM':'=" + payplannum + "'}}";
 
         }
@@ -271,8 +275,8 @@ public class HttpManager {
     /**
      * 需款项目
      */
-    public static String gePAYPLANPROJECTUrl(String payplannum, String username, int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.PP_APPID + "','objectname':'" + GlobalConfig.PAYPLANPROJECT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYPLANNUM':'=" + payplannum + "'}}";
+    public static String gePAYPLANPROJECTUrl(String appid,String payplannum, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYPLANPROJECT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYPLANNUM':'=" + payplannum + "'}}";
 
     }
 

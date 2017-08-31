@@ -40,9 +40,6 @@ import io.reactivex.schedulers.Schedulers;
  **/
 public class XkxmActivity extends BaseListActivity {
     private static final String TAG = "XkxmActivity";
-
-
-
     private XkmxAdapter xkmxadapter;
 
     private int curpage = 1;
@@ -50,20 +47,26 @@ public class XkxmActivity extends BaseListActivity {
     private int totalpage;
 
     private String payplannum ;;//payplannum
-
+    private String appid ;;//appid
+    private String title ;;//title
 
     @Override
     protected void beforeInit() {
         super.beforeInit();
         if(getIntent().hasExtra("payplannum")){
             payplannum=getIntent().getExtras().getString("payplannum");
+        } if(getIntent().hasExtra("appid")){
+            appid=getIntent().getExtras().getString("appid");
+        }
+        if(getIntent().hasExtra("title")){
+            title=getIntent().getExtras().getString("title");
         }
     }
 
     @Override
     protected String getSubTitle() {
 
-        return getString(R.string.xkxm_text);
+        return title;
     }
 
 
@@ -71,7 +74,7 @@ public class XkxmActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data= HttpManager.gePAYPLANPROJECTUrl(payplannum,AccountUtils.getpersonId(this), curpage, showcount);
+        String data= HttpManager.gePAYPLANPROJECTUrl(appid,payplannum,AccountUtils.getpersonId(this), curpage, showcount);
         Log.e(TAG,"data="+data);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addQueryParameter("data", data)
@@ -95,6 +98,7 @@ public class XkxmActivity extends BaseListActivity {
                 .map(new Function<R_PAYPLANPROJECT.ResultBean, List<R_PAYPLANPROJECT.PAYPLANPROJECT>>() {
                     @Override
                     public List<R_PAYPLANPROJECT.PAYPLANPROJECT> apply(@NonNull R_PAYPLANPROJECT.ResultBean resultBean) throws Exception {
+                        totalpage = Integer.valueOf(resultBean.getTotalpage());
                         return resultBean.getResultlist();
                     }
 
@@ -173,7 +177,6 @@ public class XkxmActivity extends BaseListActivity {
 
     @Override
     protected void fillData() {
-        payplannum=getIntent().getExtras().getString("payplannum");
         initAdapter(new ArrayList<PAYPLANPROJECT>());
         getData();
 
@@ -181,7 +184,7 @@ public class XkxmActivity extends BaseListActivity {
 
     @Override
     protected void setOnClick() {
-
+       searchText.setVisibility(View.GONE);
     }
 
 
@@ -191,12 +194,6 @@ public class XkxmActivity extends BaseListActivity {
     private void initAdapter(final List<PAYPLANPROJECT> list) {
         xkmxadapter = new XkmxAdapter(XkxmActivity.this, R.layout.list_xkxm, list);
         mRecyclerView.setAdapter(xkmxadapter);
-        xkmxadapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-            }
-        });
     }
 
     /**

@@ -141,6 +141,8 @@ public final class GlobalConfig {
 
     //需款计划Appid
     public static final String PP_APPID = "PP";
+    //子需款计划Appid
+    public static final String PPCHANGE_APPID = "PPCHANGE";
     //需款计划表名
     public static final String PAYPLAN_NAME = "PAYPLAN";
     //需款项目表名

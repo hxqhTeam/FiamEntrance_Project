@@ -604,12 +604,12 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:background="@color/background_dark_gray"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/xumx_name_id"
                         android:layout_width="@dimen/word_80dp"
                         android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"

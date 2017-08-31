@@ -365,5 +365,9 @@
     <string name="zrr_text">责任人</string>
     <string name="kbfilelist_text">出国人员知识积累拟交付资料清单</string>
     <string name="xm_text">姓名</string>
-
+    <string name="zxkjh_text">子需款计划</string>
+    <string name="type2_text">需款类型</string>
+    <string name="vendor1_text">供应商名称</string>
+    <string name="enterbyname_text">出差申请</string>
+    <string name="isbopayplan1_text">借款需款</string>
 </resources>
