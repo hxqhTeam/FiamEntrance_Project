@@ -3,7 +3,6 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -23,8 +22,8 @@ import com.hqxh.fiamproperty.base.BaseTitleActivity;
 import com.hqxh.fiamproperty.bean.R_APPROVE;
 import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_PR.PR;
 import com.hqxh.fiamproperty.model.R_PR;
+import com.hqxh.fiamproperty.model.R_PR.PR;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.hqxh.fiamproperty.unit.JsonUnit;
@@ -86,7 +85,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
 
     protected void beforeInit() {
         super.beforeInit();
-        if(getIntent().hasExtra("pr")){
+        if (getIntent().hasExtra("pr")) {
             pr = (PR) getIntent().getExtras().getSerializable("pr");
         }
         if (getIntent().hasExtra("mark")) {
@@ -116,9 +115,9 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
         prnum_text = (TextView) findViewById(R.id.prnum_text);
         worktype_text = (TextView) findViewById(R.id.worktype_text);
         status_text = (TextView) findViewById(R.id.status_text);
-        enterdate_text=(TextView)findViewById(R.id.enterdate_text);
-        cudept_text=(TextView)findViewById(R.id.cudept_text);
-        cucrew_text=(TextView)findViewById(R.id.cucrew_text);
+        enterdate_text = (TextView) findViewById(R.id.enterdate_text);
+        cudept_text = (TextView) findViewById(R.id.cudept_text);
+        cucrew_text = (TextView) findViewById(R.id.cucrew_text);
         udremarka_text = (TextView) findViewById(R.id.udremarka_text);
         projectdes1_text = (TextView) findViewById(R.id.projectdes1_text);
         udremarks3_text = (TextView) findViewById(R.id.udremarks3_text);
@@ -149,15 +148,15 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
                 layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
                 scrollView.setLayoutParams(layoutParams);
             }
+            showLoadingDialog(getResources().getString(R.string.loading_hint));
             getNetWorkPR();
         }
-
 
 
     }
 
     private void showData() {
-        prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]+","+JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
+        prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0] + "," + JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
         worktype_text.setText(JsonUnit.convertStrToArray(pr.getCUTYPE())[0]);
         status_text.setText(JsonUnit.convertStrToArray(pr.getSTATUSDESC())[0]);
         udremarka_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK1())[0]);
@@ -170,9 +169,9 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
         udremark5_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK4())[0]);
         rdchead_text.setText(JsonUnit.convertStrToArray(pr.getRDCHEADNAME())[0]);
         ownername_text.setText(JsonUnit.convertStrToArray(pr.getASSIGNERNAME())[0]);
-        if(!JsonUnit.convertStrToArray(pr.getPROJECTID())[0].isEmpty()){
+        if (!JsonUnit.convertStrToArray(pr.getPROJECTID())[0].isEmpty()) {
 
-        projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]+","+JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
+            projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
         }
         pm_text.setText(JsonUnit.convertStrToArray(pr.getPM())[0]);
         sqr_text.setText(JsonUnit.convertStrToArray(pr.getREQBYPERSON())[0]);
@@ -273,17 +272,9 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.i(TAG, "s=" + s);
-
-
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_106)) {
                             R_APPROVE r_approve = new Gson().fromJson(s, R_APPROVE.class);
-                            for (int i = 0; i < r_approve.getResult().size(); i++) {
-                                R_APPROVE.Result result = r_approve.getResult().get(i);
-                                Log.e(TAG, "instruction=" + result.getInstruction() + ",ispositive=" + result.getIspositive());
-                            }
-
                             showDialog(r_approve.getResult());
                         } else {
                             showMiddleToast(FwpaydetailsActivity.this, workflow.getErrmsg());
@@ -325,6 +316,10 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
                     public void accept(@NonNull String s) throws Exception {
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         showMiddleToast(FwpaydetailsActivity.this, workflow.getErrmsg());
+                        if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_103)) {
+                            setResult(ActiveTaskActivity.TASK_RESULTCODE);
+                            finish();
+                        }
                     }
 
 
@@ -347,7 +342,6 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
                     @Override
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
-                        Log.e(TAG, "result" + result.getInstruction());
                         PostApprove(GlobalConfig.PR_NAME, JsonUnit.convertStrToArray(pr.getPRID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(FwpaydetailsActivity.this));
                     }
 
@@ -394,7 +388,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<List<PR>>() {
                     @Override
                     public void accept(@NonNull List<PR> prs) throws Exception {
-
+                        dismissLoadingDialog();
                         if (prs == null || prs.isEmpty()) {
                         } else {
                             pr = prs.get(0);
@@ -406,6 +400,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
+                        dismissLoadingDialog();
                     }
                 });
     }

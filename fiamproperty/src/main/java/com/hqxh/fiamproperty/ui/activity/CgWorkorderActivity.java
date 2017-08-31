@@ -3,7 +3,6 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -81,10 +80,12 @@ public class CgWorkorderActivity extends BaseTitleActivity {
     private TextView reportdateText; //申请日期
     private TextView phonenumText; //电话
 
+    private ImageView kbfilelistImageView; //出国人员知识积累拟交付资料清单
     private ImageView sqjlImageView; //审批记录
-    private RelativeLayout workflowRelativeLayout;//布局
+
 
     private Button workflowBtn;
+    private RelativeLayout workflowRelativeLayout;//布局
 
     private Workorder workorder;
 
@@ -154,6 +155,7 @@ public class CgWorkorderActivity extends BaseTitleActivity {
         reportdateText = (TextView) findViewById(R.id.reportdate_text_id);
         phonenumText = (TextView) findViewById(R.id.phonenum_text_id);
 
+        kbfilelistImageView = (ImageView) findViewById(R.id.kbfilelist_imageview_id);
         sqjlImageView = (ImageView) findViewById(R.id.sqjl_imageview_id);
 
         workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
@@ -167,6 +169,7 @@ public class CgWorkorderActivity extends BaseTitleActivity {
                 layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
                 scrollView.setLayoutParams(layoutParams);
             }
+            showLoadingDialog(getResources().getString(R.string.loading_hint));
             getNetWorkWorkOrder();
         }
     }
@@ -216,6 +219,7 @@ public class CgWorkorderActivity extends BaseTitleActivity {
 
         lcgrymdText.setOnClickListener(ccrTextOnClickListener);
         qtxxImageView.setOnClickListener(jbxxImageViewOnClickListener);
+        kbfilelistImageView.setOnClickListener(kbfilelistImageViewOnClickListener);
         sqjlImageView.setOnClickListener(sqjlImageViewOnClickListener);
         workflowBtn.setOnClickListener(workflowBtnOnClickListener);
 
@@ -267,6 +271,17 @@ public class CgWorkorderActivity extends BaseTitleActivity {
         return rotate.getFillAfter();
     }
 
+    //出国立项申请-出国人员知识积累拟交付资料清单
+    private View.OnClickListener kbfilelistImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(CgWorkorderActivity.this, KbfilelistActivity.class);
+            intent.putExtra("appid", GlobalConfig.TRAVELS_APPID);
+            intent.putExtra("wonum", JsonUnit.convertStrToArray(workorder.getWONUM())[0]);
+            intent.putExtra("title", getResources().getString(R.string.kbfilelist_text));
+            startActivityForResult(intent, 0);
+        }
+    };
     //审批记录
     private View.OnClickListener sqjlImageViewOnClickListener = new View.OnClickListener() {
         @Override
@@ -289,7 +304,6 @@ public class CgWorkorderActivity extends BaseTitleActivity {
 
     //流程启动
     private void PostStart(String ownertable, String ownerid, String appid, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",appid=" + appid + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_START_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -316,10 +330,6 @@ public class CgWorkorderActivity extends BaseTitleActivity {
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_106)) {
                             R_APPROVE r_approve = new Gson().fromJson(s, R_APPROVE.class);
-                            for (int i = 0; i < r_approve.getResult().size(); i++) {
-                                R_APPROVE.Result result = r_approve.getResult().get(i);
-                                Log.e(TAG, "instruction=" + result.getInstruction() + ",ispositive=" + result.getIspositive());
-                            }
 
                             showDialog(r_approve.getResult());
                         } else {
@@ -365,6 +375,10 @@ public class CgWorkorderActivity extends BaseTitleActivity {
                     public void accept(@NonNull String s) throws Exception {
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         showMiddleToast(CgWorkorderActivity.this, workflow.getErrmsg());
+                        if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_103)) {
+                            setResult(ActiveTaskActivity.TASK_RESULTCODE);
+                            finish();
+                        }
                     }
 
 
@@ -433,7 +447,7 @@ public class CgWorkorderActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<List<R_Workorder.Workorder>>() {
                     @Override
                     public void accept(@NonNull List<R_Workorder.Workorder> workorders) throws Exception {
-
+                        dismissLoadingDialog();
                         if (workorders == null || workorders.isEmpty()) {
                         } else {
                             workorder = workorders.get(0);
@@ -446,6 +460,7 @@ public class CgWorkorderActivity extends BaseTitleActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
+                        dismissLoadingDialog();
                     }
                 });
 

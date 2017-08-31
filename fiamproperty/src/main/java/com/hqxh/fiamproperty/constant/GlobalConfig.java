@@ -74,6 +74,8 @@ public final class GlobalConfig {
     public static final String WPITEM_NAME = "WPITEM";
     //出差人
     public static final String PERSONRELATION_NAME = "PERSONRELATION";
+    //出国立项申请-出国人员知识积累拟交付资料清单
+    public static final String KBFILELIST_NAME = "KBFILELIST";
     //国外立项appid
     public static final String TRAVELS_APPID = "TRAVELS";
 
@@ -213,6 +215,7 @@ public final class GlobalConfig {
      * 工作流标示
      **/
     public static final String WORKFLOW_106 = "WF-S-106";//返回可执行操作
+    public static final String WORKFLOW_103 = "WF-S-103";//审批成功
 
 
     /**

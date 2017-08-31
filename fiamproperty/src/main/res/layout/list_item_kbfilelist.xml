@@ -26,12 +26,12 @@
                 android:id="@+id/displayname_title_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/xm_text"
+                android:text="@string/linenum_text"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimens_16sp" />
 
             <TextView
-                android:id="@+id/displayname_text_id"
+                android:id="@+id/linenum_text_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
@@ -39,10 +39,12 @@
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_line"
             android:background="@mipmap/line"></View>
+
         <LinearLayout
             android:id="@+id/bm_linearLayout_id"
             android:layout_width="match_parent"
@@ -54,12 +56,12 @@
                 android:id="@+id/cudept_title_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cudept_text"
+                android:text="@string/filetype_text"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimens_16sp" />
 
             <TextView
-                android:id="@+id/cudept_text_id"
+                android:id="@+id/filetype_text_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
@@ -67,10 +69,12 @@
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_line"
             android:background="@mipmap/line"></View>
+
         <LinearLayout
             android:id="@+id/ks_linearLayout_id"
             android:layout_width="match_parent"
@@ -82,12 +86,40 @@
                 android:id="@+id/ks_title_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cucrew_text"
+                android:text="@string/ms_text"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimens_16sp" />
 
             <TextView
-                android:id="@+id/cucrew_text_id"
+                android:id="@+id/description_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/btn_top_5dp"
+                android:hint="@string/have_notdata_hint"
+                android:textSize="@dimen/dimens_16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_line"
+            android:background="@mipmap/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/btn_top_5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zrr_text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimens_16sp" />
+
+            <TextView
+                android:id="@+id/owner_text_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"

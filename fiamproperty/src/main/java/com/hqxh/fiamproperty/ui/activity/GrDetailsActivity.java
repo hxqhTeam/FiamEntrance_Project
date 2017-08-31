@@ -25,14 +25,10 @@ import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_GR;
 import com.hqxh.fiamproperty.model.R_GR.GR;
-
-
-import com.hqxh.fiamproperty.model.R_WFTRANSACTION;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.hqxh.fiamproperty.unit.JsonUnit;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
-
 
 import java.util.List;
 
@@ -48,6 +44,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
 
     private ScrollView scrollView;
     TextView grnum_text; //编号
+    TextView descritionText;//描述
     TextView location_text;//门岗1
     TextView location2_text;//门岗2
     TextView reason_text;//理由
@@ -78,7 +75,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
 
     private GR gr; //对象
 
-    private int mark=0;//跳转标识
+    private int mark = 0;//跳转标识
     private String appid; //appid
     private String ownernum;//ownernum
     private String ownertable;//ownertable
@@ -113,6 +110,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
     protected void initView(Bundle savedInstanceState) {
         scrollView = (ScrollView) findViewById(R.id.scrollView_id);
         grnum_text = (TextView) findViewById(R.id.grnum_text);
+        descritionText = (TextView) findViewById(R.id.description_text_id);
 
         location_text = (TextView) findViewById(R.id.location_text);
         location2_text = (TextView) findViewById(R.id.location2_text);
@@ -151,6 +149,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
                 layoutParams.setMargins(0, 0, 0, getHeight(workflowRelativeLayout));//4个参数按顺序分别是左上右下
                 scrollView.setLayoutParams(layoutParams);
             }
+            showLoadingDialog(getString(R.string.loading_hint));
             getNetWorkGr();
         }
 
@@ -159,7 +158,8 @@ public class GrDetailsActivity extends BaseTitleActivity {
     }
 
     private void showData() {
-        grnum_text.setText(JsonUnit.convertStrToArray(gr.getGRNUM())[0] + ',' + JsonUnit.convertStrToArray(gr.getDESCRIPTION())[0]);
+        grnum_text.setText(JsonUnit.convertStrToArray(gr.getGRNUM())[0]);
+        descritionText.setText(JsonUnit.convertStrToArray(gr.getDESCRIPTION())[0]);
         location_text.setText(JsonUnit.convertStrToArray(gr.getLOCATIONDESCRIPTION())[0]);
         location2_text.setText(JsonUnit.convertStrToArray(gr.getLOCATION2DESCRIPTION())[0]);
         reason_text.setText(JsonUnit.convertStrToArray(gr.getREASON())[0]);
@@ -184,7 +184,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
         jbxx_text.setOnClickListener(jbxx_textOnClickListener);
 
         wzmx_text.setOnClickListener(wzmx_textOnClickListener);
-      //  zcmx_text.setOnClickListener(zcmx_textOnClickListener);
+        zcmx_text.setOnClickListener(zcmx_textOnClickListener);
         spjl_text.setOnClickListener(sqjlImageViewOnClickListener);
         workflowBtn.setOnClickListener(spOnClickListener);
     }
@@ -219,31 +219,33 @@ public class GrDetailsActivity extends BaseTitleActivity {
         }
     };
 
-    /*
-    物资明细
-    */
-
+    /**
+     * 物资明细
+     **/
     private View.OnClickListener wzmx_textOnClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(GrDetailsActivity.this, WzmxListActivity.class);
             intent.putExtra("grnum", JsonUnit.convertStrToArray(gr.getGRNUM())[0]);
+            intent.putExtra("appid", GlobalConfig.GRWZ);
+            intent.putExtra("title", getResources().getString(R.string.wzmx_text));
             startActivityForResult(intent, 0);
 
         }
     };
- /*  *//* 整车明细*//*
     private View.OnClickListener zcmx_textOnClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(GrDetailsActivity.this, ZcmxListActivity.class);
+            Intent intent = new Intent(GrDetailsActivity.this, WzmxListActivity.class);
             intent.putExtra("grnum", JsonUnit.convertStrToArray(gr.getGRNUM())[0]);
+            intent.putExtra("appid", GlobalConfig.GRZC_APPID);
+            intent.putExtra("title", getResources().getString(R.string.zcmx_text));
             startActivityForResult(intent, 0);
 
         }
-    };*/
+    };
     //审批记录
     private View.OnClickListener sqjlImageViewOnClickListener = new View.OnClickListener() {
         @Override
@@ -289,15 +291,11 @@ public class GrDetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.i(TAG, "s=" + s);
-
-
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_106)) {
                             R_APPROVE r_approve = new Gson().fromJson(s, R_APPROVE.class);
                             for (int i = 0; i < r_approve.getResult().size(); i++) {
                                 R_APPROVE.Result result = r_approve.getResult().get(i);
-                                Log.e(TAG, "instruction=" + result.getInstruction() + ",ispositive=" + result.getIspositive());
                             }
 
                             showDialog(r_approve.getResult());
@@ -318,7 +316,6 @@ public class GrDetailsActivity extends BaseTitleActivity {
 /*审批流程*/
 
     private void PostApprove(String ownertable, String ownerid, String memo, String selectWhat, String userid) {
-        Log.e(TAG, "ownertable=" + ownertable + ",ownerid=" + ownerid + ",memo=" + memo + ",selectWhat=" + selectWhat + ",userid=" + userid);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_APPROVE_WORKFLOW)
                 .addBodyParameter("ownertable", ownertable)
                 .addBodyParameter("ownerid", ownerid)
@@ -341,9 +338,14 @@ public class GrDetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.i(TAG, "审批s=" + s);
+                        Log.e(TAG, "s=" + s);
                         R_WORKFLOW workflow = new Gson().fromJson(s, R_WORKFLOW.class);
                         showMiddleToast(GrDetailsActivity.this, workflow.getErrmsg());
+                        if (workflow.getErrcode().equals(GlobalConfig.WORKFLOW_103)) {
+                            setResult(ActiveTaskActivity.TASK_RESULTCODE);
+                            finish();
+                        }
+
                     }
 
 
@@ -366,7 +368,6 @@ public class GrDetailsActivity extends BaseTitleActivity {
                     @Override
                     public void cOnClickListener(DialogInterface dialogInterface, R_APPROVE.Result result, String memo) {
                         dialogInterface.dismiss();
-                        Log.e(TAG, "result" + result.getInstruction());
                         PostApprove(GlobalConfig.GR_NAME, JsonUnit.convertStrToArray(gr.getGRID())[0], memo, result.getIspositive(), AccountUtils.getpersonId(GrDetailsActivity.this));
                     }
 
@@ -413,7 +414,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
                 .subscribe(new Consumer<List<GR>>() {
                     @Override
                     public void accept(@NonNull List<GR> grs) throws Exception {
-
+                        dismissLoadingDialog();
                         if (grs == null || grs.isEmpty()) {
                         } else {
                             gr = grs.get(0);
@@ -425,6 +426,7 @@ public class GrDetailsActivity extends BaseTitleActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
+                        dismissLoadingDialog();
                     }
                 });
     }

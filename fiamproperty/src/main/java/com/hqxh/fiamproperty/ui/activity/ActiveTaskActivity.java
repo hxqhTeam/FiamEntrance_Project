@@ -317,7 +317,7 @@ public class ActiveTaskActivity extends BaseListActivity {
                     intent.putExtra("ownertable", JsonUnit.convertStrToArray(wfassignment.getOWNERTABLE())[0]);
                     startActivityForResult(intent, TASK_REQUESTCODE);
                 } else {
-                    showMiddleToast(ActiveTaskActivity.this, getString(R.string.have_not_appove_hint));
+                    showMiddleToast1(ActiveTaskActivity.this, getString(R.string.have_not_appove_hint));
                 }
             }
         });

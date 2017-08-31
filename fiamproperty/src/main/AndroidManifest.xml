@@ -96,6 +96,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".ui.activity.KbfilelistActivity"
+            android:label="@string/kbfilelist_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ui.activity.WzmxListActivity"
             android:label="@string/wzmx_text"
             android:screenOrientation="portrait"

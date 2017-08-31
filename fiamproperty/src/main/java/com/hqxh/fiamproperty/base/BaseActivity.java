@@ -122,6 +122,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
+    public static void showMiddleToast1(Context cxt, String msg) {
+        Toast toast = Toast.makeText(cxt, msg, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
 
     public void showLoadingDialog(String msg) {
         loadingDialog = new LoadingDialog(this, msg, R.style.loading_dialog);

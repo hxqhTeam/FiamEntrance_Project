@@ -50,7 +50,7 @@ public class HttpManager {
      * 出差人*
      */
     public static String getR_PERSONRELATIONUrl(String appid, String username, String wonum, int curpage, int showcount) {
-        if (appid.equals(GlobalConfig.TRAVEL_APPID)) {
+        if (appid.equals(GlobalConfig.TRAVEL_APPID) || appid.equals(GlobalConfig.TRAVELS_APPID)) {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PERSONRELATION_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'=" + wonum + "'}}";
 
         } else if (appid.equals(GlobalConfig.EXPENSES_APPID)) {
@@ -58,6 +58,16 @@ public class HttpManager {
 
         }
         return null;
+
+    }
+
+
+    /**
+     * 出国立项申请-出国人员知识积累拟交付资料清单*
+     */
+    public static String getKBFILELISTUrl(String appid, String wonum, String username, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.KBFILELIST_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'=" + wonum + "'}}";
+
 
     }
 

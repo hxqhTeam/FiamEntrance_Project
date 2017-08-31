@@ -1,18 +1,17 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseListActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
-import com.hqxh.fiamproperty.model.R_PERSONRELATION;
-import com.hqxh.fiamproperty.model.R_PERSONRELATION.PERSONRELATION;
-import com.hqxh.fiamproperty.model.R_PERSONRELATION.ResultBean;
-import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
-import com.hqxh.fiamproperty.ui.adapter.CcrAdapter;
+import com.hqxh.fiamproperty.model.R_KBFILELIST;
+import com.hqxh.fiamproperty.model.R_KBFILELIST.KBFILELIST;
+import com.hqxh.fiamproperty.model.R_KBFILELIST.ResultBean;
+import com.hqxh.fiamproperty.ui.adapter.KbfilelistAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -26,35 +25,33 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 出差人的Activity
+ * 出国立项申请-出国人员知识积累拟交付资料清单的Activity
  **/
-public class PersonrelationActivity extends BaseListActivity {
-    private static final String TAG = "PersonrelationActivity";
+public class KbfilelistActivity extends BaseListActivity {
+    private static final String TAG = "KbfilelistActivity";
 
 
-    private CcrAdapter ccrAdapter;
-
+    private KbfilelistAdapter kbfilelistAdapter;
 
     private int curpage = 1;
     private int showcount = 20;
     private int totalpage;
 
-
-    private String wonum; //单号
-    private String title;//标题
-    private String appid;
+    private String appid; //appid
+    private String wonum; //appid
+    private String title; //title
 
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        if (getIntent().hasExtra("wonum")) {
-            wonum = getIntent().getExtras().getString("wonum");
+        if (getIntent().hasExtra("appid")) {
+            appid = getIntent().getExtras().getString("appid");
         }
         if (getIntent().hasExtra("title")) {
             title = getIntent().getExtras().getString("title");
         }
-        if (getIntent().hasExtra("appid")) {
-            appid = getIntent().getExtras().getString("appid");
+        if (getIntent().hasExtra("wonum")) {
+            wonum = getIntent().getExtras().getString("wonum");
         }
     }
 
@@ -69,49 +66,47 @@ public class PersonrelationActivity extends BaseListActivity {
      * 获取数据
      **/
     private void getData() {
-        String data = HttpManager.getR_PERSONRELATIONUrl(appid, AccountUtils.getpersonId(this), wonum, curpage, showcount);
-        Log.e(TAG, "data" + data);
+        String data = HttpManager.getKBFILELISTUrl(appid, wonum, AccountUtils.getpersonId(this), curpage, showcount);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addQueryParameter("data", data)
                 .build()
-                .getObjectObservable(R_PERSONRELATION.class) // 发起获取数据列表的请求，并解析到R_PERSONRELATION
+                .getObjectObservable(R_KBFILELIST.class) // 发起获取数据列表的请求，并解析到FootList
                 .subscribeOn(Schedulers.io())        // 在io线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread()) // 在主线程处理获取数据列表的请求结果
-                .doOnNext(new Consumer<R_PERSONRELATION>() {
+                .doOnNext(new Consumer<R_KBFILELIST>() {
                     @Override
-                    public void accept(@NonNull R_PERSONRELATION r_personrelation) throws Exception {
+                    public void accept(@NonNull R_KBFILELIST r_kbfilelist) throws Exception {
                     }
                 })
 
-                .map(new Function<R_PERSONRELATION, ResultBean>() {
+                .map(new Function<R_KBFILELIST, ResultBean>() {
                     @Override
-                    public ResultBean apply(@NonNull R_PERSONRELATION r_personrelation) throws Exception {
+                    public ResultBean apply(@NonNull R_KBFILELIST r_paycheck) throws Exception {
 
-                        return r_personrelation.getResult();
+                        return r_paycheck.getResult();
                     }
                 })
-                .map(new Function<ResultBean, List<PERSONRELATION>>() {
+                .map(new Function<ResultBean, List<KBFILELIST>>() {
                     @Override
-                    public List<PERSONRELATION> apply(@NonNull ResultBean resultBean) throws Exception {
+                    public List<KBFILELIST> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<PERSONRELATION>>() {
+                .subscribe(new Consumer<List<KBFILELIST>>() {
                     @Override
-                    public void accept(@NonNull List<PERSONRELATION> personrelation) throws Exception {
+                    public void accept(@NonNull List<KBFILELIST> kbfilelist) throws Exception {
                         mPullLoadMoreRecyclerView.setRefreshing(false);
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
-                        if (personrelation == null || personrelation.isEmpty()) {
+                        if (kbfilelist == null || kbfilelist.isEmpty()) {
                             notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
 
-                            addData(personrelation);
+                            addData(kbfilelist);
 
 
                         }
@@ -131,7 +126,7 @@ public class PersonrelationActivity extends BaseListActivity {
     @Override
     public void onRefresh() {
         curpage = 1;
-        ccrAdapter.removeAll(ccrAdapter.getData());
+        kbfilelistAdapter.removeAll(kbfilelistAdapter.getData());
         getData();
 
     }
@@ -140,7 +135,7 @@ public class PersonrelationActivity extends BaseListActivity {
     public void onLoadMore() {
         if (totalpage == curpage) {
             getLoadMore();
-            showMiddleToast(PersonrelationActivity.this, getResources().getString(R.string.all_data_hint));
+            showMiddleToast(KbfilelistActivity.this, getResources().getString(R.string.all_data_hint));
         } else {
             curpage++;
             getData();
@@ -170,45 +165,44 @@ public class PersonrelationActivity extends BaseListActivity {
     @Override
     protected void fillData() {
         searchText.setVisibility(View.GONE);
-        initAdapter(new ArrayList<PERSONRELATION>());
+        initAdapter(new ArrayList<KBFILELIST>());
         getData();
 
     }
 
     @Override
     protected void setOnClick() {
-
+        searchText.setOnClickListener(searchTextOnClickListener);
     }
 
 
     /**
      * 获取数据*
      */
-    private void initAdapter(final List<PERSONRELATION> list) {
-        int layoutResId = 0;
-        if (appid.equals(GlobalConfig.TRAVEL_APPID)) {
-            layoutResId = R.layout.list_item_ccr;
-        } else if (appid.equals(GlobalConfig.EXPENSES_APPID)) {
-            layoutResId = R.layout.list_item_cl_ccr;
-        }
-        ccrAdapter = new CcrAdapter(PersonrelationActivity.this, layoutResId, list);
-        ccrAdapter.setAppid(appid);
-
-        mRecyclerView.setAdapter(ccrAdapter);
-        ccrAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-            }
-        });
+    private void initAdapter(final List<KBFILELIST> list) {
+        kbfilelistAdapter = new KbfilelistAdapter(KbfilelistActivity.this, R.layout.list_item_kbfilelist, list);
+        mRecyclerView.setAdapter(kbfilelistAdapter);
     }
 
     /**
      * 添加数据*
      */
-    private void addData(final List<PERSONRELATION> list) {
-        ccrAdapter.addData(list);
+    private void addData(final List<KBFILELIST> list) {
+        kbfilelistAdapter.addData(list);
     }
 
+
+    /**
+     * 跳转事件
+     **/
+    private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = getIntent();
+            intent.setClass(KbfilelistActivity.this, Fkys_SearchActivity.class);
+            intent.putExtra("appid", GlobalConfig.PAYCHECK_APPID);
+            startActivityForResult(intent, 0);
+        }
+    };
 
 }
