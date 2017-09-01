@@ -68,6 +68,8 @@ public class XkplandetailActivity extends BaseTitleActivity {
 
     TextView sqr_text;//申请人
     TextView enterdate_text;//申请时间
+    TextView cudept_text;//部门
+    TextView cucrew_text;//科室
     LinearLayout jbxxLinearlayout;
 
     ImageView jbxx_text;//其它信息
@@ -120,13 +122,15 @@ public class XkplandetailActivity extends BaseTitleActivity {
         month_text = (TextView) findViewById(R.id.month_text);
         type1_text = (TextView) findViewById(R.id.type1_text);
 
-        totalcost1_text = (TextView) findViewById(R.id.totalcost1_text);
-        status_text = (TextView) findViewById(R.id.status_text);
-        contractnum1_text = (TextView) findViewById(R.id.contractnum1_text);
-        description2_text = (TextView) findViewById(R.id.description2_text);
-        phase_text = (TextView) findViewById(R.id.phase_text);
-        vendor_text = (TextView) findViewById(R.id.vendor_text);
-        wonum2_text = (TextView) findViewById(R.id.wonum2_text);
+        totalcost1_text=(TextView)findViewById(R.id.totalcost1_text);
+        status_text=(TextView)findViewById(R.id.status_text);
+        contractnum1_text=(TextView)findViewById(R.id.contractnum1_text);
+        description2_text=(TextView)findViewById(R.id.description2_text);
+        phase_text=(TextView)findViewById(R.id.phase_text);
+        vendor_text=(TextView)findViewById(R.id.vendor_text);
+        wonum2_text=(TextView)findViewById(R.id.wonum2_text);
+        cudept_text=(TextView)findViewById(R.id.cudept_text);
+        cucrew_text=(TextView)findViewById(R.id.cucrew_text);
 
 
         isbopayplan_text = (CheckBox) findViewById(R.id.isbopayplan_text);
@@ -171,6 +175,9 @@ public class XkplandetailActivity extends BaseTitleActivity {
         phase_text.setText(JsonUnit.convertStrToArray(payplan.getPHASE())[0]);
         vendor_text.setText(JsonUnit.convertStrToArray(payplan.getVENDORNAME())[0]);
         wonum2_text.setText(JsonUnit.convertStrToArray(payplan.getWONUM2())[0]);
+        cudept_text.setText(JsonUnit.convertStrToArray(payplan.getDEPARTMENT())[0]);
+        cucrew_text.setText(JsonUnit.convertStrToArray(payplan.getCREW())[0]);
+
 
         if (JsonUnit.convertStrToArray(payplan.getISBOPAYPLAN())[0].equals("1")) {
             isbopayplan_text.setChecked(true);
