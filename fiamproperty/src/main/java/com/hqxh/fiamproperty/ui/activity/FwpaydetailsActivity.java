@@ -4,6 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +77,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     private TextView sqr_text;//申请人
 
     private ImageView document_text;//文档
+    private ImageView yxmxImageView; //预算明细
     private ImageView spjl_text;//审批记录
 
     private Button workflowBtn;//审批按钮
@@ -142,6 +146,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
         jbxxlinearlayout = (LinearLayout) findViewById(R.id.jbxx_text_id);
 
         document_text = (ImageView) findViewById(R.id.document_text);
+        yxmxImageView = (ImageView) findViewById(R.id.yxmx_imageview_id);
         spjl_text = (ImageView) findViewById(R.id.spjl_text);
 
         workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
@@ -164,7 +169,15 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     }
 
     private void showData() {
-        prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0] + "," + JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
+        if (JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0].isEmpty()) {
+            prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]);
+        } else {
+            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(pr.getPRNUM())[0] + "," + JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
+            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
+            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(pr.getPRNUM())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            prnum_text.setText(builder);
+        }
+
         worktype_text.setText(JsonUnit.convertStrToArray(pr.getCUTYPE())[0]);
         status_text.setText(JsonUnit.convertStrToArray(pr.getSTATUSDESC())[0]);
         udremarka_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK1())[0]);
@@ -177,15 +190,22 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
         udremark5_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK4())[0]);
         rdchead_text.setText(JsonUnit.convertStrToArray(pr.getRDCHEADNAME())[0]);
         ownername_text.setText(JsonUnit.convertStrToArray(pr.getASSIGNERNAME())[0]);
-        if (!JsonUnit.convertStrToArray(pr.getPROJECTID())[0].isEmpty()) {
 
-            projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
+        if (JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0].isEmpty()) {
+            projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]);
+        } else {
+            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(pr.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
+            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
+            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(pr.getPROJECTID())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            projectid_text.setText(builder);
         }
+
         pm_text.setText(JsonUnit.convertStrToArray(pr.getPM())[0]);
         sqr_text.setText(JsonUnit.convertStrToArray(pr.getREQBYPERSON())[0]);
 
         jbxx_text.setOnClickListener(jbxx_textOnClickListener);
         document_text.setOnClickListener(document_textOnClickListener);
+        yxmxImageView.setOnClickListener(yxmxImageViewOnClickListener);
         spjl_text.setOnClickListener(spjl_textOnClickListener);
 
         workflowBtn.setOnClickListener(workflowBtnOnClickListener);
@@ -198,15 +218,13 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     //设置事件监听
     private void onClickListener() {
 
-        Log.e(TAG, "RDCHEAD=" + JsonUnit.convertStrToArray(pr.getRDCHEAD())[1]);
-        if (JsonUnit.convertStrToArray(pr.getRDCHEAD())[1].equals(GlobalConfig.NOTREADONLY)) { //中心分管领导
+        if (JsonUnit.convertStrToArray(pr.getRDCHEAD())[1].equals(GlobalConfig.NOTREADONLY) && appid != null) { //中心分管领导
             Drawable nav_up = getResources().getDrawable(R.drawable.ic_person_black);
             nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
             rdchead_text.setCompoundDrawablesWithIntrinsicBounds(null, null, nav_up, null);
             rdchead_text.setOnClickListener(rdcheadTextOnClickListener);
         }
-        Log.e(TAG, "OWNERPERSON=" + JsonUnit.convertStrToArray(pr.getASSIGNERNAME())[1]);
-        if (JsonUnit.convertStrToArray(pr.getASSIGNERNAME())[1].equals(GlobalConfig.NOTREADONLY)) {
+        if (JsonUnit.convertStrToArray(pr.getASSIGNERNAME())[1].equals(GlobalConfig.NOTREADONLY) && appid != null) {
             Drawable nav_up = getResources().getDrawable(R.drawable.ic_person_black);
             nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
             ownername_text.setCompoundDrawablesWithIntrinsicBounds(null, null, nav_up, null);
@@ -223,6 +241,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
         public void onClick(View view) {
             Intent intent = new Intent(FwpaydetailsActivity.this, PersonActivity.class);
             intent.putExtra("appid", GlobalConfig.ROLE_APPID);
+            intent.putExtra("title", getResources().getString(R.string.rdchead_text));
             startActivityForResult(intent, GlobalConfig.RDCHEAD_REQUESTCODE);
 
 
@@ -234,6 +253,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
         public void onClick(View view) {
             Intent intent = new Intent(FwpaydetailsActivity.this, PersonActivity.class);
             intent.putExtra("appid", GlobalConfig.FWPR_APPID);
+            intent.putExtra("title", getResources().getString(R.string.ownername_text));
             startActivityForResult(intent, GlobalConfig.PERSON_REQUESTCODE);
 
 
@@ -279,6 +299,19 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
             intent.putExtra("title", getResources().getString(R.string.wd_text));
             startActivityForResult(intent, 0);
 
+        }
+    };
+
+
+    //预算明细
+    private View.OnClickListener yxmxImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(FwpaydetailsActivity.this, FctaskrelationActivity.class);
+            intent.putExtra("searchName", "PRNUM");
+            intent.putExtra("searchValue", JsonUnit.convertStrToArray(pr.getPRNUM())[0]);
+            intent.putExtra("title", getResources().getString(R.string.yxmx_text));
+            startActivityForResult(intent, 0);
         }
     };
 

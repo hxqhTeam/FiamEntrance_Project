@@ -2,7 +2,6 @@ package com.hqxh.fiamproperty.ui.adapter;
 
 import android.animation.Animator;
 import android.content.Context;
-import android.view.View;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.model.R_ZXPERSON.PERSON;
@@ -36,6 +35,7 @@ public class PersonAdapter extends BaseQuickAdapter<PERSON> {
         helper.setText(R.id.cudept_title_id, mContext.getString(R.string.mc_text));
         helper.setText(R.id.cudept_text_id, JsonUnit.convertStrToArray(item.getDISPLAYNAME())[0]);
         helper.setVisible(R.id.ks_linearLayout_id, false);
+        helper.setVisible(R.id.ks_view_id, false);
     }
 
 

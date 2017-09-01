@@ -71,6 +71,16 @@ public class HttpManager {
 
     }
 
+    /**
+     * 项目费用管理-任务单出差申请采购申请的预算明细
+     **/
+    public static String getFCTASKRELATIONURL(String wonum, String wonum1, String username, int curpage, int showcount) {
+        return "{'appid':'" + GlobalConfig.FINCNTRL_APPID + "','objectname':'" + GlobalConfig.FCTASKRELATION_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'"+wonum+"':'=" + wonum1 + "'}}";
+
+
+    }
+
+
     /*
     物资明细/整车明细
     */
@@ -234,7 +244,7 @@ public class HttpManager {
 
 
     /**
-     * 付款验收*
+     * 付款验收-搜索*
      */
     public static String getSearchPAYCHECKUrl(String appid, String search, String username, int curpage, int showcount) {
 
@@ -251,7 +261,7 @@ public class HttpManager {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYPLAN_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
 
         } else {
-            if(appid.equals(GlobalConfig.PPCHANGE_APPID)){  //子需款计划
+            if (appid.equals(GlobalConfig.PPCHANGE_APPID)) {  //子需款计划
                 return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYPLAN_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PARENT':'=" + payplannum + "'}}";
 
             }
@@ -275,7 +285,7 @@ public class HttpManager {
     /**
      * 需款项目
      */
-    public static String gePAYPLANPROJECTUrl(String appid,String payplannum, String username, int curpage, int showcount) {
+    public static String gePAYPLANPROJECTUrl(String appid, String payplannum, String username, int curpage, int showcount) {
         return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PAYPLANPROJECT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PAYPLANNUM':'=" + payplannum + "'}}";
 
     }
@@ -358,12 +368,28 @@ public class HttpManager {
      */
     public static String getCUDEPTUrl(String appid, String deptnum, String username, int curpage, int showcount) {
         if (appid.equals(GlobalConfig.USER_APPID)) {
-            return "{'appid':'" + GlobalConfig.USER_APPID + "','objectname':'" + GlobalConfig.CUDEPT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.CUDEPT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
         } else if (appid.equals(GlobalConfig.ROLE_APPID)) {
-            return "{'appid':'" + GlobalConfig.ROLE_APPID + "','objectname':'" + GlobalConfig.CUDEPT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PARENT':'=" + deptnum + "'}}";
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.CUDEPT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PARENT':'=" + deptnum + "'}}";
 
         }
-        return null;
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.CUDEPT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    }
+
+
+    /**
+     * 执行部门 /科室*
+     * GlobalConfig.USER_APPID 部门
+     * GlobalConfig.ROLE_APPID 科室
+     */
+    public static String getCUDEPTSearchUrl(String appid, String deptnum, String search,String username, int curpage, int showcount) {
+        if (appid.equals(GlobalConfig.USER_APPID)) {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.CUDEPT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'DEPTNUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+        } else if (appid.equals(GlobalConfig.ROLE_APPID)) {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.CUDEPT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'PARENT':'=" + deptnum + "'},'reporsearch':{'DEPTNUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+
+        }
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.CUDEPT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'DEPTNUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
     }
 
 
@@ -391,6 +417,19 @@ public class HttpManager {
 
         } else {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PERSON_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'CUDEPT':'=" + cudept + "','CUCREW':'=" + cucrew + "'}}";
+        }
+    }
+
+
+    /**
+     * 执行人-搜索
+     */
+    public static String getPERSONSearchUrl(String appid, String cudept, String cucrew, String search,String username, int curpage, int showcount) {
+        if (null == cudept && null == cucrew) {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PERSON_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'PERSONID':'" + search + "','DISPLAYNAME':'" + search + "'}}";
+
+        } else {
+            return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PERSON_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'CUDEPT':'=" + cudept + "','CUCREW':'=" + cucrew + "'},'reporsearch':{'PERSONID':'" + search + "','DISPLAYNAME':'" + search + "'}}";
         }
     }
 }

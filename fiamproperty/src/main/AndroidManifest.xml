@@ -326,6 +326,21 @@
             android:label="@string/search_text"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.PersonSearchActivity"
+            android:label="@string/search_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.CudeptSearchActivity"
+            android:label="@string/search_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.FctaskrelationActivity"
+            android:label="@string/yxmx_text"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
 
         <provider

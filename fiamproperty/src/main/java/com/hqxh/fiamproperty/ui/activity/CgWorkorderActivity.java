@@ -3,6 +3,9 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -81,6 +84,8 @@ public class CgWorkorderActivity extends BaseTitleActivity {
     private TextView phonenumText; //电话
 
     private ImageView kbfilelistImageView; //出国人员知识积累拟交付资料清单
+    private ImageView doclinksImageView; //附件
+    private ImageView yxmxImageView; //预算明细
     private ImageView sqjlImageView; //审批记录
 
 
@@ -156,6 +161,8 @@ public class CgWorkorderActivity extends BaseTitleActivity {
         phonenumText = (TextView) findViewById(R.id.phonenum_text_id);
 
         kbfilelistImageView = (ImageView) findViewById(R.id.kbfilelist_imageview_id);
+        doclinksImageView = (ImageView) findViewById(R.id.doclinks_imageview_id);
+        yxmxImageView = (ImageView) findViewById(R.id.yxmx_imageview_id);
         sqjlImageView = (ImageView) findViewById(R.id.sqjl_imageview_id);
 
         workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
@@ -179,17 +186,20 @@ public class CgWorkorderActivity extends BaseTitleActivity {
     private void showData() {
         if (JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0].isEmpty()) {
             wonumText.setText(JsonUnit.convertStrToArray(workorder.getWONUM())[0]);
-
         } else {
-            wonumText.setText(JsonUnit.convertStrToArray(workorder.getWONUM())[0] + "," + JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0]);
-
+            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(workorder.getWONUM())[0] + "," + JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0]);
+            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
+            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(workorder.getWONUM())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            wonumText.setText(builder);
         }
+
         if (JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0].isEmpty()) {
             projectidText.setText(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0]);
-
         } else {
-            projectidText.setText(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0]);
-
+            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0]);
+            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
+            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(workorder.getPROJECTID())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            projectidText.setText(builder);
         }
         udesttotalcostText.setText(JsonUnit.convertStrToArray(workorder.getUDESTTOTALCOST())[0]);
         statusText.setText(JsonUnit.convertStrToArray(workorder.getSTATUS())[0]);
@@ -220,7 +230,10 @@ public class CgWorkorderActivity extends BaseTitleActivity {
         lcgrymdText.setOnClickListener(ccrTextOnClickListener);
         qtxxImageView.setOnClickListener(jbxxImageViewOnClickListener);
         kbfilelistImageView.setOnClickListener(kbfilelistImageViewOnClickListener);
+        doclinksImageView.setOnClickListener(doclinksImageViewOnClickListener);
+        yxmxImageView.setOnClickListener(yxmxImageViewOnClickListener);
         sqjlImageView.setOnClickListener(sqjlImageViewOnClickListener);
+
         workflowBtn.setOnClickListener(workflowBtnOnClickListener);
 
 
@@ -282,6 +295,33 @@ public class CgWorkorderActivity extends BaseTitleActivity {
             startActivityForResult(intent, 0);
         }
     };
+
+
+    //附件
+    private View.OnClickListener doclinksImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(CgWorkorderActivity.this, DoclinksActivity.class);
+            intent.putExtra("ownertable", GlobalConfig.WORKORDER_NAME);
+            intent.putExtra("ownerid", JsonUnit.convertStrToArray(workorder.getWORKORDERID())[0]);
+            intent.putExtra("title", getResources().getString(R.string.fj_text));
+            startActivityForResult(intent, 0);
+        }
+    };
+
+    //预算明细
+    private View.OnClickListener yxmxImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(CgWorkorderActivity.this, FctaskrelationActivity.class);
+            intent.putExtra("searchName", "WONUM");
+            intent.putExtra("searchValue", JsonUnit.convertStrToArray(workorder.getWONUM())[0]);
+            intent.putExtra("title", getResources().getString(R.string.yxmx_text));
+            startActivityForResult(intent, 0);
+        }
+    };
+
+
     //审批记录
     private View.OnClickListener sqjlImageViewOnClickListener = new View.OnClickListener() {
         @Override

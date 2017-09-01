@@ -63,8 +63,6 @@ public class WpitemActivity extends BaseListActivity {
      **/
     private void getData() {
         String data = HttpManager.getWPITEMUrl(appid, wonum, AccountUtils.getpersonId(this), curpage, showcount);
-        Log.i(TAG, "data=" + data);
-        Log.i(TAG, "url=" + GlobalConfig.HTTP_URL_SEARCH);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addBodyParameter("data", data)
                 .build()
@@ -102,7 +100,7 @@ public class WpitemActivity extends BaseListActivity {
                         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                         if (wpitem == null || wpitem.isEmpty()) {
-
+                            notLinearLayout.setVisibility(View.VISIBLE);
                         } else {
                             if (appid.equals(GlobalConfig.TOLL_APPID)) {
                                 addData(wpitem);

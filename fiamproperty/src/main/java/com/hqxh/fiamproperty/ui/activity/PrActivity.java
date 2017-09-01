@@ -189,7 +189,9 @@ public class PrActivity extends BaseListActivity {
      */
     private void initAdapter(final List<PR> list) {
         prAdapter = new PrAdapter(PrActivity.this, R.layout.list_item_travel, list);
+        prAdapter.setAppid(appid);
         mRecyclerView.setAdapter(prAdapter);
+
         prAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

@@ -3,6 +3,9 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -73,6 +76,7 @@ public class WppaydetailsActivity extends BaseTitleActivity {
     private TextView udremark_text;//从事本专业岗位工作及承担项目情况
     private TextView udremarks2_text;//本专业技术现状，培训理由及目的
 
+    private ImageView yxmxImageView; //预算明细
     private ImageView spjl_text;//审批记录
 
     private Button workflowBtn;//审批按钮
@@ -131,14 +135,15 @@ public class WppaydetailsActivity extends BaseTitleActivity {
         phone_text = (TextView) findViewById(R.id.phone_text);
         uddate1_text = (TextView) findViewById(R.id.uddate1_text);
         uddate2_text = (TextView) findViewById(R.id.uddate2_text);
-        cudept_text=(TextView)findViewById(R.id.cudept_text);
-        cucrew_text=(TextView)findViewById(R.id.cucrew_text);
+        cudept_text = (TextView) findViewById(R.id.cudept_text);
+        cucrew_text = (TextView) findViewById(R.id.cucrew_text);
         udremarks4_text = (TextView) findViewById(R.id.udremarks4_text);
         // linecost_text=(TextView)findViewById(R.id.linecost_text);
         udremark_text = (TextView) findViewById(R.id.udremark_text);
         udremarks2_text = (TextView) findViewById(R.id.udremarks2_text);
         jbxxlinearlayout = (LinearLayout) findViewById(R.id.jbxx_text_id);
 
+        yxmxImageView = (ImageView) findViewById(R.id.yxmx_imageview_id);
         spjl_text = (ImageView) findViewById(R.id.spjl_text);
 
         workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
@@ -158,9 +163,23 @@ public class WppaydetailsActivity extends BaseTitleActivity {
     }
 
     private void showData() {
-        prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]+","+JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
-        if(!JsonUnit.convertStrToArray(pr.getPROJECTID())[0].isEmpty()){
-            projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]+","+JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
+
+        if (JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0].isEmpty()) {
+            prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]);
+        } else {
+            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(pr.getPRNUM())[0] + "," + JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
+            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
+            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(pr.getPRNUM())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            prnum_text.setText(builder);
+        }
+
+        if (JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0].isEmpty()) {
+            projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]);
+        } else {
+            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(pr.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
+            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
+            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(pr.getPROJECTID())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            projectid_text.setText(builder);
         }
 
         status_text.setText(JsonUnit.convertStrToArray(pr.getSTATUSDESC())[0]);
@@ -183,6 +202,7 @@ public class WppaydetailsActivity extends BaseTitleActivity {
         rotate = AnimationUtils.loadAnimation(this, R.anim.arrow_rotate);//创建动画
 
         jbxx_text.setOnClickListener(jbxx_textOnClickListener);
+        yxmxImageView.setOnClickListener(yxmxImageViewOnClickListener);
         spjl_text.setOnClickListener(sqjlImageViewOnClickListener);
         workflowBtn.setOnClickListener(workflowBtnOnClickListener);
 
@@ -200,6 +220,20 @@ public class WppaydetailsActivity extends BaseTitleActivity {
 
         }
     };
+
+
+    //预算明细
+    private View.OnClickListener yxmxImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(WppaydetailsActivity.this, FctaskrelationActivity.class);
+            intent.putExtra("searchName", "PRNUM");
+            intent.putExtra("searchValue", JsonUnit.convertStrToArray(pr.getPRNUM())[0]);
+            intent.putExtra("title", getResources().getString(R.string.yxmx_text));
+            startActivityForResult(intent, 0);
+        }
+    };
+
     /*
     审批记录
     */

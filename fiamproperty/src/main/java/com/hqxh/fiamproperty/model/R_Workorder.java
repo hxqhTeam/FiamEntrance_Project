@@ -45,13 +45,14 @@ public class R_Workorder {
         this.result = result;
     }
 
-    /**结果集
+    /**
+     * 结果集
      * curpage
      * resultlist
      * showcount
      * totalpage
      * totalresult
-     * **/
+     **/
     public static class ResultBean {
         private String curpage; //当前页
         private String showcount;//显示条数
@@ -101,79 +102,81 @@ public class R_Workorder {
         }
     }
 
-       /**国内出差申请
+    /**
+     * 国内出差申请
      * 任务单
-     *
-     * **/
-    public static class  Workorder extends Entity{
+     **/
+    public static class Workorder extends Entity {
         //国内出差申请
-        private String  UDTRV2A; //其它团组名称
-        private String  UDREMARK3;//出访国家或地区／试验项目、标准、方法及方案
-        private String  UDKSREMARK;//途经国家或地区
-        private String  RDCHEAD;//中心分管领导
-        private String  UDTRV2;//出国团组名称
-        private String  PHONENUM;//电话
-        private String  CUDEPT;//申请部门／执行部门
-        private String  CUCREW;//申请科室／执行科室
-        private String  FINCNTRLDESC;//项目名称
-        private String  UDCONTACT;//联系人及电话
-        private String  STATUS;//状态
-        private String  TEAMLEADER;//团长姓名
-        private String  UDREMARK1;//出国目的／试验目的／出差原因
-        private String  UDTARGSTARTDATE;//开始时间／建议完成时间
-        private String  UDTARGCOMPDATE;//结束时间／要求完成时间
-        private String  UDADDRESS1;//拟出访路线／目的地
-        private String  UDESTDUR3;//出访国家停留(天)
-        private String  UDQTY1;//途径国家容留(天)／样品数量/申请数量
-        private String  UDSUMMARY6;//预期成果
-        private String  UDTARGSTARTDATE2;//出国时间
-        private String  REPORTDATE;//申请日期／提单日期
-        private String  REPORTEDBY;//申请人
-        private String  UDREMARK2;//邀请接待单位／样品名称
-        private String  UDREMARK4;//出国工作任务／车辆及总成基本信息
-        private String  DESCRIPTION;//描述／名称
-        private String  WONUM;//申请单／任务单
-        private String  PROJECTID;//费用号
-        private String  UDESTTOTALCOST;//出差费用预算(人民币)／费用概算合计
-        private String  WORKTYPE;//类型
-        private String  UDTRANSPORT3;//乘坐飞机
-        private String  UDTRVCOST2;//其它费用
-        private String  UDTRVCOST1;//差旅费用
+        private String UDTRV2A; //其它团组名称
+        private String UDREMARK3;//出访国家或地区／试验项目、标准、方法及方案
+        private String UDKSREMARK;//途经国家或地区
+        private String RDCHEAD;//中心分管领导
+        private String UDTRV2;//出国团组名称
+        private String PHONENUM;//电话
+        private String CUDEPT;//申请部门／执行部门
+        private String CUCREW;//申请科室／执行科室
+        private String FINCNTRLDESC;//项目名称
+        private String UDCONTACT;//联系人及电话
+        private String STATUS;//状态
+        private String TEAMLEADER;//团长姓名
+        private String UDREMARK1;//出国目的／试验目的／出差原因
+        private String UDTARGSTARTDATE;//开始时间／建议完成时间
+        private String UDTARGCOMPDATE;//结束时间／要求完成时间
+        private String UDADDRESS1;//拟出访路线／目的地
+        private String UDESTDUR3;//出访国家停留(天)
+        private String UDQTY1;//途径国家容留(天)／样品数量/申请数量
+        private String UDSUMMARY6;//预期成果
+        private String UDTARGSTARTDATE2;//出国时间
+        private String REPORTDATE;//申请日期／提单日期
+        private String REPORTEDBY;//申请人
+        private String UDREMARK2;//邀请接待单位／样品名称
+        private String UDREMARK4;//出国工作任务／车辆及总成基本信息
+        private String DESCRIPTION;//描述／名称
+        private String WONUM;//申请单／任务单
+        private String PROJECTID;//费用号
+        private String UDESTTOTALCOST;//出差费用预算(人民币)／费用概算合计
+        private String WORKTYPE;//类型
+        private String UDTRANSPORT3;//乘坐飞机
+        private String UDTRVCOST2;//其它费用
+        private String UDTRVCOST1;//差旅费用
 
         //试验任务单
-        private String  PROJECTDESC;//项目名称
-        private String  PM;//项目经理
-        private String  UDTOTYPE2;//试验类型
-        private String  SUPERVISOR;//子项目经理
-        private String  REPORTEDBYNAME;//提单人
-        private String  REPORTEDBYPHONE;//提单人电话
-        private String  UDTOQUESTION;//问题描述
-        private String  UDTODESC;//任务单描述
-        private String  STATUSDESC;//状态
-        private String  REPORTEDBYCUDEPT;//提单部门
-        private String  REPORTEDBYCUCREW;//提单科室
-        private String  OWNER;//执行人代码／子项目负责人代码
-        private String  OWNERNAME;//执行人姓名／子项目负责人姓名
-        private String  ACTFINISH;//任务完成时间
+        private String PROJECTDESC;//项目名称
+        private String PM;//项目经理
+        private String UDTOTYPE2;//试验类型
+        private String SUPERVISOR;//子项目经理
+        private String REPORTEDBYNAME;//提单人
+        private String REPORTEDBYPHONE;//提单人电话
+        private String UDTOQUESTION;//问题描述
+        private String UDTODESC;//任务单描述
+        private String STATUSDESC;//状态
+        private String REPORTEDBYCUDEPT;//提单部门
+        private String REPORTEDBYCUCREW;//提单科室
+        private String OWNER;//执行人代码／子项目负责人代码
+        private String OWNERNAME;//执行人姓名／子项目负责人姓名
+        private String ACTFINISH;//任务完成时间
         //试制任务单
-        private String  UDPAYTHISYEAR;//本年度是否结算
-        private String  UDTOTYPE3;//试制类型
-        private String  CUQUANTITY;//试制数量
-        private String  UDSZDATE1;//任务开始时间
+        private String UDPAYTHISYEAR;//本年度是否结算
+        private String UDTOTYPE3;//试制类型
+        private String CUQUANTITY;//试制数量
+        private String UDSZDATE1;//任务开始时间
+        private String UDMEETINGNUM;//会议编号
+        private String UDMEETINGNAME;//会议名称
         //物资领料单
-        private String  STORELOC;//库房
-        private String  ESTMATCOST;//总费用
-        private String  SCHEDFINISH;//结算完成时间
+        private String STORELOC;//库房
+        private String ESTMATCOST;//总费用
+        private String SCHEDFINISH;//结算完成时间
         // 调件任务单
-        private String  UDADDITIONAL;//是否补录
+        private String UDADDITIONAL;//是否补录
 
         //燃油申请单
-        private String  UDTOOIL1;//燃油类型及标号
-        private String  CUUNIT;//单位
+        private String UDTOOIL1;//燃油类型及标号
+        private String CUUNIT;//单位
         //其它任务单
-        private String  UDTOTYPE1;//类型
-        private String  WORKORDERID;//唯一ID
-        private String  DEPTNUM;//部门编码
+        private String UDTOTYPE1;//类型
+        private String WORKORDERID;//唯一ID
+        private String DEPTNUM;//部门编码
 
 
         public String getDEPTNUM() {
@@ -616,39 +619,54 @@ public class R_Workorder {
             this.ACTFINISH = ACTFINISH;
         }
 
-           public String getUDSZDATE1() {
-               return UDSZDATE1;
-           }
+        public String getUDSZDATE1() {
+            return UDSZDATE1;
+        }
 
-           public void setUDSZDATE1(String UDSZDATE1) {
-               this.UDSZDATE1 = UDSZDATE1;
-           }
+        public void setUDSZDATE1(String UDSZDATE1) {
+            this.UDSZDATE1 = UDSZDATE1;
+        }
 
-           public String getESTMATCOST() {
-               return ESTMATCOST;
-           }
+        public String getESTMATCOST() {
+            return ESTMATCOST;
+        }
 
-           public void setESTMATCOST(String ESTMATCOST) {
-               this.ESTMATCOST = ESTMATCOST;
-           }
+        public void setESTMATCOST(String ESTMATCOST) {
+            this.ESTMATCOST = ESTMATCOST;
+        }
 
-           public String getSCHEDFINISH() {
-               return SCHEDFINISH;
-           }
+        public String getSCHEDFINISH() {
+            return SCHEDFINISH;
+        }
 
-           public void setSCHEDFINISH(String SCHEDFINISH) {
-               this.SCHEDFINISH = SCHEDFINISH;
-           }
+        public void setSCHEDFINISH(String SCHEDFINISH) {
+            this.SCHEDFINISH = SCHEDFINISH;
+        }
 
-           public String getUDADDITIONAL() {
-               return UDADDITIONAL;
-           }
+        public String getUDADDITIONAL() {
+            return UDADDITIONAL;
+        }
 
-           public void setUDADDITIONAL(String UDADDITIONAL) {
-               this.UDADDITIONAL = UDADDITIONAL;
-           }
-       }
+        public void setUDADDITIONAL(String UDADDITIONAL) {
+            this.UDADDITIONAL = UDADDITIONAL;
+        }
 
+        public String getUDMEETINGNUM() {
+            return UDMEETINGNUM;
+        }
+
+        public void setUDMEETINGNUM(String UDMEETINGNUM) {
+            this.UDMEETINGNUM = UDMEETINGNUM;
+        }
+
+        public String getUDMEETINGNAME() {
+            return UDMEETINGNAME;
+        }
+
+        public void setUDMEETINGNAME(String UDMEETINGNAME) {
+            this.UDMEETINGNAME = UDMEETINGNAME;
+        }
+    }
 
 
 }

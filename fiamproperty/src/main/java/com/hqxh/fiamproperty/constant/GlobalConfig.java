@@ -9,15 +9,15 @@ public final class GlobalConfig {
     /**
      * 服务器地址
      **/
-//    public final static String HTTP_URL="http://qmportal1.qm.cn:8090";
-    public final static String HTTP_URL = "http://10.60.12.98:9080";
+    public final static String HTTP_URL="http://qmportal1.qm.cn:8090";
+//    public final static String HTTP_URL = "http://10.60.12.98:9080";
 
     /**
      * 附件下载路劲
      **/
-    public final static String HTTP_DOCLINKS_URL = "http://10.60.12.98";
+//    public final static String HTTP_DOCLINKS_URL = "http://10.60.12.98";
 
-//    public final static String HTTP_DOCLINKS_URL = HTTP_URL+"/maximo/file";
+    public final static String HTTP_DOCLINKS_URL = HTTP_URL+"/maximo/file";
 
     /**
      * 服务器登录接口地址
@@ -76,6 +76,10 @@ public final class GlobalConfig {
     public static final String PERSONRELATION_NAME = "PERSONRELATION";
     //出国立项申请-出国人员知识积累拟交付资料清单
     public static final String KBFILELIST_NAME = "KBFILELIST";
+    //项目费用管理-任务单出差申请采购申请的预算明细
+    public static final String FINCNTRL_APPID = "FINCNTRL";
+    //项目费用管理-任务单出差申请采购申请的预算明细
+    public static final String FCTASKRELATION_NAME = "FCTASKRELATION";
     //国外立项appid
     public static final String TRAVELS_APPID = "TRAVELS";
 

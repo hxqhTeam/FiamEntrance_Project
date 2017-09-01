@@ -271,7 +271,8 @@
     <string name="udlxtype_text">立项类型</string>
     <string name="udremarka_text">立项原因</string>
     <string name="projectdes1_text">项目内容</string>
-    <string name="pr6_text">总预算   (人民币)</string>
+    <string name="pr6_text">总预算(人民币)</string>
+    <string name="wb_text">总预算(外币)</string>
     <string name="udremark6_text">提升内容</string>
     <string name="udremark5_text">适用范围</string>
     <string name="wonum_text">任务单号</string>
@@ -365,9 +366,20 @@
     <string name="zrr_text">责任人</string>
     <string name="kbfilelist_text">出国人员知识积累拟交付资料清单</string>
     <string name="xm_text">姓名</string>
+    <string name="fj_text">附件</string>
+
     <string name="zxkjh_text">子需款计划</string>
     <string name="type2_text">需款类型</string>
     <string name="vendor1_text">供应商名称</string>
     <string name="enterbyname_text">出差申请</string>
     <string name="isbopayplan1_text">借款需款</string>
+    <string name="taskid_text">任务</string>
+    <string name="tasktypedesc_text">任务类型</string>
+    <string name="fcyear_text">预算年度</string>
+    <string name="yxmx_text">预算明细</string>
+    <string name="xmys_text">项目预算</string>
+    <string name="sz_udesttotalcost_text">费用概算合计</string>
+    <string name="udmeetingnum_text">会议编号</string>
+    <string name="udmeetingname_text">会议名称</string>
+    <string name="payedcost_text">已付金额</string>
 </resources>

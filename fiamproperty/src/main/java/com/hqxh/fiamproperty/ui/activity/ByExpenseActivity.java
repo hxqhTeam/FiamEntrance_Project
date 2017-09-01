@@ -194,7 +194,10 @@ public class ByExpenseActivity extends BaseTitleActivity {
             projectidText.setText(JsonUnit.convertStrToArray(expense.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(expense.getFINCNTRLDESC())[0]);
         }
 
-        bocostText.setText(JsonUnit.convertStrToArray(expense.getBOCOST())[0]);
+        if (!JsonUnit.convertStrToArray(expense.getBOCOST())[0].equals("0.0")) {
+            bocostText.setText(JsonUnit.convertStrToArray(expense.getBOCOST())[0]);
+        }
+
         paycheckcostText.setText(JsonUnit.convertStrToArray(expense.getPAYCHECKCOST())[0]);
         enterbyText.setText(JsonUnit.convertStrToArray(expense.getENTERBY())[0]);
         departmentText.setText(JsonUnit.convertStrToArray(expense.getDEPARTMENT())[0]);

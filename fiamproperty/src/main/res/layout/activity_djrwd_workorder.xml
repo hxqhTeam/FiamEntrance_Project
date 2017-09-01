@@ -77,6 +77,41 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/background_dark_gray"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/dimens_text"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dimen_10"
+                            android:gravity="center"
+                            android:text="@string/mc_text"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimens_16sp" />
+
+
+                        <TextView
+
+                            android:id="@+id/description_text_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center_vertical"
+                            android:hint="@string/have_not_data"
+                            android:paddingLeft="@dimen/btn_top_5dp"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/line"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/background_dark_gray"
                         android:gravity="center_vertical"
@@ -84,7 +119,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udtodesc_text"
@@ -118,7 +153,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/status_text"
@@ -153,7 +188,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/projectid_text"
@@ -187,7 +222,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/projectdesc_text"
@@ -220,7 +255,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/pm_text"
@@ -254,7 +289,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/reportedbyname_text"
@@ -287,7 +322,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/cudept_text"
@@ -321,7 +356,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/cucrew_text"
@@ -354,7 +389,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/reportdate1_text"
@@ -387,7 +422,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/phonenum_text"
@@ -443,6 +478,7 @@
                 </RelativeLayout>
 
                 <View
+                    android:id="@+id/qt_view_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/line" />
@@ -463,7 +499,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udtargstartdate_text"
@@ -496,7 +532,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udtargcompdate_text"
@@ -530,7 +566,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/actfinish_text"
@@ -564,7 +600,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/js_schedfinish_text"
@@ -584,10 +620,7 @@
                             android:textSize="@dimen/dimens_16sp" />
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/line" />
+
 
                 </LinearLayout>
 
@@ -615,6 +648,38 @@
 
                     <ImageView
                         android:id="@+id/mxxx_text_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_more_horiz_black" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/xmys_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                    <ImageView
+                        android:id="@+id/xmys_imageview_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

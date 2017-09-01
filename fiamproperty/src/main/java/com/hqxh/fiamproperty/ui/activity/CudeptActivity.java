@@ -11,11 +11,10 @@ import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseListActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_CUDEPT;
-import com.hqxh.fiamproperty.model.R_CUDEPT.ResultBean;
 import com.hqxh.fiamproperty.model.R_CUDEPT.CUDEPT;
+import com.hqxh.fiamproperty.model.R_CUDEPT.ResultBean;
 import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
 import com.hqxh.fiamproperty.ui.adapter.CudeptAdapter;
-import com.hqxh.fiamproperty.ui.adapter.WfassignmentAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -33,7 +32,7 @@ import io.reactivex.schedulers.Schedulers;
  * 执行部门选择项
  **/
 public class CudeptActivity extends BaseListActivity {
-    private static final String TAG = "ActiveTaskActivity";
+    private static final String TAG = "CudeptActivity";
 
 
     private CudeptAdapter cudeptAdapter;
@@ -48,6 +47,22 @@ public class CudeptActivity extends BaseListActivity {
 
     private String deptnum;
 
+    @Override
+    protected void beforeInit() {
+        super.beforeInit();
+        if (getIntent().hasExtra("title")) {
+            title = getIntent().getExtras().getString("title");
+        }
+        if (getIntent().hasExtra("appid")) {
+            appid = getIntent().getExtras().getString("appid");
+        }
+
+        if (getIntent().hasExtra("deptnum")) {
+            deptnum = getIntent().getExtras().getString("deptnum");
+        } else {
+            deptnum = null;
+        }
+    }
 
     @Override
     protected String getSubTitle() {
@@ -63,7 +78,7 @@ public class CudeptActivity extends BaseListActivity {
      **/
     private void getData() {
         String data = HttpManager.getCUDEPTUrl(appid, deptnum, AccountUtils.getpersonId(this), curpage, showcount);
-        Log.e(TAG,"data="+data);
+        Log.e(TAG, "data=" + data);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addQueryParameter("data", data)
                 .build()
@@ -161,13 +176,7 @@ public class CudeptActivity extends BaseListActivity {
 
     @Override
     protected void fillData() {
-        title = getIntent().getExtras().getString("title");
-        appid = getIntent().getExtras().getString("appid");
-        if(getIntent().hasExtra("deptnum")) {
-            deptnum = getIntent().getExtras().getString("deptnum");
-        }else{
-            deptnum=null;
-        }
+
         initAdapter(new ArrayList<CUDEPT>());
         getData();
 
@@ -213,11 +222,20 @@ public class CudeptActivity extends BaseListActivity {
     private View.OnClickListener searchTextOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(CudeptActivity.this, SearchActivity.class);
-            intent.putExtra("appid", GlobalConfig.WFADMIN_APPID);
+            Intent intent = getIntent();
+            intent.setClass(CudeptActivity.this, CudeptSearchActivity.class);
             startActivityForResult(intent, 0);
         }
     };
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case GlobalConfig.CUDEPT_REQUESTCODE:
+                setResult(GlobalConfig.CUDEPT_REQUESTCODE, data);
+                finish();
+                break;
+        }
+    }
 }

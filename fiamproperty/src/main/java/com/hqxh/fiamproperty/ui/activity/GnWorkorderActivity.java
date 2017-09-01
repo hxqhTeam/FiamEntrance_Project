@@ -3,7 +3,9 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -66,8 +68,8 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
     private ImageView ccrText; //出差人
     private LinearLayout ccrLinearLayout;
-
-    private ImageView jbxxImageView;  //基本信息
+    private ImageView jbxxImageView;  //其它信息
+    private View qtxxView;
 
     private TextView udtrv1Text; //团队负责人
     private TextView rdcheadText; //中心分管领导
@@ -77,6 +79,8 @@ public class GnWorkorderActivity extends BaseTitleActivity {
     private TextView reportdateText; //申请日期
     private TextView phonenumText; //电话
 
+    private ImageView doclinksImageView; //附件
+    private ImageView yxmxImageView; //预算明细
     private ImageView sqjlImageView; //审批记录
 
     private Button workflowBtn; //审批
@@ -136,6 +140,7 @@ public class GnWorkorderActivity extends BaseTitleActivity {
         ccrText = (ImageView) findViewById(R.id.ccr_imageview_id);
         ccrLinearLayout = (LinearLayout) findViewById(R.id.linearLayout_id);
         jbxxImageView = (ImageView) findViewById(R.id.jbxx_kz_imageview_id);
+        qtxxView = (View) findViewById(R.id.qtxx_view_id);
 
         udtrv1Text = (TextView) findViewById(R.id.udtrv1_text_id);
         rdcheadText = (TextView) findViewById(R.id.rdchead_text_id);
@@ -145,6 +150,8 @@ public class GnWorkorderActivity extends BaseTitleActivity {
         reportdateText = (TextView) findViewById(R.id.reportdate_text_id);
         phonenumText = (TextView) findViewById(R.id.phonenum_text_id);
 
+        doclinksImageView = (ImageView) findViewById(R.id.doclinks_imageview_id);
+        yxmxImageView = (ImageView) findViewById(R.id.yxmx_imageview_id);
         sqjlImageView = (ImageView) findViewById(R.id.sqjl_imageview_id);
 
         workflowBtn = (Button) findViewById(R.id.workflow_btn_id);
@@ -167,8 +174,24 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
     //展示界面数据
     private void showData() {
-        wonumText.setText(JsonUnit.convertStrToArray(workorder.getWONUM())[0] + "," + JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0]);
-        projectidText.setText(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0]);
+
+        if (JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0].isEmpty()) {
+            wonumText.setText(JsonUnit.convertStrToArray(workorder.getWONUM())[0]);
+        } else {
+            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(workorder.getWONUM())[0] + "," + JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0]);
+            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
+            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(workorder.getWONUM())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            wonumText.setText(builder);
+        }
+
+        if (JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0].isEmpty()) {
+            projectidText.setText(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0]);
+        } else {
+            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0]);
+            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
+            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(workorder.getPROJECTID())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            projectidText.setText(builder);
+        }
         worktypeText.setText(JsonUnit.convertStrToArray(workorder.getWORKTYPE())[0]);
         statusText.setText(JsonUnit.convertStrToArray(workorder.getSTATUS())[0]);
         udtargstartdateText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(workorder.getUDTARGSTARTDATE())[0]));
@@ -203,6 +226,8 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
         ccrText.setOnClickListener(ccrTextOnClickListener);
         jbxxImageView.setOnClickListener(jbxxImageViewOnClickListener);
+        doclinksImageView.setOnClickListener(doclinksImageViewOnClickListener);
+        yxmxImageView.setOnClickListener(yxmxImageViewOnClickListener);
         sqjlImageView.setOnClickListener(sqjlImageViewOnClickListener);
 
         workflowBtn.setOnClickListener(workflowBtnOnClickListener);
@@ -231,10 +256,36 @@ public class GnWorkorderActivity extends BaseTitleActivity {
         public void onClick(View view) {
             if (startAnaim()) {
                 ccrLinearLayout.setVisibility(View.GONE);
+                qtxxView.setVisibility(View.GONE);
             } else {
                 ccrLinearLayout.setVisibility(View.VISIBLE);
+                qtxxView.setVisibility(View.VISIBLE);
             }
 
+        }
+    };
+
+
+    //附件
+    private View.OnClickListener doclinksImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(GnWorkorderActivity.this, DoclinksActivity.class);
+            intent.putExtra("ownertable", GlobalConfig.WORKORDER_NAME);
+            intent.putExtra("ownerid", JsonUnit.convertStrToArray(workorder.getWORKORDERID())[0]);
+            intent.putExtra("title", getResources().getString(R.string.fj_text));
+            startActivityForResult(intent, 0);
+        }
+    };
+    //预算明细
+    private View.OnClickListener yxmxImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(GnWorkorderActivity.this, FctaskrelationActivity.class);
+            intent.putExtra("searchName", "WONUM");
+            intent.putExtra("searchValue", JsonUnit.convertStrToArray(workorder.getWONUM())[0]);
+            intent.putExtra("title", getResources().getString(R.string.yxmx_text));
+            startActivityForResult(intent, 0);
         }
     };
 
@@ -244,7 +295,6 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
         rotate.setInterpolator(new LinearInterpolator());//设置为线性旋转
 
-        Log.e(TAG, "b=" + !rotate.getFillAfter());
         rotate.setFillAfter(!rotate.getFillAfter());//每次都取相反值，使得可以不恢复原位的旋转
 
         jbxxImageView.startAnimation(rotate);

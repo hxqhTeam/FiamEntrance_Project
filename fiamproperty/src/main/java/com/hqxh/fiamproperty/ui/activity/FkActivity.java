@@ -3,7 +3,6 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import com.hqxh.fiamproperty.R;
@@ -77,7 +76,6 @@ public class FkActivity extends BaseListActivity {
                     @Override
                     public List<PAYCHECK> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 

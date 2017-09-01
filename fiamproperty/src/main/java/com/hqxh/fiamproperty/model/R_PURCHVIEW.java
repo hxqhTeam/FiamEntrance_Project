@@ -133,6 +133,7 @@ public class R_PURCHVIEW {
         private String  UDOWNERDEPT;//责任部门
         private String  UDOWNERCREW;//责任科室
         private String  CONTRACTNUM;//合同号
+        private String  PAYEDCOST;//已付金额
 
         public String getCONTRACTID() {
             return CONTRACTID;
@@ -340,6 +341,14 @@ public class R_PURCHVIEW {
 
         public void setCONTRACTNUM(String CONTRACTNUM) {
             this.CONTRACTNUM = CONTRACTNUM;
+        }
+
+        public String getPAYEDCOST() {
+            return PAYEDCOST;
+        }
+
+        public void setPAYEDCOST(String PAYEDCOST) {
+            this.PAYEDCOST = PAYEDCOST;
         }
     }
 

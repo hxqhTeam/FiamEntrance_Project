@@ -94,7 +94,6 @@ public class PersonrelationActivity extends BaseListActivity {
                     @Override
                     public List<PERSONRELATION> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
@@ -186,7 +185,7 @@ public class PersonrelationActivity extends BaseListActivity {
      */
     private void initAdapter(final List<PERSONRELATION> list) {
         int layoutResId = 0;
-        if (appid.equals(GlobalConfig.TRAVEL_APPID)) {
+        if (appid.equals(GlobalConfig.TRAVEL_APPID) || appid.equals(GlobalConfig.TRAVELS_APPID)) {
             layoutResId = R.layout.list_item_ccr;
         } else if (appid.equals(GlobalConfig.EXPENSES_APPID)) {
             layoutResId = R.layout.list_item_cl_ccr;

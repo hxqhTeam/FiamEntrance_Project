@@ -1,27 +1,19 @@
 package com.hqxh.fiamproperty.ui.activity;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.api.HttpManager;
 import com.hqxh.fiamproperty.base.BaseListActivity;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_GRLINE;
-import com.hqxh.fiamproperty.model.R_GRLINE.ResultBean;
 import com.hqxh.fiamproperty.model.R_GRLINE.GRLINE;
-import com.hqxh.fiamproperty.ui.adapter.BaseQuickAdapter;
-import com.hqxh.fiamproperty.ui.adapter.WfassignmentAdapter;
+import com.hqxh.fiamproperty.model.R_GRLINE.ResultBean;
 import com.hqxh.fiamproperty.ui.adapter.WzmxAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
-import com.hqxh.fiamproperty.unit.JsonUnit;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +69,8 @@ public class WzmxListActivity extends BaseListActivity {
      **/
     private void getData() {
         String data = HttpManager.getGRLINEUrl(appid, AccountUtils.getpersonId(this), grnum, curpage, showcount);
+        Log.e(TAG, "data=" + data);
+
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addQueryParameter("data", data)
                 .build()
@@ -190,7 +184,7 @@ public class WzmxListActivity extends BaseListActivity {
      */
     private void initAdapter(final List<GRLINE> list) {
         wzmxadapter = new WzmxAdapter(WzmxListActivity.this, R.layout.list_item_wzmx, list);
-
+        wzmxadapter.setAppid(appid);
         mRecyclerView.setAdapter(wzmxadapter);
     }
 

@@ -2,7 +2,6 @@ package com.hqxh.fiamproperty.ui.adapter;
 
 import android.animation.Animator;
 import android.content.Context;
-import android.util.Log;
 
 import com.hqxh.fiamproperty.R;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
@@ -34,8 +33,7 @@ public class CcrAdapter extends BaseQuickAdapter<PERSONRELATION> {
 
     @Override
     protected void convert(BaseViewHolder helper, PERSONRELATION item) {
-        Log.e(TAG, "appid=" + appid);
-        if (appid.equals(GlobalConfig.TRAVEL_APPID)) {
+        if (appid.equals(GlobalConfig.TRAVEL_APPID)||appid.equals(GlobalConfig.TRAVELS_APPID)) {
             helper.setText(R.id.displayname_text_id, JsonUnit.convertStrToArray(item.getDISPLAYNAME())[0] + "," + JsonUnit.convertStrToArray(item.getTITLE())[0]);
             helper.setText(R.id.cudept_text_id, JsonUnit.convertStrToArray(item.getCUDEPT())[0]);
             helper.setText(R.id.cucrew_text_id, JsonUnit.convertStrToArray(item.getCUCREW())[0]);

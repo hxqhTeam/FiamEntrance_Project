@@ -267,6 +267,7 @@
                             android:textSize="@dimen/dimens_16sp" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -353,8 +354,8 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="@dimen/dimen_10"
-                        android:text="@string/jbxx_text"
                         android:gravity="center"
+                        android:text="@string/jbxx_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
 
@@ -405,13 +406,11 @@
                             android:background="@color/white"
                             android:gravity="center_vertical"
                             android:hint="@string/have_not_data"
-
+                            android:padding="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
 
                     </LinearLayout>
-
-
 
 
                     <View
@@ -513,6 +512,7 @@
                             android:textSize="@dimen/dimens_16sp" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -578,6 +578,7 @@
                             android:textSize="@dimen/dimens_16sp" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -610,10 +611,6 @@
                             android:textSize="@dimen/dimens_16sp" />
 
                     </LinearLayout>
-
-
-
-
 
 
                 </LinearLayout>
@@ -660,6 +657,42 @@
                     android:layout_height="wrap_content"
                     android:background="@mipmap/line"></View>
 
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/dimen_10"
+                        android:gravity="center"
+                        android:text="@string/yxmx_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                    <ImageView
+                        android:id="@+id/yxmx_imageview_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/btn_top_5dp"
+                        android:src="@drawable/ic_more_horiz_black" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line"></View>
+
                 <RelativeLayout
 
                     android:layout_width="match_parent"
@@ -689,11 +722,6 @@
                         android:src="@drawable/ic_more_horiz_black" />
 
                 </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/line"></View>
 
 
             </LinearLayout>

@@ -79,7 +79,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/type_text"
@@ -112,7 +112,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/status_text"
@@ -146,7 +146,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/pr6_text"
@@ -179,7 +179,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/rwd_text"
@@ -212,7 +212,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/projectid_text"
@@ -245,7 +245,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/wz_udremark1_text"
@@ -323,7 +323,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/wz_uddate1_text"
@@ -356,7 +356,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/uddate3_text"
@@ -389,7 +389,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/udtargcompdate_text"
@@ -422,7 +422,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/pm_text"
@@ -455,7 +455,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/rdchead_text"
@@ -488,7 +488,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/newvendor_text"
@@ -521,7 +521,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/contact_text"
@@ -555,7 +555,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/sqr_text"
@@ -588,7 +588,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/cudept_text"
@@ -621,7 +621,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/cucrew_text"
@@ -654,7 +654,7 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
                             android:text="@string/reportdate_text"
@@ -687,10 +687,10 @@
 
                         <TextView
                             android:layout_width="@dimen/dimens_text"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_margin="@dimen/dimen_10"
                             android:gravity="center"
-                            android:text="@string/reqbyphone_text"
+                            android:text="@string/phonenum_text"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimens_16sp" />
 
@@ -760,6 +760,38 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
+                        android:text="@string/yxmx_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_16sp" />
+
+                    <ImageView
+                        android:id="@+id/yxmx_imageview_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_more_horiz_black" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_dark_gray"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
                         android:text="@string/spjl_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimens_16sp" />
@@ -771,7 +803,6 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:src="@drawable/ic_more_horiz_black" />
-
                 </RelativeLayout>
 
 
