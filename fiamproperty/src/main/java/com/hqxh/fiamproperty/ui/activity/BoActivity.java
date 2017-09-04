@@ -42,7 +42,6 @@ import io.reactivex.schedulers.Schedulers;
  * 报销单详情
  **/
 public class BoActivity extends BaseTitleActivity {
-
     private static final String TAG = "BoActivity";
 
     private ScrollView scrollView;

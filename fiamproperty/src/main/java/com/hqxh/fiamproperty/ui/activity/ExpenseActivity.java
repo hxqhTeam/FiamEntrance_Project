@@ -41,7 +41,6 @@ import io.reactivex.schedulers.Schedulers;
  * 差旅报销明细
  **/
 public class ExpenseActivity extends BaseTitleActivity {
-
     private static final String TAG = "ExpenseActivity";
 
     private ScrollView scrollView;
