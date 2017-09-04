@@ -266,7 +266,12 @@ public class Ccsq_SearchActivity extends BaseActivity implements PullLoadMoreRec
         traveladapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(Ccsq_SearchActivity.this, GnWorkorderActivity.class);
+                Intent intent = null;
+                if (appid.equals(GlobalConfig.TRAVEL_APPID)) {//国内立项
+                    intent = new Intent(Ccsq_SearchActivity.this, GnWorkorderActivity.class);
+                } else if (appid.equals(GlobalConfig.TRAVELS_APPID)) {//国外立项
+                    intent = new Intent(Ccsq_SearchActivity.this, CgWorkorderActivity.class);
+                }
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("workorder", (Serializable) traveladapter.getData().get(position));
                 intent.putExtras(bundle);

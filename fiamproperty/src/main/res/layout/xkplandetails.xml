@@ -63,7 +63,6 @@
                             android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
-                            android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -97,7 +96,6 @@
                             android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
-                            android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -130,7 +128,6 @@
                             android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
-                            android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -164,7 +161,6 @@
                             android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
-                            android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -197,7 +193,6 @@
                             android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
-                            android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -231,7 +226,6 @@
                             android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
-                            android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -266,7 +260,6 @@
                         android:layout_height="match_parent"
                         android:background="@color/white"
                         android:gravity="center_vertical"
-                        android:hint="暂无数据"
                         android:padding="@dimen/btn_top_5dp"
                         android:textColor="@color/light_black"
                         android:textSize="@dimen/dimens_16sp" />
@@ -301,7 +294,6 @@
                         android:layout_height="match_parent"
                         android:background="@color/white"
                         android:gravity="center_vertical"
-                        android:hint="暂无数据"
                         android:padding="@dimen/btn_top_5dp"
                         android:textColor="@color/light_black"
                         android:textSize="@dimen/dimens_16sp" />
@@ -335,7 +327,6 @@
                         android:layout_height="match_parent"
                         android:background="@color/white"
                         android:gravity="center_vertical"
-                        android:hint="暂无数据"
                         android:padding="@dimen/btn_top_5dp"
                         android:textColor="@color/light_black"
                         android:textSize="@dimen/dimens_16sp" />
@@ -412,7 +403,6 @@
                             android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
-                            android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -485,7 +475,6 @@
                             android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
-                            android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -518,7 +507,6 @@
                             android:layout_height="match_parent"
                             android:background="@color/white"
                             android:gravity="center_vertical"
-                            android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16sp" />
@@ -549,7 +537,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
-                            android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:gravity="center_vertical"
                             android:textColor="@color/light_black"
@@ -582,7 +569,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
-                            android:hint="暂无数据"
                             android:padding="@dimen/btn_top_5dp"
                             android:gravity="center_vertical"
                             android:textColor="@color/light_black"

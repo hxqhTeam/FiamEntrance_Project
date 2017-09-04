@@ -119,7 +119,16 @@ public class R_PRLINE {
         private String UDMODEL;//图号
         private String UDASSIGNER;//执行人
         private String ASSIGNERPERSON;//执行人名称
+        private String UNITCOST;//含税单价
 
+
+        public String getUNITCOST() {
+            return UNITCOST;
+        }
+
+        public void setUNITCOST(String UNITCOST) {
+            this.UNITCOST = UNITCOST;
+        }
 
         public String getLINECOST() {
             return LINECOST;

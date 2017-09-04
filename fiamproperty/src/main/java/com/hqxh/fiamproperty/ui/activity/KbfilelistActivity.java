@@ -170,6 +170,7 @@ public class KbfilelistActivity extends BaseListActivity {
 
     @Override
     protected void setOnClick() {
+        searchText.setVisibility(View.GONE);
     }
 
 

@@ -3,9 +3,6 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -54,7 +51,9 @@ public class GnWorkorderActivity extends BaseTitleActivity {
      * 信息展示
      **/
     private TextView wonumText; //申请单
+    private TextView descriptionText; //描述
     private TextView projectidText; //费用号
+    private TextView fincntrldescText; //项目名称
     private TextView worktypeText; //类型
     private TextView statusText; //状态
     private TextView udtargstartdateText; //开始时间
@@ -125,7 +124,9 @@ public class GnWorkorderActivity extends BaseTitleActivity {
     protected void initView(Bundle savedInstanceState) {
         scrollView = (ScrollView) findViewById(R.id.scrollView_id);
         wonumText = (TextView) findViewById(R.id.requireplannum_text_id);
+        descriptionText = (TextView) findViewById(R.id.description_text_id);
         projectidText = (TextView) findViewById(R.id.projectid_text_id);
+        fincntrldescText = (TextView) findViewById(R.id.fincntrldesc_text_id);
         worktypeText = (TextView) findViewById(R.id.worktype_text_id);
         statusText = (TextView) findViewById(R.id.status_text_id);
         udtargstartdateText = (TextView) findViewById(R.id.udtargstartdate_text_id);
@@ -174,24 +175,10 @@ public class GnWorkorderActivity extends BaseTitleActivity {
 
     //展示界面数据
     private void showData() {
-
-        if (JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0].isEmpty()) {
-            wonumText.setText(JsonUnit.convertStrToArray(workorder.getWONUM())[0]);
-        } else {
-            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(workorder.getWONUM())[0] + "," + JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0]);
-            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
-            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(workorder.getWONUM())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            wonumText.setText(builder);
-        }
-
-        if (JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0].isEmpty()) {
-            projectidText.setText(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0]);
-        } else {
-            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0]);
-            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
-            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(workorder.getPROJECTID())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            projectidText.setText(builder);
-        }
+        wonumText.setText(JsonUnit.convertStrToArray(workorder.getWONUM())[0]);
+        descriptionText.setText(JsonUnit.convertStrToArray(workorder.getDESCRIPTION())[0]);
+        projectidText.setText(JsonUnit.convertStrToArray(workorder.getPROJECTID())[0]);
+        fincntrldescText.setText(JsonUnit.convertStrToArray(workorder.getFINCNTRLDESC())[0]);
         worktypeText.setText(JsonUnit.convertStrToArray(workorder.getWORKTYPE())[0]);
         statusText.setText(JsonUnit.convertStrToArray(workorder.getSTATUS())[0]);
         udtargstartdateText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(workorder.getUDTARGSTARTDATE())[0]));

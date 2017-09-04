@@ -223,7 +223,7 @@ public class JsonUnit {
         try {
             jswo.put("PRID", prid);//唯一列
             jswo.put("RDCHEAD", rdchead); //中心分管领导
-            if (!udassigner.isEmpty()) {
+            if (null != udassigner) {
                 jswo.put("UDASSIGNER", udassigner); //执行人代码
             }
 
@@ -320,11 +320,14 @@ public class JsonUnit {
     /**
      * 转换斜杠
      **/
+
+    //http://mobile.faw.com.cn:8091/maximo/file/app/ibm/doclinks/attach2017/1503035302926.docx
     public static String getSlash(String str) {
-        String qzurl = "C:\\doclinks";
+//        String qzurl = "C:\\doclinks";
+        String qzurl = "/app/ibm/doclinks";
         if (!str.isEmpty()) {
             str = str.replace(qzurl, "");
-            str = str.replace("\\", "/");
+//            str = str.replace("\\", "/");
         }
 
 
@@ -336,9 +339,10 @@ public class JsonUnit {
      **/
     //http://10.60.12.98/attach2017/1503304774234.xlsx
     public static String getFile(String str) {
-        String qzurl = "C:\\doclinks";
+//        String qzurl = "C:\\doclinks";
+        String qzurl = "/app/ibm/doclinks/attach2017";
         if (!str.isEmpty()) {
-            int index = str.lastIndexOf("\\");
+            int index = str.lastIndexOf("/");
             str = str.substring(index + 1, str.length());
         }
 

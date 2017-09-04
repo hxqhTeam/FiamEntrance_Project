@@ -1,7 +1,6 @@
 package com.hqxh.fiamproperty.ui.activity;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import com.hqxh.fiamproperty.R;
@@ -57,7 +56,6 @@ public class PrlineActivity extends BaseListActivity {
     @Override
     protected String getSubTitle() {
 
-
         return getResources().getString(R.string.sqmx_text);
 
     }
@@ -68,7 +66,6 @@ public class PrlineActivity extends BaseListActivity {
      **/
     private void getData() {
         String data = HttpManager.getPRLINEUrl(appid, prnum, AccountUtils.getpersonId(this), curpage, showcount);
-        Log.e(TAG, "data=" + data);
         Rx2AndroidNetworking.post(GlobalConfig.HTTP_URL_SEARCH)
                 .addBodyParameter("data", data)
                 .build()
@@ -183,6 +180,7 @@ public class PrlineActivity extends BaseListActivity {
      */
     private void initAdapter(final List<PRLINE> list) {
         prlineadapter = new PrlineAdapter(PrlineActivity.this, R.layout.list_item_sz_sqmx, list);
+        prlineadapter.setAppid(appid);
         mRecyclerView.setAdapter(prlineadapter);
     }
 

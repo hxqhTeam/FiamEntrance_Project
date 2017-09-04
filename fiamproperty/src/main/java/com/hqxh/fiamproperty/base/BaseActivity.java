@@ -118,12 +118,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     public static void showMiddleToast(Context cxt, String msg) {
-        Toast toast = Toast.makeText(cxt, msg, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(cxt, msg, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
     public static void showMiddleToast1(Context cxt, String msg) {
-        Toast toast = Toast.makeText(cxt, msg, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(cxt, msg, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }

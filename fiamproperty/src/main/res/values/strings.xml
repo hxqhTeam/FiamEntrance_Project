@@ -189,7 +189,7 @@
     <string name="createdate_text">创建日期</string>
     <string name="yl_text">查看</string>
     <string name="htxq_text">合同详情</string>
-    <string name="conpaylinenum_text">第几次</string>
+    <string name="conpaylinenum_text">付款阶段</string>
     <string name="term_text">付款条件</string>
     <string name="duedate_text">付款日期</string>
     <string name="linecost_text">付款金额</string>
@@ -383,4 +383,8 @@
     <string name="udmeetingname_text">会议名称</string>
     <string name="payedcost_text">已付金额</string>
     <string name="contractname_text">合同名称</string>
+    <string name="hs_unitcost2_text">含税单价</string>
+    <string name="hs_linecost2_text">含税总价</string>
+    <string name="fyzj_text">费用总计</string>
+    <string name="fjf_text">附加费</string>
 </resources>

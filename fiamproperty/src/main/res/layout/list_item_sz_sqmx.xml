@@ -136,7 +136,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/unitcost_text"
+                android:text="@string/hs_unitcost2_text"
                 android:textColor="@color/grid_line"
                 android:textSize="@dimen/dimens_14sp" />
 
@@ -153,12 +153,61 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/linecost_text1"
+                android:text="@string/hs_linecost2_text"
                 android:textColor="@color/grid_line"
                 android:textSize="@dimen/dimens_14sp" />
 
             <TextView
                 android:id="@+id/linecost_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/btn_top_5dp"
+                android:layout_weight="1"
+                android:hint="@string/have_notdata_hint"
+                android:textColor="@color/grid_line"
+                android:textSize="@dimen/dimens_14sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_id"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_line"
+            android:background="@mipmap/line"></View>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/btn_top_5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fyzj_text"
+                android:textColor="@color/grid_line"
+                android:textSize="@dimen/dimens_14sp" />
+
+            <TextView
+                android:id="@+id/fy_linecost_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/btn_top_5dp"
+                android:layout_weight="1"
+                android:hint="@string/have_notdata_hint"
+                android:textColor="@color/grid_line"
+                android:textSize="@dimen/dimens_14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fjf_text"
+                android:textColor="@color/grid_line"
+                android:textSize="@dimen/dimens_14sp" />
+
+            <TextView
+                android:id="@+id/unitcost1_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"

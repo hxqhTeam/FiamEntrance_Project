@@ -3,7 +3,6 @@ package com.hqxh.fiamproperty.ui.adapter;
 import android.animation.Animator;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.hqxh.fiamproperty.R;
@@ -11,8 +10,6 @@ import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_WPITEM.WPITEM;
 import com.hqxh.fiamproperty.ui.widget.BaseViewHolder;
 import com.hqxh.fiamproperty.unit.JsonUnit;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -37,8 +34,6 @@ public class DjWpitemAdapter extends BaseQuickAdapter<WPITEM> {
     @Override
     protected void convert(BaseViewHolder helper, WPITEM item) {
 
-        Log.e(TAG, "执行人编码＝" + JsonUnit.convertStrToArray(item.getOWNER())[1]);
-        Log.e(TAG, "执行人＝" + JsonUnit.convertStrToArray(item.getOWNERNAME())[1]);
         helper.setText(R.id.description_text_id, JsonUnit.convertStrToArray(item.getDESCRIPTION())[0]);
         helper.setText(R.id.wpt5_text_id, JsonUnit.convertStrToArray(item.getWPT5())[0]);
         helper.setText(R.id.qty_text_id, JsonUnit.convertStrToArray(item.getITEMQTY())[0]);

@@ -176,7 +176,7 @@ public class PersonrelationActivity extends BaseListActivity {
 
     @Override
     protected void setOnClick() {
-
+        searchText.setVisibility(View.GONE);
     }
 
 

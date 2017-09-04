@@ -216,8 +216,12 @@ public class DoclinksActivity extends BaseListActivity {
     /**
      * 文件下载
      **/
+
+    //http://10.60.15.130/attach2015/1433720355791.pdf
+
+    // http://mobile.faw.com.cn:8091/maximo/file/attach2017/1503645232998.pdf
     private void uploadFile(String url, final String dirPath, final String fileName) {
-        Log.e(TAG, "文件下载地址" + url);
+        Log.e(TAG, "文件下载地址" + url + ",dirPath=" + dirPath + ",fileName=" + fileName);
         AndroidNetworking.download(url, Utils.getFilePath(dirPath), fileName)
                 .build()
                 .setDownloadProgressListener(new DownloadProgressListener() {
@@ -238,6 +242,7 @@ public class DoclinksActivity extends BaseListActivity {
                     @Override
                     public void onError(ANError error) {
                         // handle error
+                        showMiddleToast1(DoclinksActivity.this, "文件不存在");
                         Log.e(TAG, "下载失败" + error.getMessage());
                     }
                 });
