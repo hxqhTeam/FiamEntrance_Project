@@ -10,15 +10,15 @@ public final class GlobalConfig {
      * 服务器地址
      **/
 //    public final static String HTTP_URL="http://qmportal1.qm.cn:8090"; //外网测试
-    public final static String HTTP_URL = "http://mobile.faw.com.cn:8091"; //外网正式
-//    public final static String HTTP_URL = "http://10.60.12.98:9080";
+   //public final static String HTTP_URL = "http://mobile.faw.com.cn:8091"; //外网正式
+   public final static String HTTP_URL = "http://10.60.12.98:9080";//内网
 
     /**
      * 附件下载路劲
      **/
 //    public final static String HTTP_DOCLINKS_URL = "http://10.60.12.98";
 
-    public final static String HTTP_DOCLINKS_URL = HTTP_URL + "/maximo/file";
+    public final static String HTTP_DOCLINKS_URL = HTTP_URL+"/maximo/file";
 
     /**
      * 服务器登录接口地址
