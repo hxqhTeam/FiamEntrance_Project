@@ -64,7 +64,7 @@ public class BoActivity extends BaseTitleActivity {
     private ImageView qtxxImageView;  //其它信息
     private LinearLayout qtxxLinearLayout;  //其它信息
     private View qtxxView;  //其它信息
-
+    private TextView contractname_text;//合同名称
     private TextView contractnumText; //合同
     private TextView prnumText; //采购申请
     private TextView projectidText; //费用号
@@ -127,7 +127,7 @@ public class BoActivity extends BaseTitleActivity {
         departmentText = (TextView) findViewById(R.id.department_text_id);
         crewText = (TextView) findViewById(R.id.cucrew_text_id);
         enterdateText = (TextView) findViewById(R.id.enterdate_text_id);
-
+        contractname_text=(TextView)findViewById(R.id.contractname_text);
         qtxxImageView = (ImageView) findViewById(R.id.jbxx_kz_imageview_id);
         qtxxLinearLayout = (LinearLayout) findViewById(R.id.linearLayout_id);
         qtxxView = (View) findViewById(R.id.jbxx_view_id);
@@ -174,6 +174,7 @@ public class BoActivity extends BaseTitleActivity {
         enterdateText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(bo.getENTERDATE())[0]));
 
         contractnumText.setText(JsonUnit.convertStrToArray(bo.getCONTRACTNUM())[0]);
+        contractname_text.setText(JsonUnit.convertStrToArray(bo.getCONTRACTDESCR())[0]);
         if (!JsonUnit.convertStrToArray(bo.getPRNUM())[0].isEmpty()) {
             prnumText.setText(JsonUnit.convertStrToArray(bo.getPRNUM())[0] + "," + JsonUnit.convertStrToArray(bo.getPRDESC())[0]);
 

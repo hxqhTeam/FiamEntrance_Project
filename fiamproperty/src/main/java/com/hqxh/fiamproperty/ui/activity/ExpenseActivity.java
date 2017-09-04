@@ -177,7 +177,7 @@ public class ExpenseActivity extends BaseTitleActivity {
         crewText.setText(JsonUnit.convertStrToArray(expense.getCREW())[0]);
         actstartText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(expense.getACTSTART())[0]));
         actfinishText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(expense.getACTFINISH())[0]));
-        actdaysText.setText(JsonUnit.strToDateString(JsonUnit.convertStrToArray(expense.getACTDAYS())[0]));
+        actdaysText.setText(JsonUnit.convertStrToArray(expense.getACTDAYS())[0]);
 
         rotate = AnimationUtils.loadAnimation(this, R.anim.arrow_rotate);//创建动画
 
