@@ -731,7 +731,8 @@
                     android:id="@+id/mx_view_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/line" />
+                    android:background="@mipmap/line"
+                    android:visibility="gone" />
 
                 <RelativeLayout
                     android:id="@+id/mxxx_relativelayout_id"
@@ -761,8 +762,6 @@
                         android:src="@drawable/ic_more_horiz_black" />
 
                 </RelativeLayout>
-
-
 
 
                 <View

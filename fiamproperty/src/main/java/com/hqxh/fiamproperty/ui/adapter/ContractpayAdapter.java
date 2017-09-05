@@ -35,7 +35,12 @@ public class ContractpayAdapter extends BaseQuickAdapter<CONTRACTPAY> {
         helper.setText(R.id.duedate_text_id, JsonUnit.strToDateString(JsonUnit.convertStrToArray(item.getDUEDATE())[0]));
         helper.setText(R.id.linecost_text_id, JsonUnit.convertStrToArray(item.getLINECOST())[0]);
         helper.setText(R.id.paymentpercent_text_id, JsonUnit.convertStrToArray(item.getPAYMENTPERCENT())[0]);
-        helper.setText(R.id.isadvance_text_id, JsonUnit.convertStrToArray(item.getISADVANCE())[0]);
+        if (JsonUnit.convertStrToArray(item.getISADVANCE())[0].equals("0")) {
+            helper.setChecked(R.id.isadvance_text_id, false);
+        } else {
+            helper.setChecked(R.id.isadvance_text_id, true);
+        }
+
     }
 
 

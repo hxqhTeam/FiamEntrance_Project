@@ -120,8 +120,8 @@ public class JsonUnit {
             for (int i = 0; i < wpitems.size(); i++) {
                 JSONObject jsline = new JSONObject();
                 WPITEM wpitem = wpitems.get(i);
-                jsline.put("WPITEMID", wpitem.getWPITEMID());
-                jsline.put("OWNER", wpitem.getOWNER());//执行人
+                jsline.put("WPITEMID", JsonUnit.convertStrToArray(wpitem.getWPITEMID())[0]);
+                jsline.put("OWNER", JsonUnit.convertStrToArray(wpitem.getOWNER())[0]);//执行人
                 jaline.put(jsline);
             }
             jsrec.put("WPITEM", jaline.toString());
@@ -226,7 +226,6 @@ public class JsonUnit {
             if (null != udassigner) {
                 jswo.put("UDASSIGNER", udassigner); //执行人代码
             }
-
 
 
             jsrec.put("PR", jswo.toString());

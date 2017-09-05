@@ -10,15 +10,15 @@ public final class GlobalConfig {
      * 服务器地址
      **/
 //    public final static String HTTP_URL="http://qmportal1.qm.cn:8090"; //外网测试
-   //public final static String HTTP_URL = "http://mobile.faw.com.cn:8091"; //外网正式
-   public final static String HTTP_URL = "http://10.60.12.98:9080";//内网
+//    public final static String HTTP_URL = "http://mobile.faw.com.cn:8091"; //外网正式
+    public final static String HTTP_URL = "http://10.60.12.98:9080";//内网
 
     /**
-     * 附件下载路劲
+     * 附件下载路径
      **/
 //    public final static String HTTP_DOCLINKS_URL = "http://10.60.12.98";
 
-    public final static String HTTP_DOCLINKS_URL = HTTP_URL+"/maximo/file";
+    public final static String HTTP_DOCLINKS_URL = HTTP_URL + "/maximo/file";
 
     /**
      * 服务器登录接口地址
@@ -235,6 +235,14 @@ public final class GlobalConfig {
     public static final int PERSON_REQUESTCODE = 1002;//执行人请求码
 
     public static final int RDCHEAD_REQUESTCODE = 1003;//中心分管领导请求码
+
+    public static final int DJRWD_REQUESTCODE = 1004;//调件任务码执行人请求码
+
+    /**
+     * 返回码
+     **/
+
+    public static final int DJRWD_RESULTCODE = 1104;//调件任务码执行人返回码
 
 
     //字段操作标识

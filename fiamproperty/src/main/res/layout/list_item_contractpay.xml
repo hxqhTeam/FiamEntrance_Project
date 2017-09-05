@@ -39,10 +39,12 @@
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_line"
             android:background="@mipmap/line"></View>
+
         <LinearLayout
             android:id="@+id/bm_linearLayout_id"
             android:layout_width="match_parent"
@@ -67,10 +69,12 @@
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_line"
             android:background="@mipmap/line"></View>
+
         <LinearLayout
             android:id="@+id/ks_linearLayout_id"
             android:layout_width="match_parent"
@@ -116,10 +120,12 @@
                 android:textSize="@dimen/dimens_16sp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_line"
             android:background="@mipmap/line"></View>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -153,14 +159,14 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimens_16sp" />
 
-            <TextView
+            <CheckBox
                 android:id="@+id/isadvance_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
                 android:layout_weight="1"
-                android:hint="@string/have_notdata_hint"
-                android:textSize="@dimen/dimens_16sp" />
+                android:button="@drawable/checkbox_bj"
+                android:clickable="false" />
 
         </LinearLayout>
 

@@ -3,9 +3,6 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -51,8 +48,10 @@ public class WppaydetailsActivity extends BaseTitleActivity {
     private ScrollView scrollView;
     /*  展示*/
     private TextView prnum_text;//申请单
+    private TextView description_text;//名称
 
     private TextView projectid_text;//费用号
+    private TextView projectdesc_text;//项目名称
     private TextView status_text;//状态
     private TextView udpcowner_text;//参加人
 
@@ -62,6 +61,7 @@ public class WppaydetailsActivity extends BaseTitleActivity {
 
     private ImageView jbxx_text;//其它信息
     private LinearLayout jbxxlinearlayout;
+    private View qtView;
 
     private TextView sqr_text;//申请人
     private TextView reportdate_text;//申请日期
@@ -123,12 +123,15 @@ public class WppaydetailsActivity extends BaseTitleActivity {
     protected void initView(Bundle savedInstanceState) {
         scrollView = (ScrollView) findViewById(R.id.scrollView_id);
         prnum_text = (TextView) findViewById(R.id.prnum_text);
+        description_text = (TextView) findViewById(R.id.description_text_id);
         projectid_text = (TextView) findViewById(R.id.projectid_text);
+        projectdesc_text = (TextView) findViewById(R.id.projectdesc_text_id);
         status_text = (TextView) findViewById(R.id.status_text);
 
         udpcowner_text = (TextView) findViewById(R.id.udpcowner_text);
         udremarks_text = (TextView) findViewById(R.id.udremarks_text);
         udremarks1_text = (TextView) findViewById(R.id.udremarks1_text);
+
         jbxx_text = (ImageView) findViewById(R.id.jbxx_text);
         sqr_text = (TextView) findViewById(R.id.sqr_text);
         reportdate_text = (TextView) findViewById(R.id.reportdate_text);
@@ -141,7 +144,9 @@ public class WppaydetailsActivity extends BaseTitleActivity {
         // linecost_text=(TextView)findViewById(R.id.linecost_text);
         udremark_text = (TextView) findViewById(R.id.udremark_text);
         udremarks2_text = (TextView) findViewById(R.id.udremarks2_text);
+
         jbxxlinearlayout = (LinearLayout) findViewById(R.id.jbxx_text_id);
+        qtView = (View) findViewById(R.id.qt_view_id);
 
         yxmxImageView = (ImageView) findViewById(R.id.yxmx_imageview_id);
         spjl_text = (ImageView) findViewById(R.id.spjl_text);
@@ -164,24 +169,10 @@ public class WppaydetailsActivity extends BaseTitleActivity {
 
     private void showData() {
 
-        if (JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0].isEmpty()) {
-            prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]);
-        } else {
-            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(pr.getPRNUM())[0] + "," + JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
-            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
-            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(pr.getPRNUM())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            prnum_text.setText(builder);
-        }
-
-        if (JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0].isEmpty()) {
-            projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]);
-        } else {
-            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(pr.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
-            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
-            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(pr.getPROJECTID())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            projectid_text.setText(builder);
-        }
-
+        prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]);
+        description_text.setText(JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
+        projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]);
+        projectdesc_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
         status_text.setText(JsonUnit.convertStrToArray(pr.getSTATUSDESC())[0]);
         udpcowner_text.setText(JsonUnit.convertStrToArray(pr.getPCOWNER())[0]);
         udremarks_text.setText(JsonUnit.convertStrToArray(pr.getUDREMARK2())[0]);
@@ -214,8 +205,10 @@ public class WppaydetailsActivity extends BaseTitleActivity {
         public void onClick(View v) {
             if (startAnaim()) {
                 jbxxlinearlayout.setVisibility(View.GONE);
+                qtView.setVisibility(View.GONE);
             } else {
                 jbxxlinearlayout.setVisibility(View.VISIBLE);
+                qtView.setVisibility(View.VISIBLE);
             }
 
         }

@@ -259,6 +259,7 @@ public class Pr_SearchActivity extends BaseActivity implements PullLoadMoreRecyc
      */
     private void initAdapter(final List<PR> list) {
         prAdapter = new PrAdapter(Pr_SearchActivity.this, R.layout.list_item_travel, list);
+        prAdapter.setAppid(appid);
         mRecyclerView.setAdapter(prAdapter);
         prAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override

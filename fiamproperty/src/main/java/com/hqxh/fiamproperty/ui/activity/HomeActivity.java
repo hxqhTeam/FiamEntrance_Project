@@ -89,7 +89,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_home1;
+        return R.layout.activity_main_home;
 
     }
 
@@ -103,11 +103,10 @@ public class HomeActivity extends BaseActivity {
 //            showMiddleToast(this, "无法识别身份");
 //            finish();
 //        }
+//        LoginAndCount();
 
 //        Login();
         getData();
-
-//        LoginAndCount();
     }
 
     @Override
@@ -115,7 +114,7 @@ public class HomeActivity extends BaseActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         titleTextView = (TextView) findViewById(R.id.title_text);
 
-        dbBadgeButton = (TextView) findViewById(R.id.db_task_id);
+        dbBadgeButton = (TextView) findViewById(R.id.db_task_text_id);
         badgeText = (MaterialBadgeTextView) findViewById(R.id.badge_text_id);
         ybBadgeButton = (TextView) findViewById(R.id.yb_task_id);
         ccsqBadgeButton = (TextView) findViewById(R.id.ccsq_text_id);
@@ -179,7 +178,7 @@ public class HomeActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = null;
             int i = view.getId();
-            if (i == R.id.db_task_id) {
+            if (i == R.id.db_task_text_id) {
                 intent = new Intent(HomeActivity.this, ActiveTaskActivity.class);
                 intent.putExtra("assignstatus", "ACTIVE");
                 intent.putExtra("mark", DB_CODE);
@@ -414,12 +413,10 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-
     //重新启动
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.e(TAG, "onRestart");
         getData();
     }
 }

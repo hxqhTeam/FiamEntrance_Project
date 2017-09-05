@@ -56,9 +56,13 @@ public class ByExpenseActivity extends BaseTitleActivity {
     private TextView totalcostText; //报销金额
     private TextView statusText; //状态
     private TextView contractnumText; //合同
+    private TextView contractdescText; //合同名称
     private TextView prnumText; //采购申请
+    private TextView prdescText; //采购申请描述
     private TextView wonumText; //任务单
+    private TextView udtodescText; //任务单描述
     private TextView projectidText; //费用号
+    private TextView fincntrldescText; //项目名称
 
 
     private ImageView qtxxImageView;  //其它信息
@@ -130,9 +134,13 @@ public class ByExpenseActivity extends BaseTitleActivity {
         totalcostText = (TextView) findViewById(R.id.linecost_text_id);
         statusText = (TextView) findViewById(R.id.status_text_id);
         contractnumText = (TextView) findViewById(R.id.contractnum_text_id);
+        contractdescText = (TextView) findViewById(R.id.contractdesc_text_id);
         prnumText = (TextView) findViewById(R.id.prnum_text_id);
+        prdescText = (TextView) findViewById(R.id.prdesc_text_id);
         wonumText = (TextView) findViewById(R.id.wonum_text_id);
+        udtodescText = (TextView) findViewById(R.id.udtodesc_text_id);
         projectidText = (TextView) findViewById(R.id.projectid_text_id);
+        fincntrldescText = (TextView) findViewById(R.id.fincntrldesc_text_id);
 
         qtxxImageView = (ImageView) findViewById(R.id.jbxx_kz_imageview_id);
         qtxxLinearLayout = (LinearLayout) findViewById(R.id.linearLayout_id);
@@ -179,20 +187,15 @@ public class ByExpenseActivity extends BaseTitleActivity {
         wftypeText.setText(JsonUnit.convertStrToArray(expense.getWFTYPE())[0]);
         totalcostText.setText(JsonUnit.convertStrToArray(expense.getTOTALCOST())[0]);
         statusText.setText(JsonUnit.convertStrToArray(expense.getSTATUSDESC())[0]);
-        if (!JsonUnit.convertStrToArray(expense.getCONTRACTNUM())[0].isEmpty()) {
-            contractnumText.setText(JsonUnit.convertStrToArray(expense.getCONTRACTNUM())[0] + "," + JsonUnit.convertStrToArray(expense.getCONTRACTDESC())[0]);
-        }
-        if (!JsonUnit.convertStrToArray(expense.getPRNUM())[0].isEmpty()) {
-            prnumText.setText(JsonUnit.convertStrToArray(expense.getPRNUM())[0] + "," + JsonUnit.convertStrToArray(expense.getPRDESC())[0]);
-        }
-        if (!JsonUnit.convertStrToArray(expense.getWONUM())[0].isEmpty()) {
+        contractnumText.setText(JsonUnit.convertStrToArray(expense.getCONTRACTNUM())[0]);
+        contractdescText.setText(JsonUnit.convertStrToArray(expense.getCONTRACTDESC())[0]);
+        prnumText.setText(JsonUnit.convertStrToArray(expense.getPRNUM())[0]);
+        prdescText.setText(JsonUnit.convertStrToArray(expense.getPRDESC())[0]);
+        wonumText.setText(JsonUnit.convertStrToArray(expense.getWONUM())[0]);
+        udtodescText.setText(JsonUnit.convertStrToArray(expense.getWORKORDERDESC())[0]);
 
-            wonumText.setText(JsonUnit.convertStrToArray(expense.getWONUM())[0] + "," + JsonUnit.convertStrToArray(expense.getWORKORDERDESC())[0]);
-
-        }
-        if (!JsonUnit.convertStrToArray(expense.getPROJECTID())[0].isEmpty()) {
-            projectidText.setText(JsonUnit.convertStrToArray(expense.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(expense.getFINCNTRLDESC())[0]);
-        }
+        projectidText.setText(JsonUnit.convertStrToArray(expense.getPROJECTID())[0]);
+        fincntrldescText.setText(JsonUnit.convertStrToArray(expense.getFINCNTRLDESC())[0]);
 
         if (!JsonUnit.convertStrToArray(expense.getBOCOST())[0].equals("0.0")) {
             bocostText.setText(JsonUnit.convertStrToArray(expense.getBOCOST())[0]);

@@ -16,6 +16,9 @@ import java.util.List;
 
 public class WpitemAdapter extends BaseQuickAdapter<WPITEM>{
 
+
+
+
     public WpitemAdapter(Context context, int layoutResId, List data) {
         super(context, layoutResId, data);
     }
@@ -32,7 +35,6 @@ public class WpitemAdapter extends BaseQuickAdapter<WPITEM>{
         helper.setText(R.id.grlin1_text_id,JsonUnit.convertStrToArray(item.getWPT5())[0]);
         helper.setText(R.id.measureunitid_text_id,JsonUnit.convertStrToArray(item.getORDERUNIT())[0]);
         helper.setText(R.id.qty_text_id,JsonUnit.convertStrToArray(item.getITEMQTY())[0]);
-
-
     }
+
 }

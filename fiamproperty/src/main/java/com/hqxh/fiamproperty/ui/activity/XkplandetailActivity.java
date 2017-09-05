@@ -3,7 +3,6 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -26,7 +25,6 @@ import com.hqxh.fiamproperty.bean.R_WORKFLOW;
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_PAYPLAN;
 import com.hqxh.fiamproperty.model.R_PAYPLAN.PAYPLAN;
-import com.hqxh.fiamproperty.ui.adapter.ZxkjhAdapter;
 import com.hqxh.fiamproperty.ui.widget.ConfirmDialog;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.hqxh.fiamproperty.unit.JsonUnit;
@@ -53,6 +51,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
     private ScrollView scrollView;
 
     TextView payplannum_text;//计划单
+    TextView description_text;//描述
     TextView month_text;//日期
     TextView type1_text;//需款类型
     TextView totalcost1_text;//需款金额
@@ -119,18 +118,19 @@ public class XkplandetailActivity extends BaseTitleActivity {
     protected void initView(Bundle savedInstanceState) {
         scrollView = (ScrollView) findViewById(R.id.scrollView_id);
         payplannum_text = (TextView) findViewById(R.id.payplannum_text);
+        description_text = (TextView) findViewById(R.id.description_text_id);
         month_text = (TextView) findViewById(R.id.month_text);
         type1_text = (TextView) findViewById(R.id.type1_text);
 
-        totalcost1_text=(TextView)findViewById(R.id.totalcost1_text);
-        status_text=(TextView)findViewById(R.id.status_text);
-        contractnum1_text=(TextView)findViewById(R.id.contractnum1_text);
-        description2_text=(TextView)findViewById(R.id.description2_text);
-        phase_text=(TextView)findViewById(R.id.phase_text);
-        vendor_text=(TextView)findViewById(R.id.vendor_text);
-        wonum2_text=(TextView)findViewById(R.id.wonum2_text);
-        cudept_text=(TextView)findViewById(R.id.cudept_text);
-        cucrew_text=(TextView)findViewById(R.id.cucrew_text);
+        totalcost1_text = (TextView) findViewById(R.id.totalcost1_text);
+        status_text = (TextView) findViewById(R.id.status_text);
+        contractnum1_text = (TextView) findViewById(R.id.contractnum1_text);
+        description2_text = (TextView) findViewById(R.id.description2_text);
+        phase_text = (TextView) findViewById(R.id.phase_text);
+        vendor_text = (TextView) findViewById(R.id.vendor_text);
+        wonum2_text = (TextView) findViewById(R.id.wonum2_text);
+        cudept_text = (TextView) findViewById(R.id.cudept_text);
+        cucrew_text = (TextView) findViewById(R.id.cucrew_text);
 
 
         isbopayplan_text = (CheckBox) findViewById(R.id.isbopayplan_text);
@@ -165,7 +165,8 @@ public class XkplandetailActivity extends BaseTitleActivity {
 
 
     private void showData() {
-        payplannum_text.setText(JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0] + "," + JsonUnit.convertStrToArray(payplan.getDESCRIPTION())[0]);
+        payplannum_text.setText(JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]);
+        description_text.setText(JsonUnit.convertStrToArray(payplan.getDESCRIPTION())[0]);
         month_text.setText(JsonUnit.convertStrToArray(payplan.getMONTH())[0]);
         type1_text.setText(JsonUnit.convertStrToArray(payplan.getTYPE())[0]);
         totalcost1_text.setText(JsonUnit.convertStrToArray(payplan.getTOTALCOST())[0]);
@@ -188,7 +189,7 @@ public class XkplandetailActivity extends BaseTitleActivity {
         enterdate_text.setText(JsonUnit.convertStrToArray(payplan.getENTERDATE())[0]);
 
         rotate = AnimationUtils.loadAnimation(this, R.anim.arrow_rotate);//创建动画
-        if(JsonUnit.convertStrToArray(payplan.getTYPE())[0].equals("3.部门需款汇总")){
+        if (JsonUnit.convertStrToArray(payplan.getTYPE())[0].equals("3.部门需款汇总")) {
             xkxmText.setText(R.string.zxkjh_text);
         }
         jbxx_text.setOnClickListener(jbxx_textOnClickListener);
@@ -207,15 +208,15 @@ public class XkplandetailActivity extends BaseTitleActivity {
     private View.OnClickListener xkxm_textOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent=null;
-            if(JsonUnit.convertStrToArray(payplan.getTYPE())[0].equals("3.部门需款汇总")) {
-                 intent = new Intent(XkplandetailActivity.this, ZxkjhActivity.class);
+            Intent intent = null;
+            if (JsonUnit.convertStrToArray(payplan.getTYPE())[0].equals("3.部门需款汇总")) {
+                intent = new Intent(XkplandetailActivity.this, ZxkjhActivity.class);
                 intent.putExtra("payplannum", JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]);
                 intent.putExtra("title", getResources().getString(R.string.zxkjh_text));
                 intent.putExtra("appid", GlobalConfig.PPCHANGE_APPID);
                 startActivityForResult(intent, 0);
-            }else{
-                 intent = new Intent(XkplandetailActivity.this, XkxmActivity.class);
+            } else {
+                intent = new Intent(XkplandetailActivity.this, XkxmActivity.class);
                 intent.putExtra("payplannum", JsonUnit.convertStrToArray(payplan.getPAYPLANNUM())[0]);
                 intent.putExtra("title", getResources().getString(R.string.xkxm_text));
                 intent.putExtra("appid", GlobalConfig.PP_APPID);

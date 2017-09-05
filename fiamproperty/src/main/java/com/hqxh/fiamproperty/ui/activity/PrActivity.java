@@ -233,6 +233,7 @@ public class PrActivity extends BaseListActivity {
         public void onClick(View view) {
             Intent intent = getIntent();
             intent.setClass(PrActivity.this, Pr_SearchActivity.class);
+            intent.putExtra("appid", appid);
             startActivityForResult(intent, 0);
         }
     };

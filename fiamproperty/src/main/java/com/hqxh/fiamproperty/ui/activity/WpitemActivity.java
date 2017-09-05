@@ -1,6 +1,9 @@
 package com.hqxh.fiamproperty.ui.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
@@ -11,11 +14,14 @@ import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_WPITEM;
 import com.hqxh.fiamproperty.model.R_WPITEM.ResultBean;
 import com.hqxh.fiamproperty.model.R_WPITEM.WPITEM;
+import com.hqxh.fiamproperty.model.R_ZXPERSON;
 import com.hqxh.fiamproperty.ui.adapter.DjWpitemAdapter;
 import com.hqxh.fiamproperty.ui.adapter.WpitemAdapter;
 import com.hqxh.fiamproperty.unit.AccountUtils;
+import com.hqxh.fiamproperty.unit.JsonUnit;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +35,8 @@ import io.reactivex.schedulers.Schedulers;
  * 明细信息的Activity
  **/
 public class WpitemActivity extends BaseListActivity {
-    private static final String TAG = "WftransactionActivity";
-
+    private static final String TAG = "WpitemActivity";
+    private Toolbar itemToolbar;
     private WpitemAdapter wpitemadapter;
 
     private DjWpitemAdapter djwpitemadapter;
@@ -42,12 +48,26 @@ public class WpitemActivity extends BaseListActivity {
 
     private String appid; // appid
     private String wonum; // wonum
+    private int mark;
+
+    private int mpostion; //选择执行项
 
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        appid = getIntent().getExtras().getString("appid");
-        wonum = getIntent().getExtras().getString("wonum");
+        if (getIntent().hasExtra("appid")) {
+            appid = getIntent().getExtras().getString("appid");
+        }
+        if (getIntent().hasExtra("wonum")) {
+            wonum = getIntent().getExtras().getString("wonum");
+        }
+        if (appid.equals(GlobalConfig.TODJ_APPID)) {
+            isShowBack = false;
+        }
+
+        if (getIntent().hasExtra("mark")) {
+            mark = getIntent().getExtras().getInt("mark");
+        }
 
     }
 
@@ -168,6 +188,13 @@ public class WpitemActivity extends BaseListActivity {
 
     @Override
     protected void fillData() {
+        itemToolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (appid.equals(appid.equals(GlobalConfig.TODJ_APPID))) {//调件任务单
+            //setNavigationIcon必须在setSupportActionBar(toolbar);方法后面加入
+//            itemToolbar.setTitle("");
+            setSupportActionBar(itemToolbar);
+            itemToolbar.setNavigationIcon(R.mipmap.ic_back);
+        }
         searchText.setVisibility(View.GONE);
         if (appid.equals(GlobalConfig.TOLL_APPID)) {//物资
             initAdapter(new ArrayList<WPITEM>());
@@ -180,9 +207,28 @@ public class WpitemActivity extends BaseListActivity {
 
     @Override
     protected void setOnClick() {
-
+        backOnClickListener();
     }
 
+    private void backOnClickListener() {
+        //setNavigationIcon必须在setSupportActionBar(toolbar);方法后面加入
+        itemToolbar.setTitle("");
+        setSupportActionBar(itemToolbar);
+        itemToolbar.setNavigationIcon(R.mipmap.ic_back);
+        itemToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("wpitem", (Serializable) djwpitemadapter.getData());
+                intent.putExtras(bundle);
+                setResult(GlobalConfig.DJRWD_RESULTCODE, intent);
+                onBackPressed();
+
+            }
+        });
+
+    }
 
     /**
      * 获取数据-物料单明细*
@@ -197,7 +243,15 @@ public class WpitemActivity extends BaseListActivity {
      */
     private void initDjAdapter(final List<WPITEM> list) {
         djwpitemadapter = new DjWpitemAdapter(WpitemActivity.this, R.layout.list_item_jdmx, list);
+        djwpitemadapter.setMark(mark);
         mRecyclerView.setAdapter(djwpitemadapter);
+        djwpitemadapter.setmOnClickListener(new DjWpitemAdapter.cOnClickListener() {
+            @Override
+            public void cOnClickListener(int postion) {
+                mpostion = postion;
+                chooseOwner();
+            }
+        });
     }
 
     /**
@@ -214,5 +268,33 @@ public class WpitemActivity extends BaseListActivity {
         djwpitemadapter.addData(list);
     }
 
+    //选择执行人
+    private void chooseOwner() {
+        Intent intent = new Intent(WpitemActivity.this, PersonActivity.class);
+        intent.putExtra("appid", GlobalConfig.TODJ_APPID);
+        intent.putExtra("title", getResources().getString(R.string.ownername_text));
+        startActivityForResult(intent, GlobalConfig.PERSON_REQUESTCODE);
+    }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case GlobalConfig.PERSON_REQUESTCODE:
+                if (resultCode == GlobalConfig.CUDEPT_REQUESTCODE) {
+                    R_ZXPERSON.PERSON persion = (R_ZXPERSON.PERSON) data.getSerializableExtra("person");
+                    String personnum = JsonUnit.convertStrToArray(persion.getPERSONID())[0];
+                    String personname = JsonUnit.convertStrToArray(persion.getDISPLAYNAME())[0];
+                    WPITEM wpitem = (WPITEM) djwpitemadapter.getData().get(mpostion);
+                    String owenr = personnum + "," + JsonUnit.convertStrToArray(wpitem.getOWNER())[1];
+                    wpitem.setOWNER(owenr);
+                    wpitem.setOWNERNAME(personname);
+                    djwpitemadapter.remove(mpostion);
+                    djwpitemadapter.add(mpostion, wpitem);
+                    djwpitemadapter.notifyDataSetChanged();
+                }
+                break;
+        }
+    }
 }

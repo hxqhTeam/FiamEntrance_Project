@@ -1,22 +1,13 @@
 package com.hqxh.fiamproperty.base;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hqxh.fiamproperty.R;
-import com.hqxh.fiamproperty.ui.SystemBarTintManager;
 
 
 /**
@@ -32,7 +23,7 @@ public abstract class BaseTitleActivity extends BaseActivity {
     Toolbar mToolbar;
     private TextView mTitleName;
 
-
+    public boolean isShowBack = true;
 
     /**
      * 设置标题文本
@@ -43,8 +34,8 @@ public abstract class BaseTitleActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mToolbar=(Toolbar)findViewById(R.id.toolbar);
-        mTitleName=(TextView)findViewById(R.id.title_text);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mTitleName = (TextView) findViewById(R.id.title_text);
 
         if (getContentViewLayoutID() != 0) {
             initToolbar();
@@ -54,13 +45,11 @@ public abstract class BaseTitleActivity extends BaseActivity {
     }
 
 
-
-
     private void initToolbar() {
         if (mToolbar != null) {
             mToolbar.setTitle("");
             mTitleName.setText(getSubTitle());
-            if (isShowBack()) {
+            if (isShowBack(isShowBack)) {
                 showBack();
             }
         }
@@ -82,13 +71,16 @@ public abstract class BaseTitleActivity extends BaseActivity {
     }
 
 
-    protected boolean isShowBack() {
-        return true;
+    protected boolean isShowBack(boolean showback) {
+        Log.e(TAG, "showback=" + showback);
+        return showback;
     }
 
 
-    /**获取View的高度**/
-    public static int getHeight(View view){
+    /**
+     * 获取View的高度
+     **/
+    public static int getHeight(View view) {
         int w = View.MeasureSpec.makeMeasureSpec(0,
                 View.MeasureSpec.UNSPECIFIED);
         int h = View.MeasureSpec.makeMeasureSpec(0,

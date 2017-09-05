@@ -4,9 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +51,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
 
     private ScrollView scrollView;
     private TextView prnum_text;//申请单号
+    private TextView descriptionText;//名称
     private TextView worktype_text;//类型
     private TextView status_text;//状态
     private TextView enterdate_text;//申请时间
@@ -73,6 +71,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     private TextView udremark5_text;//适用范围
 
     private TextView projectid_text;//费用号
+    private TextView projectdescText;//项目名称
     private TextView pm_text;//项目经理
     private TextView sqr_text;//申请人
 
@@ -125,6 +124,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     protected void initView(Bundle savedInstanceState) {
         scrollView = (ScrollView) findViewById(R.id.scrollView_id);
         prnum_text = (TextView) findViewById(R.id.prnum_text);
+        descriptionText = (TextView) findViewById(R.id.description_text_id);
         worktype_text = (TextView) findViewById(R.id.worktype_text);
         status_text = (TextView) findViewById(R.id.status_text);
         enterdate_text = (TextView) findViewById(R.id.enterdate_text);
@@ -139,6 +139,7 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
         ownername_text = (TextView) findViewById(R.id.ownername_text);
 
         projectid_text = (TextView) findViewById(R.id.projectid_text);
+        projectdescText = (TextView) findViewById(R.id.projectdesc_text_id);
         pm_text = (TextView) findViewById(R.id.pm_text);
         sqr_text = (TextView) findViewById(R.id.sqr_text);
 
@@ -169,14 +170,8 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
     }
 
     private void showData() {
-        if (JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0].isEmpty()) {
-            prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]);
-        } else {
-            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(pr.getPRNUM())[0] + "," + JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
-            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
-            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(pr.getPRNUM())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            prnum_text.setText(builder);
-        }
+        prnum_text.setText(JsonUnit.convertStrToArray(pr.getPRNUM())[0]);
+        descriptionText.setText(JsonUnit.convertStrToArray(pr.getDESCRIPTION())[0]);
 
         worktype_text.setText(JsonUnit.convertStrToArray(pr.getCUTYPE())[0]);
         status_text.setText(JsonUnit.convertStrToArray(pr.getSTATUSDESC())[0]);
@@ -191,14 +186,8 @@ public class FwpaydetailsActivity extends BaseTitleActivity {
         rdchead_text.setText(JsonUnit.convertStrToArray(pr.getRDCHEADNAME())[0]);
         ownername_text.setText(JsonUnit.convertStrToArray(pr.getASSIGNERNAME())[0]);
 
-        if (JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0].isEmpty()) {
-            projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]);
-        } else {
-            SpannableStringBuilder builder = new SpannableStringBuilder(JsonUnit.convertStrToArray(pr.getPROJECTID())[0] + "," + JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
-            ForegroundColorSpan redSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));
-            builder.setSpan(redSpan, 0, JsonUnit.convertStrToArray(pr.getPROJECTID())[0].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            projectid_text.setText(builder);
-        }
+        projectid_text.setText(JsonUnit.convertStrToArray(pr.getPROJECTID())[0]);
+        projectdescText.setText(JsonUnit.convertStrToArray(pr.getPROJECTDESC())[0]);
 
         pm_text.setText(JsonUnit.convertStrToArray(pr.getPM())[0]);
         sqr_text.setText(JsonUnit.convertStrToArray(pr.getREQBYPERSON())[0]);
