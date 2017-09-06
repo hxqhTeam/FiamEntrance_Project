@@ -18,6 +18,7 @@ import com.hqxh.fiamproperty.model.R_PERSONS.PERSION;
 import com.hqxh.fiamproperty.model.R_Wfassignemt;
 import com.hqxh.fiamproperty.ui.widget.MaterialBadgeTextView;
 import com.hqxh.fiamproperty.unit.AccountUtils;
+import com.hqxh.fiamproperty.unit.JsonUnit;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
 import io.reactivex.Observable;
@@ -97,15 +98,15 @@ public class HomeActivity extends BaseActivity {
         super.beforeInit();
         showLoadingDialog(getString(R.string.loading_hint));
 //        identity = "_220724199011260619";
-//        identity = JsonUnit.getIdentity(AccountUtils.getPerson(this));
-//        if (null == identity) {
-//            showMiddleToast(this, "无法识别身份");
-//            finish();
-//        }
-//        LoginAndCount();
+        identity = JsonUnit.getIdentity(AccountUtils.getPerson(this));
+        if (null == identity) {
+            showMiddleToast(this, "无法识别身份");
+            finish();
+        }
+        LoginAndCount();
 
 //        Login();
-        getData();
+//        getData();
     }
 
     @Override

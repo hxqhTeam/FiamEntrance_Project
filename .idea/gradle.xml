@@ -10,6 +10,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/fiamproperty" />
+            <option value="$PROJECT_DIR$/taskversionproperty" />
+            <option value="$PROJECT_DIR$/worklogproperty" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

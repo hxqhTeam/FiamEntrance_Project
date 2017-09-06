@@ -1,1 +1,1 @@
-include ':app', ':fiamproperty'
+include ':app', ':fiamproperty', ':worklogproperty', ':taskversionproperty'

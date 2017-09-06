@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/FiamEntrance_Project.iml" filepath="$PROJECT_DIR$/FiamEntrance_Project.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/fiamproperty/fiamproperty.iml" filepath="$PROJECT_DIR$/fiamproperty/fiamproperty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/taskversionproperty/taskversionproperty.iml" filepath="$PROJECT_DIR$/taskversionproperty/taskversionproperty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/worklogproperty/worklogproperty.iml" filepath="$PROJECT_DIR$/worklogproperty/worklogproperty.iml" />
     </modules>
   </component>
 </project>
