@@ -154,10 +154,11 @@ public class JsonUnit {
 
         try {
             jswo.put("CONTRACTID", contractid);//唯一列
-            jswo.put("SIGNDATE", signdate);
-            jswo.put("STARTDATE", startdate);
-            jswo.put("UDCONTRACTNUM", udcontractnum);
-            jswo.put("ENDDATE", enddate);
+            jswo.put("SIGNDATE", signdate);//开始日期
+            jswo.put("STARTDATE", startdate);//签订日期
+            jswo.put("UDCONTRACTNUM", udcontractnum);//国外合同编号
+            jswo.put("ENDDATE", enddate);//结束日期
+
 
 
             jsrec.put("PURCHVIEW", jswo.toString());
