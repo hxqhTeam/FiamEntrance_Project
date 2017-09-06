@@ -39,7 +39,6 @@ public class HomeActivity extends BaseActivity {
      * 标题
      **/
     TextView titleTextView;
-    /**搜索**/
 
     /**
      * 待办任务

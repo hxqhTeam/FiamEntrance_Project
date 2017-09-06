@@ -104,7 +104,7 @@ public class R_PRLINE {
     /*
     物资明细
     */
-    public static class PRLINE {
+    public static class PRLINE extends Entity {
 
         private String PRLINEID;//PRLINEID
         private String LINECOST;//费用总计

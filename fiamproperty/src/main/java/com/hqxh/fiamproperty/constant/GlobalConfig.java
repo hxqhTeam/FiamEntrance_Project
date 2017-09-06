@@ -238,11 +238,14 @@ public final class GlobalConfig {
 
     public static final int DJRWD_REQUESTCODE = 1004;//调件任务码执行人请求码
 
+    public static final int WZPR_REQUESTCODE = 1005;//物资采购申请执行人请求码
+
     /**
      * 返回码
      **/
 
     public static final int DJRWD_RESULTCODE = 1104;//调件任务码执行人返回码
+    public static final int WZPR_RESULTCODE = 1105;//物资采购申请执行人返回码
 
 
     //字段操作标识

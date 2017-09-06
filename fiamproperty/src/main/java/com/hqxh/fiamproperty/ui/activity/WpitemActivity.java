@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.hqxh.fiamproperty.R;
@@ -106,7 +105,6 @@ public class WpitemActivity extends BaseListActivity {
                     @Override
                     public List<WPITEM> apply(@NonNull ResultBean resultBean) throws Exception {
                         totalpage = Integer.valueOf(resultBean.getTotalpage());
-                        Log.e(TAG, "Totalresult=" + resultBean.getTotalresult());
                         return resultBean.getResultlist();
                     }
 
@@ -189,12 +187,6 @@ public class WpitemActivity extends BaseListActivity {
     @Override
     protected void fillData() {
         itemToolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (appid.equals(appid.equals(GlobalConfig.TODJ_APPID))) {//调件任务单
-            //setNavigationIcon必须在setSupportActionBar(toolbar);方法后面加入
-//            itemToolbar.setTitle("");
-            setSupportActionBar(itemToolbar);
-            itemToolbar.setNavigationIcon(R.mipmap.ic_back);
-        }
         searchText.setVisibility(View.GONE);
         if (appid.equals(GlobalConfig.TOLL_APPID)) {//物资
             initAdapter(new ArrayList<WPITEM>());

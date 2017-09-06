@@ -93,11 +93,10 @@
 
             <TextView
                 android:id="@+id/udmodel_text_id"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
                 android:layout_weight="1"
-                android:hint="@string/have_notdata_hint"
                 android:textColor="@color/grid_line"
                 android:textSize="@dimen/dimens_14sp" />
 
@@ -105,14 +104,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
-
                 android:text="@string/qty_text"
                 android:textColor="@color/grid_line"
                 android:textSize="@dimen/dimens_14sp" />
 
             <TextView
                 android:id="@+id/orderqty_text_id"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/btn_top_5dp"
                 android:layout_weight="1"
@@ -215,6 +213,40 @@
                 android:hint="@string/have_notdata_hint"
                 android:textColor="@color/grid_line"
                 android:textSize="@dimen/dimens_14sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_1_id"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_line"
+            android:background="@mipmap/line"
+            android:visibility="gone"></View>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_1_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/btn_top_5dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ownername_text"
+                android:textColor="@color/grid_line"
+                android:textSize="@dimen/dimens_16sp" />
+
+            <TextView
+                android:id="@+id/ownername_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/btn_top_5dp"
+                android:hint="@string/have_notdata_hint"
+                android:textColor="@color/grid_line"
+                android:textSize="@dimen/dimens_16sp" />
+
 
         </LinearLayout>
 

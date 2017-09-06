@@ -269,8 +269,8 @@ public class JsonUnit {
                 for (int i = 0; i < prlines.size(); i++) {
                     JSONObject jsline = new JSONObject();
                     PRLINE prline = prlines.get(i);
-                    jsline.put("PRLINEID", prline.getPRLINEID());
-                    jsline.put("UDASSIGNER", prline.getUDASSIGNER());//执行人
+                    jsline.put("PRLINEID", JsonUnit.convertStrToArray(prline.getPRLINEID())[0]);
+                    jsline.put("UDASSIGNER", JsonUnit.convertStrToArray(prline.getUDASSIGNER())[0]);//执行人
                     jaline.put(jsline);
 
                 }

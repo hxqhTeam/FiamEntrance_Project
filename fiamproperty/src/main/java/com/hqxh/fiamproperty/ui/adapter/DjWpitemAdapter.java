@@ -3,6 +3,7 @@ package com.hqxh.fiamproperty.ui.adapter;
 import android.animation.Animator;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -53,13 +54,14 @@ public class DjWpitemAdapter extends BaseQuickAdapter<WPITEM> {
             nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
             TextView ownerText = helper.getView(R.id.ownername_text_id);
             ownerText.setCompoundDrawablesWithIntrinsicBounds(null, null, nav_up, null);
+            helper.setOnClickListener(R.id.ownername_text_id, new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnClickListener.cOnClickListener(helper.getLayoutPosition());
+                }
+            });
         }
-        helper.setOnClickListener(R.id.ownername_text_id, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mOnClickListener.cOnClickListener(helper.getLayoutPosition());
-            }
-        });
+
 
     }
 
