@@ -3,6 +3,7 @@ package com.hqxh.fiamproperty.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -244,7 +245,15 @@ public class ExpenseActivity extends BaseTitleActivity {
     private View.OnClickListener bzmxImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(ExpenseActivity.this, SubsidiesActivity.class);
+            Intent intent = null;
+            if (JsonUnit.convertStrToArray(expense.getWFTYPE())[0].indexOf("2.4") != -1) {
+                Log.e(TAG,"存在");
+                intent = new Intent(ExpenseActivity.this, OuttestineActivity.class);
+            } else {
+                Log.e(TAG,"不存在");
+                intent = new Intent(ExpenseActivity.this, SubsidiesActivity.class);
+            }
+
             intent.putExtra("expensenum", JsonUnit.convertStrToArray(expense.getEXPENSENUM())[0]);
             startActivityForResult(intent, 0);
         }

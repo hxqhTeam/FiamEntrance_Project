@@ -10,8 +10,8 @@ public final class GlobalConfig {
      * 服务器地址
      **/
 //    public final static String HTTP_URL="http://qmportal1.qm.cn:8090"; //外网测试
-//    public final static String HTTP_URL = "http://mobile.faw.com.cn:8091"; //外网正式
-    public final static String HTTP_URL = "http://10.60.12.98:9080";//内网
+    public final static String HTTP_URL = "http://mobile.faw.com.cn:8091"; //外网正式
+//    public final static String HTTP_URL = "http://10.60.12.98:9080";//内网
 
     /**
      * 附件下载路径
@@ -163,6 +163,8 @@ public final class GlobalConfig {
     public static final String EXPENSE_NAME = "EXPENSE";
     //补助明细
     public static final String SUBSIDIES_NAME = "SUBSIDIES";
+    //外出试验－补助明细
+    public static final String OUTTESTINE_NAME = "OUTTESTLINE";
     //交通明细
     public static final String EXPENSELINE_NAME = "EXPENSELINE";
     //借款单

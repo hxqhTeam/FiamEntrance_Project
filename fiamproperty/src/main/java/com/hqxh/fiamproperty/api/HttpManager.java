@@ -75,7 +75,7 @@ public class HttpManager {
      * 项目费用管理-任务单出差申请采购申请的预算明细
      **/
     public static String getFCTASKRELATIONURL(String wonum, String wonum1, String username, int curpage, int showcount) {
-        return "{'appid':'" + GlobalConfig.FINCNTRL_APPID + "','objectname':'" + GlobalConfig.FCTASKRELATION_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'"+wonum+"':'=" + wonum1 + "'}}";
+        return "{'appid':'" + GlobalConfig.FINCNTRL_APPID + "','objectname':'" + GlobalConfig.FCTASKRELATION_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'" + wonum + "':'=" + wonum1 + "'}}";
 
 
     }
@@ -323,6 +323,14 @@ public class HttpManager {
     }
 
     /**
+     * 外出试验－补助明细*
+     */
+    public static String getOuttestineUrl(String appid, String username, String expensenum, int curpage, int showcount) {
+        return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.OUTTESTINE_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'EXPENSENUM':'=" + expensenum + "'}}";
+
+    }
+
+    /**
      * 补助明细/交通明细*
      */
     public static String getCLMXUrl(String appid, String objectname, String username, String expensenum, int curpage, int showcount) {
@@ -382,7 +390,7 @@ public class HttpManager {
      * GlobalConfig.USER_APPID 部门
      * GlobalConfig.ROLE_APPID 科室
      */
-    public static String getCUDEPTSearchUrl(String appid, String deptnum, String search,String username, int curpage, int showcount) {
+    public static String getCUDEPTSearchUrl(String appid, String deptnum, String search, String username, int curpage, int showcount) {
         if (appid.equals(GlobalConfig.USER_APPID)) {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.CUDEPT_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'DEPTNUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
         } else if (appid.equals(GlobalConfig.ROLE_APPID)) {
@@ -424,7 +432,7 @@ public class HttpManager {
     /**
      * 执行人-搜索
      */
-    public static String getPERSONSearchUrl(String appid, String cudept, String cucrew, String search,String username, int curpage, int showcount) {
+    public static String getPERSONSearchUrl(String appid, String cudept, String cucrew, String search, String username, int curpage, int showcount) {
         if (null == cudept && null == cucrew) {
             return "{'appid':'" + appid + "','objectname':'" + GlobalConfig.PERSON_NAME + "','username':'" + username + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'PERSONID':'" + search + "','DISPLAYNAME':'" + search + "'}}";
 

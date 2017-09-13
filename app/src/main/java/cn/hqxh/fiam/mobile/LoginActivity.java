@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.hqxh.fiamproperty.constant.GlobalConfig;
 import com.hqxh.fiamproperty.model.R_PERSONS;
+import com.hqxh.fiamproperty.ui.activity.HomeActivity;
 import com.hqxh.fiamproperty.unit.AccountUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -66,11 +67,11 @@ public class LoginActivity extends AppCompatActivity {
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Login();
+                Login();
 
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("username", mEmailView.getText().toString());
-                startActivityForResult(intent, 0);
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                intent.putExtra("username", mEmailView.getText().toString());
+//                startActivityForResult(intent, 0);
             }
         });
 
@@ -130,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                             persion1.setMYAPPS(object.getString("MYAPPS"));
                             persion1.setPERSONID(object.getString("PERSONID"));
                             AccountUtils.setLoginDetails(LoginActivity.this, persion1);
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivityForResult(intent, 0);
                         }
 

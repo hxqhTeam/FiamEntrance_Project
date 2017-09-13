@@ -388,4 +388,13 @@
     <string name="fyzj_text">费用总计</string>
     <string name="fjf_text">附加费</string>
     <string name="prdesc_text">采购申请描述</string>
+    <string name="pegiontype_text">地区类别</string>
+    <string name="persontype_text">人员类别</string>
+    <string name="stayname_text">住宿人员</string>
+    <string name="startdate1_text">入住日期</string>
+    <string name="enddate1_text">离开日期</string>
+    <string name="staydays_text">补助天数</string>
+    <string name="linecost4_text">补助总额</string>
+    <string name="standard_text">补助标准</string>
+    <string name="place_text">地点</string>
 </resources>
