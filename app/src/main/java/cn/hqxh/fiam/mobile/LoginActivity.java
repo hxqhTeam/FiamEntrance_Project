@@ -67,11 +67,11 @@ public class LoginActivity extends AppCompatActivity {
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Login();
+//                Login();
 
-//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                intent.putExtra("username", mEmailView.getText().toString());
-//                startActivityForResult(intent, 0);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("username", mEmailView.getText().toString());
+                startActivityForResult(intent, 0);
             }
         });
 

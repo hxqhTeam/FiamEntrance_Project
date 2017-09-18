@@ -3,7 +3,6 @@ package com.hqxh.fiamproperty.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -72,7 +71,6 @@ public abstract class BaseTitleActivity extends BaseActivity {
 
 
     protected boolean isShowBack(boolean showback) {
-        Log.e(TAG, "showback=" + showback);
         return showback;
     }
 

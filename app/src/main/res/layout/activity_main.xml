@@ -55,6 +55,7 @@
 
         <TextView
             android:id="@+id/rwqb_text_id"
+            android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
             android:background="@color/white"
             android:drawablePadding="@dimen/btn_top_5dp"
